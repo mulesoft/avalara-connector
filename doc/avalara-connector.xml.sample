@@ -1,0 +1,19 @@
+<!-- BEGIN_INCLUDE(avalara:get-tax) -->
+    <avalara:get-tax />
+<!-- END_INCLUDE(avalara:get-tax) -->
+
+<!-- BEGIN_INCLUDE(avalara:commit-tax) -->
+    <avalara:commit-tax />
+<!-- END_INCLUDE(avalara:commit-tax) -->
+
+<!-- BEGIN_INCLUDE(avalara:get-tax-history) -->
+    <avalara:get-tax-history />
+<!-- END_INCLUDE(avalara:get-tax-history) -->
+
+<!-- BEGIN_INCLUDE(avalara:cancel-tax) -->
+    <avalara:cancel-tax />
+<!-- END_INCLUDE(avalara:cancel-tax) -->
+
+<!-- BEGIN_INCLUDE(avalara:validate-address) -->
+    <avalara:validate-address />
+<!-- END_INCLUDE(avalara:validate-address) -->
