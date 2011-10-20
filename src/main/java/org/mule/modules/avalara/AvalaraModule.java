@@ -55,6 +55,7 @@ import com.avalara.avatax.services.GetTaxHistoryRequest;
 import com.avalara.avatax.services.GetTaxHistoryResult;
 import com.avalara.avatax.services.GetTaxRequest;
 import com.avalara.avatax.services.GetTaxResult;
+import com.avalara.avatax.services.PingResult;
 
 /**
  * Module
@@ -85,6 +86,10 @@ public class AvalaraModule
     
     private MapObjectMapper mom = new MapObjectMapper("com.avalara.avatax.services");
     
+    public PingResult ping()
+    {
+        return client.ping();
+    }
     /**
      * Get Tax processor.
      * <p>
@@ -98,7 +103,7 @@ public class AvalaraModule
      *                and PurchaseOrder
      * @param docCode Client application identifier describing this tax transaction
      * @param docDate Date of invoice, purchase order, etc.
-     * @param salespersonCode
+     * @param salespersonCode todo
      * @param customerCode Client application customer reference code 
      * @param customerUsageType Client application customer or usage type.
      *                          CustomerUsageType determines the exempt status of 
@@ -110,25 +115,25 @@ public class AvalaraModule
      *                        for single use exemption certificates to match the 
      *                        order and invoice with the certificate.
      * @param exemptionNo Exemption number used for this transaction
-     * @param originCode
-     * @param destinationCode
+     * @param originCode todo
+     * @param destinationCode todo
      * @param baseAddresses Collection of physical addresses that will be referred 
      *                      to as the destination or origination of 1 or more invoice 
      *                      line entries
      * @param listOfLines Collection of invoice lines requiring tax calculation
      * @param detailLevel Specifies the level of tax detail to return
-     * @param referenceCode
-     * @param hashCode
-     * @param locationCode
+     * @param referenceCode todo
+     * @param hashCode todo
+     * @param locationCode todo
      * @param commit Commit flag. If Commit is set to true, tax for the transaction 
      *               is saved and posted as tax document.
-     * @param batchCode
-     * @param taxOverride
-     * @param currencyCode
-     * @param serviceMode
+     * @param batchCode todo
+     * @param taxOverride todo
+     * @param currencyCode todo
+     * @param serviceMode todo
      * @param paymentDate The date on which payment was made
-     * @param exchangeRate
-     * @param exchangeRateEffDate
+     * @param exchangeRate todo
+     * @param exchangeRateEffDate todo
      * @return The {@link GetTaxResult}
      */
     @Processor
@@ -176,8 +181,7 @@ public class AvalaraModule
             addresses.put("baseAddress", listOfLines);
         }
         
-        return (GetTaxResult) client.sendToAvalara(EntityType.GetTax,
-            mom.toObject(GetTaxRequest.class,            
+        return client.getTax(mom.toObject(GetTaxRequest.class,            
                 new MapBuilder()
                 .with("companyCode", companyCode)
                 .with("docType", docType.toDocumentType())
@@ -215,11 +219,11 @@ public class AvalaraModule
      *
      * {@sample.xml doc/avalara-connector.xml.sample avalara:commit-tax}
      *
-     * @param docId
-     * @param companyCode
-     * @param docType
-     * @param docCode
-     * @param newDocCode
+     * @param docId todo
+     * @param companyCode todo
+     * @param docType todo
+     * @param docCode todo
+     * @param newDocCode todo
      * @return The {@link CommitTaxRequest}
      */
     @Processor
@@ -246,11 +250,12 @@ public class AvalaraModule
      * Get Tax History processor
      *
      * {@sample.xml doc/avalara-connector.xml.sample avalara:get-tax-history}
-     * @param docId
-     * @param companyCode
-     * @param docType
-     * @param docCode
-     * @param detailLevel
+     *
+     * @param docId todo
+     * @param companyCode todo
+     * @param docType todo
+     * @param docCode todo
+     * @param detailLevel todo
      * @return The {@link GetTaxHistoryResult}
      */
     @Processor
@@ -278,11 +283,11 @@ public class AvalaraModule
      *
      * {@sample.xml doc/avalara-connector.xml.sample avalara:cancel-tax}
      * 
-     * @param docId
-     * @param companyCode
-     * @param docType
-     * @param docCode
-     * @param cancelCode
+     * @param docId todo
+     * @param companyCode todo
+     * @param docType todo
+     * @param docCode todo
+     * @param cancelCode todo
      * @return The {@link CancelTaxResult}
      */
     @Processor

@@ -7,6 +7,9 @@ package org.mule.modules.avalara.api;
 import org.mule.modules.avalara.EntityType;
 
 import com.avalara.avatax.services.BaseResult;
+import com.avalara.avatax.services.GetTaxRequest;
+import com.avalara.avatax.services.GetTaxResult;
+import com.avalara.avatax.services.PingResult;
 
 /**
  * @author Gaston Ponti
@@ -16,4 +19,8 @@ import com.avalara.avatax.services.BaseResult;
 public interface AvalaraClient
 {
     <T extends BaseResult> T sendToAvalara(EntityType entityType, Object obj);
+
+    GetTaxResult getTax(GetTaxRequest getTaxRequest);
+
+    PingResult ping();
 }

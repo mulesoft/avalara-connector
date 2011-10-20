@@ -28,10 +28,16 @@ public class AvalaraTestDriver
     @Before
     public void setup()
     {
-        module = new AvalaraModule();       
+        module = new AvalaraModule();
         module.init();
     }
 
+    @Test
+    public void ping()
+    {
+        System.out.println(module.ping());
+    }
+    
     @Test
     public void getTaxWithoutKnowingUsernameOrPassword() throws Exception
     {

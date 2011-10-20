@@ -27,4 +27,16 @@ public class AvalaraRuntimeException extends RuntimeException
     {
         super(ToStringBuilder.reflectionToString(messages));
     }
+
+    
+    /**
+     * Creates the AvalaraRuntimeException.
+     *
+     * @param message
+     */
+    
+    public AvalaraRuntimeException(String message)
+    {
+        super(message);
+    }
 }
