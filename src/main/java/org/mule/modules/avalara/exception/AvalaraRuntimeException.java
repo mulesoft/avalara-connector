@@ -12,29 +12,25 @@ import com.avalara.avatax.services.ArrayOfMessage;
  * @author Gaston Ponti
  * @since Oct 18, 2011
  */
-
 public class AvalaraRuntimeException extends RuntimeException
 {
 
-    
     /**
      * Creates the AvalaraRuntimeException.
-     *
+     * 
      * @param messages
      */
-    
     public AvalaraRuntimeException(ArrayOfMessage messages)
     {
         super(ToStringBuilder.reflectionToString(messages));
     }
 
-    
     /**
      * Creates the AvalaraRuntimeException.
-     *
+     * 
      * @param message
      */
-    
+
     public AvalaraRuntimeException(String message)
     {
         super(message);

@@ -18,12 +18,10 @@ import javax.xml.ws.handler.MessageContext;
 import javax.xml.ws.handler.soap.SOAPHandler;
 import javax.xml.ws.handler.soap.SOAPMessageContext;
 
-
 /**
  * @author Gaston Ponti
  * @since Oct 20, 2011
  */
-
 public class SOAPSimpleCredentials implements SOAPHandler<SOAPMessageContext>
 {
 

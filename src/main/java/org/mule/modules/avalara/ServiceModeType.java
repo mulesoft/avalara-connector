@@ -11,7 +11,6 @@ import com.avalara.avatax.services.ServiceMode;
  * @author Gaston Ponti
  * @since Oct 19, 2011
  */
-
 public enum ServiceModeType
 {
     /**

@@ -13,7 +13,6 @@ import com.avalara.avatax.services.DetailLevel;
  * @author Gaston Ponti
  * @since Oct 18, 2011
  */
-
 public enum DetailLevelType
 {
     /**

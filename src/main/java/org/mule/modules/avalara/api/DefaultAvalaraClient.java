@@ -1,4 +1,3 @@
-
 /*
  * Copyright (c) 2011 Zauber S.A.  -- All rights reserved
  */
@@ -22,12 +21,10 @@ import com.avalara.avatax.services.SeverityLevel;
 import com.avalara.avatax.services.TaxSvc;
 import com.avalara.avatax.services.TaxSvcSoap;
 
-
 /**
  * @author Gaston Ponti
  * @since Oct 17, 2011
  */
-
 public class DefaultAvalaraClient implements AvalaraClient
 {
     private String username;

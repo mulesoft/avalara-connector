@@ -15,7 +15,6 @@ import com.avalara.avatax.services.PingResult;
  * @author Gaston Ponti
  * @since Oct 17, 2011
  */
-
 public interface AvalaraClient
 {
     <T extends BaseResult> T sendToAvalara(EntityType entityType, Object obj);
