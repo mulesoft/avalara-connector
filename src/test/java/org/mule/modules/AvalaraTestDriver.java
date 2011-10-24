@@ -29,6 +29,8 @@ public class AvalaraTestDriver
     public void setup()
     {
         module = new AvalaraModule();
+        module.setUsername(System.getenv("avalaraUsername"));
+        module.setPassword(System.getenv("avalaraPassword"));
         module.init();
     }
 

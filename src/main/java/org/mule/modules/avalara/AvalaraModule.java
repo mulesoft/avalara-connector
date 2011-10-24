@@ -96,7 +96,7 @@ public class AvalaraModule
      * The Get Tax operation calculates tax for one or more invoiced items and 
      * displays details describing the calculation of tax for each line item.
      *
-     * {@sample.xml doc/avalara-connector.xml.sample avalara:get-tax}
+     * {@sample.xml ../../../doc/avalara-connector.xml.sample avalara:get-tax}
      * 
      * @param companyCode Client application company reference code
      * @param docType The document types supported include SalesOrder, SalesInvoice 
@@ -217,7 +217,7 @@ public class AvalaraModule
     /**
      * Commit Tax processor
      *
-     * {@sample.xml doc/avalara-connector.xml.sample avalara:commit-tax}
+     * {@sample.xml ../../../doc/avalara-connector.xml.sample avalara:commit-tax}
      *
      * @param docId todo
      * @param companyCode todo
@@ -249,7 +249,7 @@ public class AvalaraModule
     /**
      * Get Tax History processor
      *
-     * {@sample.xml doc/avalara-connector.xml.sample avalara:get-tax-history}
+     * {@sample.xml ../../../doc/avalara-connector.xml.sample avalara:get-tax-history}
      *
      * @param docId todo
      * @param companyCode todo
@@ -281,7 +281,7 @@ public class AvalaraModule
     /**
      * Cancel Tax processor
      *
-     * {@sample.xml doc/avalara-connector.xml.sample avalara:cancel-tax}
+     * {@sample.xml ../../../doc/avalara-connector.xml.sample avalara:cancel-tax}
      * 
      * @param docId todo
      * @param companyCode todo
@@ -316,7 +316,7 @@ public class AvalaraModule
      * This operation validates the supplied address, returning canonical form and 
      * additional delivery details if successfully validated.
      *
-     * {@sample.xml doc/avalara-connector.xml.sample avalara:validate-address}
+     * {@sample.xml ../../../doc/avalara-connector.xml.sample avalara:validate-address}
      * @param line1 Address line 1
      * @param line2 Address line 2
      * @param line3 Address line 3
