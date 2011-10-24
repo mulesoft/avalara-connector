@@ -22,5 +22,5 @@ public interface AvalaraClient
 
     GetTaxResult getTax(GetTaxRequest getTaxRequest);
 
-    PingResult ping();
+    PingResult ping(String message);
 }

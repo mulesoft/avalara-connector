@@ -40,9 +40,9 @@ public class DefaultAvalaraClient implements AvalaraClient
     }
 
     @Override
-    public PingResult ping()
+    public PingResult ping(String message)
     {
-        return getService().ping("666");
+        return getService().ping(message);
     }
     
     @Override
@@ -86,7 +86,6 @@ public class DefaultAvalaraClient implements AvalaraClient
         {
             throw new AvalaraRuntimeException(response.getMessages());
         }
-        
         return response;
     }
 

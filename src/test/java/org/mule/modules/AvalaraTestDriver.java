@@ -4,14 +4,22 @@
 
 package org.mule.modules;
 
+import static org.junit.Assert.*;
+
 import java.util.Date;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mule.modules.avalara.AvalaraDocumentType;
 import org.mule.modules.avalara.AvalaraModule;
+import org.mule.modules.avalara.CancelCodeType;
 import org.mule.modules.avalara.DetailLevelType;
 import org.mule.modules.avalara.ServiceModeType;
+
+import com.avalara.avatax.services.CancelTaxResult;
+import com.avalara.avatax.services.CommitTaxResult;
+import com.avalara.avatax.services.GetTaxResult;
+import com.avalara.avatax.services.PingResult;
 
 /**
  * @author Gaston Ponti
@@ -37,7 +45,10 @@ public class AvalaraTestDriver
     @Test
     public void ping()
     {
-        System.out.println(module.ping());
+        PingResult result = module.ping("Hi");
+        assertNotNull(result);
+        assertFalse(result.getMessages().getMessage().isEmpty());
+        assertEquals("Hi", result.getMessages().getMessage().get(0));
     }
     
     @Test
@@ -45,8 +56,8 @@ public class AvalaraTestDriver
     {
 //        new TaxSvc().getTaxSvcSoap().getTax(new GetTaxRequest());
         
-        module.getTax("FOO",
-            AvalaraDocumentType.SALES_ORDER, null,
+        GetTaxResult result = module.getTax("FOO",
+            AvalaraDocumentType.SALES_ORDER, "1234",
             new Date(), null, null, null,
             "1.2", null, null, null, null, null, null,
             DetailLevelType.TAX, null,
@@ -57,6 +68,35 @@ public class AvalaraTestDriver
             "2.3",
             new Date());
         
-        
+        assertNotNull(result);
+        assertEquals("some code", result.getDocCode());
     }
+    
+    @Test
+    public void createCommitAndCancelATax() throws Exception
+    {
+        
+        module.getTax("FOO",
+            AvalaraDocumentType.SALES_ORDER, "1_45_45670",
+            new Date(), null, null, null,
+            "1.2", null, null, null, null, null, null,
+            DetailLevelType.TAX, null,
+            28, null,
+            false, null, null, null,
+            ServiceModeType.LOCAL,
+            new Date(),
+            "2.3",
+            new Date());
+        
+        CommitTaxResult commitTaxResult = module.commitTax("docId", "FOO", 
+            AvalaraDocumentType.SALES_ORDER, "1_45_45670", "1_45_45671");
+        
+        assertNotNull(commitTaxResult);
+  
+        CancelTaxResult cancelTaxResult = module.cancelTax("docId", "FOO", AvalaraDocumentType.SALES_ORDER, "1_45_45671", CancelCodeType.DOC_DELETED);
+        
+        assertEquals("docId", cancelTaxResult.getDocId());
+    }
+    
+    
 }

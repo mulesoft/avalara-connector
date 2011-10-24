@@ -86,9 +86,9 @@ public class AvalaraModule
     
     private MapObjectMapper mom = new MapObjectMapper("com.avalara.avatax.services");
     
-    public PingResult ping()
+    public PingResult ping(String message)
     {
-        return client.ping();
+        return client.ping(message);
     }
     /**
      * Get Tax processor.
