@@ -149,20 +149,18 @@ public class SOAPSimpleCredentials implements SOAPHandler<SOAPMessageContext>
                 header = message.getSOAPHeader();
             }
 
-            // Add WS-Security SOAP Header
             SOAPElement heSecurity = header.addChildElement("Security", WSSEPrefix, WSSENamespace);
             heSecurity.addAttribute(message.getSOAPPart().getEnvelope().createName("mustUnderstand",
                 SOAPENVPrefix, SOAPENVNamespace), "1");
 
-            // Add the Usernametoken element to the WS-Security Header
             SOAPElement heUsernameToken = heSecurity.addChildElement("UsernameToken", WSSEPrefix,
                 WSSENamespace);
 
-            // Add the Username element to the UsernameToken Element
             heUsernameToken.addChildElement("Username", WSSEPrefix, WSSENamespace).addTextNode(username);
 
-            // Add the Password element to the UsernameToken Element
             SOAPElement hePassword = heUsernameToken.addChildElement("Password", WSSEPrefix, WSSENamespace);
+            
+            
             hePassword.addAttribute(message.getSOAPPart().getEnvelope().createName("Type"), WSSEPasswordText);
             hePassword.addTextNode(password);
 

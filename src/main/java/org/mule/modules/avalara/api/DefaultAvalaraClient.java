@@ -76,7 +76,7 @@ public class DefaultAvalaraClient implements AvalaraClient
         }
         catch (InvocationTargetException e)
         {
-            throw new AvalaraRuntimeException(e.getMessage());
+            throw new AvalaraRuntimeException(e.getCause().getMessage());
         }
         catch (Exception e)
         {

@@ -181,7 +181,7 @@ public class AvalaraModule
             addresses.put("baseAddress", listOfLines);
         }
         
-        return client.getTax(mom.toObject(GetTaxRequest.class,            
+        return client.sendToAvalara(EntityType.GetTax, mom.toObject(GetTaxRequest.class,            
                 new MapBuilder()
                 .with("companyCode", companyCode)
                 .with("docType", docType.toDocumentType())

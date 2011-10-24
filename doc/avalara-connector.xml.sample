@@ -1,17 +1,93 @@
 <!-- BEGIN_INCLUDE(avalara:get-tax) -->
-    <avalara:get-tax />
+    <avalara:get-tax companyCode="some company code"
+                     docType="PURCHASE_ORDER"
+                     docCode="some doc code"
+                     docDate="2011-05-13"
+                     salespersonCode="some sales person code"
+                     customerCode="some customer code"
+                     customerUsageType="some customer usage type"
+                     discount="0.2"
+                     purchaseOrderNo="some purcharse order number"
+                     exemptionNo="some exemption number"
+                     originCode="some orgin code"
+                     destinationCode="some destination code"
+                     detailLevel="TAX"
+                     referenceCode="some reference code"
+                     hashCode=4
+                     locationCode="some location code"
+                     commit="false"
+                     batchCode="some batch code"
+                     currencyCode="some currency code"
+                     serviceMode="LOCAL"
+                     paymentDate=="2011-05-13"
+                     exchangeRate="some exchange rate"
+                     exchangeRateEffDate=="2011-05-13">
+        <avalara:base-addresses ref="#[groovy : [
+            [ 'addressCode' : 'some address code' ,
+              'line1' : 'some line 1' ,
+              'line2' : 'some line 2' ,
+              'line3' : 'some line 3' ,
+              'city' : 'some city' ,
+              'region' : 'some region' ,
+              'postalCode' : 'some postal code' ,
+              'country' : 'some country' ,
+              'taxRegionId' : 3 ,
+              'latitude' : 'some latitude' ,
+              'longitude' : 'some longitude' ]
+        ] ]" />
+        <avalara:list-of-lines ref="#[groovy : [
+            [ 'no' : 'some number' ,
+              'originCode' : 'some origin code' ,
+              'destinationCode' : 'some destination code' ,
+              'itemCode' : 'some item code' ,
+              'taxCode' : 'some tax code' ,
+              'qty' : [] ,
+              'amount' : [] ,
+              'discounted' : true ,
+              'revAcct' : 'some rev acct' ,
+              'ref1' : 'some reference 1' ,
+              'ref2' : 'some reference 2' ,
+              'exemptionNo' : 'some exemption number' ,
+              'customerUsageType' : 'some customer usage type' ,
+              'description' : 'some description' ,
+              'taxOverride' : 
+                [ 'taxOverrideType' : TAX_AMOUNT,
+                  'taxAmount' : [] ,
+                  'taxDate' : [] ,
+                  'reason' : 'some reason' ] ,
+              'taxIncluded' : [false?] ]
+        ] ]" />
+        <avalara:tax-override ref="#[groovy : [ 
+              'taxOverrideType' : TAX_AMOUNT,
+              'taxAmount' : [] ,
+              'taxDate' : [] ,
+              'reason' : 'some reason' ] ,
+              'taxIncluded' : [false?] 
+        ] ]" />
 <!-- END_INCLUDE(avalara:get-tax) -->
 
 <!-- BEGIN_INCLUDE(avalara:commit-tax) -->
-    <avalara:commit-tax />
+    <avalara:commit-tax docId="some document id"
+                        companyCode="some company code"
+                        docType="SALES_ORDER"
+                        docCode="some document code"
+                        newDocCode="some new document code" />
 <!-- END_INCLUDE(avalara:commit-tax) -->
 
 <!-- BEGIN_INCLUDE(avalara:get-tax-history) -->
-    <avalara:get-tax-history />
+    <avalara:get-tax-history docId="some document id"
+                             companyCode="some company code"
+                             docType="SALES_ORDER"
+                             docCode="some document code"
+                             detailLevel="DOCUMENT" />
 <!-- END_INCLUDE(avalara:get-tax-history) -->
 
 <!-- BEGIN_INCLUDE(avalara:cancel-tax) -->
-    <avalara:cancel-tax />
+    <avalara:cancel-tax docId="some document id"
+                        companyCode="some company code"
+                        docType="SALES_ORDER"
+                        docCode="some document code"
+                        cancelCode="UNSPECIFIED" />
 <!-- END_INCLUDE(avalara:cancel-tax) -->
 
 <!-- BEGIN_INCLUDE(avalara:validate-address) -->
