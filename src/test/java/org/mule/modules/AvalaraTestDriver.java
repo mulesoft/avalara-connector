@@ -21,11 +21,15 @@ import org.mule.modules.avalara.AvalaraModule;
 import org.mule.modules.avalara.CancelCodeType;
 import org.mule.modules.avalara.DetailLevelType;
 import org.mule.modules.avalara.ServiceModeType;
+import org.mule.modules.avalara.TextCaseType;
+import org.mule.modules.avalara.exception.AvalaraRuntimeException;
 
 import com.avalara.avatax.services.CancelTaxResult;
 import com.avalara.avatax.services.CommitTaxResult;
 import com.avalara.avatax.services.GetTaxResult;
 import com.avalara.avatax.services.PingResult;
+import com.avalara.avatax.services.SeverityLevel;
+import com.avalara.avatax.services.ValidateResult;
 
 /**
  * @author Gaston Ponti
@@ -42,8 +46,9 @@ public class AvalaraTestDriver
     public void setup()
     {
         module = new AvalaraModule();
-        module.setUsername(System.getenv("avalaraUsername"));
-        module.setPassword(System.getenv("avalaraPassword"));
+        module.setAccount(System.getenv("avalaraAccount"));
+        module.setLisence(System.getenv("avalaraLisence"));
+        module.setAvalaraClient(System.getenv("avalaraClient"));
         module.init();
     }
 
@@ -52,16 +57,13 @@ public class AvalaraTestDriver
     {
         PingResult result = module.ping("Hi");
         assertNotNull(result);
-        assertFalse(result.getMessages().getMessage().isEmpty());
-        assertEquals("Hi", result.getMessages().getMessage().get(0));
+        assertEquals(SeverityLevel.SUCCESS, result.getResultCode());
     }
 
     @Test
     public void getTaxWithoutKnowingUsernameOrPassword() throws Exception
     {
-        // new TaxSvc().getTaxSvcSoap().getTax(new GetTaxRequest());
-
-        GetTaxResult result = module.getTax("FOO", AvalaraDocumentType.SALES_ORDER, "1234", new Date(), null,
+        GetTaxResult result = module.getTax("MS", AvalaraDocumentType.SALES_ORDER, "1234", new Date(), null,
             null, null, "1.2", null, null, null, null, null, null, DetailLevelType.TAX, null, 28, null,
             false, null, null, null, ServiceModeType.LOCAL, new Date(), "2.3", new Date());
 
@@ -86,6 +88,23 @@ public class AvalaraTestDriver
             "1_45_45671", CancelCodeType.DOC_DELETED);
 
         assertEquals("docId", cancelTaxResult.getDocId());
+    }
+    
+    @Test
+    public void validateAValidAddress() throws Exception
+    {
+        ValidateResult response = module.validateAddress("435 Ericksen Ave NE", null, null, null, null, null, 
+            "98110", null, 0, null, null, TextCaseType.DEFAULT, false, false, new Date());
+        
+        assertNotNull(response);
+        assertEquals("Bainbridge Island", response.getValidAddresses().getValidAddress().get(0).getCity());
+    }
+    
+    @Test(expected = AvalaraRuntimeException.class)
+    public void validateAnInvalidAddress() throws Exception
+    {
+        ValidateResult response = module.validateAddress("SARLAZA", null, null, null, null, null, 
+            null, null, 0, null, null, TextCaseType.DEFAULT, false, false, new Date());
     }
 
 }

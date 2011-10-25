@@ -20,7 +20,7 @@
         http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
         http://www.mulesoft.org/schema/mule/avalara http://www.mulesoft.org/schema/mule/avalara/1.0-SNAPSHOT/mule-avalara.xsd">
 
-    <avalara:config username="avalaraUsername" password="avalaraPassword"/>
+    <avalara:config account="avalaraAccount" lisence="avalaraLisence"/>
 
     <flow name="testFlow">
         <avalara:get-tax companyCode = "#[variable:companyCode]"

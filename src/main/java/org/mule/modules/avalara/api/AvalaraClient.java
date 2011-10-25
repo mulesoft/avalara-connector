@@ -13,9 +13,9 @@ package org.mule.modules.avalara.api;
 import org.mule.modules.avalara.RequestType;
 
 import com.avalara.avatax.services.BaseResult;
-import com.avalara.avatax.services.GetTaxRequest;
-import com.avalara.avatax.services.GetTaxResult;
 import com.avalara.avatax.services.PingResult;
+import com.avalara.avatax.services.ValidateRequest;
+import com.avalara.avatax.services.ValidateResult;
 
 /**
  * @author Gaston Ponti
@@ -24,8 +24,8 @@ import com.avalara.avatax.services.PingResult;
 public interface AvalaraClient
 {
     <T extends BaseResult> T sendToAvalara(RequestType requestType, Object obj);
-
-    GetTaxResult getTax(GetTaxRequest getTaxRequest);
+    
+    ValidateResult validateAddress(ValidateRequest validateRequest);
 
     PingResult ping(String message);
 }

@@ -64,7 +64,7 @@ public class UsernameTokenProfile implements SOAPHandler<SOAPMessageContext>
     private String password;
 
     /**
-     * This method created an instance of the SOAPSimpleCredentials class and adds it as
+     * This method created an instance of the UsernameTokenProfile class and adds it as
      * a handler to the bindingProvider supplied.
      * 
      * @param bindingProvider The client stub to which the handler will be added. The
@@ -84,8 +84,8 @@ public class UsernameTokenProfile implements SOAPHandler<SOAPMessageContext>
     }
 
     /**
-     * Creates a SOAPSimpleCredentials handler and initialises the member variables. In
-     * most cases, the addSOAPSimpleCredentials static method should be used instead.
+     * Creates a UsernameTokenProfile handler and initialises the member variables. In
+     * most cases, the sign static method should be used instead.
      * 
      * @param username The id and tenant name for the user. This is of the form
      *            systemid@tenant.
@@ -155,21 +155,21 @@ public class UsernameTokenProfile implements SOAPHandler<SOAPMessageContext>
                 header = message.getSOAPHeader();
             }
 
-            SOAPElement heSecurity = header.addChildElement("Security", WSSEPrefix, WSSENamespace);
-            heSecurity.addAttribute(message.getSOAPPart().getEnvelope().createName("mustUnderstand",
+            SOAPElement headerSecurity = header.addChildElement("Security", WSSEPrefix, WSSENamespace);
+            headerSecurity.addAttribute(message.getSOAPPart().getEnvelope().createName("mustUnderstand",
                 SOAPENVPrefix, SOAPENVNamespace), "1");
 
-            SOAPElement heUsernameToken = heSecurity.addChildElement("UsernameToken", WSSEPrefix,
+            SOAPElement headerUsernameToken = headerSecurity.addChildElement("UsernameToken", WSSEPrefix,
                 WSSENamespace);
 
-            heUsernameToken.addChildElement("Username", WSSEPrefix, WSSENamespace).addTextNode(username);
+            headerUsernameToken.addChildElement("Username", WSSEPrefix, WSSENamespace).addTextNode(username);
 
-            SOAPElement hePassword = heUsernameToken.addChildElement("Password", WSSEPrefix, WSSENamespace);
+            SOAPElement headerPassword = headerUsernameToken.addChildElement("Password", WSSEPrefix, WSSENamespace);
             
             
-            hePassword.addAttribute(message.getSOAPPart().getEnvelope().createName("Type"), WSSEPasswordText);
-            hePassword.addTextNode(password);
-
+            headerPassword.addAttribute(message.getSOAPPart().getEnvelope().createName("Type"), WSSEPasswordText);
+            headerPassword.addTextNode(password);
+            
         }
         catch (SOAPException e)
         {
@@ -178,4 +178,3 @@ public class UsernameTokenProfile implements SOAPHandler<SOAPMessageContext>
     }
 }
 
-	

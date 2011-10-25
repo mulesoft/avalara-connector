@@ -26,7 +26,6 @@ import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.apache.commons.beanutils.Converter;
-import org.apache.commons.lang.NotImplementedException;
 import org.apache.commons.lang.Validate;
 import org.mule.api.annotations.Configurable;
 import org.mule.api.annotations.Module;
@@ -40,6 +39,7 @@ import org.mule.modules.avalara.api.MapBuilder;
 import ar.com.zauber.commons.mom.CXFStyle;
 import ar.com.zauber.commons.mom.MapObjectMapper;
 
+import com.avalara.avatax.services.BaseAddress;
 import com.avalara.avatax.services.CancelTaxRequest;
 import com.avalara.avatax.services.CancelTaxResult;
 import com.avalara.avatax.services.CommitTaxRequest;
@@ -49,6 +49,8 @@ import com.avalara.avatax.services.GetTaxHistoryResult;
 import com.avalara.avatax.services.GetTaxRequest;
 import com.avalara.avatax.services.GetTaxResult;
 import com.avalara.avatax.services.PingResult;
+import com.avalara.avatax.services.ValidateRequest;
+import com.avalara.avatax.services.ValidateResult;
 
 /**
  * Module
@@ -59,19 +61,25 @@ import com.avalara.avatax.services.PingResult;
 public class AvalaraModule
 {
     /**
-     * Avalara's username
+     * Avalara's account
      */
     @Configurable
-    private String username;
+    private String account;
 
     /**
-     * Avalara's password
+     * Avalara's lisence
      */
     @Configurable
-    private String password;
+    private String lisence;
     
     /**
-     * Avalara client. By default uses DefaultAvalaraClient class.
+     * Avalara's client
+     */
+    @Configurable
+    private String avalaraClient;
+    
+    /**
+     * Avalara's application client. By default uses DefaultAvalaraClient class.
      */
     @Configurable
     @Optional
@@ -318,17 +326,56 @@ public class AvalaraModule
      * @param country Country code
      * @param postalCode Postal or ZIP code. Required, when City and Region are not 
      *                   specified
+     * @param addressCode
+     * @param taxRegionId
+     * @param latitud
+     * @param longitude
+     * @param textCase
+     * @param coordinates
+     * @param taxability
+     * @param date
+     * @return The {@link ValidateResult}
      */
-    @Processor
-    public void validateAddress(String line1,
-                                @Optional String line2,
-                                @Optional String line3, 
-                                @Optional String city,
-                                @Optional String region,
-                                @Optional String country,
-                                @Optional String postalCode)
+    public ValidateResult validateAddress(String line1,
+                                          @Optional String line2,
+                                          @Optional String line3, 
+                                          @Optional String city,
+                                          @Optional String region,
+                                          @Optional String country,
+                                          @Optional String postalCode,
+                                          @Optional String addressCode,
+                                          @Optional int taxRegionId,
+                                          @Optional String latitud,
+                                          @Optional String longitude,
+                                          @Optional @Default("DEFAULT") TextCaseType textCase,
+                                          @Optional boolean coordinates,
+                                          @Optional boolean taxability,
+                                          Date date)
     {
-        throw new NotImplementedException();
+        BaseAddress address = new BaseAddress();
+        address.setAddressCode(addressCode);
+        address.setCity(city);
+        address.setCountry(country);
+        address.setLatitude(latitud);
+        address.setLine1(line1);
+        address.setLine2(line2);
+        address.setLine3(line3);
+        address.setLongitude(longitude);
+        address.setPostalCode(postalCode);
+        address.setRegion(region);
+        address.setTaxRegionId(taxRegionId);
+        
+        return client.validateAddress(
+            mom.toObject(ValidateRequest.class,            
+                new MapBuilder()
+                .with("address", address)
+                .with("textCase", textCase.toAvalaraTextCase())
+                .with("coordinates", coordinates)
+                .with("taxability", taxability)
+                .with("date", date)
+                .build()
+            )
+        );
     }
     /**
      * 
@@ -338,57 +385,76 @@ public class AvalaraModule
     {
         if (client == null )
         {
-            Validate.notNull(username);
-            Validate.notNull(password);
-            client = new DefaultAvalaraClient(username, password);
+            Validate.notNull(account);
+            Validate.notNull(lisence);
+            Validate.notNull(avalaraClient);
+            client = new DefaultAvalaraClient(account, lisence, avalaraClient);
         }
         mom.setPropertyStyle(CXFStyle.STYLE);
     }
     
     /**
-     * Returns the username.
+     * Returns the account.
      * 
-     * @return  with the username.
+     * @return  with the account.
      */
     
-    public String getUsername()
+    public String getAccount()
     {
-        return username;
+        return account;
     }
 
     /**
-     * Sets the username. 
-     *
-     * @param username  with the username.
-     */
-    
-    public void setUsername(String username)
-    {
-        this.username = username;
-    }
-
-    /**
-     * Returns the password.
+     * Returns the lisence.
      * 
-     * @return  with the password.
+     * @return  with the lisence.
      */
     
-    public String getPassword()
+    public String getLisence()
     {
-        return password;
+        return lisence;
     }
 
     /**
-     * Sets the password. 
-     *
-     * @param password  with the password.
+     * Returns the avalaraClient.
+     * 
+     * @return  with the avalaraClient.
      */
     
-    public void setPassword(String password)
+    public String getAvalaraClient()
     {
-        this.password = password;
+        return avalaraClient;
     }
-
+    /**
+     * Sets the avalaraClient. 
+     *
+     * @param avalaraClient  with the avalaraClient.
+     */
+    
+    public void setAvalaraClient(String avalaraClient)
+    {
+        this.avalaraClient = avalaraClient;
+    }
+    /**
+     * Sets the account. 
+     *
+     * @param account  with the account.
+     */
+    
+    public void setAccount(String account)
+    {
+        this.account = account;
+    }
+    /**
+     * Sets the lisence. 
+     *
+     * @param lisence  with the lisence.
+     */
+    
+    public void setLisence(String lisence)
+    {
+        this.lisence = lisence;
+    }
     /**
      * Returns the client.
      * 

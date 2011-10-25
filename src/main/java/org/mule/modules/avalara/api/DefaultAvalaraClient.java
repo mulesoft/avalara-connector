@@ -13,20 +13,23 @@ package org.mule.modules.avalara.api;
 import java.lang.reflect.InvocationTargetException;
 
 import javax.xml.ws.BindingProvider;
-import javax.xml.ws.soap.SOAPFaultException;
 
 import org.apache.commons.lang.Validate;
+import org.apache.commons.lang.builder.ToStringBuilder;
 import org.mule.modules.avalara.RequestType;
 import org.mule.modules.avalara.exception.AvalaraRuntimeException;
+import org.mule.modules.avalara.util.AvalaraProfileHeader;
 import org.mule.modules.avalara.util.UsernameTokenProfile;
 
+import com.avalara.avatax.services.AddressSvc;
+import com.avalara.avatax.services.AddressSvcSoap;
 import com.avalara.avatax.services.BaseResult;
-import com.avalara.avatax.services.GetTaxRequest;
-import com.avalara.avatax.services.GetTaxResult;
 import com.avalara.avatax.services.PingResult;
 import com.avalara.avatax.services.SeverityLevel;
 import com.avalara.avatax.services.TaxSvc;
 import com.avalara.avatax.services.TaxSvcSoap;
+import com.avalara.avatax.services.ValidateRequest;
+import com.avalara.avatax.services.ValidateResult;
 
 /**
  * @author Gaston Ponti
@@ -36,13 +39,16 @@ public class DefaultAvalaraClient implements AvalaraClient
 {
     private String account;
     private String license;
+    private String client;
     
-    public DefaultAvalaraClient(String account, String license)
+    public DefaultAvalaraClient(String account, String license, String client)
     {
         Validate.notEmpty(account);
         Validate.notEmpty(license);
+        Validate.notEmpty(client);
         this.account = account;
         this.license = license;
+        this.client = client;
     }
 
     @Override
@@ -51,30 +57,11 @@ public class DefaultAvalaraClient implements AvalaraClient
         return getService().ping(message);
     }
     
-    @Override
-    public GetTaxResult getTax(GetTaxRequest getTaxRequest)
-    {
-        GetTaxResult response;
-        try 
-        {
-            response = getService().getTax(getTaxRequest);
-            
-            if (!response.getResultCode().equals(SeverityLevel.SUCCESS))
-            {
-                throw new AvalaraRuntimeException(response.getMessages());
-            }
-            
-            return response;
-        }
-        catch (SOAPFaultException e)
-        {
-           throw new AvalaraRuntimeException(e.getMessage()); 
-        }
-    }
     /** @see org.mule.modules.avalara.api.AvalaraClient#sendToAvalara(org.mule.modules.avalara.RequestType, java.lang.Object) */
     @Override
     public <T extends BaseResult> T sendToAvalara(RequestType entityType, Object obj)
     {
+        System.out.println(ToStringBuilder.reflectionToString(obj));
         T response;
         try
         {
@@ -95,6 +82,22 @@ public class DefaultAvalaraClient implements AvalaraClient
         return response;
     }
 
+    @Override
+    public ValidateResult validateAddress(ValidateRequest validateRequest)
+    {
+        AddressSvcSoap port = new AddressSvc().getPort(AddressSvcSoap.class);
+        
+        UsernameTokenProfile.sign((BindingProvider) port, account, license);
+        AvalaraProfileHeader.sign((BindingProvider) port, client);
+        
+        ValidateResult response =  port.validate(validateRequest);
+        if (!response.getResultCode().equals(SeverityLevel.SUCCESS))
+        {
+            throw new AvalaraRuntimeException(response.getMessages());
+        }
+        
+        return response;
+    }
     /**
      * @return
      */
@@ -105,11 +108,11 @@ public class DefaultAvalaraClient implements AvalaraClient
              
         //Headers.add(bindingProvider, profileHeaders());
         UsernameTokenProfile.sign(bindingProvider, account, license);
-
+        AvalaraProfileHeader.sign(bindingProvider, client);
+        
 //        Map<String, Object> requestContext = ((BindingProvider) port).getRequestContext();
 //        requestContext.put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, ENDPOINT);
 
         return port;
     }
-    
 }
