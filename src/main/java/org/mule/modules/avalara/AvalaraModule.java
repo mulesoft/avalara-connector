@@ -174,7 +174,7 @@ public class AvalaraModule
             addresses.put("baseAddress", listOfLines);
         }
         
-        return client.sendToAvalara(EntityType.GetTax, mom.toObject(GetTaxRequest.class,            
+        return client.sendToAvalara(RequestType.GetTax, mom.toObject(GetTaxRequest.class,            
                 new MapBuilder()
                 .with("companyCode", companyCode)
                 .with("docType", docType.toDocumentType())
@@ -226,7 +226,7 @@ public class AvalaraModule
                                      @Optional String docCode,
                                      @Optional String newDocCode)
     {
-        return (CommitTaxResult) client.sendToAvalara(EntityType.CommitTax,
+        return (CommitTaxResult) client.sendToAvalara(RequestType.CommitTax,
             mom.toObject(CommitTaxRequest.class,            
                 new MapBuilder()
                 .with("docId", docId)
@@ -258,7 +258,7 @@ public class AvalaraModule
                                              @Optional String docCode,
                                              DetailLevelType detailLevel)
     {
-        return (GetTaxHistoryResult) client.sendToAvalara(EntityType.GetTaxHistory,
+        return (GetTaxHistoryResult) client.sendToAvalara(RequestType.GetTaxHistory,
             mom.toObject(GetTaxHistoryRequest.class,            
                 new MapBuilder()
                 .with("docId", docId)
@@ -290,7 +290,7 @@ public class AvalaraModule
                                      @Optional String docCode,
                                      CancelCodeType cancelCode)
     {
-        return (CancelTaxResult) client.sendToAvalara(EntityType.CancelTax,
+        return (CancelTaxResult) client.sendToAvalara(RequestType.CancelTax,
             mom.toObject(CancelTaxRequest.class,            
                 new MapBuilder()
                 .with("docId", docId)

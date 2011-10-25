@@ -10,10 +10,15 @@
 
 package org.mule.modules.avalara.api;
 
-import org.mule.modules.avalara.EntityType;
+import java.lang.reflect.InvocationTargetException;
+
+import javax.xml.ws.BindingProvider;
+import javax.xml.ws.soap.SOAPFaultException;
+
+import org.apache.commons.lang.Validate;
+import org.mule.modules.avalara.RequestType;
 import org.mule.modules.avalara.exception.AvalaraRuntimeException;
 import org.mule.modules.avalara.util.UsernameTokenProfile;
-
 
 import com.avalara.avatax.services.BaseResult;
 import com.avalara.avatax.services.GetTaxRequest;
@@ -23,24 +28,21 @@ import com.avalara.avatax.services.SeverityLevel;
 import com.avalara.avatax.services.TaxSvc;
 import com.avalara.avatax.services.TaxSvcSoap;
 
-import java.lang.reflect.InvocationTargetException;
-
-import javax.xml.ws.BindingProvider;
-import javax.xml.ws.soap.SOAPFaultException;
-
 /**
  * @author Gaston Ponti
  * @since Oct 17, 2011
  */
 public class DefaultAvalaraClient implements AvalaraClient
 {
-    private String username;
-    private String password;
+    private String account;
+    private String license;
     
-    public DefaultAvalaraClient(String username, String password)
+    public DefaultAvalaraClient(String account, String license)
     {
-        this.username = username;
-        this.password = password;
+        Validate.notEmpty(account);
+        Validate.notEmpty(license);
+        this.account = account;
+        this.license = license;
     }
 
     @Override
@@ -69,9 +71,9 @@ public class DefaultAvalaraClient implements AvalaraClient
            throw new AvalaraRuntimeException(e.getMessage()); 
         }
     }
-    /** @see org.mule.modules.avalara.api.AvalaraClient#sendToAvalara(org.mule.modules.avalara.EntityType, java.lang.Object) */
+    /** @see org.mule.modules.avalara.api.AvalaraClient#sendToAvalara(org.mule.modules.avalara.RequestType, java.lang.Object) */
     @Override
-    public <T extends BaseResult> T sendToAvalara(EntityType entityType, Object obj)
+    public <T extends BaseResult> T sendToAvalara(RequestType entityType, Object obj)
     {
         T response;
         try
@@ -99,7 +101,10 @@ public class DefaultAvalaraClient implements AvalaraClient
     public TaxSvcSoap getService()
     {
         TaxSvcSoap port = new TaxSvc().getPort(TaxSvcSoap.class);
-        UsernameTokenProfile.sign(((BindingProvider) port), username, password);
+        BindingProvider bindingProvider = (BindingProvider) port;
+             
+        //Headers.add(bindingProvider, profileHeaders());
+        UsernameTokenProfile.sign(bindingProvider, account, license);
 
 //        Map<String, Object> requestContext = ((BindingProvider) port).getRequestContext();
 //        requestContext.put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, ENDPOINT);

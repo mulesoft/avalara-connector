@@ -23,7 +23,7 @@ import com.avalara.avatax.services.GetTaxHistory;
  * @since Oct 18, 2011
  */
 
-public enum EntityType
+public enum RequestType
 {
     /**
      * GetTax is the core of the Avalara Service. It is capable of collecting a 
@@ -77,7 +77,7 @@ public enum EntityType
     
     private final Class<?> type;
     
-    private EntityType(Class<?> type)
+    private RequestType(Class<?> type)
     {
         this.type = type;
     }
