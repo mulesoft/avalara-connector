@@ -176,6 +176,11 @@
     </build>
 
     <dependencies>
+<!--       <dependency>-->
+<!--            <groupId>com.zaubersoftware</groupId>-->
+<!--            <artifactId>commons-ws-security</artifactId>-->
+<!--            <version>${wssecurity.version}</version>            -->
+<!--        </dependency>-->
         <dependency>
            <groupId>org.mule.dsl</groupId>
            <artifactId>dsl-api</artifactId>

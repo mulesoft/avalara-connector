@@ -10,14 +10,10 @@
 
 package org.mule.modules.avalara.api;
 
-import java.lang.reflect.InvocationTargetException;
-
-import javax.xml.ws.BindingProvider;
-import javax.xml.ws.soap.SOAPFaultException;
-
 import org.mule.modules.avalara.EntityType;
 import org.mule.modules.avalara.exception.AvalaraRuntimeException;
-import org.mule.modules.avalara.util.SOAPSimpleCredentials;
+import org.mule.modules.avalara.util.UsernameTokenProfile;
+
 
 import com.avalara.avatax.services.BaseResult;
 import com.avalara.avatax.services.GetTaxRequest;
@@ -26,6 +22,11 @@ import com.avalara.avatax.services.PingResult;
 import com.avalara.avatax.services.SeverityLevel;
 import com.avalara.avatax.services.TaxSvc;
 import com.avalara.avatax.services.TaxSvcSoap;
+
+import java.lang.reflect.InvocationTargetException;
+
+import javax.xml.ws.BindingProvider;
+import javax.xml.ws.soap.SOAPFaultException;
 
 /**
  * @author Gaston Ponti
@@ -98,7 +99,7 @@ public class DefaultAvalaraClient implements AvalaraClient
     public TaxSvcSoap getService()
     {
         TaxSvcSoap port = new TaxSvc().getPort(TaxSvcSoap.class);
-        SOAPSimpleCredentials.addSOAPSimpleCredentials(((BindingProvider) port), username, password);
+        UsernameTokenProfile.sign(((BindingProvider) port), username, password);
 
 //        Map<String, Object> requestContext = ((BindingProvider) port).getRequestContext();
 //        requestContext.put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, ENDPOINT);

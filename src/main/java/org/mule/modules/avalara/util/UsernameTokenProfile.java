@@ -25,10 +25,12 @@ import javax.xml.ws.handler.soap.SOAPHandler;
 import javax.xml.ws.handler.soap.SOAPMessageContext;
 
 /**
+ * Simple implementation of request signing using 
+ * <a href="http://www.oasis-open.org/committees/download.php/13392/wss-v1.1-spec-pr-UsernameTokenProfile-01.htm">username-token profile</a>
  * @author Gaston Ponti
  * @since Oct 20, 2011
  */
-public class SOAPSimpleCredentials implements SOAPHandler<SOAPMessageContext>
+public class UsernameTokenProfile implements SOAPHandler<SOAPMessageContext>
 {
 
     /** Namespace for the SOAP Envelope. */
@@ -74,10 +76,10 @@ public class SOAPSimpleCredentials implements SOAPHandler<SOAPMessageContext>
      * @param password The password for the system user.
      */
     @SuppressWarnings("unchecked")
-    public static void addSOAPSimpleCredentials(BindingProvider bindingProvider, String username, String password)
+    public static void sign(BindingProvider bindingProvider, String username, String password)
     {
         List<Handler> handlerChain = bindingProvider.getBinding().getHandlerChain();
-        handlerChain.add(new SOAPSimpleCredentials(username, password));
+        handlerChain.add(new UsernameTokenProfile(username, password));
         bindingProvider.getBinding().setHandlerChain(handlerChain);
     }
 
@@ -89,7 +91,7 @@ public class SOAPSimpleCredentials implements SOAPHandler<SOAPMessageContext>
      *            systemid@tenant.
      * @param password The password for the system user.
      */
-    public SOAPSimpleCredentials(String username, String password)
+    public UsernameTokenProfile(String username, String password)
     {
         this.username = username;
         this.password = password;

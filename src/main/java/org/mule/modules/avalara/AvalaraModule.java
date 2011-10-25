@@ -338,6 +338,8 @@ public class AvalaraModule
     {
         if (client == null )
         {
+            Validate.notNull(username);
+            Validate.notNull(password);
             client = new DefaultAvalaraClient(username, password);
         }
         mom.setPropertyStyle(CXFStyle.STYLE);
