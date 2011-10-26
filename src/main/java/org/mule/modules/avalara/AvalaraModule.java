@@ -13,20 +13,6 @@
  */
 package org.mule.modules.avalara;
 
-import java.math.BigDecimal;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.PostConstruct;
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
-
-import org.apache.commons.beanutils.Converter;
-import org.apache.commons.lang.Validate;
 import org.mule.api.annotations.Configurable;
 import org.mule.api.annotations.Module;
 import org.mule.api.annotations.Processor;
@@ -35,7 +21,6 @@ import org.mule.api.annotations.param.Optional;
 import org.mule.modules.avalara.api.AvalaraClient;
 import org.mule.modules.avalara.api.DefaultAvalaraClient;
 import org.mule.modules.avalara.api.MapBuilder;
-import org.mule.modules.avalara.exception.AvalaraRuntimeException;
 
 import ar.com.zauber.commons.mom.CXFStyle;
 import ar.com.zauber.commons.mom.MapObjectMapper;
@@ -53,6 +38,21 @@ import com.avalara.avatax.services.PingResult;
 import com.avalara.avatax.services.PostTaxResult;
 import com.avalara.avatax.services.ValidateRequest;
 import com.avalara.avatax.services.ValidateResult;
+
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.PostConstruct;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
+
+import org.apache.commons.beanutils.Converter;
+import org.apache.commons.lang.Validate;
 
 /**
  * Module

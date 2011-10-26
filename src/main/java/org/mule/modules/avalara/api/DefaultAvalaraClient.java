@@ -106,13 +106,9 @@ public class DefaultAvalaraClient implements AvalaraClient
         TaxSvcSoap port = new TaxSvc().getPort(TaxSvcSoap.class);
         BindingProvider bindingProvider = (BindingProvider) port;
              
-        //Headers.add(bindingProvider, profileHeaders());
         UsernameTokenProfile.sign(bindingProvider, account, license);
         AvalaraProfileHeader.sign(bindingProvider, client);
         
-//        Map<String, Object> requestContext = ((BindingProvider) port).getRequestContext();
-//        requestContext.put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, ENDPOINT);
-
         return port;
     }
 }
