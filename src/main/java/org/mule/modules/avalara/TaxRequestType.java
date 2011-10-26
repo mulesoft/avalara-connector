@@ -16,6 +16,7 @@ import com.avalara.avatax.services.CancelTax;
 import com.avalara.avatax.services.CommitTax;
 import com.avalara.avatax.services.GetTax;
 import com.avalara.avatax.services.GetTaxHistory;
+import com.avalara.avatax.services.PostTax;
 
 
 /**
@@ -38,10 +39,27 @@ public enum TaxRequestType
     GetTax(GetTax.class),
 
     /**
+     * PostTax can be used to set the document status to several states during 
+     * a SalesInvoice process (SalesOrder processes are not saved). Invoices appear 
+     * initially as "uncommitted" on the Admin Console and do not appear at all 
+     * on Avalara reporting until they are committed.
+     * A posted document can be changed (overwritten not amended) with subsequent 
+     * GetTax calls to the same DocCode (Document Number).
+     * The typical integration point for PostTax/CommitTax process is when it is 
+     * required by the ERP or a business process requires that an invoice is posted 
+     * indicating that it has been reviewed by a second level of management, the 
+     * "committed" indicating that it has been certified to be ready for tax reporting.
+     */
+    PostTax(PostTax.class),
+    
+    /**
      * CommitTax can be used to set the document status to several states during 
      * a SalesInvoice process (SalesOrder processes are not saved). Invoices appear 
      * initially as "uncommitted" on the Admin Console and do not appear at all 
      * on Avalara reporting until they are committed.
+     * CommitTax completes the two stage process and sets the Document Status to 
+     * Committed on mm/dd/yyyy however it cannot be overwritten as the PostTax 
+     * operation was.
      */
     CommitTax(CommitTax.class),
     

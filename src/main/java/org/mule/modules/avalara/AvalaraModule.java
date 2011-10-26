@@ -35,6 +35,7 @@ import org.mule.api.annotations.param.Optional;
 import org.mule.modules.avalara.api.AvalaraClient;
 import org.mule.modules.avalara.api.DefaultAvalaraClient;
 import org.mule.modules.avalara.api.MapBuilder;
+import org.mule.modules.avalara.exception.AvalaraRuntimeException;
 
 import ar.com.zauber.commons.mom.CXFStyle;
 import ar.com.zauber.commons.mom.MapObjectMapper;
@@ -49,6 +50,7 @@ import com.avalara.avatax.services.GetTaxHistoryResult;
 import com.avalara.avatax.services.GetTaxRequest;
 import com.avalara.avatax.services.GetTaxResult;
 import com.avalara.avatax.services.PingResult;
+import com.avalara.avatax.services.PostTaxResult;
 import com.avalara.avatax.services.ValidateRequest;
 import com.avalara.avatax.services.ValidateResult;
 
@@ -91,6 +93,7 @@ public class AvalaraModule
     {
         return apiClient.ping(message);
     }
+    
     /**
      * Get Tax processor.
      * <p>
@@ -131,6 +134,12 @@ public class AvalaraModule
      *                        for single use exemption certificates to match the 
      *                        order and invoice with the certificate.
      * @param exemptionNo Exemption number used for this transaction
+     * @param originCode Code that refers one of the address of the baseAddress collection.
+     *                   It has to be the same code of one of the address's addressCode.
+     *                   It represents the origin address. 
+     * @param destinationCode Code that refers one of the address of the baseAddress collection.
+     *                        It has to be the same code of one of the address's addressCode.
+     *                        It represents the destination address. 
      * @param baseAddresses Collection of physical addresses that will be referred 
      *                      to as the destination or origination of 1 or more invoice 
      *                      line entries
@@ -156,6 +165,8 @@ public class AvalaraModule
      * @param exchangeRate The exchange rate value.
      * @param exchangeRateEffDate The exchange rate effective date value.
      * @return The {@link GetTaxResult}
+     * 
+     * @throws AvalaraRuntimeException
      */
     @Processor
     public GetTaxResult getTax(String companyCode,
@@ -163,13 +174,15 @@ public class AvalaraModule
                                @Optional String docCode,
                                Date docDate,
                                @Optional String salespersonCode,
-                               @Optional String customerCode,
+                               String customerCode,
                                @Optional String customerUsageType,
                                String discount,
                                @Optional String purchaseOrderNo,
                                @Optional String exemptionNo,
-                               @Optional List<Map<String, Object>> baseAddresses,
-                               @Optional List<Map<String, Object>> listOfLines,
+                               String originCode,
+                               String destinationCode,
+                               List<Map<String, Object>> baseAddresses,
+                               List<Map<String, Object>> listOfLines,
                                DetailLevelType detailLevel,
                                @Optional String referenceCode,
                                @Optional String locationCode,
@@ -195,8 +208,8 @@ public class AvalaraModule
         Map<String, Object> lines = null;
         if (listOfLines != null && !listOfLines.isEmpty())
         {
-            addresses = new HashMap<String, Object>();
-            addresses.put("baseAddress", listOfLines);
+            lines = new HashMap<String, Object>();
+            lines.put("line", listOfLines);
         }
         
         return apiClient.sendToAvalara(TaxRequestType.GetTax, mom.toObject(GetTaxRequest.class,            
@@ -206,11 +219,13 @@ public class AvalaraModule
                 .with("docCode", docCode)
                 .with("docDate", docDate)
                 .with("salespersonCode", salespersonCode)
-                .with("currencyCode", customerCode)
+                .with("customerCode", customerCode)
                 .with("customerUsageType", customerUsageType)
                 .with("discount", discountDecimal)
                 .with("purchaseOrderNo", purchaseOrderNo)
                 .with("exemptionNo", exemptionNo)
+                .with("originCode", originCode)
+                .with("destinationCode", destinationCode)
                 .with("addresses", addresses)
                 .with("lines", lines)
                 .with("detailLevel", detailLevel.toAvalaraDetailLevel())
@@ -230,6 +245,69 @@ public class AvalaraModule
     }
 
     /**
+     * Post Tax processor
+     *
+     * {@sample.xml ../../../doc/avalara-connector.xml.sample avalara:post-tax}
+     *
+     * @param docId The original document's type, such as Sales Invoice or Purchase Invoice.
+     * @param companyCode Client application company reference code. If docId is specified, 
+     *                    this is not needed.
+     * @param docType The document type specifies the category of the document and affects
+     *                how the document is treated after a tax calculation; see 
+     *                {@link AvalaraDocumentType} for more information about the specific 
+     *                document types.
+     * @param docCode The internal reference code used by the client application.
+     * @param docDate The date on the invoice, purchase order, etc
+     * @param totalAmount The total amount (not including tax) for the document. <p>
+     *                    This is used for verification and reconciliation. This should 
+     *                    be the <b>TotalAmount</b> returned by {@link GetTaxResult} when 
+     *                    tax was calculated for this document; otherwise the web service 
+     *                    will return an error.
+     * @param totalTax The total tax for the document. <p> This is used for verification 
+     *                 and reconciliation. This should be the <b>TotalTax</b> returned by
+     *                 {@link GetTaxResult} when tax was calculated for this document; 
+     *                 otherwise the web service will return an error. </p>
+     * @param commit The commit value. <p> This has been defaulted to false. If this has 
+     *               been set to true AvaTax will commit the document on this call. Seller's 
+     *               system who wants to Post and Commit the document on one call should use 
+     *               this flag.
+     * @param newDocCode The new document code value.
+     * @return The {@link PostTaxResult}
+     * 
+     * @throws AvalaraRuntimeException
+     */
+    @Processor
+    public PostTaxResult postTax(@Optional String docId,
+                                 String companyCode,
+                                 AvalaraDocumentType docType,
+                                 @Optional String docCode,
+                                 Date docDate,
+                                 String totalAmount,
+                                 String totalTax,
+                                 @Optional @Default("false") boolean commit,
+                                 @Optional String newDocCode)
+    {
+        BigDecimal totalAmountDecimal = totalAmount == null ? null :  new BigDecimal(totalAmount);
+        BigDecimal totalTaxDecimal = totalTax == null ? null :  new BigDecimal(totalTax);
+        
+        return (PostTaxResult) apiClient.sendToAvalara(TaxRequestType.PostTax,
+            mom.toObject(CommitTaxRequest.class,            
+                new MapBuilder()
+                .with("docId", docId)
+                .with("companyCode", companyCode)
+                .with("docType", docType.toDocumentType())
+                .with("docCode", docCode)
+                .with("docDate", docDate)
+                .with("totalAmount", totalAmountDecimal)
+                .with("totalTax", totalTaxDecimal)
+                .with("commit", commit)
+                .with("newDocCode", newDocCode)
+                .build()
+            )
+        );
+    }
+    
+    /**
      * Commit Tax processor
      *
      * {@sample.xml ../../../doc/avalara-connector.xml.sample avalara:commit-tax}
@@ -244,6 +322,8 @@ public class AvalaraModule
      * @param docCode The internal reference code used by the client application.
      * @param newDocCode The new document code value.
      * @return The {@link CommitTaxRequest}
+     * 
+     * @throws AvalaraRuntimeException
      */
     @Processor
     public CommitTaxResult commitTax(@Optional String docId,
@@ -280,10 +360,12 @@ public class AvalaraModule
      * @param docCode The internal reference code used by the client application.
      * @param detailLevel Specifies the level of detail to return. See {@link DetailLevelType}.
      * @return The {@link GetTaxHistoryResult}
+     * 
+     * @throws AvalaraRuntimeException
      */
     @Processor
     public GetTaxHistoryResult getTaxHistory(@Optional String docId,
-                                             @Optional String companyCode,
+                                             String companyCode,
                                              AvalaraDocumentType docType,
                                              @Optional String docCode,
                                              DetailLevelType detailLevel)
@@ -317,10 +399,12 @@ public class AvalaraModule
      * @param docCode The internal reference code used by the client application.
      * @param cancelCode A code indicating the reason the document is getting canceled.
      * @return The {@link CancelTaxResult}
+     * 
+     * @throws AvalaraRuntimeException
      */
     @Processor
     public CancelTaxResult cancelTax(@Optional String docId,
-                                     @Optional String companyCode,
+                                     String companyCode,
                                      AvalaraDocumentType docType,
                                      @Optional String docCode,
                                      CancelCodeType cancelCode)
@@ -362,6 +446,8 @@ public class AvalaraModule
      * @param taxability True, if you want the valid taxRegionId in the result.
      * @param date Date.
      * @return The {@link ValidateResult}
+     * 
+     * @throws AvalaraRuntimeException
      */
     @Processor
     public ValidateResult validateAddress(String line1,

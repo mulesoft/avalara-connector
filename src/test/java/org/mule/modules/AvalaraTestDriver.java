@@ -12,7 +12,11 @@ package org.mule.modules;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -63,31 +67,96 @@ public class AvalaraTestDriver
     @Test
     public void getTaxWithoutKnowingUsernameOrPassword() throws Exception
     {
-        GetTaxResult result = module.getTax("MS", AvalaraDocumentType.SALES_ORDER, "1234", new Date(), null,
-            null, null, "1.2", null, null, null, null, DetailLevelType.TAX, null, null,
+        List<Map<String, Object>> addresses = new ArrayList<Map<String, Object>>() { {
+            add(new HashMap<String, Object>() { {
+                put("addressCode", "Origin");
+                put("line1", "Avalara");
+                put("line2", "900 Winslow Way");
+                put("line3", "Suite 100");
+                put("city", "Bainbridge Island");
+                put("region", "WA");
+                put("postalCode", "98110");
+                put("country", "USA");
+            } });
+            add(new HashMap<String, Object>() { {
+                put("addressCode", "Dest");
+                put("line1", "3130 Elliott");
+                put("city", "Seattle");
+                put("region", "WA");
+                put("postalCode", "98121");
+                put("country", "USA");
+            } });
+        } };
+        
+        List<Map<String, Object>> lines = new ArrayList<Map<String, Object>>() { {
+            add(new HashMap<String, Object>() { {
+                put("no", "666");
+                put("itemCode", "ITEM CODE 1");
+                put("qty", 42.4);
+                put("amount", 4);
+                put("discounted", false);
+                put("description", "item number 1");
+                put("taxIncluded", false);
+            } });
+        } };
+        
+        GetTaxResult result = module.getTax("TC", AvalaraDocumentType.SALES_ORDER, "1234", new Date(), null,
+            "cusomer Code", null, "1.2", null, null, "Origin", "Dest", addresses, lines, DetailLevelType.TAX, null, null,
             false, null, null, null, ServiceModeType.LOCAL, new Date(), "2.3", new Date());
 
         assertNotNull(result);
-        assertEquals("some code", result.getDocCode());
+        assertEquals("1234", result.getDocCode());
     }
 
     @Test
     public void createCommitAndCancelATax() throws Exception
     {
-
-        module.getTax("FOO", AvalaraDocumentType.SALES_ORDER, "1_45_45670", new Date(), null, null, null,
-            "1.2", null, null, null, null, DetailLevelType.TAX, null, null, false, null,
+        List<Map<String, Object>> addresses = new ArrayList<Map<String, Object>>() { {
+            add(new HashMap<String, Object>() { {
+                put("addressCode", "Origin");
+                put("line1", "Avalara");
+                put("line2", "900 Winslow Way");
+                put("line3", "Suite 100");
+                put("city", "Bainbridge Island");
+                put("region", "WA");
+                put("postalCode", "98110");
+                put("country", "USA");
+            } });
+            add(new HashMap<String, Object>() { {
+                put("addressCode", "Dest");
+                put("line1", "3130 Elliott");
+                put("city", "Seattle");
+                put("region", "WA");
+                put("postalCode", "98121");
+                put("country", "USA");
+            } });
+        } };
+        
+        List<Map<String, Object>> lines = new ArrayList<Map<String, Object>>() { {
+            add(new HashMap<String, Object>() { {
+                put("no", "666");
+                put("itemCode", "ITEM CODE 1");
+                put("qty", 42.4);
+                put("amount", 4);
+                put("discounted", false);
+                put("description", "item number 1");
+                put("taxIncluded", false);
+            } });
+        } };
+        
+        GetTaxResult getTaxResult = module.getTax("TC", AvalaraDocumentType.SALES_ORDER, "1_45_45670", new Date(), null, "testCustomer", null,
+            "1.2", null, null, "Origin", "Dest", addresses, lines, DetailLevelType.TAX, null, null, false, null,
             null, null, ServiceModeType.LOCAL, new Date(), "2.3", new Date());
 
-        CommitTaxResult commitTaxResult = module.commitTax("docId", "FOO", AvalaraDocumentType.SALES_ORDER,
-            "1_45_45670", "1_45_45671");
+        CommitTaxResult commitTaxResult = module.commitTax(getTaxResult.getDocId(), "TC", AvalaraDocumentType.SALES_ORDER,
+            getTaxResult.getDocCode(), "1_45_45671");
 
         assertNotNull(commitTaxResult);
 
-        CancelTaxResult cancelTaxResult = module.cancelTax("docId", "FOO", AvalaraDocumentType.SALES_ORDER,
+        CancelTaxResult cancelTaxResult = module.cancelTax(null, "TC", AvalaraDocumentType.SALES_ORDER,
             "1_45_45671", CancelCodeType.DOC_DELETED);
 
-        assertEquals("docId", cancelTaxResult.getDocId());
+        assertEquals(commitTaxResult.getDocId() , cancelTaxResult.getDocId());
     }
     
     @Test

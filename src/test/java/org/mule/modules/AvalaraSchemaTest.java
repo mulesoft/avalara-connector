@@ -18,7 +18,7 @@ public class AvalaraSchemaTest extends FunctionalTestCase
     @Override
     protected String getConfigResources()
     {
-        return "mule-config.xml";
+        return "avalara-schema-test.xml";
     }
 
     @Test

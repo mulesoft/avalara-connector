@@ -9,6 +9,8 @@
                  discount="0.2"
                  purchaseOrderNo="some purchase order number"
                  exemptionNo="some exemption number"
+                 originCode="some origin code"
+                 destinationCode="some destination code"
                  detailLevel="TAX"
                  referenceCode="some reference code"
                  locationCode="some location code"
@@ -20,7 +22,18 @@
                  exchangeRate="some exchange rate"
                  exchangeRateEffDate="2010-09-13T01:18:14-07:00">
     <avalara:base-addresses ref="#[groovy : [
-        [ 'addressCode' : 'some address code' ,
+        [ 'addressCode' : 'some origin code' ,
+          'line1' : 'some line 1' ,
+          'line2' : 'some line 2' ,
+          'line3' : 'some line 3' ,
+          'city' : 'some city' ,
+          'region' : 'some region' ,
+          'postalCode' : 'some postal code' ,
+          'country' : 'some country' ,
+          'taxRegionId' : 3 ,
+          'latitude' : 'some latitude' ,
+          'longitude' : 'some longitude' ] ,
+        [ 'addressCode' : 'some destination code' ,
           'line1' : 'some line 1' ,
           'line2' : 'some line 2' ,
           'line3' : 'some line 3' ,
@@ -63,6 +76,18 @@
     ] ]" />
 </avalara:get-tax>
 <!-- END_INCLUDE(avalara:get-tax) -->
+
+<!-- BEGIN_INCLUDE(avalara:post-tax) -->
+<avalara:post-tax docId="some document id"
+                    companyCode="some company code"
+                    docType="SALES_ORDER"
+                    docCode="some document code"
+                    docDate="2010-09-13T01:18:14-07:00"
+                    totalAmount="1200"
+                    totalTax="100"
+                    commit="false"
+                    newDocCode="some new document code" />
+<!-- END_INCLUDE(avalara:post-tax) -->
 
 <!-- BEGIN_INCLUDE(avalara:commit-tax) -->
 <avalara:commit-tax docId="some document id"
