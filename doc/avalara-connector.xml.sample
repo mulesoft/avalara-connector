@@ -2,7 +2,7 @@
 <avalara:get-tax companyCode="some company code"
                  docType="PURCHASE_ORDER"
                  docCode="some doc code"
-                 docDate="2011-05-13"
+                 docDate="2010-09-13T01:18:14-07:00"
                  salespersonCode="some sales person code"
                  customerCode="some customer code"
                  customerUsageType="some customer usage type"
@@ -16,9 +16,9 @@
                  batchCode="some batch code"
                  currencyCode="some currency code"
                  serviceMode="LOCAL"
-                 paymentDate="2011-05-13"
+                 paymentDate="2010-09-13T01:18:14-07:00"
                  exchangeRate="some exchange rate"
-                 exchangeRateEffDate="2011-05-13">
+                 exchangeRateEffDate="2010-09-13T01:18:14-07:00">
     <avalara:base-addresses ref="#[groovy : [
         [ 'addressCode' : 'some address code' ,
           'line1' : 'some line 1' ,
@@ -89,5 +89,19 @@
 <!-- END_INCLUDE(avalara:cancel-tax) -->
 
 <!-- BEGIN_INCLUDE(avalara:validate-address) -->
-<avalara:validate-address />
+<avalara:validate-address line1="435 Ericksen Ave"
+                          line2="some line 2"
+                          line3="some line 3" 
+                          city="some city"
+                          region="NE"
+                          country="some country"
+                          postalCode="some postal code"
+                          addressCode="some address code"
+                          taxRegionId="1"
+                          latitude="26"
+                          longitude="40"
+                          textCase="DEFAULT"
+                          coordinates="true"
+                          taxability="false"
+                          date="2010-09-13T01:18:14-07:00" />
 <!-- END_INCLUDE(avalara:validate-address) -->

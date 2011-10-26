@@ -67,13 +67,13 @@ public class AvalaraModule
     private String account;
 
     /**
-     * Avalara's lisence
+     * Avalara's license
      */
     @Configurable
-    private String lisence;
+    private String license;
     
     /**
-     * Avalara's client
+     * Avalara's apiClient
      */
     @Configurable
     private String avalaraClient;
@@ -83,13 +83,13 @@ public class AvalaraModule
      */
     @Configurable
     @Optional
-    private AvalaraClient client;
+    private AvalaraClient apiClient;
     
     private MapObjectMapper mom = new MapObjectMapper("com.avalara.avatax.services");
     
     public PingResult ping(String message)
     {
-        return client.ping(message);
+        return apiClient.ping(message);
     }
     /**
      * Get Tax processor.
@@ -199,7 +199,7 @@ public class AvalaraModule
             addresses.put("baseAddress", listOfLines);
         }
         
-        return client.sendToAvalara(TaxRequestType.GetTax, mom.toObject(GetTaxRequest.class,            
+        return apiClient.sendToAvalara(TaxRequestType.GetTax, mom.toObject(GetTaxRequest.class,            
                 new MapBuilder()
                 .with("companyCode", companyCode)
                 .with("docType", docType.toDocumentType())
@@ -252,7 +252,7 @@ public class AvalaraModule
                                      @Optional String docCode,
                                      @Optional String newDocCode)
     {
-        return (CommitTaxResult) client.sendToAvalara(TaxRequestType.CommitTax,
+        return (CommitTaxResult) apiClient.sendToAvalara(TaxRequestType.CommitTax,
             mom.toObject(CommitTaxRequest.class,            
                 new MapBuilder()
                 .with("docId", docId)
@@ -288,7 +288,7 @@ public class AvalaraModule
                                              @Optional String docCode,
                                              DetailLevelType detailLevel)
     {
-        return (GetTaxHistoryResult) client.sendToAvalara(TaxRequestType.GetTaxHistory,
+        return (GetTaxHistoryResult) apiClient.sendToAvalara(TaxRequestType.GetTaxHistory,
             mom.toObject(GetTaxHistoryRequest.class,            
                 new MapBuilder()
                 .with("docId", docId)
@@ -325,7 +325,7 @@ public class AvalaraModule
                                      @Optional String docCode,
                                      CancelCodeType cancelCode)
     {
-        return (CancelTaxResult) client.sendToAvalara(TaxRequestType.CancelTax,
+        return (CancelTaxResult) apiClient.sendToAvalara(TaxRequestType.CancelTax,
             mom.toObject(CancelTaxRequest.class,            
                 new MapBuilder()
                 .with("docId", docId)
@@ -378,7 +378,7 @@ public class AvalaraModule
                                           @Optional @Default("DEFAULT") TextCaseType textCase,
                                           @Optional @Default("false") boolean coordinates,
                                           @Optional @Default("false") boolean taxability,
-                                          @Optional Date date)
+                                          Date date)
     {
         BaseAddress address = new BaseAddress();
         address.setAddressCode(addressCode);
@@ -393,7 +393,7 @@ public class AvalaraModule
         address.setRegion(region);
         address.setTaxRegionId(taxRegionId);
         
-        return client.validateAddress(
+        return apiClient.validateAddress(
             mom.toObject(ValidateRequest.class,            
                 new MapBuilder()
                 .with("address", address)
@@ -411,12 +411,12 @@ public class AvalaraModule
     @PostConstruct
     public void init()
     {
-        if (client == null )
+        if (apiClient == null )
         {
             Validate.notNull(account);
-            Validate.notNull(lisence);
+            Validate.notNull(license);
             Validate.notNull(avalaraClient);
-            client = new DefaultAvalaraClient(account, lisence, avalaraClient);
+            apiClient = new DefaultAvalaraClient(account, license, avalaraClient);
         }
         mom.setPropertyStyle(CXFStyle.STYLE);
     }
@@ -433,14 +433,14 @@ public class AvalaraModule
     }
 
     /**
-     * Returns the lisence.
+     * Returns the license.
      * 
-     * @return  with the lisence.
+     * @return  with the license.
      */
     
-    public String getLisence()
+    public String getLicense()
     {
-        return lisence;
+        return license;
     }
 
     /**
@@ -474,35 +474,35 @@ public class AvalaraModule
         this.account = account;
     }
     /**
-     * Sets the lisence. 
+     * Sets the license. 
      *
-     * @param lisence  with the lisence.
+     * @param license  with the license.
      */
     
-    public void setLisence(String lisence)
+    public void setLicense(String lisence)
     {
-        this.lisence = lisence;
+        this.license = lisence;
     }
     /**
-     * Returns the client.
+     * Returns the apiClient.
      * 
-     * @return  with the client.
+     * @return  with the apiClient.
      */
     
-    public AvalaraClient getClient()
+    public AvalaraClient getApiClient()
     {
-        return client;
+        return apiClient;
     }
 
     /**
-     * Sets the client. 
+     * Sets the apiClient. 
      *
-     * @param client  with the client.
+     * @param apiClient  with the apiClient.
      */
     
     public void setClient(AvalaraClient client)
     {
-        this.client = client;
+        this.apiClient = client;
     }
     
     private final DatatypeFactory datatypeFactory;

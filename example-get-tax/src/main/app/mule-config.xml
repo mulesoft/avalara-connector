@@ -27,7 +27,7 @@
        http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/3.2/mule-scripting.xsd
        ">
 
-  <avalara:config license="${avalaraLicense}" account="${avalaraAccount}"/>
+  <avalara:config license="${avalaraLicense}" account="${avalaraAccount}" avalaraClient="${avalaraClient}" />
   
    <flow name="GetTaxes">
     <http:inbound />

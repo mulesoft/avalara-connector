@@ -47,7 +47,7 @@ public class AvalaraTestDriver
     {
         module = new AvalaraModule();
         module.setAccount(System.getenv("avalaraAccount"));
-        module.setLisence(System.getenv("avalaraLisence"));
+        module.setLicense(System.getenv("avalaraLicense"));
         module.setAvalaraClient(System.getenv("avalaraClient"));
         module.init();
     }
@@ -93,7 +93,7 @@ public class AvalaraTestDriver
     @Test
     public void validateAValidAddress() throws Exception
     {
-        ValidateResult response = module.validateAddress("435 Ericksen Ave NE", null, null, null, null, null, 
+        ValidateResult response = module.validateAddress("435 Ericksen Ave", null, null, null, "NE", null, 
             "98110", null, 0, null, null, TextCaseType.DEFAULT, false, false, new Date());
         
         assertNotNull(response);
