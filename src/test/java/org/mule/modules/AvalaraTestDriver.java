@@ -64,7 +64,7 @@ public class AvalaraTestDriver
     public void getTaxWithoutKnowingUsernameOrPassword() throws Exception
     {
         GetTaxResult result = module.getTax("MS", AvalaraDocumentType.SALES_ORDER, "1234", new Date(), null,
-            null, null, "1.2", null, null, null, null, null, null, DetailLevelType.TAX, null, 28, null,
+            null, null, "1.2", null, null, null, null, DetailLevelType.TAX, null, null,
             false, null, null, null, ServiceModeType.LOCAL, new Date(), "2.3", new Date());
 
         assertNotNull(result);
@@ -76,7 +76,7 @@ public class AvalaraTestDriver
     {
 
         module.getTax("FOO", AvalaraDocumentType.SALES_ORDER, "1_45_45670", new Date(), null, null, null,
-            "1.2", null, null, null, null, null, null, DetailLevelType.TAX, null, 28, null, false, null,
+            "1.2", null, null, null, null, DetailLevelType.TAX, null, null, false, null,
             null, null, ServiceModeType.LOCAL, new Date(), "2.3", new Date());
 
         CommitTaxResult commitTaxResult = module.commitTax("docId", "FOO", AvalaraDocumentType.SALES_ORDER,

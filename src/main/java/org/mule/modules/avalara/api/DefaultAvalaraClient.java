@@ -16,7 +16,7 @@ import javax.xml.ws.BindingProvider;
 
 import org.apache.commons.lang.Validate;
 import org.apache.commons.lang.builder.ToStringBuilder;
-import org.mule.modules.avalara.RequestType;
+import org.mule.modules.avalara.TaxRequestType;
 import org.mule.modules.avalara.exception.AvalaraRuntimeException;
 import org.mule.modules.avalara.util.AvalaraProfileHeader;
 import org.mule.modules.avalara.util.UsernameTokenProfile;
@@ -57,9 +57,9 @@ public class DefaultAvalaraClient implements AvalaraClient
         return getService().ping(message);
     }
     
-    /** @see org.mule.modules.avalara.api.AvalaraClient#sendToAvalara(org.mule.modules.avalara.RequestType, java.lang.Object) */
+    /** @see org.mule.modules.avalara.api.AvalaraClient#sendToAvalara(org.mule.modules.avalara.TaxRequestType, java.lang.Object) */
     @Override
-    public <T extends BaseResult> T sendToAvalara(RequestType entityType, Object obj)
+    public <T extends BaseResult> T sendToAvalara(TaxRequestType entityType, Object obj)
     {
         System.out.println(ToStringBuilder.reflectionToString(obj));
         T response;

@@ -20,7 +20,7 @@
         http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
         http://www.mulesoft.org/schema/mule/avalara http://www.mulesoft.org/schema/mule/avalara/1.0-SNAPSHOT/mule-avalara.xsd">
 
-    <avalara:config account="avalaraAccount" lisence="avalaraLisence"/>
+    <avalara:config account="avalaraAccount" lisence="avalaraLisence" avalaraClient="avalaraClient"/>
 
     <flow name="testFlow">
         <avalara:get-tax companyCode = "#[variable:companyCode]"
@@ -53,7 +53,12 @@
                                   city="#[variable:city]"
                                   region="#[variable:region]"
                                   country="#[variable:country]"
-                                  postalCode="#[variable:postalCode]"/>
+                                  postalCode="#[variable:postalCode]"
+                                  addressCode="#[variable:addressCode]"
+                                  taxRegionId="#[variable:taxRegionId]"
+                                  latitude="#[variable:latitude]"
+                                  longitude="#[variable:longitude]"
+                                  date="#[variable:date]" />
     </flow>
 
 </mule>

@@ -100,45 +100,65 @@ public class AvalaraModule
      * {@sample.xml ../../../doc/avalara-connector.xml.sample avalara:get-tax}
      * 
      * @param companyCode Client application company reference code
-     * @param docType The document types supported include SalesOrder, SalesInvoice 
-     *                and PurchaseOrder
-     * @param docCode Client application identifier describing this tax transaction
+     * @param docType The document type specifies the category of the document and affects
+     *                how the document is treated after a tax calculation; see 
+     *                {@link AvalaraDocumentType} for more information about the specific 
+     *                document types.
+     * @param docCode The internal reference code used by the client application.
      * @param docDate Date of invoice, purchase order, etc.
-     * @param salespersonCode todo
+     * @param salespersonCode The client application salesperson reference code.
      * @param customerCode Client application customer reference code 
      * @param customerUsageType Client application customer or usage type.
      *                          CustomerUsageType determines the exempt status of 
      *                          the transaction based on the exemption tax rules for 
      *                          the jurisdictions involved. CustomerUsageType may 
-     *                          also be set at the line item level.
-     * @param discount Discount amount applied to transaction
+     *                          also be set at the line item level. <p>
+     *                          The standard values for the CustomerUsageType (A-L).<br/>
+        A Federal Government<br/>
+        B State/Local Govt.<br/>
+        C Tribal Government<br/>
+        D Foreign Diplomat<br/>
+        E Charitable Organization<br/>
+        F Religious/Education<br/>
+        G Resale<br/>
+        H Agricultural Production<br/>
+        I Industrial Prod/Mfg.<br/>
+        J Direct Pay Permit<br/>
+        K Direct Mail<br/>
+        L - Other
+     * @param discount The discount amount to apply to the document.
      * @param purchaseOrderNo Purchase order identifier. PurchaseOrderNo is required 
      *                        for single use exemption certificates to match the 
      *                        order and invoice with the certificate.
      * @param exemptionNo Exemption number used for this transaction
-     * @param originCode todo
-     * @param destinationCode todo
      * @param baseAddresses Collection of physical addresses that will be referred 
      *                      to as the destination or origination of 1 or more invoice 
      *                      line entries
      * @param listOfLines Collection of invoice lines requiring tax calculation
      * @param detailLevel Specifies the level of tax detail to return
-     * @param referenceCode todo
-     * @param hashCode todo
-     * @param locationCode todo
+     * @param referenceCode For returns (see {@link AvalaraDocumentType}), refers to the 
+     *                      {@link GetTaxRequest#getDocCode} of the original invoice.
+     * @param locationCode Location Code value. It is Also referred to as a Store 
+     *                     Location, Outlet Id, or Outlet code is a number assigned by 
+     *                     the State which identifies a Store location. Some state returns 
+     *                     require taxes are broken out separately for Store Locations.
      * @param commit Commit flag. If Commit is set to true, tax for the transaction 
-     *               is saved and posted as tax document.
-     * @param batchCode todo
-     * @param taxOverride todo
-     * @param currencyCode todo
-     * @param serviceMode todo
-     * @param paymentDate The date on which payment was made
-     * @param exchangeRate todo
-     * @param exchangeRateEffDate todo
+     *               is saved, posted and committed as tax document.
+     * @param batchCode The batchCode value.
+     * @param taxOverride Indicates to apply tax override to the document.
+     * @param currencyCode It is 3 character ISO 4217 currency code.
+     * @param serviceMode This is only supported by AvaLocal servers. It provides the 
+     *                    ability to controls whether tax is calculated locally or remotely 
+     *                    when using an AvaLocal server. The default is Automatic which 
+     *                    calculates locally unless remote is necessary for non-local 
+     *                    addresses.
+     * @param paymentDate The date on which payment was made.
+     * @param exchangeRate The exchange rate value.
+     * @param exchangeRateEffDate The exchange rate effective date value.
      * @return The {@link GetTaxResult}
      */
     @Processor
-    public GetTaxResult getTax(@Optional String companyCode,
+    public GetTaxResult getTax(String companyCode,
                                AvalaraDocumentType docType,
                                @Optional String docCode,
                                Date docDate,
@@ -148,13 +168,10 @@ public class AvalaraModule
                                String discount,
                                @Optional String purchaseOrderNo,
                                @Optional String exemptionNo,
-                               @Optional String originCode,
-                               @Optional String destinationCode,
                                @Optional List<Map<String, Object>> baseAddresses,
                                @Optional List<Map<String, Object>> listOfLines,
                                DetailLevelType detailLevel,
                                @Optional String referenceCode,
-                               @Optional int hashCode,
                                @Optional String locationCode,
                                @Optional @Default("false") boolean commit,
                                @Optional String batchCode,
@@ -182,7 +199,7 @@ public class AvalaraModule
             addresses.put("baseAddress", listOfLines);
         }
         
-        return client.sendToAvalara(RequestType.GetTax, mom.toObject(GetTaxRequest.class,            
+        return client.sendToAvalara(TaxRequestType.GetTax, mom.toObject(GetTaxRequest.class,            
                 new MapBuilder()
                 .with("companyCode", companyCode)
                 .with("docType", docType.toDocumentType())
@@ -194,13 +211,10 @@ public class AvalaraModule
                 .with("discount", discountDecimal)
                 .with("purchaseOrderNo", purchaseOrderNo)
                 .with("exemptionNo", exemptionNo)
-                .with("originCode", originCode)
-                .with("destinationCode", destinationCode)
                 .with("addresses", addresses)
                 .with("lines", lines)
                 .with("detailLevel", detailLevel.toAvalaraDetailLevel())
                 .with("referenceCode", referenceCode)
-                .with("hashCode", hashCode)
                 .with("locationCode", locationCode)
                 .with("commit", commit) 
                 .with("batchCode", batchCode)
@@ -220,21 +234,25 @@ public class AvalaraModule
      *
      * {@sample.xml ../../../doc/avalara-connector.xml.sample avalara:commit-tax}
      *
-     * @param docId todo
-     * @param companyCode todo
-     * @param docType todo
-     * @param docCode todo
-     * @param newDocCode todo
+     * @param docId The original document's type, such as Sales Invoice or Purchase Invoice.
+     * @param companyCode Client application company reference code. If docId is specified, 
+     *                    this is not needed.
+     * @param docType The document type specifies the category of the document and affects
+     *                how the document is treated after a tax calculation; see 
+     *                {@link AvalaraDocumentType} for more information about the specific 
+     *                document types.
+     * @param docCode The internal reference code used by the client application.
+     * @param newDocCode The new document code value.
      * @return The {@link CommitTaxRequest}
      */
     @Processor
     public CommitTaxResult commitTax(@Optional String docId,
-                                     @Optional String companyCode,
+                                     String companyCode,
                                      AvalaraDocumentType docType,
                                      @Optional String docCode,
                                      @Optional String newDocCode)
     {
-        return (CommitTaxResult) client.sendToAvalara(RequestType.CommitTax,
+        return (CommitTaxResult) client.sendToAvalara(TaxRequestType.CommitTax,
             mom.toObject(CommitTaxRequest.class,            
                 new MapBuilder()
                 .with("docId", docId)
@@ -252,11 +270,15 @@ public class AvalaraModule
      *
      * {@sample.xml ../../../doc/avalara-connector.xml.sample avalara:get-tax-history}
      *
-     * @param docId todo
-     * @param companyCode todo
-     * @param docType todo
-     * @param docCode todo
-     * @param detailLevel todo
+     * @param docId The original document's type, such as Sales Invoice or Purchase Invoice.
+     * @param companyCode Client application company reference code. If docId is specified, 
+     *                    this is not needed.
+     * @param docType The document type specifies the category of the document and affects
+     *                how the document is treated after a tax calculation; see 
+     *                {@link AvalaraDocumentType} for more information about the specific 
+     *                document types.
+     * @param docCode The internal reference code used by the client application.
+     * @param detailLevel Specifies the level of detail to return. See {@link DetailLevelType}.
      * @return The {@link GetTaxHistoryResult}
      */
     @Processor
@@ -266,7 +288,7 @@ public class AvalaraModule
                                              @Optional String docCode,
                                              DetailLevelType detailLevel)
     {
-        return (GetTaxHistoryResult) client.sendToAvalara(RequestType.GetTaxHistory,
+        return (GetTaxHistoryResult) client.sendToAvalara(TaxRequestType.GetTaxHistory,
             mom.toObject(GetTaxHistoryRequest.class,            
                 new MapBuilder()
                 .with("docId", docId)
@@ -280,15 +302,20 @@ public class AvalaraModule
     }
     
     /**
-     * Cancel Tax processor
+     * Cancel tax, indicating the document that should be cancelled and the reason
+     * for the operation.
      *
      * {@sample.xml ../../../doc/avalara-connector.xml.sample avalara:cancel-tax}
      * 
-     * @param docId todo
-     * @param companyCode todo
-     * @param docType todo
-     * @param docCode todo
-     * @param cancelCode todo
+     * @param docId The original document's type, such as Sales Invoice or Purchase Invoice.
+     * @param companyCode Client application company reference code. If docId is specified, 
+     *                    this is not needed.
+     * @param docType The document type specifies the category of the document and affects
+     *                how the document is treated after a tax calculation; see 
+     *                {@link AvalaraDocumentType} for more information about the specific 
+     *                document types.
+     * @param docCode The internal reference code used by the client application.
+     * @param cancelCode A code indicating the reason the document is getting canceled.
      * @return The {@link CancelTaxResult}
      */
     @Processor
@@ -298,7 +325,7 @@ public class AvalaraModule
                                      @Optional String docCode,
                                      CancelCodeType cancelCode)
     {
-        return (CancelTaxResult) client.sendToAvalara(RequestType.CancelTax,
+        return (CancelTaxResult) client.sendToAvalara(TaxRequestType.CancelTax,
             mom.toObject(CancelTaxRequest.class,            
                 new MapBuilder()
                 .with("docId", docId)
@@ -326,16 +353,17 @@ public class AvalaraModule
      * @param country Country code
      * @param postalCode Postal or ZIP code. Required, when City and Region are not 
      *                   specified
-     * @param addressCode
-     * @param taxRegionId
-     * @param latitud
-     * @param longitude
-     * @param textCase
-     * @param coordinates
-     * @param taxability
-     * @param date
+     * @param addressCode the address code.
+     * @param taxRegionId The tax region id.
+     * @param latitude Latitude. 
+     * @param longitude Longitude.
+     * @param textCase The casing to apply to the validated address(es).
+     * @param coordinates True, if you want in the result a not empty latitud and longitude.
+     * @param taxability True, if you want the valid taxRegionId in the result.
+     * @param date Date.
      * @return The {@link ValidateResult}
      */
+    @Processor
     public ValidateResult validateAddress(String line1,
                                           @Optional String line2,
                                           @Optional String line3, 
@@ -345,18 +373,18 @@ public class AvalaraModule
                                           @Optional String postalCode,
                                           @Optional String addressCode,
                                           @Optional int taxRegionId,
-                                          @Optional String latitud,
+                                          @Optional String latitude,
                                           @Optional String longitude,
                                           @Optional @Default("DEFAULT") TextCaseType textCase,
-                                          @Optional boolean coordinates,
-                                          @Optional boolean taxability,
-                                          Date date)
+                                          @Optional @Default("false") boolean coordinates,
+                                          @Optional @Default("false") boolean taxability,
+                                          @Optional Date date)
     {
         BaseAddress address = new BaseAddress();
         address.setAddressCode(addressCode);
         address.setCity(city);
         address.setCountry(country);
-        address.setLatitude(latitud);
+        address.setLatitude(latitude);
         address.setLine1(line1);
         address.setLine2(line2);
         address.setLine3(line3);

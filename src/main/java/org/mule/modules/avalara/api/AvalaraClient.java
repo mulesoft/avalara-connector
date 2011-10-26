@@ -10,7 +10,7 @@
 
 package org.mule.modules.avalara.api;
 
-import org.mule.modules.avalara.RequestType;
+import org.mule.modules.avalara.TaxRequestType;
 
 import com.avalara.avatax.services.BaseResult;
 import com.avalara.avatax.services.PingResult;
@@ -23,7 +23,7 @@ import com.avalara.avatax.services.ValidateResult;
  */
 public interface AvalaraClient
 {
-    <T extends BaseResult> T sendToAvalara(RequestType requestType, Object obj);
+    <T extends BaseResult> T sendToAvalara(TaxRequestType requestType, Object obj);
     
     ValidateResult validateAddress(ValidateRequest validateRequest);
 

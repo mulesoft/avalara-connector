@@ -23,7 +23,7 @@ import com.avalara.avatax.services.GetTaxHistory;
  * @since Oct 18, 2011
  */
 
-public enum RequestType
+public enum TaxRequestType
 {
     /**
      * GetTax is the core of the Avalara Service. It is capable of collecting a 
@@ -72,12 +72,10 @@ public enum RequestType
      * be re-used).
      */
     CancelTax(CancelTax.class);
-    
-    //ValidateAddressRequest(?.class);
-    
+        
     private final Class<?> type;
     
-    private RequestType(Class<?> type)
+    private TaxRequestType(Class<?> type)
     {
         this.type = type;
     }
