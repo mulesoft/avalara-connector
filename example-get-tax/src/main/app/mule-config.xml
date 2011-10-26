@@ -18,6 +18,7 @@
   xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting"
   xmlns:http="http://www.mulesoft.org/schema/mule/http"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xmlns:zuora="http://repository.mulesoft.org/releases/org/mule/modules/mule-module-zuora"
   xsi:schemaLocation="
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
        http://www.mulesoft.org/schema/mule/avalara http://www.mulesoft.org/schema/mule/avalara/1.0-SNAPSHOT/mule-avalara.xsd
@@ -25,12 +26,158 @@
        http://www.mulesoft.org/schema/mule/json    http://www.mulesoft.org/schema/mule/json/3.2/mule-json.xsd
        http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/3.0/mule-http.xsd
        http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/3.2/mule-scripting.xsd
+       http://repository.mulesoft.org/releases/org/mule/modules/mule-module-zuora http://repository.mulesoft.org/releases/org/mule/modules/mule-module-zuora/1.0/mule-zuora.xsd
        ">
 
   <avalara:config license="${avalaraLicense}" account="${avalaraAccount}" avalaraClient="${avalaraClient}" />
+  <zuora:config username="${zuoraUsername}" password="${zuoraPassword}" endpoint="https://apisandbox.zuora.com/apps/services/a/29.0" />
   
    <flow name="GetTaxes">
-    <http:inbound />
-    <!-- implements -->
+    <description>
+        Answers total taxes for an Invoice stored in Zuora, given its id. 
+        This flows expects an inbound invoiceId to be set. Answers an string with a message 
+        describing the total tax amount for the invoice
+    </description>
+    <http:inbound-endpoint host="localhost" port="9090" path="avalara-demo-get-tax" />
+    <flow-ref name="GetZuoraInvoiceByInvoiceId"/>
+    <flow-ref name="GetZuoraInvoiceItemsByInvoiceId"/>
+    <flow-ref name="GetTaxesForInvoceAndItems"/>
+    <expression-transformer 
+        expression="Taxes calculates successfully for 
+                    invoice #[header:inbound:invoiceId]. Total tax is $#[groovy:payload.totalTaxable]" 
+        evaluator="string"/>     
   </flow>
+  
+  
+  <flow name="GetZuoraInvoiceByInvoiceId">
+   <description>
+    TODO document preconditions and postconditions
+   </description>
+    <!-- 
+    CHECK THIS URL FOR FIELDS OF AN INVOICE THAT MAY BE INTERESTING FOR THE GET-TAX HEADER:
+    http://apidocs.developer.zuora.com/index.php/Invoice
+     -->
+   <zuora:find zquery="select interestingProperty1, interestingProperty2 
+                       from  Item
+                       where id = '#[header:inbound:invoiceId]'"/>
+    <scripting:component>
+      <scripting:script engine="groovy">
+        <![CDATA[
+          if(payload.isEmpty()) throw new IllegalArgumentException("Invoice ${message.getInboundProperty('invoiceId')} does not exists ");
+          assert payload.size() == 1, 'Should have returned exactly one element'
+          return payload[0]        
+        ]]>
+      </scripting:script>
+    </scripting:component>                   
+    <message-properties-transformer scope="invocation">
+      <add-message-property key="interestingProperty1" value="#[groovy:payload.interestingProperty1]" />
+      <add-message-property key="interestingProperty2" value="#[groovy:payload.interestingProperty2]" />      
+      <!-- .... -->
+    </message-properties-transformer>
+  </flow>
+  
+  
+  <flow name="GetZuoraInvoiceItemsByInvoiceId">
+   <description>
+    TODO document preconditions and postconditions
+   </description>
+    <!--
+    CHECK THIS URL FOR FIELDS OF AN INVOICE ITEM THAT MAY BE INTERESTING FOR THE GET-TAX ITEMS: 
+    http://apidocs.developer.zuora.com/index.php/InvoiceItem
+     -->    
+   <zuora:find zquery="select interestingProperty1, interestingProperty2 
+                       from  InvoiceItem
+                       where invoiceId = '#[header:inbound:invoiceId]'"/>                       
+  </flow>
+  
+  
+  <flow name="GetTaxesForInvoceAndItems">
+   <description>
+    TODO document preconditions and postconditions
+   </description>
+   <scripting:component>
+      <scripting:script engine="groovy">
+        <![CDATA[        
+        return payload.collect { it ->
+           [ 'no' : 'some number' ,
+             'originCode' : 'some origin code' ,
+             'destinationCode' : 'some destination code' ,
+             'itemCode' : 'some item code' ,
+             'taxCode' : 'some tax code' ,
+             'qty' : 3.0G ,
+             'amount' : 500.5G ,
+             'discounted' : true ,
+             'revAcct' : 'some rev acct' ,
+             'ref1' : 'some reference 1' ,
+             'ref2' : 'some reference 2' ,
+             'exemptionNo' : 'some exemption number' ,
+             'customerUsageType' : 'some customer usage type' ,
+             'description' : 'some description' ,
+             'taxOverride' : 
+              [ 'taxOverrideType' : TaxOverrideType.TAX_AMOUNT,
+                'taxAmount' : 10.0G ,
+                'taxDate' : new Date() ,
+                'reason' : 'some reason' ] ,
+            'taxIncluded' : false ] 
+        };
+        ]]>
+      </scripting:script>
+    </scripting:component>
+    <avalara:get-tax companyCode="some company code"
+                 docType="PURCHASE_ORDER"
+                 docCode="some doc code"
+                 docDate="2010-09-13T01:18:14-07:00"
+                 salespersonCode="some sales person code"
+                 customerCode="some customer code"
+                 customerUsageType="some customer usage type"
+                 discount="0.2"
+                 purchaseOrderNo="some purchase order number"
+                 exemptionNo="some exemption number"
+                 originCode="some origin code"
+                 destinationCode="some destination code"
+                 detailLevel="TAX"
+                 referenceCode="some reference code"
+                 locationCode="some location code"
+                 commit="false"
+                 batchCode="some batch code"
+                 currencyCode="some currency code"
+                 serviceMode="LOCAL"
+                 paymentDate="2010-09-13T01:18:14-07:00"
+                 exchangeRate="some exchange rate"
+                 exchangeRateEffDate="2010-09-13T01:18:14-07:00">
+          <avalara:base-addresses ref="#[groovy : [
+              [ 'addressCode' : 'some origin code' ,
+                'line1' : 'some line 1' ,
+                'line2' : 'some line 2' ,
+                'line3' : 'some line 3' ,
+                'city' : 'some city' ,
+                'region' : 'some region' ,
+                'postalCode' : 'some postal code' ,
+                'country' : 'some country' ,
+                'taxRegionId' : 3 ,
+                'latitude' : 'some latitude' ,
+                'longitude' : 'some longitude' ] ,
+              [ 'addressCode' : 'some destination code' ,
+                'line1' : 'some line 1' ,
+                'line2' : 'some line 2' ,
+                'line3' : 'some line 3' ,
+                'city' : 'some city' ,
+                'region' : 'some region' ,
+                'postalCode' : 'some postal code' ,
+                'country' : 'some country' ,
+                'taxRegionId' : 3 ,
+                'latitude' : 'some latitude' ,
+                'longitude' : 'some longitude' ]
+          ] ]" />
+          <avalara:list-of-lines ref="#[payload]" />
+          <avalara:tax-override ref="#[groovy : [ 
+                'taxOverrideType' : TaxOverrideType.TAX_AMOUNT,
+                'taxAmount' : 9.3G ,
+                'taxDate' : new Date() ,
+                'reason' : 'some reason' ] ,
+                'taxIncluded' : false 
+          ] ]" />
+      </avalara:get-tax>
+  </flow>
+  
 </mule>
