@@ -56,12 +56,14 @@
     and sets the following invocation headers:
       * accountId
       * invoiceNumber
+      * createDate
+      * dueDate
    </description>
     <!-- 
     CHECK THIS URL FOR FIELDS OF AN INVOICE THAT MAY BE INTERESTING FOR THE GET-TAX HEADER:
     http://apidocs.developer.zuora.com/index.php/Invoice
      -->
-   <zuora:find zquery="select accountId, invoiceNumber 
+   <zuora:find zquery="select accountId, invoiceNumber, createdDate, dueDate
                        from  Item
                        where id = '#[header:inbound:invoiceId]'"/>
     <scripting:component>
@@ -76,6 +78,8 @@
     <message-properties-transformer scope="invocation">
       <add-message-property key="accountId" value="#[groovy:payload.accountId]" />
       <add-message-property key="invoiceNumber" value="#[groovy:payload.invoiceNumber]" />
+      <add-message-property key="createDate" value="#[groovy:payload.createDate]" />
+      <add-message-property key="dueDate" value="#[groovy:payload.dueDate]" />
     </message-properties-transformer>
   </flow>
 
@@ -89,7 +93,7 @@
     CHECK THIS URL FOR FIELDS OF AN INVOICE ITEM THAT MAY BE INTERESTING FOR THE GET-TAX ITEMS: 
     http://apidocs.developer.zuora.com/index.php/InvoiceItem
      -->    
-   <zuora:find zquery="select interestingProperty1, interestingProperty2 
+   <zuora:find zquery="select sKU, quantity, unitPrice, chargeDescription
                        from  InvoiceItem
                        where invoiceId = '#[header:inbound:invoiceId]'"/>                       
   </flow>
@@ -99,85 +103,58 @@
    <description>
     Gets taxes from Avalara for the given collection of zuora InvoiceItems payload. 
     It expects the following headers to be set:
-    TODO
+      * sKU
+      * quantity
+      * unitPrice
+      * chargeDescription
     
     Answers the Avalara GetTaxResul
    </description>
    <scripting:component>
       <scripting:script engine="groovy">
         <![CDATA[        
-        return payload.collect { 
-           [ 'no' : 'some number' ,
-             'originCode' : 'some origin code' ,
-             'destinationCode' : 'some destination code' ,
-             'itemCode' : 'some item code' ,
-             'taxCode' : 'some tax code' ,
-             'qty' : 3.0G ,
-             'amount' : 500.5G ,
-             'discounted' : true ,
-             'revAcct' : 'some rev acct' ,
-             'ref1' : 'some reference 1' ,
-             'ref2' : 'some reference 2' ,
-             'exemptionNo' : 'some exemption number' ,
-             'customerUsageType' : 'some customer usage type' ,
-             'description' : 'some description' ,
-             'taxOverride' : 
-              [ 'taxOverrideType' : TaxOverrideType.TAX_AMOUNT,
-                'taxAmount' : 10.0G ,
-                'taxDate' : new Date() ,
-                'reason' : 'some reason' ] ,
-            'taxIncluded' : false ] 
+        return payload.collect { it->
+           [ 'itemCode' : it.sKU ,
+             'qty' : new BigDecimal(it.quantity) ,
+             'amount' : new BigDecimal(unitPrice) ,
+             'discounted' : false ,
+             'description' : it.chargeDescription ,
+             'taxIncluded' : false ] 
         };
         ]]>
       </scripting:script>
     </scripting:component>
-    <!-- TODO check format dates as 2010-09-13T01:18:14-07:00 -->
+    <!-- TODO check format dates as 2010-09-13T01:18:14-07:00 (docDate="#[function:dateStamp:yyyy-MM-dd'THH:mm:ss-???]")-->
     <avalara:get-tax companyCode="MuleSoft, Inc."
                  docType="PURCHASE_ORDER"
-                 docCode="???"
-                 docDate="#[function:dateStamp:yyyy-MM-dd'THH:mm:ss-???]"  
-                 salespersonCode="some sales person code"
+                 docCode="#[variable:invoiceNumber]"
+                 docDate="#[groovy: message.getInvocationProperty('createdDate').toGregorianCalendar().format('yyyy-MM-ddTHH:mm:ssTZD')]"
                  customerCode="#[variable:accountId]"
                  customerUsageType="Other"
                  discount="0"
                  purchaseOrderNo="#[variable:invoiceNumber]"
-                 hasta aca.....
-                 exemptionNo="some exemption number"
-                 originCode="some origin code"
-                 destinationCode="some destination code"
+                 originCode="Origin"
+                 destinationCode="Dest"
                  detailLevel="TAX"
-                 referenceCode="some reference code"
-                 locationCode="some location code"
-                 commit="false"
-                 batchCode="some batch code"
-                 currencyCode="some currency code"
-                 serviceMode="LOCAL"
-                 paymentDate="2010-09-13T01:18:14-07:00"
+                 serviceMode="AUTOMATIC"
+                 paymentDate="#[groovy: message.getInvocationProperty('dueDate').toGregorianCalendar().format('yyyy-MM-ddTHH:mm:ssTZD')]"
                  exchangeRate="some exchange rate"
-                 exchangeRateEffDate="2010-09-13T01:18:14-07:00">
+                 exchangeRateEffDate="#[groovy: message.getInvocationProperty('dueDate').toGregorianCalendar().format('yyyy-MM-ddTHH:mm:ssTZD')]">
           <avalara:base-addresses ref="#[groovy : [
-              [ 'addressCode' : 'some origin code' ,
-                'line1' : 'some line 1' ,
-                'line2' : 'some line 2' ,
-                'line3' : 'some line 3' ,
-                'city' : 'some city' ,
-                'region' : 'some region' ,
-                'postalCode' : 'some postal code' ,
-                'country' : 'some country' ,
-                'taxRegionId' : 3 ,
-                'latitude' : 'some latitude' ,
-                'longitude' : 'some longitude' ] ,
-              [ 'addressCode' : 'some destination code' ,
-                'line1' : 'some line 1' ,
-                'line2' : 'some line 2' ,
-                'line3' : 'some line 3' ,
-                'city' : 'some city' ,
-                'region' : 'some region' ,
-                'postalCode' : 'some postal code' ,
-                'country' : 'some country' ,
-                'taxRegionId' : 3 ,
-                'latitude' : 'some latitude' ,
-                'longitude' : 'some longitude' ]
+              [ 'addressCode' : 'Origin' ,
+                'line1' : 'Avalara' ,
+                'line2' : '900 Winslow Way' ,
+                'line3' : 'Suite 100' ,
+                'city' : 'Bainbridge Island' ,
+                'region' : 'WA' ,
+                'postalCode' : '98110' ,
+                'country' : 'USA' ] ,
+              [ 'addressCode' : 'Dest' ,
+                'line1' : '3130 Elliott' ,
+                'city' : 'Seattle' ,
+                'region' : 'WA' ,
+                'postalCode' : '98121' ,
+                'country' : 'USA' ]
           ] ]" />
           <avalara:list-of-lines ref="#[payload]" />
       </avalara:get-tax>

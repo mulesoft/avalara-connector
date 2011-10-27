@@ -14,23 +14,26 @@ import com.avalara.avatax.services.ServiceMode;
 
 
 /**
+ * Specifies the type of tax override.
+ * This is only supported by AvaLocal servers. It provides the ability to controls whether tax is calculated locally or remotely when using an AvaLocal server.
+ * The default is Automatic which calculates locally unless remote is necessary for non-local addresses
  * @author Gaston Ponti
  * @since Oct 19, 2011
  */
 public enum ServiceModeType
 {
     /**
-     * 
+     * Automated handling by local and/or remote server.
      */
     AUTOMATIC("Automatic"),
 
     /**
-     * 
+     * AvaLocal server only. Lines requiring remote will not be calculated.
      */
     LOCAL("Local"),
 
     /**
-     * 
+     * All lines are calculated by AvaTax remote server.
      */
     REMOTE("Remote");
     
