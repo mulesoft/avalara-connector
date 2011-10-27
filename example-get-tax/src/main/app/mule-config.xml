@@ -26,15 +26,16 @@
        http://www.mulesoft.org/schema/mule/json    http://www.mulesoft.org/schema/mule/json/3.2/mule-json.xsd
        http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/3.0/mule-http.xsd
        http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/3.2/mule-scripting.xsd
-       http://repository.mulesoft.org/releases/org/mule/modules/mule-module-zuora http://repository.mulesoft.org/releases/org/mule/modules/mule-module-zuora/1.0/mule-zuora.xsd
+       http://repository.mulesoft.org/releases/org/mule/modules/mule-module-zuora http://repository.mulesoft.org/releases/org/mule/modules/mule-module-zuora/1.0/mule-zuora.xsd"
        ">
 
-  <avalara:config license="${avalaraLicense}" account="${avalaraAccount}" avalaraClient="${avalaraClient}" />
+
   <zuora:config username="${zuoraUsername}" password="${zuoraPassword}" endpoint="https://apisandbox.zuora.com/apps/services/a/29.0" />
+  <avalara:config license="${avalaraLicense}" account="${avalaraAccount}" avalaraClient="${avalaraClient}" />
   
    <flow name="GetTaxes">
     <description>
-        Answers total taxes for an Invoice stored in Zuora, given its id. 
+        Answers total taxes using Avalara for an Invoice stored in Zuora, given its id. 
         This flows expects an inbound invoiceId to be set. Answers an string with a message 
         describing the total tax amount for the invoice
     </description>
@@ -53,13 +54,14 @@
    <description>
     Retrieves an Invoice record from Zuora given its Id. Answers the record as payload, 
     and sets the following invocation headers:
-      * TODO
+      * accountId
+      * invoiceNumber
    </description>
     <!-- 
     CHECK THIS URL FOR FIELDS OF AN INVOICE THAT MAY BE INTERESTING FOR THE GET-TAX HEADER:
     http://apidocs.developer.zuora.com/index.php/Invoice
      -->
-   <zuora:find zquery="select interestingProperty1, interestingProperty2 
+   <zuora:find zquery="select accountId, invoiceNumber 
                        from  Item
                        where id = '#[header:inbound:invoiceId]'"/>
     <scripting:component>
@@ -72,12 +74,11 @@
       </scripting:script>
     </scripting:component>                   
     <message-properties-transformer scope="invocation">
-      <add-message-property key="interestingProperty1" value="#[groovy:payload.interestingProperty1]" />
-      <add-message-property key="interestingProperty2" value="#[groovy:payload.interestingProperty2]" />      
-      <!-- .... -->
+      <add-message-property key="accountId" value="#[groovy:payload.accountId]" />
+      <add-message-property key="invoiceNumber" value="#[groovy:payload.invoiceNumber]" />
     </message-properties-transformer>
   </flow>
-  
+
   
   <flow name="GetZuoraInvoiceItemsByInvoiceId">
    <description>
@@ -105,7 +106,7 @@
    <scripting:component>
       <scripting:script engine="groovy">
         <![CDATA[        
-        return payload.collect { it ->
+        return payload.collect { 
            [ 'no' : 'some number' ,
              'originCode' : 'some origin code' ,
              'destinationCode' : 'some destination code' ,
@@ -130,15 +131,17 @@
         ]]>
       </scripting:script>
     </scripting:component>
-    <avalara:get-tax companyCode="some company code"
+    <!-- TODO check format dates as 2010-09-13T01:18:14-07:00 -->
+    <avalara:get-tax companyCode="MuleSoft, Inc."
                  docType="PURCHASE_ORDER"
-                 docCode="some doc code"
-                 docDate="2010-09-13T01:18:14-07:00"
+                 docCode="???"
+                 docDate="#[function:dateStamp:yyyy-MM-dd'THH:mm:ss-???]"  
                  salespersonCode="some sales person code"
-                 customerCode="some customer code"
-                 customerUsageType="some customer usage type"
-                 discount="0.2"
-                 purchaseOrderNo="some purchase order number"
+                 customerCode="#[variable:accountId]"
+                 customerUsageType="Other"
+                 discount="0"
+                 purchaseOrderNo="#[variable:invoiceNumber]"
+                 hasta aca.....
                  exemptionNo="some exemption number"
                  originCode="some origin code"
                  destinationCode="some destination code"
@@ -177,13 +180,6 @@
                 'longitude' : 'some longitude' ]
           ] ]" />
           <avalara:list-of-lines ref="#[payload]" />
-          <avalara:tax-override ref="#[groovy : [ 
-                'taxOverrideType' : TaxOverrideType.TAX_AMOUNT,
-                'taxAmount' : 9.3G ,
-                'taxDate' : new Date() ,
-                'reason' : 'some reason' ] ,
-                'taxIncluded' : false 
-          ] ]" />
       </avalara:get-tax>
   </flow>
   
