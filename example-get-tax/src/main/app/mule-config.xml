@@ -107,9 +107,11 @@
    </description>
    <scripting:component>
       <scripting:script engine="groovy">
-        <![CDATA[        
+        <![CDATA[  
+        def i = 0;      
         return payload.collect { it->
-           [ 'itemCode' : it.getSKU() ,
+           [ 'no': ++i,
+             'itemCode' : it.getSKU() ,
              'qty' : new BigDecimal(it.quantity) ,
              'amount' : new BigDecimal(it.unitPrice) ,
              'discounted' : false ,
