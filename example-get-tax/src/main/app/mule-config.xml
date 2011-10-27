@@ -122,7 +122,7 @@
     <avalara:get-tax companyCode="TC"
                  docType="PURCHASE_ORDER"
                  docCode="#[variable:invoiceId]"
-                 docDate="#[groovy: message.getInvocationProperty('createdDate').toGregorianCalendar().format('yyyy-MM-ddTHH:mm:ssTZD')]"
+                 docDate="#[groovy: message.getInvocationProperty('createdDate').toGregorianCalendar().format('yyyy-MM-dd\'T\'HH:mm:ssZ')]"
                  customerCode="#[variable:accountId]"
                  customerUsageType="Other"
                  discount="0"
@@ -131,10 +131,10 @@
                  destinationCode="Dest"
                  detailLevel="TAX"
                  serviceMode="AUTOMATIC"
-                 paymentDate="#[groovy: message.getInvocationProperty('dueDate').toGregorianCalendar().format('yyyy-MM-ddTHH:mm:ssTZD')]"
-                 exchangeRate="some exchange rate"
-                 exchangeRateEffDate="#[groovy: message.getInvocationProperty('dueDate').toGregorianCalendar().format('yyyy-MM-ddTHH:mm:ssTZD')]">
-          <avalara:base-addresses ref="#[groovy : [
+                 paymentDate="#[groovy: message.getInvocationProperty('dueDate').toGregorianCalendar().format('yyyy-MM-dd\'T\'HH:mm:ssZ')]"
+                 exchangeRate="0"
+                 exchangeRateEffDate="#[groovy: message.getInvocationProperty('dueDate').toGregorianCalendar().format('yyyy-MM-dd\'T\'HH:mm:ssZ')]">
+          <avalara:base-addresses ref="#[groovy: [
               [ 'addressCode' : 'Origin' ,
                 'line1' : 'Avalara' ,
                 'line2' : '900 Winslow Way' ,
