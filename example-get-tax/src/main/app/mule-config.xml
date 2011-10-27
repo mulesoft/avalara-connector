@@ -36,7 +36,7 @@
    <flow name="GetTaxes">
     <description>
         Answers total taxes using Avalara for an Invoice stored in Zuora, given its id. 
-        This flows expects an inbound invoiceId to be set. Answers an string with a message 
+        This flows expects an inbound invoiceNumber to be set. Answers an string with a message 
         describing the total tax amount for the invoice
     </description>
     <http:inbound-endpoint host="localhost" port="9090" path="avalara-demo-get-tax" />
@@ -45,7 +45,7 @@
     <flow-ref name="GetTaxesForInvoceAndItems"/>
     <expression-transformer 
         expression="Taxes calculates successfully for 
-                    invoice #[header:inbound:invoiceId]. Total tax is $#[groovy:payload.totalTaxable]" 
+                    invoice #[header:inbound:invoiceNumber]. Total tax is $#[groovy:payload.totalTaxable]" 
         evaluator="string"/>     
   </flow>
   
@@ -55,30 +55,25 @@
     Retrieves an Invoice record from Zuora given its Id. Answers the record as payload, 
     and sets the following invocation headers:
       * accountId
-      * invoiceNumber
       * createDate
       * dueDate
    </description>
-    <!-- 
-    CHECK THIS URL FOR FIELDS OF AN INVOICE THAT MAY BE INTERESTING FOR THE GET-TAX HEADER:
-    http://apidocs.developer.zuora.com/index.php/Invoice
-     -->
-   <zuora:find zquery="select accountId, invoiceNumber, createdDate, dueDate
-                       from  Item
-                       where id = '#[header:inbound:invoiceId]'"/>
+   <zuora:find zquery="select accountId, createdDate, dueDate, id
+                       from  Invoice
+                       where invoiceNumber = '#[header:inbound:invoiceNumber]'"/>
     <scripting:component>
       <scripting:script engine="groovy">
         <![CDATA[
           if(!payload.any()) throw new IllegalArgumentException("Invoice ${message.getInboundProperty('invoiceId')} does not exists ");
-          return payload[0]        
+          return payload.find {it}        
         ]]>
       </scripting:script>
     </scripting:component>                   
     <message-properties-transformer scope="invocation">
       <add-message-property key="accountId" value="#[groovy:payload.accountId]" />
-      <add-message-property key="invoiceNumber" value="#[groovy:payload.invoiceNumber]" />
       <add-message-property key="createDate" value="#[groovy:payload.createDate]" />
       <add-message-property key="dueDate" value="#[groovy:payload.dueDate]" />
+      <add-message-property key="invoiceId" value="#[groovy:payload.id]" />
     </message-properties-transformer>
   </flow>
 
@@ -86,6 +81,7 @@
   <flow name="GetZuoraInvoiceItemsByInvoiceId">
    <description>
     Retrieves a collection of InvoiceItems from Zuora given it's invoice id.
+    Expects the variable:invoiceId to be set
     Answers the collection of items. 
    </description>
     <!--
@@ -94,7 +90,7 @@
      -->    
    <zuora:find zquery="select sKU, quantity, unitPrice, chargeDescription
                        from  InvoiceItem
-                       where invoiceId = '#[header:inbound:invoiceId]'"/>                       
+                       where invoiceId = '#[variable:invoiceId]'"/>                       
   </flow>
   
   
@@ -113,9 +109,9 @@
       <scripting:script engine="groovy">
         <![CDATA[        
         return payload.collect { it->
-           [ 'itemCode' : it.sKU ,
+           [ 'itemCode' : it.getSKU() ,
              'qty' : new BigDecimal(it.quantity) ,
-             'amount' : new BigDecimal(unitPrice) ,
+             'amount' : new BigDecimal(it.unitPrice) ,
              'discounted' : false ,
              'description' : it.chargeDescription ,
              'taxIncluded' : false ] 
@@ -123,15 +119,14 @@
         ]]>
       </scripting:script>
     </scripting:component>
-    <!-- TODO check format dates as 2010-09-13T01:18:14-07:00 (docDate="#[function:dateStamp:yyyy-MM-dd'THH:mm:ss-???]")-->
-    <avalara:get-tax companyCode="MuleSoft, Inc."
+    <avalara:get-tax companyCode="TC"
                  docType="PURCHASE_ORDER"
-                 docCode="#[variable:invoiceNumber]"
+                 docCode="#[variable:invoiceId]"
                  docDate="#[groovy: message.getInvocationProperty('createdDate').toGregorianCalendar().format('yyyy-MM-ddTHH:mm:ssTZD')]"
                  customerCode="#[variable:accountId]"
                  customerUsageType="Other"
                  discount="0"
-                 purchaseOrderNo="#[variable:invoiceNumber]"
+                 purchaseOrderNo="#[header:inbound:invoiceNumber]"
                  originCode="Origin"
                  destinationCode="Dest"
                  detailLevel="TAX"

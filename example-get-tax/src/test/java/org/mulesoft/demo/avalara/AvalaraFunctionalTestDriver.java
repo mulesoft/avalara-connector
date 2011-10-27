@@ -30,7 +30,7 @@ public class AvalaraFunctionalTestDriver extends FunctionalTestCase
     public void getTax() throws Exception
     {
         MuleEvent event = getTestEvent(null);
-        event.getMessage().setProperty("invoiceId", "INV00000224", PropertyScope.INBOUND);
+        event.getMessage().setProperty("invoiceNumber", "INV00000224", PropertyScope.INBOUND);
         lookupFlowConstruct("GetTaxes").process(event);
     }
 
