@@ -10,7 +10,9 @@
 
 package org.mulesoft.demo.avalara;
 
+import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
+import org.mule.api.transport.PropertyScope;
 import org.mule.tck.junit4.FunctionalTestCase;
 
 import org.apache.commons.lang.NotImplementedException;
@@ -27,8 +29,9 @@ public class AvalaraFunctionalTestDriver extends FunctionalTestCase
     @Test
     public void getTax() throws Exception
     {
-        lookupFlowConstruct("GetTax");
-        throw new NotImplementedException();
+        MuleEvent event = getTestEvent(null);
+        event.getMessage().setProperty("invoiceId", "INV00000224", PropertyScope.INBOUND);
+        lookupFlowConstruct("GetTaxes").process(event);
     }
 
     private MessageProcessor lookupFlowConstruct(final String name)
