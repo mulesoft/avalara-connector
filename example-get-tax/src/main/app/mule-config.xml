@@ -51,7 +51,9 @@
   
   <flow name="GetZuoraInvoiceByInvoiceId">
    <description>
-    TODO document preconditions and postconditions
+    Retrieves an Invoice record from Zuora given its Id. Answers the record as payload, 
+    and sets the following invocation headers:
+      * TODO
    </description>
     <!-- 
     CHECK THIS URL FOR FIELDS OF AN INVOICE THAT MAY BE INTERESTING FOR THE GET-TAX HEADER:
@@ -79,7 +81,8 @@
   
   <flow name="GetZuoraInvoiceItemsByInvoiceId">
    <description>
-    TODO document preconditions and postconditions
+    Retrieves a collection of InvoiceItems from Zuora given it's invoice id.
+    Answers the collection of items. 
    </description>
     <!--
     CHECK THIS URL FOR FIELDS OF AN INVOICE ITEM THAT MAY BE INTERESTING FOR THE GET-TAX ITEMS: 
@@ -93,7 +96,11 @@
   
   <flow name="GetTaxesForInvoceAndItems">
    <description>
-    TODO document preconditions and postconditions
+    Gets taxes from Avalara for the given collection of zuora InvoiceItems payload. 
+    It expects the following headers to be set:
+    TODO
+    
+    Answers the Avalara GetTaxResul
    </description>
    <scripting:component>
       <scripting:script engine="groovy">
