@@ -31,7 +31,7 @@
 
 
   <zuora:config username="${zuoraUsername}" password="${zuoraPassword}" endpoint="https://apisandbox.zuora.com/apps/services/a/29.0" />
-  <avalara:config license="${avalaraLicense}" account="${avalaraAccount}" avalaraClient="${avalaraClient}" />
+  <avalara:config license="${avalaraLicense}" account="${avalaraAccount}" avalaraClient="Mule,3.2.1" />
   
    <flow name="GetTaxes">
     <description>
@@ -71,7 +71,7 @@
     </scripting:component>                   
     <message-properties-transformer scope="invocation">
       <add-message-property key="accountId" value="#[groovy:payload.accountId]" />
-      <add-message-property key="createDate" value="#[groovy:payload.createDate]" />
+      <add-message-property key="createdDate" value="#[groovy:payload.createDate]" />
       <add-message-property key="dueDate" value="#[groovy:payload.dueDate]" />
       <add-message-property key="invoiceId" value="#[groovy:payload.id]" />
     </message-properties-transformer>
@@ -120,7 +120,7 @@
       </scripting:script>
     </scripting:component>
     <avalara:get-tax companyCode="TC"
-                 docType="PURCHASE_ORDER"
+                 docType="SALES_ORDER"
                  docCode="#[variable:invoiceId]"
                  docDate="#[groovy: message.getInvocationProperty('createdDate').toGregorianCalendar().time]"
                  customerCode="#[variable:accountId]"
