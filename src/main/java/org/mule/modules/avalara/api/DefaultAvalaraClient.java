@@ -40,6 +40,8 @@ public class DefaultAvalaraClient implements AvalaraClient
     private String account;
     private String license;
     private String client;
+    private TaxSvcSoap taxSvcSoap;
+    private AddressSvcSoap addressSvcSoap;
     
     public DefaultAvalaraClient(String account, String license, String client)
     {
@@ -85,30 +87,31 @@ public class DefaultAvalaraClient implements AvalaraClient
     @Override
     public ValidateResult validateAddress(ValidateRequest validateRequest)
     {
-        AddressSvcSoap port = new AddressSvc().getPort(AddressSvcSoap.class);
-        
-        UsernameTokenProfile.sign((BindingProvider) port, account, license);
-        AvalaraProfileHeader.sign((BindingProvider) port, client);
-        
-        ValidateResult response =  port.validate(validateRequest);
-        if (!response.getResultCode().equals(SeverityLevel.SUCCESS))
+        if (addressSvcSoap == null)
         {
-            throw new AvalaraRuntimeException(response.getMessages());
+            addressSvcSoap = new AddressSvc().getPort(AddressSvcSoap.class);
+        
+            UsernameTokenProfile.sign((BindingProvider) addressSvcSoap, account, license);
+            AvalaraProfileHeader.sign((BindingProvider) addressSvcSoap, client);
         }
         
-        return response;
+        return addressSvcSoap.validate(validateRequest);
     }
+    
     /**
      * @return
      */
     public TaxSvcSoap getService()
     {
-        TaxSvcSoap port = new TaxSvc().getPort(TaxSvcSoap.class);
-        BindingProvider bindingProvider = (BindingProvider) port;
+        if (taxSvcSoap == null)
+        {
+            taxSvcSoap = new TaxSvc().getPort(TaxSvcSoap.class);
+            BindingProvider bindingProvider = (BindingProvider) taxSvcSoap;
              
-        UsernameTokenProfile.sign(bindingProvider, account, license);
-        AvalaraProfileHeader.sign(bindingProvider, client);
+            UsernameTokenProfile.sign(bindingProvider, account, license);
+            AvalaraProfileHeader.sign(bindingProvider, client);
+        }
         
-        return port;
+        return taxSvcSoap;
     }
 }

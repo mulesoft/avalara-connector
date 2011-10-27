@@ -50,14 +50,20 @@ import com.avalara.avatax.services.GetTaxHistoryResult;
 import com.avalara.avatax.services.GetTaxRequest;
 import com.avalara.avatax.services.GetTaxResult;
 import com.avalara.avatax.services.PingResult;
+import com.avalara.avatax.services.PostTaxRequest;
 import com.avalara.avatax.services.PostTaxResult;
 import com.avalara.avatax.services.ValidateRequest;
 import com.avalara.avatax.services.ValidateResult;
 
 /**
- * Module
+ * Avalara provides automated sales tax solutions to streamline cumbersome, 
+ * error-prone tax compliance processes and reduce the risk of loss or penalty 
+ * in case of an audit. Their automated solutions automatically perform address 
+ * validation, jurisdiction research and rate calculation and allow you to 
+ * manage even the most complicated tax issues, such as situs, nexus, tax tiers, 
+ * tax holidays, exemptions, certificate management and product taxability rules.
  *
- * @author MuleSoft, Inc.
+ * @author Gaston Ponti
  */
 @Module(name = "avalara", schemaVersion = "1.0-SNAPSHOT")
 public class AvalaraModule
@@ -129,7 +135,8 @@ public class AvalaraModule
         J Direct Pay Permit<br/>
         K Direct Mail<br/>
         L - Other
-     * @param discount The discount amount to apply to the document.
+     * @param discount The discount amount to apply to the document. The string
+     *                 represents a {@link BigDecimal}.
      * @param purchaseOrderNo Purchase order identifier. PurchaseOrderNo is required 
      *                        for single use exemption certificates to match the 
      *                        order and invoice with the certificate.
@@ -162,7 +169,8 @@ public class AvalaraModule
      *                    calculates locally unless remote is necessary for non-local 
      *                    addresses.
      * @param paymentDate The date on which payment was made.
-     * @param exchangeRate The exchange rate value.
+     * @param exchangeRate The exchange rate value. The string represents a 
+     *                     {@link BigDecimal}
      * @param exchangeRateEffDate The exchange rate effective date value.
      * @return The {@link GetTaxResult}
      * 
@@ -196,7 +204,7 @@ public class AvalaraModule
                                Date exchangeRateEffDate)
     {
         BigDecimal discountDecimal = discount == null ? null :  new BigDecimal(discount);
-        BigDecimal exchangeRatetDecimal = exchangeRate == null ? null :  new BigDecimal(exchangeRate);
+        BigDecimal exchangeRateDecimal = exchangeRate == null ? null :  new BigDecimal(exchangeRate);
         
         Map<String, Object> addresses = null;
         if (baseAddresses != null && !baseAddresses.isEmpty())
@@ -237,7 +245,7 @@ public class AvalaraModule
                 .with("currencyCode", currencyCode)
                 .with("serviceMode", serviceMode.toAvalaraServiceMode())
                 .with("paymentDate", paymentDate)
-                .with("exchangeRate", exchangeRatetDecimal)
+                .with("exchangeRate", exchangeRateDecimal)
                 .with("exchangeRateEffDate", exchangeRateEffDate)
                 .build()
             )
@@ -258,16 +266,17 @@ public class AvalaraModule
      *                document types.
      * @param docCode The internal reference code used by the client application.
      * @param docDate The date on the invoice, purchase order, etc
-     * @param totalAmount The total amount (not including tax) for the document. <p>
+     * @param totalAmount The total amount (not including tax) for the document.
      *                    This is used for verification and reconciliation. This should 
      *                    be the <b>TotalAmount</b> returned by {@link GetTaxResult} when 
      *                    tax was calculated for this document; otherwise the web service 
-     *                    will return an error.
-     * @param totalTax The total tax for the document. <p> This is used for verification 
+     *                    will return an error. The string represents a {@link BigDecimal}
+     * @param totalTax The total tax for the document. This is used for verification 
      *                 and reconciliation. This should be the <b>TotalTax</b> returned by
      *                 {@link GetTaxResult} when tax was calculated for this document; 
-     *                 otherwise the web service will return an error. </p>
-     * @param commit The commit value. <p> This has been defaulted to false. If this has 
+     *                 otherwise the web service will return an error.
+     *                 The string represents a {@link BigDecimal}
+     * @param commit The commit value. This has been defaulted to false. If this has 
      *               been set to true AvaTax will commit the document on this call. Seller's 
      *               system who wants to Post and Commit the document on one call should use 
      *               this flag.
@@ -291,7 +300,7 @@ public class AvalaraModule
         BigDecimal totalTaxDecimal = totalTax == null ? null :  new BigDecimal(totalTax);
         
         return (PostTaxResult) apiClient.sendToAvalara(TaxRequestType.PostTax,
-            mom.toObject(CommitTaxRequest.class,            
+            mom.toObject(PostTaxRequest.class,            
                 new MapBuilder()
                 .with("docId", docId)
                 .with("companyCode", companyCode)
