@@ -69,8 +69,7 @@
     <scripting:component>
       <scripting:script engine="groovy">
         <![CDATA[
-          if(payload.isEmpty()) throw new IllegalArgumentException("Invoice ${message.getInboundProperty('invoiceId')} does not exists ");
-          assert payload.size() == 1, 'Should have returned exactly one element'
+          if(!payload.any()) throw new IllegalArgumentException("Invoice ${message.getInboundProperty('invoiceId')} does not exists ");
           return payload[0]        
         ]]>
       </scripting:script>
