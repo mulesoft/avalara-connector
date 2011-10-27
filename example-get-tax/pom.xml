@@ -11,7 +11,7 @@
 	<properties>
 		<muleVersion>3.2.0</muleVersion>
 		<ibeansVersion>1.1</ibeansVersion>
-<!--		<mule.zuora.version>2.0-SNAPSHOT</mule.zuora.version>-->
+		<mule.zuora.version>1.4.2-SNAPSHOT</mule.zuora.version>
         <mule.avalara.version>1.0-SNAPSHOT</mule.avalara.version>
 	</properties>
 
@@ -90,16 +90,29 @@
 	</build>
 
 	<dependencies>
+      <!-- Avalara -->
+      <dependency>
+          <groupId>org.mule.modules</groupId>
+          <artifactId>mule-module-avalara</artifactId>
+          <version>${mule.avalara.version}</version>
+        </dependency>
+        
+        <!-- Zuora -->
+          <dependency>
+          <groupId>org.mule.modules</groupId>
+          <artifactId>mule-module-zuora</artifactId>
+          <version>${mule.zuora.version}</version>
+        </dependency>
+  
+  
+      <!-- Mule -->
         <dependency>
             <groupId>org.mule.modules</groupId>
             <artifactId>mule-module-scripting</artifactId>
             <version>${muleVersion}</version>
         </dependency>
-        <dependency>
-          <groupId>org.mule.modules</groupId>
-          <artifactId>mule-module-avalara</artifactId>
-          <version>${mule.avalara.version}</version>
-        </dependency>
+        
+        <!-- Testing -->
 		 <dependency>
             <groupId>org.mule.tests</groupId>
             <artifactId>mule-tests-functional</artifactId>
