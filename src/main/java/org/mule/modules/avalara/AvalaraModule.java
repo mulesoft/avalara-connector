@@ -89,8 +89,6 @@ public class AvalaraModule
     /**
      * Avalara's application client. By default uses DefaultAvalaraClient class.
      */
-    @Configurable
-    @Optional
     private AvalaraClient apiClient;
     
     private MapObjectMapper mom = new MapObjectMapper("com.avalara.avatax.services");
