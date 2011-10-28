@@ -63,6 +63,10 @@
                             <groupId>org.mule.modules</groupId>
                             <artifactId>mule-module-avalara</artifactId>
                         </inclusion>
+                        <inclusion>
+                            <groupId>org.mule.modules</groupId>
+                            <artifactId>mule-module-zuora</artifactId>
+                        </inclusion>
 					</inclusions>
 				</configuration>
 			</plugin>
@@ -120,11 +124,6 @@
             <scope>test</scope>
         </dependency>
 		<dependency>
-			<groupId>org.ibeans</groupId>
-			<artifactId>ibeans-support</artifactId>
-			<version>${ibeansVersion}</version>
-		</dependency>
-		<dependency>
             <groupId>org.mule.modules</groupId>
             <artifactId>mule-module-ognl</artifactId>
             <version>${muleVersion}</version>
@@ -142,21 +141,15 @@
 	</dependencies>
 	<repositories>
 		<repository>
-			<id>muleforge-repo</id>
+			<id>mulesoft-snapshots</id>
 			<name>MuleForge Repository</name>
-			<url>http://repository.muleforge.org</url>
+			<url>http://repository.mulesoft.org/snapshots</url>
 			<layout>default</layout>
 		</repository>
 		<repository>
-			<id>codehaus-repo</id>
-			<name>Codehaus Repository</name>
-			<url>http://dist.codehaus.org/mule/dependencies/maven2</url>
-			<layout>default</layout>
-		</repository>
-		<repository>
-			<id>ibeans-repo</id>
-			<name>iBeans Repository</name>
-			<url>http://repository.ibeans.muleforge.org</url>
+			<id>mulesoft-releases</id>
+			<name>MuleForge Repository</name>
+			<url>http://repository.mulesoft.org/releases</url>
 			<layout>default</layout>
 		</repository>
 	</repositories>
