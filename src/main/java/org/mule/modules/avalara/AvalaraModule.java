@@ -13,6 +13,20 @@
  */
 package org.mule.modules.avalara;
 
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.PostConstruct;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
+
+import org.apache.commons.beanutils.Converter;
+import org.apache.commons.lang.Validate;
 import org.mule.api.annotations.Configurable;
 import org.mule.api.annotations.Module;
 import org.mule.api.annotations.Processor;
@@ -21,6 +35,7 @@ import org.mule.api.annotations.param.Optional;
 import org.mule.modules.avalara.api.AvalaraClient;
 import org.mule.modules.avalara.api.DefaultAvalaraClient;
 import org.mule.modules.avalara.api.MapBuilder;
+import org.mule.modules.avalara.exception.AvalaraRuntimeException;
 
 import ar.com.zauber.commons.mom.CXFStyle;
 import ar.com.zauber.commons.mom.MapObjectMapper;
@@ -39,21 +54,6 @@ import com.avalara.avatax.services.PostTaxRequest;
 import com.avalara.avatax.services.PostTaxResult;
 import com.avalara.avatax.services.ValidateRequest;
 import com.avalara.avatax.services.ValidateResult;
-
-import java.math.BigDecimal;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.PostConstruct;
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
-
-import org.apache.commons.beanutils.Converter;
-import org.apache.commons.lang.Validate;
 
 /**
  * Avalara provides automated sales tax solutions to streamline cumbersome, 
@@ -148,7 +148,7 @@ public class AvalaraModule
      * @param baseAddresses Collection of physical addresses that will be referred 
      *                      to as the destination or origination of 1 or more invoice 
      *                      line entries
-     * @param listOfLines Collection of invoice lines requiring tax calculation
+     * @param lines Collection of invoice lines requiring tax calculation
      * @param detailLevel Specifies the level of tax detail to return
      * @param referenceCode For returns (see {@link AvalaraDocumentType}), refers to the 
      *                      {@link GetTaxRequest#getDocCode} of the original invoice.
@@ -188,7 +188,7 @@ public class AvalaraModule
                                String originCode,
                                String destinationCode,
                                List<Map<String, Object>> baseAddresses,
-                               List<Map<String, Object>> listOfLines,
+                               List<Map<String, Object>> lines,
                                DetailLevelType detailLevel,
                                @Optional String referenceCode,
                                @Optional String locationCode,
@@ -211,11 +211,11 @@ public class AvalaraModule
             addresses.put("baseAddress", baseAddresses);
         }
         
-        Map<String, Object> lines = null;
-        if (listOfLines != null && !listOfLines.isEmpty())
+        Map<String, Object> mapLines = null;
+        if (lines != null && !lines.isEmpty())
         {
-            lines = new HashMap<String, Object>();
-            lines.put("line", listOfLines);
+            mapLines = new HashMap<String, Object>();
+            mapLines.put("line", lines);
         }
         
         return apiClient.sendToAvalara(TaxRequestType.GetTax, mom.toObject(GetTaxRequest.class,            
@@ -233,7 +233,7 @@ public class AvalaraModule
                 .with("originCode", originCode)
                 .with("destinationCode", destinationCode)
                 .with("addresses", addresses)
-                .with("lines", lines)
+                .with("lines", mapLines)
                 .with("detailLevel", detailLevel.toAvalaraDetailLevel())
                 .with("referenceCode", referenceCode)
                 .with("locationCode", locationCode)

@@ -36,7 +36,7 @@
                          exchangeRate="#[variable:exchangeRate]"
                          exchangeRateEffDate="#[variable:exchangeRateEffDate]" >
             <avalara:base-addresses ref="#[variable:addresses]" />
-            <avalara:list-of-lines ref="#[variable:lines]" /> 
+            <avalara:lines ref="#[variable:lines]" /> 
         </avalara:get-tax>
         <avalara:commit-tax docId="#[variable:docId]"
                             companyCode="#[variable:companyCode]"
