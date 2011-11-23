@@ -57,6 +57,11 @@
       <artifactId>mom</artifactId>
       <version>${mom.version}</version>
     </dependency>
+    <dependency>
+        <groupId>org.mule.modules</groupId>
+        <artifactId>mule-module-scripting</artifactId>
+        <version>3.2.0</version>
+    </dependency>
   </dependencies>
 
   <scm>

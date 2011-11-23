@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Mule Avalara Cloud Connector
+
+    Copyright (c) MuleSoft, Inc.  All rights reserved.  http://www.mulesoft.com
+
+    The software in this package is published under the terms of the CPAL v1.0
+    license, a copy of which has been included with this distribution in the
+    LICENSE.txt file.
+
+-->
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:spring="http://www.springframework.org/schema/beans"
+      xmlns:avalara="http://www.mulesoft.org/schema/mule/avalara"
+      xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting"
+      xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+        http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/3.2/mule-scripting.xsd
+        http://www.mulesoft.org/schema/mule/avalara http://www.mulesoft.org/schema/mule/avalara/1.0/mule-avalara.xsd">
+
+    <avalara:config account="${avalaraAccount}" 
+                    license="${avalaraLicense}"
+                    avalaraClient="${avalaraClient}" />
+
+    <flow name="main">
+        <!-- <vm:inbound-endpoint path="in" exchange-pattern="request-response" /> -->
+
+        <scripting:transformer name="createprops">
+			<scripting:script engine="groovy"><![CDATA[
+							import org.mule.modules.avalara.AvalaraDocumentType;
+							import org.mule.modules.avalara.DetailLevelType;
+							return ['docType': AvalaraDocumentType.SALES_INVOICE, 'detLevel':DetailLevelType.TAX]
+							        ]]>
+			</scripting:script>
+		</scripting:transformer>
+		<!-- 
+		
+		GetTaxHistoryResult taxHistoryResult = module.getTaxHistory(null, "TC", 
+		            AvalaraDocumentType.SALES_INVOICE, docCode, DetailLevelType.TAX);
+		 -->
+		<avalara:get-tax-history companyCode="TC"
+		          docType="#[map-payload:docType]" docCode="abc123" detailLevel="#[map-payload:detLevel]" />
+		<logger message="Result from Avalara = #[payload]" level="ERROR" />
+	
+	
+	</flow>
+</mule>
