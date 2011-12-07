@@ -10,12 +10,6 @@
 
 package org.mule.modules.avalara.api;
 
-import java.lang.reflect.InvocationTargetException;
-
-import javax.xml.ws.BindingProvider;
-
-import org.apache.commons.lang.Validate;
-import org.apache.commons.lang.builder.ToStringBuilder;
 import org.mule.modules.avalara.TaxRequestType;
 import org.mule.modules.avalara.exception.AvalaraRuntimeException;
 import org.mule.modules.avalara.util.AvalaraProfileHeader;
@@ -31,6 +25,13 @@ import com.avalara.avatax.services.TaxSvcSoap;
 import com.avalara.avatax.services.ValidateRequest;
 import com.avalara.avatax.services.ValidateResult;
 
+import java.lang.reflect.InvocationTargetException;
+
+import javax.xml.ws.BindingProvider;
+
+import org.apache.commons.lang.Validate;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 /**
  * @author Gaston Ponti
  * @since Oct 17, 2011
@@ -42,7 +43,7 @@ public class DefaultAvalaraClient implements AvalaraClient
     private String client;
     private TaxSvcSoap taxSvcSoap;
     private AddressSvcSoap addressSvcSoap;
-    
+
     public DefaultAvalaraClient(String account, String license, String client)
     {
         Validate.notEmpty(account);
@@ -58,7 +59,7 @@ public class DefaultAvalaraClient implements AvalaraClient
     {
         return getService().ping(message);
     }
-    
+
     /** @see org.mule.modules.avalara.api.AvalaraClient#sendToAvalara(org.mule.modules.avalara.TaxRequestType, java.lang.Object) */
     @Override
     public <T extends BaseResult> T sendToAvalara(TaxRequestType entityType, Object obj)
@@ -87,31 +88,33 @@ public class DefaultAvalaraClient implements AvalaraClient
     @Override
     public ValidateResult validateAddress(ValidateRequest validateRequest)
     {
+        return getAddressService().validate(validateRequest);
+    }
+
+    protected AddressSvcSoap getAddressService()
+    {
         if (addressSvcSoap == null)
         {
-            addressSvcSoap = new AddressSvc().getPort(AddressSvcSoap.class);
-        
-            UsernameTokenProfile.sign((BindingProvider) addressSvcSoap, account, license);
-            AvalaraProfileHeader.sign((BindingProvider) addressSvcSoap, client);
+            addressSvcSoap = new AddressSvc().getAddressSvcSoap();
+            sign((BindingProvider) addressSvcSoap);
         }
-        
-        return addressSvcSoap.validate(validateRequest);
+        return addressSvcSoap;
     }
-    
-    /**
-     * @return
-     */
-    public TaxSvcSoap getService()
+
+    protected TaxSvcSoap getService()
     {
         if (taxSvcSoap == null)
         {
-            taxSvcSoap = new TaxSvc().getPort(TaxSvcSoap.class);
-            BindingProvider bindingProvider = (BindingProvider) taxSvcSoap;
-             
-            UsernameTokenProfile.sign(bindingProvider, account, license);
-            AvalaraProfileHeader.sign(bindingProvider, client);
+            taxSvcSoap = new TaxSvc().getTaxSvcSoap();
+            sign((BindingProvider) taxSvcSoap);
         }
-        
         return taxSvcSoap;
     }
+
+    private void sign(BindingProvider bindingProvider)
+    {
+        UsernameTokenProfile.sign(bindingProvider, account, license);
+        AvalaraProfileHeader.sign(bindingProvider, client);
+    }
+
 }
