@@ -47,7 +47,7 @@ public class AvalaraTestDriver
     private Date testDate;
 
     /**
-     * 
+     *
      */
     @Before
     public void setup()
@@ -57,6 +57,7 @@ public class AvalaraTestDriver
         module.setAccount(System.getenv("avalaraAccount"));
         module.setLicense(System.getenv("avalaraLicense"));
         module.setAvalaraClient(System.getenv("avalaraClient"));
+        module.setAvalaraClient("Mule");
         module.init();
     }
 
@@ -70,13 +71,13 @@ public class AvalaraTestDriver
 
     @Test
     public void getTaxWithoutKnowingUsernameOrPassword() throws Exception
-    {   
+    {
         GetTaxResult result = getTaxResultElement("Test " + Long.toString(new Date().getTime()));
 
         assertNotNull(result);
         assertEquals(new BigDecimal(5000), result.getTotalAmount());
     }
-    
+
     private GetTaxResult getTaxResultElement(String docCode)
     {
         List<Map<String, Object>> addresses = new ArrayList<Map<String, Object>>() { {
@@ -99,7 +100,7 @@ public class AvalaraTestDriver
                 put("country", "USA");
             } });
         } };
-        
+
         List<Map<String, Object>> lines = new ArrayList<Map<String, Object>>() { {
             add(new HashMap<String, Object>() { {
                 put("no", "001");
@@ -120,10 +121,10 @@ public class AvalaraTestDriver
                 put("taxIncluded", false);
             } });
         } };
-        
+
         return module.getTax("TC", AvalaraDocumentType.SALES_INVOICE, docCode, testDate,
             null, "cusomer Code", null, "0", null, null, "Origin", "Dest", addresses,
-            lines, DetailLevelType.DOCUMENT, null, "Test LocationCode", false, null, 
+            lines, DetailLevelType.DOCUMENT, null, "Test LocationCode", false, null,
             null, null, ServiceModeType.AUTOMATIC, new Date(), "0", testDate);
     }
     @Test
@@ -134,8 +135,8 @@ public class AvalaraTestDriver
 
         assertEquals(SeverityLevel.SUCCESS, taxResult.getResultCode());
 
-        PostTaxResult postResult = module.postTax(null, "TC", AvalaraDocumentType.SALES_INVOICE, 
-            docCode, testDate, taxResult.getTotalAmount().toPlainString(), 
+        PostTaxResult postResult = module.postTax(null, "TC", AvalaraDocumentType.SALES_INVOICE,
+            docCode, testDate, taxResult.getTotalAmount().toPlainString(),
             taxResult.getTotalTax().toPlainString(), false, docCode);
 
         assertEquals(SeverityLevel.SUCCESS, postResult.getResultCode());
@@ -146,7 +147,7 @@ public class AvalaraTestDriver
         assertEquals(SeverityLevel.SUCCESS, cancelResult.getResultCode());
 
         // Check tax history
-        GetTaxHistoryResult taxHistoryResult = module.getTaxHistory(null, "TC", 
+        GetTaxHistoryResult taxHistoryResult = module.getTaxHistory(null, "TC",
             AvalaraDocumentType.SALES_INVOICE, docCode, DetailLevelType.TAX);
 
         assertEquals(SeverityLevel.SUCCESS, taxHistoryResult.getResultCode());
@@ -157,7 +158,7 @@ public class AvalaraTestDriver
         GetTaxResult historyTaxResult = taxHistoryResult.getGetTaxResult();
         assertNotNull(historyTaxResult);
         assertEquals(2, historyTaxResult.getTaxLines().getTaxLine().size());
-        
+
         //Finally Cancel Tax and remove the entry from the system by calling new DocVoided
         //Delete the document from the system
         cancelResult = module.cancelTax(null, "TC", AvalaraDocumentType.SALES_INVOICE,
@@ -169,19 +170,19 @@ public class AvalaraTestDriver
     @Test
     public void validateAValidAddress() throws Exception
     {
-        ValidateResult response = module.validateAddress("435 Ericksen Ave", null, null, null, "NE", null, 
+        ValidateResult response = module.validateAddress("435 Ericksen Ave", null, null, null, "NE", null,
             "98110", null, 0, null, null, TextCaseType.DEFAULT, false, false, new Date());
-        
+
         assertNotNull(response);
         assertEquals("Bainbridge Island", response.getValidAddresses().getValidAddress().get(0).getCity());
     }
-    
+
     @Test
     public void validateAnInvalidAddress() throws Exception
     {
-        ValidateResult response = module.validateAddress("SARLAZA", null, null, null, null, null, 
+        ValidateResult response = module.validateAddress("SARLAZA", null, null, null, null, null,
             null, null, 0, null, null, TextCaseType.DEFAULT, false, false, new Date());
-        
+
         assertEquals(SeverityLevel.ERROR, response.getResultCode());
     }
 

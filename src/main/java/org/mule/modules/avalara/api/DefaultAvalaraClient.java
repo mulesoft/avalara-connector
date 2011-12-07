@@ -42,7 +42,7 @@ public class DefaultAvalaraClient implements AvalaraClient
     private String client;
     private TaxSvcSoap taxSvcSoap;
     private AddressSvcSoap addressSvcSoap;
-    
+
     public DefaultAvalaraClient(String account, String license, String client)
     {
         Validate.notEmpty(account);
@@ -58,7 +58,7 @@ public class DefaultAvalaraClient implements AvalaraClient
     {
         return getService().ping(message);
     }
-    
+
     /** @see org.mule.modules.avalara.api.AvalaraClient#sendToAvalara(org.mule.modules.avalara.TaxRequestType, java.lang.Object) */
     @Override
     public <T extends BaseResult> T sendToAvalara(TaxRequestType entityType, Object obj)
@@ -90,14 +90,14 @@ public class DefaultAvalaraClient implements AvalaraClient
         if (addressSvcSoap == null)
         {
             addressSvcSoap = new AddressSvc().getPort(AddressSvcSoap.class);
-        
+
             UsernameTokenProfile.sign((BindingProvider) addressSvcSoap, account, license);
             AvalaraProfileHeader.sign((BindingProvider) addressSvcSoap, client);
         }
-        
+
         return addressSvcSoap.validate(validateRequest);
     }
-    
+
     /**
      * @return
      */
@@ -105,13 +105,13 @@ public class DefaultAvalaraClient implements AvalaraClient
     {
         if (taxSvcSoap == null)
         {
-            taxSvcSoap = new TaxSvc().getPort(TaxSvcSoap.class);
+            taxSvcSoap = new TaxSvc().getTaxSvcSoap();
             BindingProvider bindingProvider = (BindingProvider) taxSvcSoap;
-             
+
             UsernameTokenProfile.sign(bindingProvider, account, license);
             AvalaraProfileHeader.sign(bindingProvider, client);
         }
-        
+
         return taxSvcSoap;
     }
 }
