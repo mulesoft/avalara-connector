@@ -14,6 +14,7 @@ import org.mule.modules.avalara.TaxRequestType;
 import org.mule.modules.avalara.exception.AvalaraRuntimeException;
 import org.mule.modules.avalara.util.AvalaraProfileHeader;
 import org.mule.modules.avalara.util.UsernameTokenProfile;
+import org.springframework.core.io.ClassPathResource;
 
 import com.avalara.avatax.services.AddressSvc;
 import com.avalara.avatax.services.AddressSvcSoap;
@@ -25,7 +26,9 @@ import com.avalara.avatax.services.TaxSvcSoap;
 import com.avalara.avatax.services.ValidateRequest;
 import com.avalara.avatax.services.ValidateResult;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.net.URL;
 
 import javax.xml.ws.BindingProvider;
 
@@ -57,7 +60,7 @@ public class DefaultAvalaraClient implements AvalaraClient
     @Override
     public PingResult ping(String message)
     {
-        return getService().ping(message);
+        return getTaxService().ping(message);
     }
 
     /** @see org.mule.modules.avalara.api.AvalaraClient#sendToAvalara(org.mule.modules.avalara.TaxRequestType, java.lang.Object) */
@@ -68,7 +71,7 @@ public class DefaultAvalaraClient implements AvalaraClient
         T response;
         try
         {
-            response = (T) getService().getClass().getMethod(entityType.getResourceName(), obj.getClass()).invoke(getService(), obj);
+            response = (T) getTaxService().getClass().getMethod(entityType.getResourceName(), obj.getClass()).invoke(getTaxService(), obj);
         }
         catch (InvocationTargetException e)
         {
@@ -95,21 +98,29 @@ public class DefaultAvalaraClient implements AvalaraClient
     {
         if (addressSvcSoap == null)
         {
-            addressSvcSoap = new AddressSvc().getAddressSvcSoap();
+            addressSvcSoap = new AddressSvc(getSchemaUrlInternal("address")).getAddressSvcSoap();
             sign((BindingProvider) addressSvcSoap);
         }
         return addressSvcSoap;
     }
 
-    protected TaxSvcSoap getService()
+    protected TaxSvcSoap getTaxService()
     {
         if (taxSvcSoap == null)
         {
-            taxSvcSoap = new TaxSvc().getTaxSvcSoap();
+            taxSvcSoap = new TaxSvc(getSchemaUrlInternal("tax")).getTaxSvcSoap();
             sign((BindingProvider) taxSvcSoap);
         }
         return taxSvcSoap;
     }
+
+   private URL getSchemaUrlInternal(String schemaName) {
+      try {
+         return new ClassPathResource("schema/" + schemaName + "svc.wsdl").getURL();
+      } catch (IOException e) {
+         throw new AssertionError(e);
+      }
+   }
 
     private void sign(BindingProvider bindingProvider)
     {

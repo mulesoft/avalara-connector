@@ -56,7 +56,6 @@ public class AvalaraTestDriver
         module = new AvalaraModule();
         module.setAccount(System.getenv("avalaraAccount"));
         module.setLicense(System.getenv("avalaraLicense"));
-        module.setAvalaraClient(System.getenv("avalaraClient"));
         module.setAvalaraClient("Mule");
         module.init();
     }
