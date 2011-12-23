@@ -15,20 +15,19 @@
 
 package org.mule.modules.unit;
 
-import java.util.Date;
-import java.util.GregorianCalendar;
+import static org.junit.Assert.*;
 
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
+import java.util.HashMap;
+import java.util.Map;
 
-import org.apache.commons.beanutils.Converter;
-import org.apache.commons.lang.Validate;
 import org.junit.Test;
+import org.mule.modules.utils.mom.CxfMapObjectMappers;
+
+import ar.com.zauber.commons.mom.MapObjectMapper;
+
+import com.avalara.avatax.services.GetTaxRequest;
 
 /**
- * TODO: Description of the class, Comments in english by default
- * 
  * @author Gaston Ponti
  * @since Oct 19, 2011
  */
@@ -37,38 +36,16 @@ public class DateConverterTest
     @Test
     public void converterTest()
     {
-        XMLGregorianCalendar c = (XMLGregorianCalendar) conv.convert(XMLGregorianCalendar.class, new Date());
-    }
-
-    private Converter conv;
-    private final DatatypeFactory datatypeFactory;
-    {
-        conv = new Converter()
-        {
-
-            @SuppressWarnings("rawtypes")
-            @Override
-            public Object convert(Class arg0, Object arg1)
-            {
-                Validate.isTrue(arg0 == XMLGregorianCalendar.class);
-
-                return toGregorianCalendar((Date) arg1);
-            }
-        };
-        try
-        {
-            datatypeFactory = DatatypeFactory.newInstance();
-        }
-        catch (DatatypeConfigurationException e)
-        {
-            throw new AssertionError(e);
-        }
-    }
-
-    private XMLGregorianCalendar toGregorianCalendar(Date openingBalanceDate)
-    {
-        GregorianCalendar cal = new GregorianCalendar();
-        cal.setTime(openingBalanceDate);
-        return datatypeFactory.newXMLGregorianCalendar(cal);
+        MapObjectMapper mom = CxfMapObjectMappers.defaultWithPackage("com.avalara.avatax.services").build();
+        Map<String, Object> map = new HashMap<String, Object>()
+        {{
+            put("docDate", "2001-01-01T10:10:10Z");
+        }};
+        
+        GetTaxRequest getTax = (GetTaxRequest) mom.unmap(map, GetTaxRequest.class);
+        
+        assertEquals( 2001, getTax.getDocDate().getYear());
+        
+        
     }
 }

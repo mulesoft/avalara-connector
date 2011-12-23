@@ -15,17 +15,12 @@ package org.mule.modules.avalara;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
 
-import org.apache.commons.beanutils.Converter;
 import org.apache.commons.lang.Validate;
 import org.mule.api.annotations.Configurable;
 import org.mule.api.annotations.Module;
@@ -36,8 +31,8 @@ import org.mule.modules.avalara.api.AvalaraClient;
 import org.mule.modules.avalara.api.DefaultAvalaraClient;
 import org.mule.modules.avalara.api.MapBuilder;
 import org.mule.modules.avalara.exception.AvalaraRuntimeException;
+import org.mule.modules.utils.mom.CxfMapObjectMappers;
 
-import ar.com.zauber.commons.mom.CXFStyle;
 import ar.com.zauber.commons.mom.MapObjectMapper;
 
 import com.avalara.avatax.services.BaseAddress;
@@ -91,7 +86,7 @@ public class AvalaraModule
      */
     private AvalaraClient apiClient;
     
-    private MapObjectMapper mom = new MapObjectMapper("com.avalara.avatax.services");
+    private MapObjectMapper mom = CxfMapObjectMappers.defaultWithPackage("com.avalara.avatax.services").build();
     
     public PingResult ping(String message)
     {
@@ -218,7 +213,7 @@ public class AvalaraModule
             mapLines.put("line", lines);
         }
         
-        return apiClient.sendToAvalara(TaxRequestType.GetTax, mom.toObject(GetTaxRequest.class,            
+        return apiClient.sendToAvalara(TaxRequestType.GetTax, mom.unmap(            
                 new MapBuilder()
                 .with("companyCode", companyCode)
                 .with("docType", docType.toDocumentType())
@@ -245,7 +240,7 @@ public class AvalaraModule
                 .with("paymentDate", paymentDate)
                 .with("exchangeRate", exchangeRateDecimal)
                 .with("exchangeRateEffDate", exchangeRateEffDate)
-                .build()
+                .build(), GetTaxRequest.class
             )
         );
     }
@@ -298,7 +293,7 @@ public class AvalaraModule
         BigDecimal totalTaxDecimal = totalTax == null ? null :  new BigDecimal(totalTax);
         
         return (PostTaxResult) apiClient.sendToAvalara(TaxRequestType.PostTax,
-            mom.toObject(PostTaxRequest.class,            
+            mom.unmap(           
                 new MapBuilder()
                 .with("docId", docId)
                 .with("companyCode", companyCode)
@@ -309,7 +304,7 @@ public class AvalaraModule
                 .with("totalTax", totalTaxDecimal)
                 .with("commit", commit)
                 .with("newDocCode", newDocCode)
-                .build()
+                .build(), PostTaxRequest.class
             )
         );
     }
@@ -340,14 +335,14 @@ public class AvalaraModule
                                      @Optional String newDocCode)
     {
         return (CommitTaxResult) apiClient.sendToAvalara(TaxRequestType.CommitTax,
-            mom.toObject(CommitTaxRequest.class,            
+            mom.unmap(            
                 new MapBuilder()
                 .with("docId", docId)
                 .with("companyCode", companyCode)
                 .with("docType", docType.toDocumentType())
                 .with("docCode", docCode)
                 .with("newDocCode", newDocCode)
-                .build()
+                .build(), CommitTaxRequest.class
             )
         );
     }
@@ -378,14 +373,14 @@ public class AvalaraModule
                                              DetailLevelType detailLevel)
     {
         return (GetTaxHistoryResult) apiClient.sendToAvalara(TaxRequestType.GetTaxHistory,
-            mom.toObject(GetTaxHistoryRequest.class,            
+            mom.unmap(       
                 new MapBuilder()
                 .with("docId", docId)
                 .with("companyCode", companyCode)
                 .with("docType", docType.toDocumentType())
                 .with("docCode", docCode)
                 .with("detailLevel", detailLevel.toAvalaraDetailLevel())
-                .build()
+                .build(), GetTaxHistoryRequest.class
             )
         );
     }
@@ -417,14 +412,14 @@ public class AvalaraModule
                                      CancelCodeType cancelCode)
     {
         return (CancelTaxResult) apiClient.sendToAvalara(TaxRequestType.CancelTax,
-            mom.toObject(CancelTaxRequest.class,            
+            mom.unmap(           
                 new MapBuilder()
                 .with("docId", docId)
                 .with("companyCode", companyCode)
                 .with("docType", docType.toDocumentType())
                 .with("docCode", docCode)
                 .with("cancelCode", cancelCode.toAvalaraCancelCode())
-                .build()
+                .build(), CancelTaxRequest.class
             )
         );
     }
@@ -487,14 +482,14 @@ public class AvalaraModule
         address.setTaxRegionId(taxRegionId);
         
         return apiClient.validateAddress(
-            mom.toObject(ValidateRequest.class,            
+            (ValidateRequest) mom.unmap(            
                 new MapBuilder()
                 .with("address", address)
                 .with("textCase", textCase.toAvalaraTextCase())
                 .with("coordinates", coordinates)
                 .with("taxability", taxability)
                 .with("date", date)
-                .build()
+                .build(), ValidateRequest.class
             )
         );
     }
@@ -511,7 +506,6 @@ public class AvalaraModule
             Validate.notNull(avalaraClient);
             apiClient = new DefaultAvalaraClient(account, license, avalaraClient);
         }
-        mom.setPropertyStyle(CXFStyle.STYLE);
     }
     
     /**
@@ -596,36 +590,5 @@ public class AvalaraModule
     public void setClient(AvalaraClient client)
     {
         this.apiClient = client;
-    }
-    
-    private final DatatypeFactory datatypeFactory;
-    {
-        mom.registerConverter(new Converter()
-        {
-            
-            @SuppressWarnings("rawtypes")
-            @Override
-            public Object convert(Class arg0, Object arg1)
-            {
-                Validate.isTrue(arg0 == XMLGregorianCalendar.class);
-                
-                return toGregorianCalendar((Date) arg1);
-            }
-        }, XMLGregorianCalendar.class);
-        try
-        {
-            datatypeFactory = DatatypeFactory.newInstance();
-        }
-        catch (DatatypeConfigurationException e)
-        {
-            throw new AssertionError(e);
-        }
-    }
-    
-    private XMLGregorianCalendar toGregorianCalendar(Date openingBalanceDate)
-    {
-        GregorianCalendar cal = new GregorianCalendar();
-        cal.setTime(openingBalanceDate);
-        return datatypeFactory.newXMLGregorianCalendar(cal);
     }
 }
