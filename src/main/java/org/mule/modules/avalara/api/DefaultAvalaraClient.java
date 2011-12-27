@@ -10,11 +10,17 @@
 
 package org.mule.modules.avalara.api;
 
+import java.lang.reflect.InvocationTargetException;
+
+import javax.xml.ws.Service;
+
+import org.apache.commons.lang.Validate;
+import org.apache.commons.lang.builder.ToStringBuilder;
 import org.mule.modules.avalara.TaxRequestType;
 import org.mule.modules.avalara.exception.AvalaraRuntimeException;
 import org.mule.modules.avalara.util.AvalaraProfileHeader;
-import org.mule.modules.avalara.util.UsernameTokenProfile;
-import org.springframework.core.io.ClassPathResource;
+
+import ar.com.zauber.commons.ws.connection.ConnectionBuilder;
 
 import com.avalara.avatax.services.AddressSvc;
 import com.avalara.avatax.services.AddressSvcSoap;
@@ -25,15 +31,6 @@ import com.avalara.avatax.services.TaxSvc;
 import com.avalara.avatax.services.TaxSvcSoap;
 import com.avalara.avatax.services.ValidateRequest;
 import com.avalara.avatax.services.ValidateResult;
-
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.net.URL;
-
-import javax.xml.ws.BindingProvider;
-
-import org.apache.commons.lang.Validate;
-import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * @author Gaston Ponti
@@ -98,8 +95,7 @@ public class DefaultAvalaraClient implements AvalaraClient
     {
         if (addressSvcSoap == null)
         {
-            addressSvcSoap = new AddressSvc(getSchemaUrlInternal("address")).getAddressSvcSoap();
-            sign((BindingProvider) addressSvcSoap);
+            addressSvcSoap = createConnection(AddressSvcSoap.class, AddressSvc.class, "address");
         }
         return addressSvcSoap;
     }
@@ -108,28 +104,24 @@ public class DefaultAvalaraClient implements AvalaraClient
     {
         if (taxSvcSoap == null)
         {
-            taxSvcSoap = new TaxSvc(getSchemaUrlInternal("tax")).getTaxSvcSoap();
-            sign((BindingProvider) taxSvcSoap);
+            taxSvcSoap = createConnection(TaxSvcSoap.class, TaxSvc.class, "tax");
         }
         return taxSvcSoap;
     }
-
-    private URL getSchemaUrlInternal(String schemaName)
+    
+    protected <A> A createConnection(Class<A> portType, Class<? extends Service> serviceType, String schemaName)
     {
-        try
-        {
-            return new ClassPathResource("schema/" + schemaName + "svc.wsdl").getURL();
-        }
-        catch (IOException e)
-        {
-            throw new AssertionError(e);
-        }
+        return ConnectionBuilder.fromPortType(portType)
+            .withServiceType(serviceType)
+            .withClasspathWsdl(schemaLocation(schemaName))
+            .withUsernameTokenAuth(account, license)
+            .withHeader(new AvalaraProfileHeader(client))
+            .build();
     }
 
-    private void sign(BindingProvider bindingProvider)
+    protected String schemaLocation(String schemaName)
     {
-        UsernameTokenProfile.sign(bindingProvider, account, license);
-        AvalaraProfileHeader.sign(bindingProvider, client);
+        return "schema/" + schemaName + "svc.wsdl";
     }
 
 }
