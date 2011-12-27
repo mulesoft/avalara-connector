@@ -38,13 +38,13 @@ public class DateConverterTest
     {
         MapObjectMapper mom = CxfMapObjectMappers.defaultWithPackage("com.avalara.avatax.services").build();
         Map<String, Object> map = new HashMap<String, Object>()
-        {{
+        { {
             put("docDate", "2001-01-01T10:10:10Z");
-        }};
+        } };
         
         GetTaxRequest getTax = (GetTaxRequest) mom.unmap(map, GetTaxRequest.class);
         
-        assertEquals( 2001, getTax.getDocDate().getYear());
+        assertEquals(2001, getTax.getDocDate().getYear());
         
         
     }

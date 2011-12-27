@@ -114,13 +114,17 @@ public class DefaultAvalaraClient implements AvalaraClient
         return taxSvcSoap;
     }
 
-   private URL getSchemaUrlInternal(String schemaName) {
-      try {
-         return new ClassPathResource("schema/" + schemaName + "svc.wsdl").getURL();
-      } catch (IOException e) {
-         throw new AssertionError(e);
-      }
-   }
+    private URL getSchemaUrlInternal(String schemaName)
+    {
+        try
+        {
+            return new ClassPathResource("schema/" + schemaName + "svc.wsdl").getURL();
+        }
+        catch (IOException e)
+        {
+            throw new AssertionError(e);
+        }
+    }
 
     private void sign(BindingProvider bindingProvider)
     {

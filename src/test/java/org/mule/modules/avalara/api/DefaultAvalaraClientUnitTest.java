@@ -21,7 +21,7 @@ import com.avalara.avatax.services.TaxSvcSoap;
 public class DefaultAvalaraClientUnitTest 
 {
 
-   DefaultAvalaraClient client = new DefaultAvalaraClient("myAccount", "myLicense", "myClient");
+    private DefaultAvalaraClient client = new DefaultAvalaraClient("myAccount", "myLicense", "myClient");
 
    @Test
    public void taxSvcGetsCached() 

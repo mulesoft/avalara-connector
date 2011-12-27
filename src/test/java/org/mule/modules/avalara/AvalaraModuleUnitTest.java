@@ -1,6 +1,15 @@
+/**
+ * Mule Avalara Cloud Connector
+ *
+ * Copyright (c) MuleSoft, Inc.  All rights reserved.  http://www.mulesoft.com
+ *
+ * The software in this package is published under the terms of the CPAL v1.0
+ * license, a copy of which has been included with this distribution in the
+ * LICENSE.txt file.
+ */
+
 package org.mule.modules.avalara;
 
-import static org.junit.Assert.fail;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Matchers.refEq;
 import static org.mockito.Mockito.mock;
@@ -16,6 +25,7 @@ import com.avalara.avatax.services.CommitTaxRequest;
 import com.avalara.avatax.services.DetailLevel;
 import com.avalara.avatax.services.DocumentType;
 import com.avalara.avatax.services.GetTaxHistoryRequest;
+
 public class AvalaraModuleUnitTest
 {
     private AvalaraModule module;

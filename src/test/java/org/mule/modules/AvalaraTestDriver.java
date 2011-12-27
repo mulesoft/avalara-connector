@@ -10,7 +10,8 @@
 
 package org.mule.modules;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
