@@ -12,6 +12,7 @@ package org.mule.modules.avalara.api;
 
 import java.lang.reflect.InvocationTargetException;
 
+import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 
 import org.apache.commons.lang.Validate;
@@ -95,7 +96,7 @@ public class DefaultAvalaraClient implements AvalaraClient
     {
         if (addressSvcSoap == null)
         {
-            addressSvcSoap = createConnection(AddressSvcSoap.class, AddressSvc.class, "address");
+            addressSvcSoap = createConnection(AddressSvcSoap.class, AddressSvc.class, "address", AddressSvc.AddressSvcSoap);
         }
         return addressSvcSoap;
     }
@@ -104,18 +105,19 @@ public class DefaultAvalaraClient implements AvalaraClient
     {
         if (taxSvcSoap == null)
         {
-            taxSvcSoap = createConnection(TaxSvcSoap.class, TaxSvc.class, "tax");
+            taxSvcSoap = createConnection(TaxSvcSoap.class, TaxSvc.class, "tax", TaxSvc.TaxSvcSoap);
         }
         return taxSvcSoap;
     }
     
-    protected <A> A createConnection(Class<A> portType, Class<? extends Service> serviceType, String schemaName)
+    protected <A> A createConnection(Class<A> portType, Class<? extends Service> serviceType, String schemaName, QName portName)
     {
         return ConnectionBuilder.fromPortType(portType)
             .withServiceType(serviceType)
             .withClasspathWsdl(schemaLocation(schemaName))
             .withUsernameTokenAuth(account, license)
             .withHeader(new AvalaraProfileHeader(client))
+            .withPortQName(portName)
             .build();
     }
 
