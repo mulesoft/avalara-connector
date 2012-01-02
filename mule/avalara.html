@@ -111,15 +111,19 @@
       <span id="masthead-title">Mule Avalara Connector</span>
     
     <ul id="header-tabs" class="mule">
+    
     	<li id="guide"><a href="../guide/install.html">
 	    	<span class="en">Install Guide</span>
     	</a></li>
+    
     	<li id="java"><a href="../java/packages.html">
-	    	<span class="en">Java API</span>
+	    	<span class="en">Java API Reference</span>
     	</a></li>
+    
     	<li id="mule"><a href="../mule/modules.html">
-	    	<span class="en">Mule API</span>
+	    	<span class="en">Mule API Reference</span>
     	</a></li>
+    
     </ul>
     </div>
     <div id="headerRight">
@@ -226,7 +230,7 @@ Summary:
  in case of an audit. Their automated solutions automatically perform address 
  validation, jurisdiction research and rate calculation and allow you to 
  manage even the most complicated tax issues, such as situs, nexus, tax tiers, 
- tax holidays, exemptions, certificate management and product taxability rules.<br/></p>
+ tax holidays, exemptions, certificate management and product taxability rules.</p>
 
 
 </div><!-- jd-descr -->
@@ -419,6 +423,8 @@ specify which configuration to use.</p>
 
 
 
+
+
 <!-- ========= MESSAGE PROCESSOR DETAIL ======== -->
 <!-- Message Processors -->
 
@@ -442,7 +448,7 @@ specify which configuration to use.</p>
   <div class="jd-tagdata jd-tagdescr"><p>Cancel tax, indicating the document that should be cancelled and the reason
  for the operation.
 
- <br/><div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;avalara:cancel-tax docId="some document id"
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;avalara:cancel-tax docId="some document id"
                     companyCode="some company code"
                     docType="SALES_ORDER"
                     docCode="some document code"
@@ -450,17 +456,19 @@ specify which configuration to use.</p>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
-      <table class="jd-tagtable">
-      <td class="jd-linkcol"><nobr>config-ref</nobr></td>
-      <td class="jd-descrcol"></td>
-      <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td></tr>
+        <table id="lconfig" class="jd-sumtable">
+        <tr><th>Name</th><th>Default Value</th><th>Description</th></tr>
+        <tr>
+          <td class="jd-linkcol"><nobr>config-ref</nobr></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td></tr>
           
           
                 
                 <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>docId</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The original document's type, such as Sales Invoice or Purchase Invoice.<br/></td>
+                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The original document's type, such as Sales Invoice or Purchase Invoice.</td>
                 </tr>
                 
                 
@@ -470,7 +478,7 @@ specify which configuration to use.</p>
                     <td class="jd-linkcol"><nobr>companyCode</nobr></td>
                     <td class="jd-descrcol"></td>
                     <td class="jd-descrcol" width="100%">Client application company reference code. If docId is specified, 
-                    this is not needed.<br/></td>
+                    this is not needed.</td>
                 </tr>
                 
                 
@@ -481,8 +489,8 @@ specify which configuration to use.</p>
                     <td class="jd-descrcol"></td>
                     <td class="jd-descrcol" width="100%">The document type specifies the category of the document and affects
                 how the document is treated after a tax calculation; see 
-                <br/><code><a href="../java/org/mule/modules/avalara/AvalaraDocumentType.html">AvalaraDocumentType</a></code> for more information about the specific 
-                document types.<br/></td>
+                <code><a href="../java/org/mule/modules/avalara/AvalaraDocumentType.html">AvalaraDocumentType</a></code> for more information about the specific 
+                document types.</td>
                 </tr>
                 
                 
@@ -491,7 +499,7 @@ specify which configuration to use.</p>
                 <tr class="alt-color api apilevel-" >
                     <td class="jd-linkcol"><nobr>docCode</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The internal reference code used by the client application.<br/></td>
+                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The internal reference code used by the client application.</td>
                 </tr>
                 
                 
@@ -500,26 +508,18 @@ specify which configuration to use.</p>
                 <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>cancelCode</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%">A code indicating the reason the document is getting canceled.<br/></td>
+                    <td class="jd-descrcol" width="100%">A code indicating the reason the document is getting canceled.</td>
                 </tr>
                 
                 
           
           
-            <tr class="alt-color api apilevel-" >
-                <td class="jd-linkcol"><nobr>retryMax</nobr></td>
-                <td class="jd-descrcol">1</td>
-                <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify how many times this operation can be retried automatically</td>
-            </tr>
-            
           
-        
-      </table>
+        </table>
   </div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Child Elements</h5>
-
-      <table class="jd-tagtable">
+        <table id="lconfig" class="jd-sumtable">
           
           
             
@@ -537,8 +537,10 @@ specify which configuration to use.</p>
   
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Return Payload</h5>
-      <ul class="nolist"><li>The <br/><code><a href="../java/com/avalara/avatax/services/CancelTaxResult.html">CancelTaxResult</a></code></li></ul>
+      <ul class="nolist"><li>The <code><a href="../java/com/avalara/avatax/services/CancelTaxResult.html">CancelTaxResult</a></code></li></ul>
   </div>
+    
+  
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Exception Payload</h5>
       <table class="jd-tagtable">
@@ -568,7 +570,7 @@ specify which configuration to use.</p>
       
   <div class="jd-tagdata jd-tagdescr"><p>Commit Tax processor
 
- <br/><div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;avalara:commit-tax docId="some document id"
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;avalara:commit-tax docId="some document id"
                     companyCode="some company code"
                     docType="SALES_ORDER"
                     docCode="some document code"
@@ -576,17 +578,19 @@ specify which configuration to use.</p>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
-      <table class="jd-tagtable">
-      <td class="jd-linkcol"><nobr>config-ref</nobr></td>
-      <td class="jd-descrcol"></td>
-      <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td></tr>
+        <table id="lconfig" class="jd-sumtable">
+        <tr><th>Name</th><th>Default Value</th><th>Description</th></tr>
+        <tr>
+          <td class="jd-linkcol"><nobr>config-ref</nobr></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td></tr>
           
           
                 
                 <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>docId</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The original document's type, such as Sales Invoice or Purchase Invoice.<br/></td>
+                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The original document's type, such as Sales Invoice or Purchase Invoice.</td>
                 </tr>
                 
                 
@@ -596,7 +600,7 @@ specify which configuration to use.</p>
                     <td class="jd-linkcol"><nobr>companyCode</nobr></td>
                     <td class="jd-descrcol"></td>
                     <td class="jd-descrcol" width="100%">Client application company reference code. If docId is specified, 
-                    this is not needed.<br/></td>
+                    this is not needed.</td>
                 </tr>
                 
                 
@@ -607,8 +611,8 @@ specify which configuration to use.</p>
                     <td class="jd-descrcol"></td>
                     <td class="jd-descrcol" width="100%">The document type specifies the category of the document and affects
                 how the document is treated after a tax calculation; see 
-                <br/><code><a href="../java/org/mule/modules/avalara/AvalaraDocumentType.html">AvalaraDocumentType</a></code> for more information about the specific 
-                document types.<br/></td>
+                <code><a href="../java/org/mule/modules/avalara/AvalaraDocumentType.html">AvalaraDocumentType</a></code> for more information about the specific 
+                document types.</td>
                 </tr>
                 
                 
@@ -617,7 +621,7 @@ specify which configuration to use.</p>
                 <tr class="alt-color api apilevel-" >
                     <td class="jd-linkcol"><nobr>docCode</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The internal reference code used by the client application.<br/></td>
+                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The internal reference code used by the client application.</td>
                 </tr>
                 
                 
@@ -626,26 +630,18 @@ specify which configuration to use.</p>
                 <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>newDocCode</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The new document code value.<br/></td>
+                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The new document code value.</td>
                 </tr>
                 
                 
           
           
-            <tr class="alt-color api apilevel-" >
-                <td class="jd-linkcol"><nobr>retryMax</nobr></td>
-                <td class="jd-descrcol">1</td>
-                <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify how many times this operation can be retried automatically</td>
-            </tr>
-            
           
-        
-      </table>
+        </table>
   </div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Child Elements</h5>
-
-      <table class="jd-tagtable">
+        <table id="lconfig" class="jd-sumtable">
           
           
             
@@ -663,8 +659,10 @@ specify which configuration to use.</p>
   
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Return Payload</h5>
-      <ul class="nolist"><li>The <br/><code><a href="../java/com/avalara/avatax/services/CommitTaxRequest.html">CommitTaxRequest</a></code></li></ul>
+      <ul class="nolist"><li>The <code><a href="../java/com/avalara/avatax/services/CommitTaxRequest.html">CommitTaxRequest</a></code></li></ul>
   </div>
+    
+  
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Exception Payload</h5>
       <table class="jd-tagtable">
@@ -697,7 +695,7 @@ specify which configuration to use.</p>
  The Get Tax operation calculates tax for one or more invoiced items and 
  displays details describing the calculation of tax for each line item.
 
- <br/><div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;avalara:get-tax companyCode="some company code"
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;avalara:get-tax companyCode="some company code"
              docType="PURCHASE_ORDER"
              docCode="some doc code"
              docDate="2010-09-13T01:18:14-07:00"
@@ -782,17 +780,19 @@ specify which configuration to use.</p>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
-      <table class="jd-tagtable">
-      <td class="jd-linkcol"><nobr>config-ref</nobr></td>
-      <td class="jd-descrcol"></td>
-      <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td></tr>
+        <table id="lconfig" class="jd-sumtable">
+        <tr><th>Name</th><th>Default Value</th><th>Description</th></tr>
+        <tr>
+          <td class="jd-linkcol"><nobr>config-ref</nobr></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td></tr>
           
           
                 
                 <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>companyCode</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%">Client application company reference code<br/></td>
+                    <td class="jd-descrcol" width="100%">Client application company reference code</td>
                 </tr>
                 
                 
@@ -803,8 +803,8 @@ specify which configuration to use.</p>
                     <td class="jd-descrcol"></td>
                     <td class="jd-descrcol" width="100%">The document type specifies the category of the document and affects
                 how the document is treated after a tax calculation; see 
-                <br/><code><a href="../java/org/mule/modules/avalara/AvalaraDocumentType.html">AvalaraDocumentType</a></code> for more information about the specific 
-                document types.<br/></td>
+                <code><a href="../java/org/mule/modules/avalara/AvalaraDocumentType.html">AvalaraDocumentType</a></code> for more information about the specific 
+                document types.</td>
                 </tr>
                 
                 
@@ -813,7 +813,7 @@ specify which configuration to use.</p>
                 <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>docCode</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The internal reference code used by the client application.<br/></td>
+                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The internal reference code used by the client application.</td>
                 </tr>
                 
                 
@@ -822,7 +822,7 @@ specify which configuration to use.</p>
                 <tr class="alt-color api apilevel-" >
                     <td class="jd-linkcol"><nobr>docDate</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%">Date of invoice, purchase order, etc.<br/></td>
+                    <td class="jd-descrcol" width="100%">Date of invoice, purchase order, etc.</td>
                 </tr>
                 
                 
@@ -831,7 +831,7 @@ specify which configuration to use.</p>
                 <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>salespersonCode</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The client application salesperson reference code.<br/></td>
+                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The client application salesperson reference code.</td>
                 </tr>
                 
                 
@@ -840,7 +840,7 @@ specify which configuration to use.</p>
                 <tr class="alt-color api apilevel-" >
                     <td class="jd-linkcol"><nobr>customerCode</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%">Client application customer reference code <br/></td>
+                    <td class="jd-descrcol" width="100%">Client application customer reference code </td>
                 </tr>
                 
                 
@@ -866,7 +866,7 @@ specify which configuration to use.</p>
         I Industrial Prod/Mfg.<br/>
         J Direct Pay Permit<br/>
         K Direct Mail<br/>
-        L - Other<br/></td>
+        L - Other</td>
                 </tr>
                 
                 
@@ -876,7 +876,7 @@ specify which configuration to use.</p>
                     <td class="jd-linkcol"><nobr>discount</nobr></td>
                     <td class="jd-descrcol"></td>
                     <td class="jd-descrcol" width="100%">The discount amount to apply to the document. The string
-                 represents a <br/>BigDecimal.<br/></td>
+                 represents a BigDecimal.</td>
                 </tr>
                 
                 
@@ -887,7 +887,7 @@ specify which configuration to use.</p>
                     <td class="jd-descrcol"></td>
                     <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Purchase order identifier. PurchaseOrderNo is required 
                         for single use exemption certificates to match the 
-                        order and invoice with the certificate.<br/></td>
+                        order and invoice with the certificate.</td>
                 </tr>
                 
                 
@@ -896,7 +896,7 @@ specify which configuration to use.</p>
                 <tr class="alt-color api apilevel-" >
                     <td class="jd-linkcol"><nobr>exemptionNo</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Exemption number used for this transaction<br/></td>
+                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Exemption number used for this transaction</td>
                 </tr>
                 
                 
@@ -907,7 +907,7 @@ specify which configuration to use.</p>
                     <td class="jd-descrcol"></td>
                     <td class="jd-descrcol" width="100%">Code that refers one of the address of the baseAddress collection.
                    It has to be the same code of one of the address's addressCode.
-                   It represents the origin address. <br/></td>
+                   It represents the origin address. </td>
                 </tr>
                 
                 
@@ -918,36 +918,20 @@ specify which configuration to use.</p>
                     <td class="jd-descrcol"></td>
                     <td class="jd-descrcol" width="100%">Code that refers one of the address of the baseAddress collection.
                         It has to be the same code of one of the address's addressCode.
-                        It represents the destination address. <br/></td>
+                        It represents the destination address. </td>
                 </tr>
                 
                 
           
                 
-                <tr class=" api apilevel-" >
-                    <td class="jd-linkcol"><nobr>baseAddresses</nobr></td>
-                    <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%">Collection of physical addresses that will be referred 
-                      to as the destination or origination of 1 or more invoice 
-                      line entries<br/></td>
-                </tr>
-                
-                
           
-                
-                <tr class="alt-color api apilevel-" >
-                    <td class="jd-linkcol"><nobr>lines</nobr></td>
-                    <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%">Collection of invoice lines requiring tax calculation<br/></td>
-                </tr>
-                
                 
           
                 
                 <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>detailLevel</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%">Specifies the level of tax detail to return<br/></td>
+                    <td class="jd-descrcol" width="100%">Specifies the level of tax detail to return</td>
                 </tr>
                 
                 
@@ -956,8 +940,8 @@ specify which configuration to use.</p>
                 <tr class="alt-color api apilevel-" >
                     <td class="jd-linkcol"><nobr>referenceCode</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>For returns (see <br/><code><a href="../java/org/mule/modules/avalara/AvalaraDocumentType.html">AvalaraDocumentType</a></code>), refers to the 
-                      <br/><code><a href="../java/com/avalara/avatax/services/GetTaxRequest.html#getDocCode()">getDocCode()</a></code> of the original invoice.<br/></td>
+                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>For returns (see <code><a href="../java/org/mule/modules/avalara/AvalaraDocumentType.html">AvalaraDocumentType</a></code>), refers to the 
+                      <code><a href="../java/com/avalara/avatax/services/GetTaxRequest.html#getDocCode()">getDocCode()</a></code> of the original invoice.</td>
                 </tr>
                 
                 
@@ -969,7 +953,7 @@ specify which configuration to use.</p>
                     <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Location Code value. It is Also referred to as a Store 
                      Location, Outlet Id, or Outlet code is a number assigned by 
                      the State which identifies a Store location. Some state returns 
-                     require taxes are broken out separately for Store Locations.<br/></td>
+                     require taxes are broken out separately for Store Locations.</td>
                 </tr>
                 
                 
@@ -979,7 +963,7 @@ specify which configuration to use.</p>
                     <td class="jd-linkcol"><nobr>commit</nobr></td>
                     <td class="jd-descrcol"></td>
                     <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Commit flag. If Commit is set to true, tax for the transaction 
-               is saved, posted and committed as tax document.<br/></td>
+               is saved, posted and committed as tax document.</td>
                 </tr>
                 
                 
@@ -988,85 +972,70 @@ specify which configuration to use.</p>
                 <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>batchCode</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The batchCode value.<br/></td>
+                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The batchCode value.</td>
                 </tr>
                 
                 
           
                 
+          
+                
                 <tr class="alt-color api apilevel-" >
-                    <td class="jd-linkcol"><nobr>taxOverride</nobr></td>
+                    <td class="jd-linkcol"><nobr>currencyCode</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Indicates to apply tax override to the document.<br/></td>
+                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>It is 3 character ISO 4217 currency code.</td>
                 </tr>
                 
                 
           
                 
                 <tr class=" api apilevel-" >
-                    <td class="jd-linkcol"><nobr>currencyCode</nobr></td>
-                    <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>It is 3 character ISO 4217 currency code.<br/></td>
-                </tr>
-                
-                
-          
-                
-                <tr class="alt-color api apilevel-" >
                     <td class="jd-linkcol"><nobr>serviceMode</nobr></td>
                     <td class="jd-descrcol"></td>
                     <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>This is only supported by AvaLocal servers. It provides the 
                     ability to controls whether tax is calculated locally or remotely 
                     when using an AvaLocal server. The default is Automatic which 
                     calculates locally unless remote is necessary for non-local 
-                    addresses.<br/></td>
-                </tr>
-                
-                
-          
-                
-                <tr class=" api apilevel-" >
-                    <td class="jd-linkcol"><nobr>paymentDate</nobr></td>
-                    <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%">The date on which payment was made.<br/></td>
+                    addresses.</td>
                 </tr>
                 
                 
           
                 
                 <tr class="alt-color api apilevel-" >
-                    <td class="jd-linkcol"><nobr>exchangeRate</nobr></td>
+                    <td class="jd-linkcol"><nobr>paymentDate</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%">The exchange rate value. The string represents a 
-                     <br/>BigDecimal</td>
+                    <td class="jd-descrcol" width="100%">The date on which payment was made.</td>
                 </tr>
                 
                 
           
                 
                 <tr class=" api apilevel-" >
+                    <td class="jd-linkcol"><nobr>exchangeRate</nobr></td>
+                    <td class="jd-descrcol"></td>
+                    <td class="jd-descrcol" width="100%">The exchange rate value. The string represents a 
+                     BigDecimal</td>
+                </tr>
+                
+                
+          
+                
+                <tr class="alt-color api apilevel-" >
                     <td class="jd-linkcol"><nobr>exchangeRateEffDate</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%">The exchange rate effective date value.<br/></td>
+                    <td class="jd-descrcol" width="100%">The exchange rate effective date value.</td>
                 </tr>
                 
                 
           
           
-            <tr class="alt-color api apilevel-" >
-                <td class="jd-linkcol"><nobr>retryMax</nobr></td>
-                <td class="jd-descrcol">1</td>
-                <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify how many times this operation can be retried automatically</td>
-            </tr>
-            
           
-        
-      </table>
+        </table>
   </div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Child Elements</h5>
-
-      <table class="jd-tagtable">
+        <table id="lconfig" class="jd-sumtable">
           
           
             
@@ -1094,7 +1063,15 @@ specify which configuration to use.</p>
             
           
             
+            <tr><th colspan="12"><nobr>&lt;avalara:baseAddresses&gt;</nobr></br><span style="font-weight: normal;">Collection of physical addresses that will be referred 
+                      to as the destination or origination of 1 or more invoice 
+                      line entries</span></th></tr>
+            
+            
           
+            
+            <tr><th colspan="12"><nobr>&lt;avalara:lines&gt;</nobr></br><span style="font-weight: normal;">Collection of invoice lines requiring tax calculation</span></th></tr>
+            
             
           
             
@@ -1107,6 +1084,9 @@ specify which configuration to use.</p>
           
             
           
+            
+            <tr><th colspan="12"><nobr>&lt;avalara:taxOverride&gt;</nobr></br><span style="font-weight: normal;"><i>Optional.&nbsp;</i>Indicates to apply tax override to the document.</span></th></tr>
+            
             
           
             
@@ -1124,8 +1104,10 @@ specify which configuration to use.</p>
   
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Return Payload</h5>
-      <ul class="nolist"><li>The <br/><code><a href="../java/com/avalara/avatax/services/GetTaxResult.html">GetTaxResult</a></code></li></ul>
+      <ul class="nolist"><li>The <code><a href="../java/com/avalara/avatax/services/GetTaxResult.html">GetTaxResult</a></code></li></ul>
   </div>
+    
+  
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Exception Payload</h5>
       <table class="jd-tagtable">
@@ -1155,7 +1137,7 @@ specify which configuration to use.</p>
       
   <div class="jd-tagdata jd-tagdescr"><p>Get Tax History processor
 
- <br/><div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;avalara:get-tax-history docId="some document id"
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;avalara:get-tax-history docId="some document id"
                          companyCode="some company code"
                          docType="SALES_ORDER"
                          docCode="some document code"
@@ -1163,17 +1145,19 @@ specify which configuration to use.</p>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
-      <table class="jd-tagtable">
-      <td class="jd-linkcol"><nobr>config-ref</nobr></td>
-      <td class="jd-descrcol"></td>
-      <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td></tr>
+        <table id="lconfig" class="jd-sumtable">
+        <tr><th>Name</th><th>Default Value</th><th>Description</th></tr>
+        <tr>
+          <td class="jd-linkcol"><nobr>config-ref</nobr></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td></tr>
           
           
                 
                 <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>docId</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The original document's type, such as Sales Invoice or Purchase Invoice.<br/></td>
+                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The original document's type, such as Sales Invoice or Purchase Invoice.</td>
                 </tr>
                 
                 
@@ -1183,7 +1167,7 @@ specify which configuration to use.</p>
                     <td class="jd-linkcol"><nobr>companyCode</nobr></td>
                     <td class="jd-descrcol"></td>
                     <td class="jd-descrcol" width="100%">Client application company reference code. If docId is specified, 
-                    this is not needed.<br/></td>
+                    this is not needed.</td>
                 </tr>
                 
                 
@@ -1194,8 +1178,8 @@ specify which configuration to use.</p>
                     <td class="jd-descrcol"></td>
                     <td class="jd-descrcol" width="100%">The document type specifies the category of the document and affects
                 how the document is treated after a tax calculation; see 
-                <br/><code><a href="../java/org/mule/modules/avalara/AvalaraDocumentType.html">AvalaraDocumentType</a></code> for more information about the specific 
-                document types.<br/></td>
+                <code><a href="../java/org/mule/modules/avalara/AvalaraDocumentType.html">AvalaraDocumentType</a></code> for more information about the specific 
+                document types.</td>
                 </tr>
                 
                 
@@ -1204,7 +1188,7 @@ specify which configuration to use.</p>
                 <tr class="alt-color api apilevel-" >
                     <td class="jd-linkcol"><nobr>docCode</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The internal reference code used by the client application.<br/></td>
+                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The internal reference code used by the client application.</td>
                 </tr>
                 
                 
@@ -1213,26 +1197,18 @@ specify which configuration to use.</p>
                 <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>detailLevel</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%">Specifies the level of detail to return. See <br/><code><a href="../java/org/mule/modules/avalara/DetailLevelType.html">DetailLevelType</a></code>.<br/></td>
+                    <td class="jd-descrcol" width="100%">Specifies the level of detail to return. See <code><a href="../java/org/mule/modules/avalara/DetailLevelType.html">DetailLevelType</a></code>.</td>
                 </tr>
                 
                 
           
           
-            <tr class="alt-color api apilevel-" >
-                <td class="jd-linkcol"><nobr>retryMax</nobr></td>
-                <td class="jd-descrcol">1</td>
-                <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify how many times this operation can be retried automatically</td>
-            </tr>
-            
           
-        
-      </table>
+        </table>
   </div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Child Elements</h5>
-
-      <table class="jd-tagtable">
+        <table id="lconfig" class="jd-sumtable">
           
           
             
@@ -1250,8 +1226,10 @@ specify which configuration to use.</p>
   
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Return Payload</h5>
-      <ul class="nolist"><li>The <br/><code><a href="../java/com/avalara/avatax/services/GetTaxHistoryResult.html">GetTaxHistoryResult</a></code></li></ul>
+      <ul class="nolist"><li>The <code><a href="../java/com/avalara/avatax/services/GetTaxHistoryResult.html">GetTaxHistoryResult</a></code></li></ul>
   </div>
+    
+  
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Exception Payload</h5>
       <table class="jd-tagtable">
@@ -1281,7 +1259,7 @@ specify which configuration to use.</p>
       
   <div class="jd-tagdata jd-tagdescr"><p>Post Tax processor
 
- <br/><div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;avalara:post-tax docId="some document id"
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;avalara:post-tax docId="some document id"
                     companyCode="some company code"
                     docType="SALES_ORDER"
                     docCode="some document code"
@@ -1293,17 +1271,19 @@ specify which configuration to use.</p>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
-      <table class="jd-tagtable">
-      <td class="jd-linkcol"><nobr>config-ref</nobr></td>
-      <td class="jd-descrcol"></td>
-      <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td></tr>
+        <table id="lconfig" class="jd-sumtable">
+        <tr><th>Name</th><th>Default Value</th><th>Description</th></tr>
+        <tr>
+          <td class="jd-linkcol"><nobr>config-ref</nobr></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td></tr>
           
           
                 
                 <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>docId</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The original document's type, such as Sales Invoice or Purchase Invoice.<br/></td>
+                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The original document's type, such as Sales Invoice or Purchase Invoice.</td>
                 </tr>
                 
                 
@@ -1313,7 +1293,7 @@ specify which configuration to use.</p>
                     <td class="jd-linkcol"><nobr>companyCode</nobr></td>
                     <td class="jd-descrcol"></td>
                     <td class="jd-descrcol" width="100%">Client application company reference code. If docId is specified, 
-                    this is not needed.<br/></td>
+                    this is not needed.</td>
                 </tr>
                 
                 
@@ -1324,8 +1304,8 @@ specify which configuration to use.</p>
                     <td class="jd-descrcol"></td>
                     <td class="jd-descrcol" width="100%">The document type specifies the category of the document and affects
                 how the document is treated after a tax calculation; see 
-                <br/><code><a href="../java/org/mule/modules/avalara/AvalaraDocumentType.html">AvalaraDocumentType</a></code> for more information about the specific 
-                document types.<br/></td>
+                <code><a href="../java/org/mule/modules/avalara/AvalaraDocumentType.html">AvalaraDocumentType</a></code> for more information about the specific 
+                document types.</td>
                 </tr>
                 
                 
@@ -1334,7 +1314,7 @@ specify which configuration to use.</p>
                 <tr class="alt-color api apilevel-" >
                     <td class="jd-linkcol"><nobr>docCode</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The internal reference code used by the client application.<br/></td>
+                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The internal reference code used by the client application.</td>
                 </tr>
                 
                 
@@ -1343,7 +1323,7 @@ specify which configuration to use.</p>
                 <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>docDate</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%">The date on the invoice, purchase order, etc<br/></td>
+                    <td class="jd-descrcol" width="100%">The date on the invoice, purchase order, etc</td>
                 </tr>
                 
                 
@@ -1354,9 +1334,9 @@ specify which configuration to use.</p>
                     <td class="jd-descrcol"></td>
                     <td class="jd-descrcol" width="100%">The total amount (not including tax) for the document.
                     This is used for verification and reconciliation. This should 
-                    be the <b>TotalAmount</b> returned by <br/><code><a href="../java/com/avalara/avatax/services/GetTaxResult.html">GetTaxResult</a></code> when 
+                    be the <b>TotalAmount</b> returned by <code><a href="../java/com/avalara/avatax/services/GetTaxResult.html">GetTaxResult</a></code> when 
                     tax was calculated for this document; otherwise the web service 
-                    will return an error. The string represents a <br/>BigDecimal</td>
+                    will return an error. The string represents a BigDecimal</td>
                 </tr>
                 
                 
@@ -1367,9 +1347,9 @@ specify which configuration to use.</p>
                     <td class="jd-descrcol"></td>
                     <td class="jd-descrcol" width="100%">The total tax for the document. This is used for verification 
                  and reconciliation. This should be the <b>TotalTax</b> returned by
-                 <br/><code><a href="../java/com/avalara/avatax/services/GetTaxResult.html">GetTaxResult</a></code> when tax was calculated for this document; 
+                 <code><a href="../java/com/avalara/avatax/services/GetTaxResult.html">GetTaxResult</a></code> when tax was calculated for this document; 
                  otherwise the web service will return an error.
-                 The string represents a <br/>BigDecimal</td>
+                 The string represents a BigDecimal</td>
                 </tr>
                 
                 
@@ -1381,7 +1361,7 @@ specify which configuration to use.</p>
                     <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The commit value. This has been defaulted to false. If this has 
                been set to true AvaTax will commit the document on this call. Seller's 
                system who wants to Post and Commit the document on one call should use 
-               this flag.<br/></td>
+               this flag.</td>
                 </tr>
                 
                 
@@ -1390,26 +1370,18 @@ specify which configuration to use.</p>
                 <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>newDocCode</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The new document code value.<br/></td>
+                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The new document code value.</td>
                 </tr>
                 
                 
           
           
-            <tr class="alt-color api apilevel-" >
-                <td class="jd-linkcol"><nobr>retryMax</nobr></td>
-                <td class="jd-descrcol">1</td>
-                <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify how many times this operation can be retried automatically</td>
-            </tr>
-            
           
-        
-      </table>
+        </table>
   </div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Child Elements</h5>
-
-      <table class="jd-tagtable">
+        <table id="lconfig" class="jd-sumtable">
           
           
             
@@ -1435,8 +1407,10 @@ specify which configuration to use.</p>
   
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Return Payload</h5>
-      <ul class="nolist"><li>The <br/><code><a href="../java/com/avalara/avatax/services/PostTaxResult.html">PostTaxResult</a></code></li></ul>
+      <ul class="nolist"><li>The <code><a href="../java/com/avalara/avatax/services/PostTaxResult.html">PostTaxResult</a></code></li></ul>
   </div>
+    
+  
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Exception Payload</h5>
       <table class="jd-tagtable">
@@ -1469,7 +1443,7 @@ specify which configuration to use.</p>
  This operation validates the supplied address, returning canonical form and 
  additional delivery details if successfully validated.
 
- <br/><div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;avalara:validate-address line1="435 Ericksen Ave"
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;avalara:validate-address line1="435 Ericksen Ave"
                           line2="some line 2"
                           line3="some line 3" 
                           city="some city"
@@ -1487,17 +1461,19 @@ specify which configuration to use.</p>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
-      <table class="jd-tagtable">
-      <td class="jd-linkcol"><nobr>config-ref</nobr></td>
-      <td class="jd-descrcol"></td>
-      <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td></tr>
+        <table id="lconfig" class="jd-sumtable">
+        <tr><th>Name</th><th>Default Value</th><th>Description</th></tr>
+        <tr>
+          <td class="jd-linkcol"><nobr>config-ref</nobr></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td></tr>
           
           
                 
                 <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>line1</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%">Address line 1<br/></td>
+                    <td class="jd-descrcol" width="100%">Address line 1</td>
                 </tr>
                 
                 
@@ -1506,7 +1482,7 @@ specify which configuration to use.</p>
                 <tr class="alt-color api apilevel-" >
                     <td class="jd-linkcol"><nobr>line2</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Address line 2<br/></td>
+                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Address line 2</td>
                 </tr>
                 
                 
@@ -1515,7 +1491,7 @@ specify which configuration to use.</p>
                 <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>line3</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Address line 3<br/></td>
+                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Address line 3</td>
                 </tr>
                 
                 
@@ -1524,7 +1500,7 @@ specify which configuration to use.</p>
                 <tr class="alt-color api apilevel-" >
                     <td class="jd-linkcol"><nobr>city</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>City name. Required, when PostalCode is not specified.<br/></td>
+                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>City name. Required, when PostalCode is not specified.</td>
                 </tr>
                 
                 
@@ -1533,7 +1509,7 @@ specify which configuration to use.</p>
                 <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>region</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>State or region name. Requirad, when PostalCode is not specified.<br/></td>
+                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>State or region name. Requirad, when PostalCode is not specified.</td>
                 </tr>
                 
                 
@@ -1542,7 +1518,7 @@ specify which configuration to use.</p>
                 <tr class="alt-color api apilevel-" >
                     <td class="jd-linkcol"><nobr>country</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Country code<br/></td>
+                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Country code</td>
                 </tr>
                 
                 
@@ -1552,7 +1528,7 @@ specify which configuration to use.</p>
                     <td class="jd-linkcol"><nobr>postalCode</nobr></td>
                     <td class="jd-descrcol"></td>
                     <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Postal or ZIP code. Required, when City and Region are not 
-                   specified<br/></td>
+                   specified</td>
                 </tr>
                 
                 
@@ -1561,7 +1537,7 @@ specify which configuration to use.</p>
                 <tr class="alt-color api apilevel-" >
                     <td class="jd-linkcol"><nobr>addressCode</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The address code.<br/></td>
+                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The address code.</td>
                 </tr>
                 
                 
@@ -1570,7 +1546,7 @@ specify which configuration to use.</p>
                 <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>taxRegionId</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The tax region id.<br/></td>
+                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The tax region id.</td>
                 </tr>
                 
                 
@@ -1579,7 +1555,7 @@ specify which configuration to use.</p>
                 <tr class="alt-color api apilevel-" >
                     <td class="jd-linkcol"><nobr>latitude</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Latitude. <br/></td>
+                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Latitude. </td>
                 </tr>
                 
                 
@@ -1588,7 +1564,7 @@ specify which configuration to use.</p>
                 <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>longitude</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Longitude.<br/></td>
+                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Longitude.</td>
                 </tr>
                 
                 
@@ -1597,7 +1573,7 @@ specify which configuration to use.</p>
                 <tr class="alt-color api apilevel-" >
                     <td class="jd-linkcol"><nobr>textCase</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The casing to apply to the validated address(es).<br/></td>
+                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The casing to apply to the validated address(es).</td>
                 </tr>
                 
                 
@@ -1606,7 +1582,7 @@ specify which configuration to use.</p>
                 <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>coordinates</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>True, if you want in the result a not empty latitud and longitude.<br/></td>
+                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>True, if you want in the result a not empty latitud and longitude.</td>
                 </tr>
                 
                 
@@ -1615,7 +1591,7 @@ specify which configuration to use.</p>
                 <tr class="alt-color api apilevel-" >
                     <td class="jd-linkcol"><nobr>taxability</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>True, if you want the valid taxRegionId in the result.<br/></td>
+                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>True, if you want the valid taxRegionId in the result.</td>
                 </tr>
                 
                 
@@ -1624,26 +1600,18 @@ specify which configuration to use.</p>
                 <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>date</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%">Date.<br/></td>
+                    <td class="jd-descrcol" width="100%">Date.</td>
                 </tr>
                 
                 
           
           
-            <tr class="alt-color api apilevel-" >
-                <td class="jd-linkcol"><nobr>retryMax</nobr></td>
-                <td class="jd-descrcol">1</td>
-                <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify how many times this operation can be retried automatically</td>
-            </tr>
-            
           
-        
-      </table>
+        </table>
   </div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Child Elements</h5>
-
-      <table class="jd-tagtable">
+        <table id="lconfig" class="jd-sumtable">
           
           
             
@@ -1681,8 +1649,10 @@ specify which configuration to use.</p>
   
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Return Payload</h5>
-      <ul class="nolist"><li>The <br/><code><a href="../java/com/avalara/avatax/services/ValidateResult.html">ValidateResult</a></code></li></ul>
+      <ul class="nolist"><li>The <code><a href="../java/com/avalara/avatax/services/ValidateResult.html">ValidateResult</a></code></li></ul>
   </div>
+    
+  
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Exception Payload</h5>
       <table class="jd-tagtable">
