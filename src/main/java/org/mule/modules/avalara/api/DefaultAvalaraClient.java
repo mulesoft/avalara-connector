@@ -21,8 +21,6 @@ import org.mule.modules.avalara.TaxRequestType;
 import org.mule.modules.avalara.exception.AvalaraRuntimeException;
 import org.mule.modules.avalara.util.AvalaraProfileHeader;
 
-import ar.com.zauber.commons.ws.connection.ConnectionBuilder;
-
 import com.avalara.avatax.services.AddressSvc;
 import com.avalara.avatax.services.AddressSvcSoap;
 import com.avalara.avatax.services.BaseResult;
@@ -32,6 +30,7 @@ import com.avalara.avatax.services.TaxSvc;
 import com.avalara.avatax.services.TaxSvcSoap;
 import com.avalara.avatax.services.ValidateRequest;
 import com.avalara.avatax.services.ValidateResult;
+import com.zauberlabs.commons.ws.connection.ConnectionBuilder;
 
 /**
  * @author Gaston Ponti
@@ -39,9 +38,9 @@ import com.avalara.avatax.services.ValidateResult;
  */
 public class DefaultAvalaraClient implements AvalaraClient
 {
-    private String account;
-    private String license;
-    private String client;
+    private final String account;
+    private final String license;
+    private final String client;
     private TaxSvcSoap taxSvcSoap;
     private AddressSvcSoap addressSvcSoap;
 
