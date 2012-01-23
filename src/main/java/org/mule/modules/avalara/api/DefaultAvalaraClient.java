@@ -10,11 +10,16 @@
 
 package org.mule.modules.avalara.api;
 
+import java.lang.reflect.InvocationTargetException;
+
+import javax.xml.namespace.QName;
+import javax.xml.ws.Service;
+
+import org.apache.commons.lang.Validate;
+import org.apache.commons.lang.builder.ToStringBuilder;
 import org.mule.modules.avalara.TaxRequestType;
 import org.mule.modules.avalara.exception.AvalaraRuntimeException;
 import org.mule.modules.avalara.util.AvalaraProfileHeader;
-import org.mule.modules.avalara.util.UsernameTokenProfile;
-import org.springframework.core.io.ClassPathResource;
 
 import com.avalara.avatax.services.AddressSvc;
 import com.avalara.avatax.services.AddressSvcSoap;
@@ -25,15 +30,7 @@ import com.avalara.avatax.services.TaxSvc;
 import com.avalara.avatax.services.TaxSvcSoap;
 import com.avalara.avatax.services.ValidateRequest;
 import com.avalara.avatax.services.ValidateResult;
-
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.net.URL;
-
-import javax.xml.ws.BindingProvider;
-
-import org.apache.commons.lang.Validate;
-import org.apache.commons.lang.builder.ToStringBuilder;
+import com.zauberlabs.commons.ws.connection.ConnectionBuilder;
 
 /**
  * @author Gaston Ponti
@@ -41,9 +38,9 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  */
 public class DefaultAvalaraClient implements AvalaraClient
 {
-    private String account;
-    private String license;
-    private String client;
+    private final String account;
+    private final String license;
+    private final String client;
     private TaxSvcSoap taxSvcSoap;
     private AddressSvcSoap addressSvcSoap;
 
@@ -98,8 +95,7 @@ public class DefaultAvalaraClient implements AvalaraClient
     {
         if (addressSvcSoap == null)
         {
-            addressSvcSoap = new AddressSvc(getSchemaUrlInternal("address")).getAddressSvcSoap();
-            sign((BindingProvider) addressSvcSoap);
+            addressSvcSoap = createConnection(AddressSvcSoap.class, AddressSvc.class, "address", AddressSvc.AddressSvcSoap);
         }
         return addressSvcSoap;
     }
@@ -108,28 +104,25 @@ public class DefaultAvalaraClient implements AvalaraClient
     {
         if (taxSvcSoap == null)
         {
-            taxSvcSoap = new TaxSvc(getSchemaUrlInternal("tax")).getTaxSvcSoap();
-            sign((BindingProvider) taxSvcSoap);
+            taxSvcSoap = createConnection(TaxSvcSoap.class, TaxSvc.class, "tax", TaxSvc.TaxSvcSoap);
         }
         return taxSvcSoap;
     }
-
-    private URL getSchemaUrlInternal(String schemaName)
+    
+    protected <A> A createConnection(Class<A> portType, Class<? extends Service> serviceType, String schemaName, QName portName)
     {
-        try
-        {
-            return new ClassPathResource("schema/" + schemaName + "svc.wsdl").getURL();
-        }
-        catch (IOException e)
-        {
-            throw new AssertionError(e);
-        }
+        return ConnectionBuilder.fromPortType(portType)
+            .withServiceType(serviceType)
+            .withClasspathWsdl(schemaLocation(schemaName))
+            .withUsernameTokenAuth(account, license)
+            .withHeader(new AvalaraProfileHeader(client))
+            .withPortQName(portName)
+            .build();
     }
 
-    private void sign(BindingProvider bindingProvider)
+    protected String schemaLocation(String schemaName)
     {
-        UsernameTokenProfile.sign(bindingProvider, account, license);
-        AvalaraProfileHeader.sign(bindingProvider, client);
+        return "schema/" + schemaName + "svc.wsdl";
     }
 
 }
