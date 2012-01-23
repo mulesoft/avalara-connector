@@ -21,11 +21,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.Test;
-import org.mule.modules.utils.mom.CxfMapObjectMappers;
-
-import ar.com.zauber.commons.mom.MapObjectMapper;
+import org.mule.modules.utils.mom.JaxbMapObjectMappers;
 
 import com.avalara.avatax.services.GetTaxRequest;
+import com.zauberlabs.commons.mom.MapObjectMapper;
 
 /**
  * @author Gaston Ponti
@@ -36,7 +35,7 @@ public class DateConverterTest
     @Test
     public void converterTest()
     {
-        MapObjectMapper mom = CxfMapObjectMappers.defaultWithPackage("com.avalara.avatax.services").build();
+        MapObjectMapper mom = JaxbMapObjectMappers.defaultWithPackage("com.avalara.avatax.services").build();
         Map<String, Object> map = new HashMap<String, Object>()
         { {
             put("docDate", "2001-01-01T10:10:10Z");

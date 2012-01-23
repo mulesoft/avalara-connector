@@ -15,9 +15,8 @@
     <name>Mule Avalara Connector</name>
 
     <properties>
-        <cxf.version>2.3.1</cxf.version>
-        <mom.version>1.2.2</mom.version>
-        <mule.module.utils.version>1.0-beta-1</mule.module.utils.version>
+	<cxf.version>2.3.1</cxf.version>
+        <mule.module.utils.version>1.0-SNAPSHOT</mule.module.utils.version>
         <jersey.version>1.3</jersey.version>
         <ws.version>1.0</ws.version>
     </properties>
@@ -55,11 +54,11 @@
     </build>
 
   <dependencies>
-    <dependency>
+    <!--<dependency>
       <groupId>com.zaubersoftware</groupId>
       <artifactId>mom</artifactId>
       <version>${mom.version}</version>
-    </dependency>
+    </dependency>-->
     <dependency>
       <groupId>org.mule.modules</groupId>
       <artifactId>mule-module-scripting</artifactId>
