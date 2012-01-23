@@ -15,7 +15,7 @@ var NAVTREE_DATA =
 , "" ] ]
 , "" ], [ "org.mule.modules.avalara.exception", "org/mule/modules/avalara/exception/package-summary.html", [ [ "Exceptions", null, [ [ "AvalaraRuntimeException", "org/mule/modules/avalara/exception/AvalaraRuntimeException.html", null, "" ] ]
 , "" ] ]
-, "" ], [ "org.mule.modules.avalara.util", "org/mule/modules/avalara/util/package-summary.html", [ [ "Classes", null, [ [ "AvalaraProfileHeader", "org/mule/modules/avalara/util/AvalaraProfileHeader.html", null, "" ], [ "UsernameTokenProfile", "org/mule/modules/avalara/util/UsernameTokenProfile.html", null, "" ] ]
+, "" ], [ "org.mule.modules.avalara.util", "org/mule/modules/avalara/util/package-summary.html", [ [ "Classes", null, [ [ "AvalaraProfileHeader", "org/mule/modules/avalara/util/AvalaraProfileHeader.html", null, "" ] ]
 , "" ] ]
 , "" ] ]
 

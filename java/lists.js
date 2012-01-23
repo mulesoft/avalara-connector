@@ -123,8 +123,7 @@ var DATA = [
       { id:121, label:"org.mule.modules.avalara.exception.AvalaraRuntimeException", link:"java/org/mule/modules/avalara/exception/AvalaraRuntimeException.html", type:"class" },
       { id:122, label:"org.mule.modules.avalara.util", link:"java/org/mule/modules/avalara/util/package-summary.html", type:"package" },
       { id:123, label:"org.mule.modules.avalara.util.AvalaraProfileHeader", link:"java/org/mule/modules/avalara/util/AvalaraProfileHeader.html", type:"class" },
-      { id:124, label:"org.mule.modules.avalara.util.UsernameTokenProfile", link:"java/org/mule/modules/avalara/util/UsernameTokenProfile.html", type:"class" },
-      { id:125, label:"post-tax", link:"mule/avalara.html#post-tax", type:"method" },
-      { id:126, label:"validate-address", link:"mule/avalara.html#validate-address", type:"method" }
+      { id:124, label:"post-tax", link:"mule/avalara.html#post-tax", type:"method" },
+      { id:125, label:"validate-address", link:"mule/avalara.html#validate-address", type:"method" }
 
     ];

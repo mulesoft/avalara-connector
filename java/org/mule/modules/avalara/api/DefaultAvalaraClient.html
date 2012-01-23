@@ -424,7 +424,7 @@ Summary:
           <td class="jd-typecol"><nobr>
           private
           
-          
+          final
           String</nobr></td>
           <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/api/DefaultAvalaraClient.html#account">account</a></td>
           <td class="jd-descrcol" width="100%"></td>
@@ -446,7 +446,7 @@ Summary:
           <td class="jd-typecol"><nobr>
           private
           
-          
+          final
           String</nobr></td>
           <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/api/DefaultAvalaraClient.html#client">client</a></td>
           <td class="jd-descrcol" width="100%"></td>
@@ -457,7 +457,7 @@ Summary:
           <td class="jd-typecol"><nobr>
           private
           
-          
+          final
           String</nobr></td>
           <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/api/DefaultAvalaraClient.html#license">license</a></td>
           <td class="jd-descrcol" width="100%"></td>
@@ -584,11 +584,11 @@ Summary:
             
             
             
-            
-            <a href="../../../../../../java/com/avalara/avatax/services/AddressSvcSoap.html">AddressSvcSoap</a></nobr>
+            &lt;A&gt;
+            A</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/api/DefaultAvalaraClient.html#getAddressService()">getAddressService</a></span>()</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/api/DefaultAvalaraClient.html#createConnection(java.lang.Class<A>, java.lang.Class<? extends javax.xml.ws.Service>, java.lang.String, javax.xml.namespace.QName)">createConnection</a></span>(Class&lt;A&gt; portType, Class&lt;?&nbsp;extends&nbsp;Service&gt; serviceType, String schemaName, QName portName)</nobr>
         
   </td></tr>
 
@@ -601,10 +601,42 @@ Summary:
             
             
             
+            <a href="../../../../../../java/com/avalara/avatax/services/AddressSvcSoap.html">AddressSvcSoap</a></nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/api/DefaultAvalaraClient.html#getAddressService()">getAddressService</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
             <a href="../../../../../../java/com/avalara/avatax/services/TaxSvcSoap.html">TaxSvcSoap</a></nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/api/DefaultAvalaraClient.html#getTaxService()">getTaxService</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/api/DefaultAvalaraClient.html#schemaLocation(java.lang.String)">schemaLocation</a></span>(String schemaName)</nobr>
         
   </td></tr>
 
@@ -936,7 +968,7 @@ From interface
       <span class="normal">
         private 
          
-         
+        final 
         String
       </span>
         account
@@ -996,7 +1028,7 @@ From interface
       <span class="normal">
         private 
          
-         
+        final 
         String
       </span>
         client
@@ -1026,7 +1058,7 @@ From interface
       <span class="normal">
         private 
          
-         
+        final 
         String
       </span>
         license
@@ -1289,6 +1321,58 @@ From interface
 
 
 
+<A NAME="createConnection(java.lang.Class<A>, java.lang.Class<? extends javax.xml.ws.Service>, java.lang.String, javax.xml.namespace.QName)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        protected 
+         
+         
+         
+         
+        A
+      </span>
+      <span class="sympad">createConnection</span>
+      <span class="normal">(Class&lt;A&gt; portType, Class&lt;?&nbsp;extends&nbsp;Service&gt; serviceType, String schemaName, QName portName)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>portType</td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>serviceType</td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>schemaName</td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>portName</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
 <A NAME="getAddressService()"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -1346,6 +1430,46 @@ From interface
     <div class="jd-details-descr">
       
   <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    </div>
+</div>
+
+
+<A NAME="schemaLocation(java.lang.String)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        protected 
+         
+         
+         
+         
+        String
+      </span>
+      <span class="sympad">schemaLocation</span>
+      <span class="normal">(String schemaName)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>schemaName</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
 
     </div>
 </div>
