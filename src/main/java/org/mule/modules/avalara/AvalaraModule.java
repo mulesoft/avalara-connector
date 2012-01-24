@@ -31,9 +31,7 @@ import org.mule.modules.avalara.api.AvalaraClient;
 import org.mule.modules.avalara.api.DefaultAvalaraClient;
 import org.mule.modules.avalara.api.MapBuilder;
 import org.mule.modules.avalara.exception.AvalaraRuntimeException;
-import org.mule.modules.utils.mom.CxfMapObjectMappers;
-
-import ar.com.zauber.commons.mom.MapObjectMapper;
+import org.mule.modules.utils.mom.JaxbMapObjectMappers;
 
 import com.avalara.avatax.services.BaseAddress;
 import com.avalara.avatax.services.CancelTaxRequest;
@@ -49,6 +47,7 @@ import com.avalara.avatax.services.PostTaxRequest;
 import com.avalara.avatax.services.PostTaxResult;
 import com.avalara.avatax.services.ValidateRequest;
 import com.avalara.avatax.services.ValidateResult;
+import com.zauberlabs.commons.mom.MapObjectMapper;
 
 /**
  * Avalara provides automated sales tax solutions to streamline cumbersome, 
@@ -86,7 +85,7 @@ public class AvalaraModule
      */
     private AvalaraClient apiClient;
     
-    private MapObjectMapper mom = CxfMapObjectMappers.defaultWithPackage("com.avalara.avatax.services").build();
+    private final MapObjectMapper mom = JaxbMapObjectMappers.defaultWithPackage("com.avalara.avatax.services").build();
     
     public PingResult ping(String message)
     {

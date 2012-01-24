@@ -10,8 +10,7 @@
 
 package org.mule.modules.avalara.api;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertSame;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
