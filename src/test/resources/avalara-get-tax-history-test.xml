@@ -22,10 +22,6 @@
         http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/3.2/mule-scripting.xsd
         http://www.mulesoft.org/schema/mule/avalara http://www.mulesoft.org/schema/mule/avalara/1.0/mule-avalara.xsd">
 
-    <avalara:config account="${avalaraAccount}" 
-                    license="${avalaraLicense}"
-                    avalaraClient="${avalaraClient}" />
-
     <flow name="main">
         <!-- <vm:inbound-endpoint path="in" exchange-pattern="request-response" /> -->
 
@@ -42,7 +38,11 @@
 		GetTaxHistoryResult taxHistoryResult = module.getTaxHistory(null, "TC", 
 		            AvalaraDocumentType.SALES_INVOICE, docCode, DetailLevelType.TAX);
 		 -->
-		<avalara:get-tax-history companyCode="TC"
+		<avalara:get-tax-history 
+				  account="${avalaraAccount}" 
+                  license="${avalaraLicense}"
+                  avalaraClient="${avalaraClient}
+				  companyCode="TC"
 		          docType="#[map-payload:docType]" docCode="abc123" detailLevel="#[map-payload:detLevel]" />
 		<logger message="Result from Avalara = #[payload]" level="ERROR" />
 	

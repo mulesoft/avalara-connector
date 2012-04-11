@@ -10,7 +10,8 @@
 
 package org.mule.modules.avalara.util;
 
-import java.util.List;
+import org.mule.modules.avalara.api.AvalaraProfile;
+
 import java.util.Set;
 
 import javax.xml.namespace.QName;
@@ -18,8 +19,6 @@ import javax.xml.soap.SOAPElement;
 import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPHeader;
 import javax.xml.soap.SOAPMessage;
-import javax.xml.ws.BindingProvider;
-import javax.xml.ws.handler.Handler;
 import javax.xml.ws.handler.MessageContext;
 import javax.xml.ws.handler.soap.SOAPHandler;
 import javax.xml.ws.handler.soap.SOAPMessageContext;
@@ -29,7 +28,7 @@ import javax.xml.ws.handler.soap.SOAPMessageContext;
  * @since Oct 25, 2011
  */
 
-public class AvalaraProfileHeader implements SOAPHandler<SOAPMessageContext>
+public class AvalaraProfileHandler implements SOAPHandler<SOAPMessageContext>
 {
 
     public static final String PROFILE_ELEMENT = "Profile";
@@ -56,25 +55,7 @@ public class AvalaraProfileHeader implements SOAPHandler<SOAPMessageContext>
 
     /**
      */
-    private String client;
-
-    /**
-     * This method created an instance of the AvalaraProfileHeader class and adds it as
-     * a handler to the bindingProvider supplied.
-     * 
-     * @param bindingProvider The client stub to which the handler will be added. The
-     *            most convenient way to obtain the required bindingProvvider is to
-     *            call one of the getPort methods on the Service class for the Web
-     *            service and then cast the returned object to a BindingProvider.
-     * @param client The client for the system user.
-     */
-    @SuppressWarnings("unchecked")
-    public static void sign(BindingProvider bindingProvider, String client)
-    {
-        List<Handler> handlerChain = bindingProvider.getBinding().getHandlerChain();
-        handlerChain.add(new AvalaraProfileHeader(client));
-        bindingProvider.getBinding().setHandlerChain(handlerChain);
-    }
+    private AvalaraProfile profile;
 
     /**
      * Creates a SOAPSimpleCredentials handler and initialises the member variables. In
@@ -82,9 +63,9 @@ public class AvalaraProfileHeader implements SOAPHandler<SOAPMessageContext>
      * 
      * @param client The client for the system user.
      */
-    public AvalaraProfileHeader(String client)
+    public AvalaraProfileHandler(AvalaraProfile profile)
     {
-        this.client = client;
+        this.profile = profile;
     }
 
     /**
@@ -103,7 +84,7 @@ public class AvalaraProfileHeader implements SOAPHandler<SOAPMessageContext>
         Boolean outboundProperty = (Boolean) smc.get(MessageContext.MESSAGE_OUTBOUND_PROPERTY);
         if (outboundProperty.booleanValue())
         {
-            addProfileHeader(smc, client);
+            addProfileHeader(smc, profile.getClient());
         }
         return true;
     }
