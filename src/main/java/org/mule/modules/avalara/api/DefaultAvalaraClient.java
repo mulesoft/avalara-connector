@@ -82,6 +82,21 @@ public class DefaultAvalaraClient implements AvalaraClient
         setCredential(account, license, client);
         return getAddressService().validate(validateRequest);
     }
+    
+    public ThreadLocal<String> getUsernameLocal()
+    {
+        return usernameLocal;
+    }
+
+    public ThreadLocal<String> getPasswordLocal()
+    {
+        return passwordLocal;
+    }
+
+    public ThreadLocal<String> getClientLocal()
+    {
+        return clientLocal;
+    }
 
     protected AddressSvcSoap getAddressService()
     {
