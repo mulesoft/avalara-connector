@@ -71,15 +71,15 @@ public class DefaultAvalaraClientUnitTest
            {
                try
                {
-                    Assert.assertNull(client2.getClientLocal().get());
-                    Assert.assertNull(client2.getUsernameLocal().get());
-                    Assert.assertNull(client2.getPasswordLocal().get());
+                    Assert.assertNull(client2.getClient());
+                    Assert.assertNull(client2.getUsername());
+                    Assert.assertNull(client2.getPassword());
                     client2.ping("accountThread1", "licenseThread1", "clientThread1", "a message");
                     availableSecondThread.release();
                     availableFirstThread.acquire();
-                    Assert.assertEquals("accountThread1", client2.getUsernameLocal().get());
-                    Assert.assertEquals("licenseThread1", client2.getPasswordLocal().get());
-                    Assert.assertEquals("clientThread1", client2.getClientLocal().get());
+                    Assert.assertEquals("accountThread1", client2.getUsername());
+                    Assert.assertEquals("licenseThread1", client2.getPassword());
+                    Assert.assertEquals("clientThread1", client2.getClient());
                     availableSecondThread.release();
                     countDown.countDown();
                }
@@ -98,15 +98,15 @@ public class DefaultAvalaraClientUnitTest
                try
                {
                    availableSecondThread.acquire();
-                   Assert.assertNull(client2.getClientLocal().get());
-                   Assert.assertNull(client2.getUsernameLocal().get());
-                   Assert.assertNull(client2.getPasswordLocal().get());
+                   Assert.assertNull(client2.getClient());
+                   Assert.assertNull(client2.getUsername());
+                   Assert.assertNull(client2.getPassword());
                    client2.ping("accountThread2", "licenseThread2", "clientThread2", "a message");
                    availableFirstThread.release();
                    availableSecondThread.acquire();
-                   Assert.assertEquals("accountThread2", client2.getUsernameLocal().get());
-                   Assert.assertEquals("licenseThread2", client2.getPasswordLocal().get());
-                   Assert.assertEquals("clientThread2", client2.getClientLocal().get());
+                   Assert.assertEquals("accountThread2", client2.getUsername());
+                   Assert.assertEquals("licenseThread2", client2.getPassword());
+                   Assert.assertEquals("clientThread2", client2.getClient());
                    countDown.countDown();
                 }
                 catch (Exception e)
@@ -121,9 +121,9 @@ public class DefaultAvalaraClientUnitTest
            Assert.fail("Incomplete tasks");
        }
        
-       Assert.assertNull(client2.getClientLocal().get());
-       Assert.assertNull(client2.getUsernameLocal().get());
-       Assert.assertNull(client2.getPasswordLocal().get());
+       Assert.assertNull(client2.getClient());
+       Assert.assertNull(client2.getUsername());
+       Assert.assertNull(client2.getPassword());
        
    }
    

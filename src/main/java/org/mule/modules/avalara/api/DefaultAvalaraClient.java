@@ -83,19 +83,19 @@ public class DefaultAvalaraClient implements AvalaraClient
         return getAddressService().validate(validateRequest);
     }
     
-    public ThreadLocal<String> getUsernameLocal()
+    public String getUsername()
     {
-        return usernameLocal;
+        return usernameLocal.get();
     }
 
-    public ThreadLocal<String> getPasswordLocal()
+    public String getPassword()
     {
-        return passwordLocal;
+        return passwordLocal.get();
     }
 
-    public ThreadLocal<String> getClientLocal()
+    public String getClient()
     {
-        return clientLocal;
+        return clientLocal.get();
     }
 
     protected AddressSvcSoap getAddressService()
