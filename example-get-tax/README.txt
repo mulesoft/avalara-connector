@@ -6,7 +6,10 @@ INTRODUCTION
 
 HOW TO DEMO:
   In order to run this test, you need to setup the following environment variable:
-  	* <<env variable>> - <<description>>
+  	* avalaraAccount - The avalara account
+    * avalaraLicense - The avalara license
+    * zuoraUsername - the Zuora login username
+    * zuoraPassword - the Zuora login password
 	
   * If running from AvalaraFunctionalTestDriver, you just need to run <<which>> method. 
   * If running from a Mule Container: 
@@ -15,5 +18,17 @@ HOW TO DEMO:
         
   	
 HOW IT WORKS:
-  * <<breifly explain how it is implemented here>>
-  
+  1. Retrieves an Invoice record from Zuora given its Id. Answers the record as payload, 
+     and sets the following invocation headers:
+      * accountId
+      * createDate
+      * dueDate
+  2. Retrieves a collection of InvoiceItems from Zuora given it's invoice id.
+     Expects the variable:invoiceId to be set
+     Answers the collection of items.
+  3. Gets taxes from Avalara for the given collection of zuora InvoiceItems payload. 
+     It expects the following headers to be set:
+      * sKU
+      * quantity
+      * unitPrice
+      * chargeDescription
