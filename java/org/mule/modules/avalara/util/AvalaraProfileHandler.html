@@ -72,7 +72,7 @@
 <link rel="shortcut icon" type="image/x-icon" href="../../../../../../favicon.ico" />
 <title>
 
-  DefaultAvalaraClient
+  AvalaraProfileHandler
 
 
 | Mule Avalara Connector
@@ -182,7 +182,7 @@
   <a href="../../../../../../java/com/avalara/avatax/services/package-summary.html">com.avalara.avatax.services</a></li>
     <li class="api apilevel-">
   <a href="../../../../../../java/org/mule/modules/avalara/package-summary.html">org.mule.modules.avalara</a></li>
-    <li class="selected api apilevel-">
+    <li class="api apilevel-">
   <a href="../../../../../../java/org/mule/modules/avalara/api/package-summary.html">org.mule.modules.avalara.api</a></li>
     <li class="api apilevel-">
   <a href="../../../../../../java/org/mule/modules/avalara/config/package-summary.html">org.mule.modules.avalara.config</a></li>
@@ -190,7 +190,7 @@
   <a href="../../../../../../java/org/mule/modules/avalara/config/spring/package-summary.html">org.mule.modules.avalara.config.spring</a></li>
     <li class="api apilevel-">
   <a href="../../../../../../java/org/mule/modules/avalara/exception/package-summary.html">org.mule.modules.avalara.exception</a></li>
-    <li class="api apilevel-">
+    <li class="selected api apilevel-">
   <a href="../../../../../../java/org/mule/modules/avalara/util/package-summary.html">org.mule.modules.avalara.util</a></li>
               </ul><br/>
             </div> <!-- end packages -->
@@ -198,17 +198,10 @@
           <div id="classes-nav">
             <ul>
               
-    <li><h2>Interfaces</h2>
-      <ul>
-          <li class="api apilevel-"><a href="../../../../../../java/org/mule/modules/avalara/api/AvalaraClient.html">AvalaraClient</a></li>
-          <li class="api apilevel-"><a href="../../../../../../java/org/mule/modules/avalara/api/AvalaraProfile.html">AvalaraProfile</a></li>
-      </ul>
-    </li>
               
     <li><h2>Classes</h2>
       <ul>
-          <li class="selected api apilevel-"><a href="../../../../../../java/org/mule/modules/avalara/api/DefaultAvalaraClient.html">DefaultAvalaraClient</a></li>
-          <li class="api apilevel-"><a href="../../../../../../java/org/mule/modules/avalara/api/MapBuilder.html">MapBuilder</a></li>
+          <li class="selected api apilevel-"><a href="../../../../../../java/org/mule/modules/avalara/util/AvalaraProfileHandler.html">AvalaraProfileHandler</a></li>
       </ul>
     </li>
               
@@ -266,6 +259,13 @@
   
   
 
+  
+   
+  
+  
+  
+  
+
 
 <div class="sum-details-links">
 
@@ -276,9 +276,12 @@ Summary:
 
 
 
+  <a href="#constants">Constants</a>
+  
 
 
-  <a href="#lfields">Fields</a>
+
+  &#124; <a href="#lfields">Fields</a>
   
 
 
@@ -291,9 +294,6 @@ Summary:
   &#124; <a href="#pubmethods">Methods</a>
   
 
-
-  &#124; <a href="#promethods">Protected Methods</a>
-  
 
 
   &#124; <a href="#inhmethods">Inherited Methods</a>
@@ -320,7 +320,7 @@ Summary:
      
     
     class
-<h1>DefaultAvalaraClient</h1>
+<h1>AvalaraProfileHandler</h1>
 
 
 
@@ -334,7 +334,7 @@ Summary:
   
       implements 
       
-        <a href="../../../../../../java/org/mule/modules/avalara/api/AvalaraClient.html">AvalaraClient</a> 
+        SOAPHandler&lt;T&nbsp;extends&nbsp;SOAPMessageContext&gt; 
       
   
   
@@ -358,7 +358,7 @@ Summary:
         
             <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;&#x21b3;</td>
         
-        <td colspan="1" class="jd-inheritance-class-cell">org.mule.modules.avalara.api.DefaultAvalaraClient</td>
+        <td colspan="1" class="jd-inheritance-class-cell">org.mule.modules.avalara.util.AvalaraProfileHandler</td>
     </tr>
     
 
@@ -411,6 +411,36 @@ Summary:
 
 
 
+<!-- =========== ENUM CONSTANT SUMMARY =========== -->
+<table id="constants" class="jd-sumtable"><tr><th colspan="12">Constants</th></tr>
+
+
+    
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol">String</td>
+        <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/util/AvalaraProfileHandler.html#AVALARA_PREFIX">AVALARA_PREFIX</a></td>
+        <td class="jd-descrcol" width="100%"></td>
+    </tr>
+    
+    
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol">String</td>
+        <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/util/AvalaraProfileHandler.html#NAMESPACE">NAMESPACE</a></td>
+        <td class="jd-descrcol" width="100%"></td>
+    </tr>
+    
+    
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol">String</td>
+        <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/util/AvalaraProfileHandler.html#PROFILE_ELEMENT">PROFILE_ELEMENT</a></td>
+        <td class="jd-descrcol" width="100%"></td>
+    </tr>
+    
+    
+
+</table>
+
+
 
 
 
@@ -426,52 +456,8 @@ Summary:
           private
           
           
-          <a href="../../../../../../java/com/avalara/avatax/services/AddressSvcSoap.html">AddressSvcSoap</a></nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/api/DefaultAvalaraClient.html#addressSvcSoap">addressSvcSoap</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class=" api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          private
-          
-          
-          ThreadLocal&lt;String&gt;</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/api/DefaultAvalaraClient.html#clientLocal">clientLocal</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class="alt-color api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          private
-          
-          
-          ThreadLocal&lt;String&gt;</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/api/DefaultAvalaraClient.html#passwordLocal">passwordLocal</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class=" api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          private
-          
-          
-          <a href="../../../../../../java/com/avalara/avatax/services/TaxSvcSoap.html">TaxSvcSoap</a></nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/api/DefaultAvalaraClient.html#taxSvcSoap">taxSvcSoap</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class="alt-color api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          private
-          
-          
-          ThreadLocal&lt;String&gt;</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/api/DefaultAvalaraClient.html#usernameLocal">usernameLocal</a></td>
+          <a href="../../../../../../java/org/mule/modules/avalara/api/AvalaraProfile.html">AvalaraProfile</a></nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/util/AvalaraProfileHandler.html#profile">profile</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
       
@@ -501,8 +487,10 @@ Summary:
             </nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/api/DefaultAvalaraClient.html#DefaultAvalaraClient()">DefaultAvalaraClient</a></span>()</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/util/AvalaraProfileHandler.html#AvalaraProfileHandler(org.mule.modules.avalara.api.AvalaraProfile)">AvalaraProfileHandler</a></span>(<a href="../../../../../../java/org/mule/modules/avalara/api/AvalaraProfile.html">AvalaraProfile</a> profile)</nobr>
         
+        <div class="jd-descrdiv">Creates a SOAPSimpleCredentials handler and initialises the member variables.</div>
+  
   </td></tr>
 
 
@@ -527,187 +515,72 @@ Summary:
             
             
             
-            String</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/api/DefaultAvalaraClient.html#getClient()">getClient</a></span>()</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            String</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/api/DefaultAvalaraClient.html#getPassword()">getPassword</a></span>()</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            String</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/api/DefaultAvalaraClient.html#getUsername()">getUsername</a></span>()</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            <a href="../../../../../../java/com/avalara/avatax/services/PingResult.html">PingResult</a></nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/api/DefaultAvalaraClient.html#ping(java.lang.String, java.lang.String, java.lang.String, java.lang.String)">ping</a></span>(String account, String license, String client, String message)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            &lt;T&nbsp;extends&nbsp;<a href="../../../../../../java/com/avalara/avatax/services/BaseResult.html">BaseResult</a>&gt;
-            T</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/api/DefaultAvalaraClient.html#sendToAvalara(java.lang.String, java.lang.String, java.lang.String, org.mule.modules.avalara.TaxRequestType, java.lang.Object)">sendToAvalara</a></span>(String account, String license, String client, <a href="../../../../../../java/org/mule/modules/avalara/TaxRequestType.html">TaxRequestType</a> entityType, Object obj)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            <a href="../../../../../../java/com/avalara/avatax/services/ValidateResult.html">ValidateResult</a></nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/api/DefaultAvalaraClient.html#validateAddress(java.lang.String, java.lang.String, java.lang.String, com.avalara.avatax.services.ValidateRequest)">validateAddress</a></span>(String account, String license, String client, <a href="../../../../../../java/com/avalara/avatax/services/ValidateRequest.html">ValidateRequest</a> validateRequest)</nobr>
-        
-  </td></tr>
-
-
-
-</table>
-
-
-
-
-<!-- ========== METHOD SUMMARY =========== -->
-<table id="promethods" class="jd-sumtable"><tr><th colspan="12">Protected Methods</th></tr>
-
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            &lt;A&gt;
-            A</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/api/DefaultAvalaraClient.html#createConnection(java.lang.Class<A>, java.lang.Class<? extends javax.xml.ws.Service>, java.lang.String, javax.xml.namespace.QName)">createConnection</a></span>(Class&lt;A&gt; portType, Class&lt;?&nbsp;extends&nbsp;Service&gt; serviceType, String schemaName, QName portName)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            <a href="../../../../../../java/com/avalara/avatax/services/AddressSvcSoap.html">AddressSvcSoap</a></nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/api/DefaultAvalaraClient.html#getAddressService()">getAddressService</a></span>()</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            <a href="../../../../../../java/com/avalara/avatax/services/TaxSvcSoap.html">TaxSvcSoap</a></nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/api/DefaultAvalaraClient.html#getTaxService()">getTaxService</a></span>()</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            String</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/api/DefaultAvalaraClient.html#schemaLocation(java.lang.String)">schemaLocation</a></span>(String schemaName)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/api/DefaultAvalaraClient.html#setCredential(java.lang.String, java.lang.String, java.lang.String)">setCredential</a></span>(String account, String license, String client)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/util/AvalaraProfileHandler.html#close(javax.xml.ws.handler.MessageContext)">close</a></span>(MessageContext messageContext)</nobr>
         
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Set&lt;QName&gt;</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/util/AvalaraProfileHandler.html#getHeaders()">getHeaders</a></span>()</nobr>
+        
+        <div class="jd-descrdiv">Returns null as this handler doesn't process any Headers, it just adds one.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            boolean</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/util/AvalaraProfileHandler.html#handleFault(javax.xml.ws.handler.soap.SOAPMessageContext)">handleFault</a></span>(SOAPMessageContext smc)</nobr>
+        
+        <div class="jd-descrdiv">Returns true, no action is taken for faults messages.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            boolean</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/util/AvalaraProfileHandler.html#handleMessage(javax.xml.ws.handler.soap.SOAPMessageContext)">handleMessage</a></span>(SOAPMessageContext smc)</nobr>
+        
+        <div class="jd-descrdiv">Adds WS-Security header to request messages.</div>
+  
   </td></tr>
 
 
 
 </table>
+
+
 
 
 
@@ -923,19 +796,19 @@ From class
 
 <tr class="api apilevel-" >
 <td colspan="12">
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.modules.avalara.api.AvalaraClient" class="jd-expando-trigger closed"
-          ><img id="inherited-methods-org.mule.modules.avalara.api.AvalaraClient-trigger"
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-javax.xml.ws.handler.Handler" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-javax.xml.ws.handler.Handler-trigger"
           src="../../../../../../assets/images/triangle-closed.png"
           class="jd-expando-trigger-img" /></a>
 From interface
 
-  <a href="../../../../../../org/mule/modules/avalara/api/AvalaraClient.html">org.mule.modules.avalara.api.AvalaraClient</a>
+  javax.xml.ws.handler.Handler
 
-<div id="inherited-methods-org.mule.modules.avalara.api.AvalaraClient">
-  <div id="inherited-methods-org.mule.modules.avalara.api.AvalaraClient-list"
+<div id="inherited-methods-javax.xml.ws.handler.Handler">
+  <div id="inherited-methods-javax.xml.ws.handler.Handler-list"
         class="jd-inheritedlinks">
   </div>
-  <div id="inherited-methods-org.mule.modules.avalara.api.AvalaraClient-summary" style="display: none;">
+  <div id="inherited-methods-javax.xml.ws.handler.Handler-summary" style="display: none;">
     <table class="jd-sumtable-expando">
     
 
@@ -948,10 +821,10 @@ From interface
             
             
             
-            <a href="../../../../../../java/com/avalara/avatax/services/PingResult.html">PingResult</a></nobr>
+            void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/api/AvalaraClient.html#ping(java.lang.String, java.lang.String, java.lang.String, java.lang.String)">ping</a></span>(String account, String licence, String client, String message)</nobr>
+        <span class="sympad">close</span>(MessageContext arg0)</nobr>
         
   </td></tr>
 
@@ -963,11 +836,11 @@ From interface
             
             
             
-            &lt;T&nbsp;extends&nbsp;<a href="../../../../../../java/com/avalara/avatax/services/BaseResult.html">BaseResult</a>&gt;
-            T</nobr>
+            
+            boolean</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/api/AvalaraClient.html#sendToAvalara(java.lang.String, java.lang.String, java.lang.String, org.mule.modules.avalara.TaxRequestType, java.lang.Object)">sendToAvalara</a></span>(String account, String licence, String client, <a href="../../../../../../java/org/mule/modules/avalara/TaxRequestType.html">TaxRequestType</a> requestType, Object obj)</nobr>
+        <span class="sympad">handleFault</span>(C arg0)</nobr>
         
   </td></tr>
 
@@ -980,10 +853,52 @@ From interface
             
             
             
-            <a href="../../../../../../java/com/avalara/avatax/services/ValidateResult.html">ValidateResult</a></nobr>
+            boolean</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/api/AvalaraClient.html#validateAddress(java.lang.String, java.lang.String, java.lang.String, com.avalara.avatax.services.ValidateRequest)">validateAddress</a></span>(String account, String licence, String client, <a href="../../../../../../java/com/avalara/avatax/services/ValidateRequest.html">ValidateRequest</a> validateRequest)</nobr>
+        <span class="sympad">handleMessage</span>(C arg0)</nobr>
+        
+  </td></tr>
+
+
+</table>
+  </div>
+</div>
+</td></tr>
+
+
+
+<tr class="api apilevel-" >
+<td colspan="12">
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-javax.xml.ws.handler.soap.SOAPHandler" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-javax.xml.ws.handler.soap.SOAPHandler-trigger"
+          src="../../../../../../assets/images/triangle-closed.png"
+          class="jd-expando-trigger-img" /></a>
+From interface
+
+  javax.xml.ws.handler.soap.SOAPHandler
+
+<div id="inherited-methods-javax.xml.ws.handler.soap.SOAPHandler">
+  <div id="inherited-methods-javax.xml.ws.handler.soap.SOAPHandler-list"
+        class="jd-inheritedlinks">
+  </div>
+  <div id="inherited-methods-javax.xml.ws.handler.soap.SOAPHandler-summary" style="display: none;">
+    <table class="jd-sumtable-expando">
+    
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            Set&lt;QName&gt;</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getHeaders</span>()</nobr>
         
   </td></tr>
 
@@ -1017,6 +932,130 @@ From interface
 <!-- Constants -->
 
 
+<!-- ========= ENUM CONSTANTS DETAIL ======== -->
+<h2>Constants</h2>
+
+
+
+
+<A NAME="AVALARA_PREFIX"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+        static 
+        final 
+        String
+      </span>
+        AVALARA_PREFIX
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+        <div class="jd-tagdata">
+        <span class="jd-tagtitle">Constant Value: </span>
+        <span>
+            
+                "aval"
+            
+        </span>
+        </div>
+    
+    </div>
+</div>
+
+
+
+<A NAME="NAMESPACE"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+        static 
+        final 
+        String
+      </span>
+        NAMESPACE
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+        <div class="jd-tagdata">
+        <span class="jd-tagtitle">Constant Value: </span>
+        <span>
+            
+                "http://avatax.avalara.com/services"
+            
+        </span>
+        </div>
+    
+    </div>
+</div>
+
+
+
+<A NAME="PROFILE_ELEMENT"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+        static 
+        final 
+        String
+      </span>
+        PROFILE_ELEMENT
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+        <div class="jd-tagdata">
+        <span class="jd-tagtitle">Constant Value: </span>
+        <span>
+            
+                "Profile"
+            
+        </span>
+        </div>
+    
+    </div>
+</div>
+
+
+
+
 <!-- Fields -->
 
 
@@ -1026,7 +1065,7 @@ From interface
 
 
 
-<A NAME="addressSvcSoap"></A>
+<A NAME="profile"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -1034,129 +1073,9 @@ From interface
         private 
          
          
-        <a href="../../../../../../java/com/avalara/avatax/services/AddressSvcSoap.html">AddressSvcSoap</a>
+        <a href="../../../../../../java/org/mule/modules/avalara/api/AvalaraProfile.html">AvalaraProfile</a>
       </span>
-        addressSvcSoap
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="clientLocal"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        private 
-         
-         
-        ThreadLocal&lt;String&gt;
-      </span>
-        clientLocal
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="passwordLocal"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        private 
-         
-         
-        ThreadLocal&lt;String&gt;
-      </span>
-        passwordLocal
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="taxSvcSoap"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        private 
-         
-         
-        <a href="../../../../../../java/com/avalara/avatax/services/TaxSvcSoap.html">TaxSvcSoap</a>
-      </span>
-        taxSvcSoap
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="usernameLocal"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        private 
-         
-         
-        ThreadLocal&lt;String&gt;
-      </span>
-        usernameLocal
+        profile
     </h4>
       <div class="api-level">
         
@@ -1185,7 +1104,7 @@ From interface
 
 
 
-<A NAME="DefaultAvalaraClient()"></A>
+<A NAME="AvalaraProfileHandler(org.mule.modules.avalara.api.AvalaraProfile)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -1197,8 +1116,8 @@ From interface
          
         
       </span>
-      <span class="sympad">DefaultAvalaraClient</span>
-      <span class="normal">()</span>
+      <span class="sympad">AvalaraProfileHandler</span>
+      <span class="normal">(<a href="../../../../../../java/org/mule/modules/avalara/api/AvalaraProfile.html">AvalaraProfile</a> profile)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -1210,7 +1129,17 @@ From interface
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata jd-tagdescr"><p>Creates a SOAPSimpleCredentials handler and initialises the member variables. In
+ most cases, the sign static method should be used instead.</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>profile</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
 
     </div>
 </div>
@@ -1231,7 +1160,7 @@ From interface
 
 
 
-<A NAME="getClient()"></A>
+<A NAME="close(javax.xml.ws.handler.MessageContext)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -1241,103 +1170,10 @@ From interface
          
          
          
-        String
+        void
       </span>
-      <span class="sympad">getClient</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    </div>
-</div>
-
-
-<A NAME="getPassword()"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        String
-      </span>
-      <span class="sympad">getPassword</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    </div>
-</div>
-
-
-<A NAME="getUsername()"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        String
-      </span>
-      <span class="sympad">getUsername</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    </div>
-</div>
-
-
-<A NAME="ping(java.lang.String, java.lang.String, java.lang.String, java.lang.String)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        <a href="../../../../../../java/com/avalara/avatax/services/PingResult.html">PingResult</a>
-      </span>
-      <span class="sympad">ping</span>
-      <span class="normal">(String account, String license, String client, String message)</span>
+      <span class="sympad">close</span>
+      <span class="normal">(MessageContext messageContext)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -1354,19 +1190,7 @@ From interface
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">
         <tr>
-          <th>account</td>
-          <td></td>
-        </tr>
-        <tr>
-          <th>license</td>
-          <td></td>
-        </tr>
-        <tr>
-          <th>client</td>
-          <td></td>
-        </tr>
-        <tr>
-          <th>message</td>
+          <th>messageContext</td>
           <td></td>
         </tr>
       </table>
@@ -1376,7 +1200,7 @@ From interface
 </div>
 
 
-<A NAME="sendToAvalara(java.lang.String, java.lang.String, java.lang.String, org.mule.modules.avalara.TaxRequestType, java.lang.Object)"></A>
+<A NAME="getHeaders()"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -1386,10 +1210,10 @@ From interface
          
          
          
-        T
+        Set&lt;QName&gt;
       </span>
-      <span class="sympad">sendToAvalara</span>
-      <span class="normal">(String account, String license, String client, <a href="../../../../../../java/org/mule/modules/avalara/TaxRequestType.html">TaxRequestType</a> entityType, Object obj)</span>
+      <span class="sympad">getHeaders</span>
+      <span class="normal">()</span>
     </h4>
       <div class="api-level">
         <div>
@@ -1401,43 +1225,55 @@ From interface
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata jd-tagdescr"><p>Returns null as this handler doesn't process any Headers, it just adds one.
+</p></div>
+
+    </div>
+</div>
+
+
+<A NAME="handleFault(javax.xml.ws.handler.soap.SOAPMessageContext)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        boolean
+      </span>
+      <span class="sympad">handleFault</span>
+      <span class="normal">(SOAPMessageContext smc)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Returns true, no action is taken for faults messages.
+</p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">
         <tr>
-          <th>account</td>
-          <td></td>
-        </tr>
-        <tr>
-          <th>license</td>
-          <td></td>
-        </tr>
-        <tr>
-          <th>client</td>
-          <td></td>
-        </tr>
-        <tr>
-          <th>entityType</td>
-          <td></td>
-        </tr>
-        <tr>
-          <th>obj</td>
+          <th>smc</td>
           <td></td>
         </tr>
       </table>
-  </div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">See Also</h5>
-      <ul class="nolist"><li>org.mule.modules.avalara.api.AvalaraClient#sendToAvalara(org.mule.modules.avalara.TaxRequestType, java.lang.Object)</li>
-      </ul>
   </div>
 
     </div>
 </div>
 
 
-<A NAME="validateAddress(java.lang.String, java.lang.String, java.lang.String, com.avalara.avatax.services.ValidateRequest)"></A>
+<A NAME="handleMessage(javax.xml.ws.handler.soap.SOAPMessageContext)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -1447,10 +1283,10 @@ From interface
          
          
          
-        <a href="../../../../../../java/com/avalara/avatax/services/ValidateResult.html">ValidateResult</a>
+        boolean
       </span>
-      <span class="sympad">validateAddress</span>
-      <span class="normal">(String account, String license, String client, <a href="../../../../../../java/com/avalara/avatax/services/ValidateRequest.html">ValidateRequest</a> validateRequest)</span>
+      <span class="sympad">handleMessage</span>
+      <span class="normal">(SOAPMessageContext smc)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -1462,24 +1298,13 @@ From interface
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata jd-tagdescr"><p>Adds WS-Security header to request messages.
+</p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">
         <tr>
-          <th>account</td>
-          <td></td>
-        </tr>
-        <tr>
-          <th>license</td>
-          <td></td>
-        </tr>
-        <tr>
-          <th>client</td>
-          <td></td>
-        </tr>
-        <tr>
-          <th>validateRequest</td>
+          <th>smc</td>
           <td></td>
         </tr>
       </table>
@@ -1493,213 +1318,6 @@ From interface
 
 
 <!-- ========= METHOD DETAIL ======== -->
-
-<h2>Protected Methods</h2>
-
-
-
-<A NAME="createConnection(java.lang.Class<A>, java.lang.Class<? extends javax.xml.ws.Service>, java.lang.String, javax.xml.namespace.QName)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        protected 
-         
-         
-         
-         
-        A
-      </span>
-      <span class="sympad">createConnection</span>
-      <span class="normal">(Class&lt;A&gt; portType, Class&lt;?&nbsp;extends&nbsp;Service&gt; serviceType, String schemaName, QName portName)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>portType</td>
-          <td></td>
-        </tr>
-        <tr>
-          <th>serviceType</td>
-          <td></td>
-        </tr>
-        <tr>
-          <th>schemaName</td>
-          <td></td>
-        </tr>
-        <tr>
-          <th>portName</td>
-          <td></td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="getAddressService()"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        protected 
-         
-         
-         
-         
-        <a href="../../../../../../java/com/avalara/avatax/services/AddressSvcSoap.html">AddressSvcSoap</a>
-      </span>
-      <span class="sympad">getAddressService</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    </div>
-</div>
-
-
-<A NAME="getTaxService()"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        protected 
-         
-         
-         
-         
-        <a href="../../../../../../java/com/avalara/avatax/services/TaxSvcSoap.html">TaxSvcSoap</a>
-      </span>
-      <span class="sympad">getTaxService</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    </div>
-</div>
-
-
-<A NAME="schemaLocation(java.lang.String)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        protected 
-         
-         
-         
-         
-        String
-      </span>
-      <span class="sympad">schemaLocation</span>
-      <span class="normal">(String schemaName)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>schemaName</td>
-          <td></td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setCredential(java.lang.String, java.lang.String, java.lang.String)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        protected 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setCredential</span>
-      <span class="normal">(String account, String license, String client)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>account</td>
-          <td></td>
-        </tr>
-        <tr>
-          <th>license</td>
-          <td></td>
-        </tr>
-        <tr>
-          <th>client</td>
-          <td></td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
 
 
 
