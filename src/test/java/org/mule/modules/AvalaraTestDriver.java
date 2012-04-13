@@ -10,17 +10,9 @@
 
 package org.mule.modules;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.junit.Before;
-import org.junit.Test;
 import org.mule.modules.avalara.AvalaraDocumentType;
 import org.mule.modules.avalara.AvalaraModule;
 import org.mule.modules.avalara.CancelCodeType;
@@ -37,6 +29,16 @@ import com.avalara.avatax.services.PostTaxResult;
 import com.avalara.avatax.services.SeverityLevel;
 import com.avalara.avatax.services.ValidateResult;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.junit.Before;
+import org.junit.Test;
+
 /**
  * @author Gaston Ponti
  * @since Oct 19, 2011
@@ -45,6 +47,9 @@ public class AvalaraTestDriver
 {
     private AvalaraModule module;
     private Date testDate;
+    private String license;
+    private String account;
+    private String client;
 
     /**
      *
@@ -54,16 +59,16 @@ public class AvalaraTestDriver
     {
         testDate = new Date();
         module = new AvalaraModule();
-        module.setAccount(System.getenv("avalaraAccount"));
-        module.setLicense(System.getenv("avalaraLicense"));
-        module.setAvalaraClient("Mule");
+        account = System.getenv("avalaraAccount");
+        license = System.getenv("avalaraLicense");
+        client = "Mule";
         module.init();
     }
 
     @Test
     public void ping()
     {
-        PingResult result = module.ping("Hi");
+        PingResult result = module.ping(account, license, client, "Hi");
         assertNotNull(result);
         assertEquals(SeverityLevel.SUCCESS, result.getResultCode());
     }
@@ -121,7 +126,7 @@ public class AvalaraTestDriver
             } });
         } };
 
-        return module.getTax("TC", AvalaraDocumentType.SALES_INVOICE, docCode, testDate,
+        return module.getTax(account, license, client, "TC", AvalaraDocumentType.SALES_INVOICE, docCode, testDate,
             null, "cusomer Code", null, "0", null, null, "Origin", "Dest", addresses,
             lines, DetailLevelType.DOCUMENT, null, "Test LocationCode", false, null,
             null, null, ServiceModeType.AUTOMATIC, new Date(), "0", testDate);
@@ -134,19 +139,19 @@ public class AvalaraTestDriver
 
         assertEquals(SeverityLevel.SUCCESS, taxResult.getResultCode());
 
-        PostTaxResult postResult = module.postTax(null, "TC", AvalaraDocumentType.SALES_INVOICE,
+        PostTaxResult postResult = module.postTax(account, license, client, null, "TC", AvalaraDocumentType.SALES_INVOICE,
             docCode, testDate, taxResult.getTotalAmount().toPlainString(),
             taxResult.getTotalTax().toPlainString(), false, docCode);
 
         assertEquals(SeverityLevel.SUCCESS, postResult.getResultCode());
 
         //Finally Cancel Tax and remove the entry from the system by calling new DocVoided
-        CancelTaxResult cancelResult = module.cancelTax(null, "TC", AvalaraDocumentType.SALES_INVOICE, docCode, CancelCodeType.DOC_VOIDED);
+        CancelTaxResult cancelResult = module.cancelTax(account, license, client, null, "TC", AvalaraDocumentType.SALES_INVOICE, docCode, CancelCodeType.DOC_VOIDED);
 
         assertEquals(SeverityLevel.SUCCESS, cancelResult.getResultCode());
 
         // Check tax history
-        GetTaxHistoryResult taxHistoryResult = module.getTaxHistory(null, "TC",
+        GetTaxHistoryResult taxHistoryResult = module.getTaxHistory(account, license, client, null, "TC",
             AvalaraDocumentType.SALES_INVOICE, docCode, DetailLevelType.TAX);
 
         assertEquals(SeverityLevel.SUCCESS, taxHistoryResult.getResultCode());
@@ -160,7 +165,7 @@ public class AvalaraTestDriver
 
         //Finally Cancel Tax and remove the entry from the system by calling new DocVoided
         //Delete the document from the system
-        cancelResult = module.cancelTax(null, "TC", AvalaraDocumentType.SALES_INVOICE,
+        cancelResult = module.cancelTax(account, license, client, null, "TC", AvalaraDocumentType.SALES_INVOICE,
             docCode, CancelCodeType.DOC_DELETED);
 
         assertEquals(SeverityLevel.SUCCESS, cancelResult.getResultCode());
@@ -169,7 +174,7 @@ public class AvalaraTestDriver
     @Test
     public void validateAValidAddress() throws Exception
     {
-        ValidateResult response = module.validateAddress("435 Ericksen Ave", null, null, null, "NE", null,
+        ValidateResult response = module.validateAddress(account, license, client, "435 Ericksen Ave", null, null, null, "NE", null,
             "98110", null, 0, null, null, TextCaseType.DEFAULT, false, false, new Date());
 
         assertNotNull(response);
@@ -179,7 +184,7 @@ public class AvalaraTestDriver
     @Test
     public void validateAnInvalidAddress() throws Exception
     {
-        ValidateResult response = module.validateAddress("SARLAZA", null, null, null, null, null,
+        ValidateResult response = module.validateAddress(account, license, client, "SARLAZA", null, null, null, null, null,
             null, null, 0, null, null, TextCaseType.DEFAULT, false, false, new Date());
 
         assertEquals(SeverityLevel.ERROR, response.getResultCode());

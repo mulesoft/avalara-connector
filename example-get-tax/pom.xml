@@ -6,13 +6,13 @@
 	<artifactId>mule-avalara-demo-get-tax</artifactId>
 	<packaging>mule</packaging>
 	<name>Mule Avalara Get Tax Demo</name>
-	<version>1.0</version>
+	<version>2.0</version>
 
 	<properties>
-		<muleVersion>3.2.0</muleVersion>
+		<muleVersion>3.2.1</muleVersion>
 		<ibeansVersion>1.1</ibeansVersion>
-		<mule.zuora.version>1.4.2-SNAPSHOT</mule.zuora.version>
-        <mule.avalara.version>1.0-SNAPSHOT</mule.avalara.version>
+		<mule.zuora.version>1.8-SNAPSHOT</mule.zuora.version>
+		<mule.avalara.version>2.0-SNAPSHOT</mule.avalara.version>
 	</properties>
 
 	<description>Example that shows how to calculate taxes</description>

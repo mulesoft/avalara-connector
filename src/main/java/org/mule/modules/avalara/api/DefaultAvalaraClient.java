@@ -10,16 +10,9 @@
 
 package org.mule.modules.avalara.api;
 
-import java.lang.reflect.InvocationTargetException;
-
-import javax.xml.namespace.QName;
-import javax.xml.ws.Service;
-
-import org.apache.commons.lang.Validate;
-import org.apache.commons.lang.builder.ToStringBuilder;
 import org.mule.modules.avalara.TaxRequestType;
 import org.mule.modules.avalara.exception.AvalaraRuntimeException;
-import org.mule.modules.avalara.util.AvalaraProfileHeader;
+import org.mule.modules.avalara.util.AvalaraProfileHandler;
 
 import com.avalara.avatax.services.AddressSvc;
 import com.avalara.avatax.services.AddressSvcSoap;
@@ -31,6 +24,12 @@ import com.avalara.avatax.services.TaxSvcSoap;
 import com.avalara.avatax.services.ValidateRequest;
 import com.avalara.avatax.services.ValidateResult;
 import com.zauberlabs.commons.ws.connection.ConnectionBuilder;
+import com.zauberlabs.commons.ws.security.Credential;
+
+import java.lang.reflect.InvocationTargetException;
+
+import javax.xml.namespace.QName;
+import javax.xml.ws.Service;
 
 /**
  * @author Gaston Ponti
@@ -38,34 +37,26 @@ import com.zauberlabs.commons.ws.connection.ConnectionBuilder;
  */
 public class DefaultAvalaraClient implements AvalaraClient
 {
-    private final String account;
-    private final String license;
-    private final String client;
     private TaxSvcSoap taxSvcSoap;
     private AddressSvcSoap addressSvcSoap;
-
-    public DefaultAvalaraClient(String account, String license, String client)
-    {
-        Validate.notEmpty(account);
-        Validate.notEmpty(license);
-        Validate.notEmpty(client);
-        this.account = account;
-        this.license = license;
-        this.client = client;
-    }
+    
+    private ThreadLocal<String> usernameLocal = new ThreadLocal<String>();
+    private ThreadLocal<String> passwordLocal = new ThreadLocal<String>();
+    private ThreadLocal<String> clientLocal = new ThreadLocal<String>();
 
     @Override
-    public PingResult ping(String message)
+    public PingResult ping(String account, String license, String client, String message)
     {
+        setCredential(account, license, client);
         return getTaxService().ping(message);
     }
 
     /** @see org.mule.modules.avalara.api.AvalaraClient#sendToAvalara(org.mule.modules.avalara.TaxRequestType, java.lang.Object) */
     @Override
-    public <T extends BaseResult> T sendToAvalara(TaxRequestType entityType, Object obj)
+    public <T extends BaseResult> T sendToAvalara(String account, String license, String client, TaxRequestType entityType, Object obj)
     {
-        System.out.println(ToStringBuilder.reflectionToString(obj));
         T response;
+        setCredential(account, license, client);
         try
         {
             response = (T) getTaxService().getClass().getMethod(entityType.getResourceName(), obj.getClass()).invoke(getTaxService(), obj);
@@ -86,9 +77,25 @@ public class DefaultAvalaraClient implements AvalaraClient
     }
 
     @Override
-    public ValidateResult validateAddress(ValidateRequest validateRequest)
+    public ValidateResult validateAddress(String account, String license, String client, ValidateRequest validateRequest)
     {
+        setCredential(account, license, client);
         return getAddressService().validate(validateRequest);
+    }
+    
+    public String getUsername()
+    {
+        return usernameLocal.get();
+    }
+
+    public String getPassword()
+    {
+        return passwordLocal.get();
+    }
+
+    public String getClient()
+    {
+        return clientLocal.get();
     }
 
     protected AddressSvcSoap getAddressService()
@@ -114,8 +121,27 @@ public class DefaultAvalaraClient implements AvalaraClient
         return ConnectionBuilder.fromPortType(portType)
             .withServiceType(serviceType)
             .withClasspathWsdl(schemaLocation(schemaName))
-            .withUsernameTokenAuth(account, license)
-            .withHeader(new AvalaraProfileHeader(client))
+            .withCredential(new Credential()
+            {
+                @Override
+                public String getUsername()
+                {
+                    return usernameLocal.get();
+                }
+                
+                @Override
+                public String getPassword()
+                {
+                    return passwordLocal.get();
+                }
+            })
+            .withHeader(new AvalaraProfileHandler(new AvalaraProfile(){
+                @Override
+                public String getClient()
+                {
+                    return clientLocal.get();
+                }
+            }))
             .withPortQName(portName)
             .build();
     }
@@ -123,6 +149,13 @@ public class DefaultAvalaraClient implements AvalaraClient
     protected String schemaLocation(String schemaName)
     {
         return "schema/" + schemaName + "svc.wsdl";
+    }
+    
+    protected void setCredential(String account, String license, String client)
+    {
+        usernameLocal.set(account);
+        passwordLocal.set(license);
+        clientLocal.set(client);
     }
 
 }

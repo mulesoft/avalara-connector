@@ -21,7 +21,7 @@
   xmlns:zuora="http://www.mulesoft.org/schema/mule/zuora"
   xsi:schemaLocation="
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-       http://www.mulesoft.org/schema/mule/avalara http://www.mulesoft.org/schema/mule/avalara/1.0/mule-avalara.xsd
+       http://www.mulesoft.org/schema/mule/avalara http://www.mulesoft.org/schema/mule/avalara/2.0/mule-avalara.xsd
        http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/3.2/mule.xsd
        http://www.mulesoft.org/schema/mule/json    http://www.mulesoft.org/schema/mule/json/3.2/mule-json.xsd
        http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/3.0/mule-http.xsd
@@ -31,7 +31,7 @@
 
 
   <zuora:config username="${zuoraUsername}" password="${zuoraPassword}" endpoint="https://apisandbox.zuora.com/apps/services/a/29.0" />
-  <avalara:config license="${avalaraLicense}" account="${avalaraAccount}" avalaraClient="Mule,3.2.1" />
+  <avalara:config/>
   
    <flow name="GetTaxes">
     <description>
@@ -121,7 +121,11 @@
         ]]>
       </scripting:script>
     </scripting:component>
-    <avalara:get-tax companyCode="TC"
+    <avalara:get-tax 
+    			 license="${avalaraLicense}" 
+    			 account="${avalaraAccount}" 
+    			 avalaraClient="Mule,3.2.1"
+    			 companyCode="TC"
                  docType="SALES_ORDER"
                  docCode="#[variable:invoiceId]"
                  docDate="#[groovy: message.getInvocationProperty('createdDate').toGregorianCalendar().time]"
@@ -152,7 +156,7 @@
                 'postalCode' : '98121' ,
                 'country' : 'USA' ]
           ] ]" />
-          <avalara:list-of-lines ref="#[payload]" />
+          <avalara:lines ref="#[payload]" />
       </avalara:get-tax>
   </flow>
   

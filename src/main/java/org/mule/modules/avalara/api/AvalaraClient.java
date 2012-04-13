@@ -23,9 +23,9 @@ import com.avalara.avatax.services.ValidateResult;
  */
 public interface AvalaraClient
 {
-    <T extends BaseResult> T sendToAvalara(TaxRequestType requestType, Object obj);
+    <T extends BaseResult> T sendToAvalara(String account, String licence, String client, TaxRequestType requestType, Object obj);
     
-    ValidateResult validateAddress(ValidateRequest validateRequest);
+    ValidateResult validateAddress(String account, String licence, String client, ValidateRequest validateRequest);
 
-    PingResult ping(String message);
+    PingResult ping(String account, String licence, String client, String message);
 }

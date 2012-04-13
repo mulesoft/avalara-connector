@@ -1,5 +1,9 @@
 <!-- BEGIN_INCLUDE(avalara:get-tax) -->
-    <avalara:get-tax companyCode="some company code"
+    <avalara:get-tax
+    			 account="avalaraAccount" 
+        		 license="avalaraLicense" 
+        		 avalaraClient="avalaraClient"
+    			 companyCode="some company code"
                  docType="PURCHASE_ORDER"
                  docCode="some doc code"
                  docDate="2010-09-13T01:18:14-07:00"
@@ -84,7 +88,11 @@
 <!-- END_INCLUDE(avalara:get-tax) -->
 
 <!-- BEGIN_INCLUDE(avalara:post-tax) -->
-<avalara:post-tax docId="some document id"
+<avalara:post-tax 
+					account="avalaraAccount" 
+        		    license="avalaraLicense" 
+        		    avalaraClient="avalaraClient"
+					docId="some document id"
                     companyCode="some company code"
                     docType="SALES_ORDER"
                     docCode="some document code"
@@ -96,7 +104,11 @@
 <!-- END_INCLUDE(avalara:post-tax) -->
 
 <!-- BEGIN_INCLUDE(avalara:commit-tax) -->
-<avalara:commit-tax docId="some document id"
+<avalara:commit-tax 
+					account="avalaraAccount" 
+        		    license="avalaraLicense" 
+        		    avalaraClient="avalaraClient"
+					docId="some document id"
                     companyCode="some company code"
                     docType="SALES_ORDER"
                     docCode="some document code"
@@ -104,7 +116,11 @@
 <!-- END_INCLUDE(avalara:commit-tax) -->
 
 <!-- BEGIN_INCLUDE(avalara:get-tax-history) -->
-<avalara:get-tax-history docId="some document id"
+<avalara:get-tax-history 
+						 account="avalaraAccount" 
+        		    	 license="avalaraLicense" 
+        		    	 avalaraClient="avalaraClient"
+						 docId="some document id"
                          companyCode="some company code"
                          docType="SALES_ORDER"
                          docCode="some document code"
@@ -112,7 +128,11 @@
 <!-- END_INCLUDE(avalara:get-tax-history) -->
 
 <!-- BEGIN_INCLUDE(avalara:cancel-tax) -->
-<avalara:cancel-tax docId="some document id"
+<avalara:cancel-tax 
+					account="avalaraAccount" 
+        		    license="avalaraLicense" 
+		    	    avalaraClient="avalaraClient"
+					docId="some document id"
                     companyCode="some company code"
                     docType="SALES_ORDER"
                     docCode="some document code"
@@ -120,7 +140,11 @@
 <!-- END_INCLUDE(avalara:cancel-tax) -->
 
 <!-- BEGIN_INCLUDE(avalara:validate-address) -->
-<avalara:validate-address line1="435 Ericksen Ave"
+<avalara:validate-address 
+						  account="avalaraAccount" 
+        		    	  license="avalaraLicense" 
+		    	    	  avalaraClient="avalaraClient"
+						  line1="435 Ericksen Ave"
                           line2="some line 2"
                           line3="some line 3" 
                           city="some city"
