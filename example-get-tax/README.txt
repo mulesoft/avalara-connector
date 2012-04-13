@@ -11,15 +11,14 @@ HOW TO DEMO:
     * zuoraUsername - the Zuora login username
     * zuoraPassword - the Zuora login password
 	
-  * If running from AvalaraFunctionalTestDriver, you just need to run <<which>> method. 
-  * If running from a Mule Container: 
-  	<<which url to hit and with which parameters>>    
-    	 Example http://localhost:9090/<<path>>
+  * If running from AvalaraFunctionalTestDriver, you just need to run  method. 
+  * If running from a Mule Container:  
+    	 Example http://localhost:9090/avalara-demo-get-tax, with which parameters:
+         - invoiceNumber
         
   	
 HOW IT WORKS:
-  1. Retrieves an Invoice record from Zuora given its Id. Answers the record as payload, 
-     and sets the following invocation headers:
+  1. Retrieves an Invoice record from Zuora given its Id. Answers the record as payload, and sets the following invocation headers:
       * accountId
       * createDate
       * dueDate
