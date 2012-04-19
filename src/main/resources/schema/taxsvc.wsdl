@@ -159,6 +159,7 @@
               <s:element minOccurs="1" maxOccurs="1" name="Version" type="s:int" />
               <s:element minOccurs="1" maxOccurs="1" name="TaxDate" type="s:date" />
               <s:element minOccurs="0" maxOccurs="1" name="TaxSummary" type="tns:ArrayOfTaxDetail" />
+			        <s:element minOccurs="0" maxOccurs="1" name="VolatileTaxRates" type="s:boolean" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
@@ -312,6 +313,7 @@
           <s:element minOccurs="0" maxOccurs="1" name="Longitude" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="ValidateStatus" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="GeocodeType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DistanceToBoundary" type="s:int" />
         </s:sequence>
       </s:complexType>
       <s:element name="Profile" type="tns:Profile" />
@@ -631,6 +633,43 @@
           </s:extension>
         </s:complexContent>
       </s:complexType>
+
+      <s:element name="TaxSummaryFetch">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TaxSummaryFetchRequest" type="tns:TaxSummaryFetchRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="TaxSummaryFetchRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MerchantCode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="StartDate" type="s:date" />
+          <s:element minOccurs="1" maxOccurs="1" name="EndDate" type="s:date" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="TaxSummaryFetchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TaxSummaryFetchResult" type="tns:TaxSummaryFetchResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="TaxSummaryFetchResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="TaxSummaryReport">
+                <s:complexType>
+                  <s:sequence>
+                    <s:any />
+                  </s:sequence>
+                </s:complexType>
+              </s:element>
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="GetTaxSoapIn">
@@ -732,6 +771,15 @@
   <wsdl:message name="IsAuthorizedProfile">
     <wsdl:part name="Profile" element="tns:Profile" />
   </wsdl:message>
+  <wsdl:message name="TaxSummaryFetchSoapIn">
+    <wsdl:part name="parameters" element="tns:TaxSummaryFetch" />
+  </wsdl:message>
+  <wsdl:message name="TaxSummaryFetchSoapOut">
+    <wsdl:part name="parameters" element="tns:TaxSummaryFetchResponse" />
+  </wsdl:message>
+  <wsdl:message name="TaxSummaryFetchProfile">
+    <wsdl:part name="Profile" element="tns:Profile" />
+  </wsdl:message>
   <wsdl:portType name="TaxSvcSoap">
     <wsdl:operation name="GetTax">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Calculates taxes on a document</wsdl:documentation>
@@ -782,6 +830,11 @@
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Checks authentication and authorization to one or more operations on the service.</wsdl:documentation>
       <wsdl:input message="tns:IsAuthorizedSoapIn" />
       <wsdl:output message="tns:IsAuthorizedSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TaxSummaryFetch">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Fetches TaxSummary Data.</wsdl:documentation>
+      <wsdl:input message="tns:TaxSummaryFetchSoapIn" />
+      <wsdl:output message="tns:TaxSummaryFetchSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="TaxSvcSoap" type="tns:TaxSvcSoap">
@@ -889,6 +942,16 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="TaxSummaryFetch">
+      <soap:operation soapAction="http://avatax.avalara.com/services/TaxSummaryFetch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:TaxSummaryFetchProfile" part="Profile" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="TaxSvcSoap12" type="tns:TaxSvcSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -990,6 +1053,16 @@
       <wsdl:input>
         <soap12:body use="literal" />
         <soap12:header message="tns:IsAuthorizedProfile" part="Profile" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TaxSummaryFetch">
+      <soap12:operation soapAction="http://avatax.avalara.com/services/TaxSummaryFetch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:TaxSummaryFetchProfile" part="Profile" use="literal" />
       </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />
