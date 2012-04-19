@@ -47,7 +47,8 @@
                   avalaraClient="${avalaraClient}"
 				  companyCode="TC"
 		          docType="#[map-payload:docType]" docCode="abc123" detailLevel="#[map-payload:detLevel]" />
-		<logger message="Result from Avalara = #[payload]" level="ERROR" />
+		
+		<logger message="Result from Avalara = #[payload]" level="INFO" />
 	
 	
 	</flow>
