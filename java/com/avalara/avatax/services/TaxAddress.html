@@ -266,6 +266,11 @@
           <li class="api apilevel-"><a href="../../../../../java/com/avalara/avatax/services/TaxDetail.html">TaxDetail</a></li>
           <li class="api apilevel-"><a href="../../../../../java/com/avalara/avatax/services/TaxLine.html">TaxLine</a></li>
           <li class="api apilevel-"><a href="../../../../../java/com/avalara/avatax/services/TaxOverride.html">TaxOverride</a></li>
+          <li class="api apilevel-"><a href="../../../../../java/com/avalara/avatax/services/TaxSummaryFetch.html">TaxSummaryFetch</a></li>
+          <li class="api apilevel-"><a href="../../../../../java/com/avalara/avatax/services/TaxSummaryFetchRequest.html">TaxSummaryFetchRequest</a></li>
+          <li class="api apilevel-"><a href="../../../../../java/com/avalara/avatax/services/TaxSummaryFetchResponse.html">TaxSummaryFetchResponse</a></li>
+          <li class="api apilevel-"><a href="../../../../../java/com/avalara/avatax/services/TaxSummaryFetchResult.html">TaxSummaryFetchResult</a></li>
+          <li class="api apilevel-"><a href="../../../../../java/com/avalara/avatax/services/TaxSummaryFetchResult.TaxSummaryReport.html">TaxSummaryFetchResult.TaxSummaryReport</a></li>
           <li class="api apilevel-"><a href="../../../../../java/com/avalara/avatax/services/TaxSvc.html">TaxSvc</a></li>
           <li class="api apilevel-"><a href="../../../../../java/com/avalara/avatax/services/ValidAddress.html">ValidAddress</a></li>
           <li class="api apilevel-"><a href="../../../../../java/com/avalara/avatax/services/Validate.html">Validate</a></li>
@@ -460,6 +465,7 @@ Summary:
          &lt;element name="Longitude" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
          &lt;element name="ValidateStatus" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
          &lt;element name="GeocodeType" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+         &lt;element name="DistanceToBoundary" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
        &lt;/sequence>
      &lt;/restriction>
    &lt;/complexContent>
@@ -577,13 +583,24 @@ Summary:
           protected
           
           
+          Integer</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../com/avalara/avatax/services/TaxAddress.html#distanceToBoundary">distanceToBoundary</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          protected
+          
+          
           String</nobr></td>
           <td class="jd-linkcol"><a href="../../../../../com/avalara/avatax/services/TaxAddress.html#geocodeType">geocodeType</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
       
     
-      <tr class="alt-color api apilevel-" >
+      <tr class=" api apilevel-" >
           <td class="jd-typecol"><nobr>
           protected
           
@@ -594,7 +611,7 @@ Summary:
       </tr>
       
     
-      <tr class=" api apilevel-" >
+      <tr class="alt-color api apilevel-" >
           <td class="jd-typecol"><nobr>
           protected
           
@@ -605,7 +622,7 @@ Summary:
       </tr>
       
     
-      <tr class="alt-color api apilevel-" >
+      <tr class=" api apilevel-" >
           <td class="jd-typecol"><nobr>
           protected
           
@@ -616,7 +633,7 @@ Summary:
       </tr>
       
     
-      <tr class=" api apilevel-" >
+      <tr class="alt-color api apilevel-" >
           <td class="jd-typecol"><nobr>
           protected
           
@@ -627,7 +644,7 @@ Summary:
       </tr>
       
     
-      <tr class="alt-color api apilevel-" >
+      <tr class=" api apilevel-" >
           <td class="jd-typecol"><nobr>
           protected
           
@@ -638,7 +655,7 @@ Summary:
       </tr>
       
     
-      <tr class=" api apilevel-" >
+      <tr class="alt-color api apilevel-" >
           <td class="jd-typecol"><nobr>
           protected
           
@@ -649,7 +666,7 @@ Summary:
       </tr>
       
     
-      <tr class="alt-color api apilevel-" >
+      <tr class=" api apilevel-" >
           <td class="jd-typecol"><nobr>
           protected
           
@@ -801,6 +818,24 @@ Summary:
             
             
             
+            Integer</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../com/avalara/avatax/services/TaxAddress.html#getDistanceToBoundary()">getDistanceToBoundary</a></span>()</nobr>
+        
+        <div class="jd-descrdiv">Gets the value of the distanceToBoundary property.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
             String</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
@@ -812,7 +847,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -830,7 +865,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -848,7 +883,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -866,7 +901,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -884,7 +919,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -902,7 +937,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -920,7 +955,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -938,7 +973,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -956,7 +991,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -974,7 +1009,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -992,7 +1027,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1010,7 +1045,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1023,6 +1058,24 @@ Summary:
         <span class="sympad"><a href="../../../../../com/avalara/avatax/services/TaxAddress.html#setCountry(java.lang.String)">setCountry</a></span>(String value)</nobr>
         
         <div class="jd-descrdiv">Sets the value of the country property.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../com/avalara/avatax/services/TaxAddress.html#setDistanceToBoundary(java.lang.Integer)">setDistanceToBoundary</a></span>(Integer value)</nobr>
+        
+        <div class="jd-descrdiv">Sets the value of the distanceToBoundary property.</div>
   
   </td></tr>
 
@@ -1569,6 +1622,36 @@ From class
 
 
 
+<A NAME="distanceToBoundary"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        protected 
+         
+         
+        Integer
+      </span>
+        distanceToBoundary
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
 <A NAME="geocodeType"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -2041,6 +2124,44 @@ From class
       <h5 class="jd-tagtitle">Returns</h5>
       <ul class="nolist"><li>possible object is
      String
+     
+</li></ul>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="getDistanceToBoundary()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        Integer
+      </span>
+      <span class="sympad">getDistanceToBoundary</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Gets the value of the distanceToBoundary property.</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Returns</h5>
+      <ul class="nolist"><li>possible object is
+     Integer
      
 </li></ul>
   </div>
@@ -2552,6 +2673,49 @@ From class
           <th>value</td>
           <td>Allowed object is
      String
+     
+</td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="setDistanceToBoundary(java.lang.Integer)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">setDistanceToBoundary</span>
+      <span class="normal">(Integer value)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Sets the value of the distanceToBoundary property.</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>value</td>
+          <td>Allowed object is
+     Integer
      
 </td>
         </tr>

@@ -72,7 +72,7 @@
 <link rel="shortcut icon" type="image/x-icon" href="../../../../../favicon.ico" />
 <title>
 
-  GetTaxHistoryResult
+  TaxSummaryFetchResult
 
 
 | Mule Avalara Connector
@@ -239,7 +239,7 @@
           <li class="api apilevel-"><a href="../../../../../java/com/avalara/avatax/services/GetTaxHistory.html">GetTaxHistory</a></li>
           <li class="api apilevel-"><a href="../../../../../java/com/avalara/avatax/services/GetTaxHistoryRequest.html">GetTaxHistoryRequest</a></li>
           <li class="api apilevel-"><a href="../../../../../java/com/avalara/avatax/services/GetTaxHistoryResponse.html">GetTaxHistoryResponse</a></li>
-          <li class="selected api apilevel-"><a href="../../../../../java/com/avalara/avatax/services/GetTaxHistoryResult.html">GetTaxHistoryResult</a></li>
+          <li class="api apilevel-"><a href="../../../../../java/com/avalara/avatax/services/GetTaxHistoryResult.html">GetTaxHistoryResult</a></li>
           <li class="api apilevel-"><a href="../../../../../java/com/avalara/avatax/services/GetTaxRequest.html">GetTaxRequest</a></li>
           <li class="api apilevel-"><a href="../../../../../java/com/avalara/avatax/services/GetTaxResponse.html">GetTaxResponse</a></li>
           <li class="api apilevel-"><a href="../../../../../java/com/avalara/avatax/services/GetTaxResult.html">GetTaxResult</a></li>
@@ -269,7 +269,7 @@
           <li class="api apilevel-"><a href="../../../../../java/com/avalara/avatax/services/TaxSummaryFetch.html">TaxSummaryFetch</a></li>
           <li class="api apilevel-"><a href="../../../../../java/com/avalara/avatax/services/TaxSummaryFetchRequest.html">TaxSummaryFetchRequest</a></li>
           <li class="api apilevel-"><a href="../../../../../java/com/avalara/avatax/services/TaxSummaryFetchResponse.html">TaxSummaryFetchResponse</a></li>
-          <li class="api apilevel-"><a href="../../../../../java/com/avalara/avatax/services/TaxSummaryFetchResult.html">TaxSummaryFetchResult</a></li>
+          <li class="selected api apilevel-"><a href="../../../../../java/com/avalara/avatax/services/TaxSummaryFetchResult.html">TaxSummaryFetchResult</a></li>
           <li class="api apilevel-"><a href="../../../../../java/com/avalara/avatax/services/TaxSummaryFetchResult.TaxSummaryReport.html">TaxSummaryFetchResult.TaxSummaryReport</a></li>
           <li class="api apilevel-"><a href="../../../../../java/com/avalara/avatax/services/TaxSvc.html">TaxSvc</a></li>
           <li class="api apilevel-"><a href="../../../../../java/com/avalara/avatax/services/ValidAddress.html">ValidAddress</a></li>
@@ -358,13 +358,16 @@
 
 Summary:
 
+  <a href="#nestedclasses">Nested Classes</a>
+  
 
 
 
 
 
 
-  <a href="#lfields">Fields</a>
+
+  &#124; <a href="#lfields">Fields</a>
   
 
 
@@ -406,7 +409,7 @@ Summary:
      
     
     class
-<h1>GetTaxHistoryResult</h1>
+<h1>TaxSummaryFetchResult</h1>
 
 
 
@@ -453,7 +456,7 @@ Summary:
         
             <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;&#x21b3;</td>
         
-        <td colspan="1" class="jd-inheritance-class-cell">com.avalara.avatax.services.GetTaxHistoryResult</td>
+        <td colspan="1" class="jd-inheritance-class-cell">com.avalara.avatax.services.TaxSummaryFetchResult</td>
     </tr>
     
 
@@ -469,17 +472,26 @@ Summary:
 
 
 <h2>Class Overview</h2>
-<p><p>Java class for GetTaxHistoryResult complex type.
+<p><p>Java class for TaxSummaryFetchResult complex type.
  
  <p>The following schema fragment specifies the expected content contained within this class.
  
  <pre>
- &lt;complexType name="GetTaxHistoryResult">
+ &lt;complexType name="TaxSummaryFetchResult">
    &lt;complexContent>
      &lt;extension base="{http://avatax.avalara.com/services}BaseResult">
        &lt;sequence>
-         &lt;element name="GetTaxRequest" type="{http://avatax.avalara.com/services}GetTaxRequest" minOccurs="0"/>
-         &lt;element name="GetTaxResult" type="{http://avatax.avalara.com/services}GetTaxResult" minOccurs="0"/>
+         &lt;element name="TaxSummaryReport" minOccurs="0">
+           &lt;complexType>
+             &lt;complexContent>
+               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+                 &lt;sequence>
+                   &lt;any/>
+                 &lt;/sequence>
+               &lt;/restriction>
+             &lt;/complexContent>
+           &lt;/complexType>
+         &lt;/element>
        &lt;/sequence>
      &lt;/extension>
    &lt;/complexContent>
@@ -517,6 +529,26 @@ Summary:
 
 
 
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+<table id="nestedclasses" class="jd-sumtable"><tr><th colspan="12">Nested Classes</th></tr>
+
+
+  
+    <tr class="alt-color api apilevel-" >
+      <td class="jd-typecol"><nobr>
+        
+        
+        
+        
+        class</nobr></td>
+      <td class="jd-linkcol"><a href="../../../../../java/com/avalara/avatax/services/TaxSummaryFetchResult.TaxSummaryReport.html">TaxSummaryFetchResult.TaxSummaryReport</a></td>
+      <td class="jd-descrcol" width="100%"><p>Java class for anonymous complex type.&nbsp;</td>
+    </tr>
+    
+    
+
+
+
 
 
 
@@ -542,19 +574,8 @@ Summary:
           protected
           
           
-          <a href="../../../../../java/com/avalara/avatax/services/GetTaxRequest.html">GetTaxRequest</a></nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../com/avalara/avatax/services/GetTaxHistoryResult.html#getTaxRequest">getTaxRequest</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class=" api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          protected
-          
-          
-          <a href="../../../../../java/com/avalara/avatax/services/GetTaxResult.html">GetTaxResult</a></nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../com/avalara/avatax/services/GetTaxHistoryResult.html#getTaxResult">getTaxResult</a></td>
+          <a href="../../../../../java/com/avalara/avatax/services/TaxSummaryFetchResult.TaxSummaryReport.html">TaxSummaryFetchResult.TaxSummaryReport</a></nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../com/avalara/avatax/services/TaxSummaryFetchResult.html#taxSummaryReport">taxSummaryReport</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
       
@@ -651,7 +672,7 @@ Summary:
             </nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../com/avalara/avatax/services/GetTaxHistoryResult.html#GetTaxHistoryResult()">GetTaxHistoryResult</a></span>()</nobr>
+        <span class="sympad"><a href="../../../../../com/avalara/avatax/services/TaxSummaryFetchResult.html#TaxSummaryFetchResult()">TaxSummaryFetchResult</a></span>()</nobr>
         
   </td></tr>
 
@@ -677,48 +698,12 @@ Summary:
             
             
             
-            <a href="../../../../../java/com/avalara/avatax/services/GetTaxRequest.html">GetTaxRequest</a></nobr>
+            <a href="../../../../../java/com/avalara/avatax/services/TaxSummaryFetchResult.TaxSummaryReport.html">TaxSummaryFetchResult.TaxSummaryReport</a></nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../com/avalara/avatax/services/GetTaxHistoryResult.html#getGetTaxRequest()">getGetTaxRequest</a></span>()</nobr>
+        <span class="sympad"><a href="../../../../../com/avalara/avatax/services/TaxSummaryFetchResult.html#getTaxSummaryReport()">getTaxSummaryReport</a></span>()</nobr>
         
-        <div class="jd-descrdiv">Gets the value of the getTaxRequest property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            <a href="../../../../../java/com/avalara/avatax/services/GetTaxResult.html">GetTaxResult</a></nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../com/avalara/avatax/services/GetTaxHistoryResult.html#getGetTaxResult()">getGetTaxResult</a></span>()</nobr>
-        
-        <div class="jd-descrdiv">Gets the value of the getTaxResult property.</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../com/avalara/avatax/services/GetTaxHistoryResult.html#setGetTaxRequest(com.avalara.avatax.services.GetTaxRequest)">setGetTaxRequest</a></span>(<a href="../../../../../java/com/avalara/avatax/services/GetTaxRequest.html">GetTaxRequest</a> value)</nobr>
-        
-        <div class="jd-descrdiv">Sets the value of the getTaxRequest property.</div>
+        <div class="jd-descrdiv">Gets the value of the taxSummaryReport property.</div>
   
   </td></tr>
 
@@ -734,9 +719,9 @@ Summary:
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../com/avalara/avatax/services/GetTaxHistoryResult.html#setGetTaxResult(com.avalara.avatax.services.GetTaxResult)">setGetTaxResult</a></span>(<a href="../../../../../java/com/avalara/avatax/services/GetTaxResult.html">GetTaxResult</a> value)</nobr>
+        <span class="sympad"><a href="../../../../../com/avalara/avatax/services/TaxSummaryFetchResult.html#setTaxSummaryReport(com.avalara.avatax.services.TaxSummaryFetchResult.TaxSummaryReport)">setTaxSummaryReport</a></span>(<a href="../../../../../java/com/avalara/avatax/services/TaxSummaryFetchResult.TaxSummaryReport.html">TaxSummaryFetchResult.TaxSummaryReport</a> value)</nobr>
         
-        <div class="jd-descrdiv">Sets the value of the getTaxResult property.</div>
+        <div class="jd-descrdiv">Sets the value of the taxSummaryReport property.</div>
   
   </td></tr>
 
@@ -1123,7 +1108,7 @@ From class
 
 
 
-<A NAME="getTaxRequest"></A>
+<A NAME="taxSummaryReport"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -1131,39 +1116,9 @@ From class
         protected 
          
          
-        <a href="../../../../../java/com/avalara/avatax/services/GetTaxRequest.html">GetTaxRequest</a>
+        <a href="../../../../../java/com/avalara/avatax/services/TaxSummaryFetchResult.TaxSummaryReport.html">TaxSummaryFetchResult.TaxSummaryReport</a>
       </span>
-        getTaxRequest
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="getTaxResult"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        protected 
-         
-         
-        <a href="../../../../../java/com/avalara/avatax/services/GetTaxResult.html">GetTaxResult</a>
-      </span>
-        getTaxResult
+        taxSummaryReport
     </h4>
       <div class="api-level">
         
@@ -1192,7 +1147,7 @@ From class
 
 
 
-<A NAME="GetTaxHistoryResult()"></A>
+<A NAME="TaxSummaryFetchResult()"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -1204,7 +1159,7 @@ From class
          
         
       </span>
-      <span class="sympad">GetTaxHistoryResult</span>
+      <span class="sympad">TaxSummaryFetchResult</span>
       <span class="normal">()</span>
     </h4>
       <div class="api-level">
@@ -1238,7 +1193,7 @@ From class
 
 
 
-<A NAME="getGetTaxRequest()"></A>
+<A NAME="getTaxSummaryReport()"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -1248,9 +1203,9 @@ From class
          
          
          
-        <a href="../../../../../java/com/avalara/avatax/services/GetTaxRequest.html">GetTaxRequest</a>
+        <a href="../../../../../java/com/avalara/avatax/services/TaxSummaryFetchResult.TaxSummaryReport.html">TaxSummaryFetchResult.TaxSummaryReport</a>
       </span>
-      <span class="sympad">getGetTaxRequest</span>
+      <span class="sympad">getTaxSummaryReport</span>
       <span class="normal">()</span>
     </h4>
       <div class="api-level">
@@ -1263,11 +1218,11 @@ From class
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Gets the value of the getTaxRequest property.</p></div>
+  <div class="jd-tagdata jd-tagdescr"><p>Gets the value of the taxSummaryReport property.</p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Returns</h5>
       <ul class="nolist"><li>possible object is
-     <code><a href="../../../../../java/com/avalara/avatax/services/GetTaxRequest.html">GetTaxRequest</a></code>
+     <code><a href="../../../../../java/com/avalara/avatax/services/TaxSummaryFetchResult.TaxSummaryReport.html">TaxSummaryFetchResult.TaxSummaryReport</a></code>
      
 </li></ul>
   </div>
@@ -1276,45 +1231,7 @@ From class
 </div>
 
 
-<A NAME="getGetTaxResult()"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        <a href="../../../../../java/com/avalara/avatax/services/GetTaxResult.html">GetTaxResult</a>
-      </span>
-      <span class="sympad">getGetTaxResult</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Gets the value of the getTaxResult property.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>possible object is
-     <code><a href="../../../../../java/com/avalara/avatax/services/GetTaxResult.html">GetTaxResult</a></code>
-     
-</li></ul>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setGetTaxRequest(com.avalara.avatax.services.GetTaxRequest)"></A>
+<A NAME="setTaxSummaryReport(com.avalara.avatax.services.TaxSummaryFetchResult.TaxSummaryReport)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -1326,8 +1243,8 @@ From class
          
         void
       </span>
-      <span class="sympad">setGetTaxRequest</span>
-      <span class="normal">(<a href="../../../../../java/com/avalara/avatax/services/GetTaxRequest.html">GetTaxRequest</a> value)</span>
+      <span class="sympad">setTaxSummaryReport</span>
+      <span class="normal">(<a href="../../../../../java/com/avalara/avatax/services/TaxSummaryFetchResult.TaxSummaryReport.html">TaxSummaryFetchResult.TaxSummaryReport</a> value)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -1339,57 +1256,14 @@ From class
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Sets the value of the getTaxRequest property.</p></div>
+  <div class="jd-tagdata jd-tagdescr"><p>Sets the value of the taxSummaryReport property.</p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">
         <tr>
           <th>value</td>
           <td>Allowed object is
-     <code><a href="../../../../../java/com/avalara/avatax/services/GetTaxRequest.html">GetTaxRequest</a></code>
-     
-</td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setGetTaxResult(com.avalara.avatax.services.GetTaxResult)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setGetTaxResult</span>
-      <span class="normal">(<a href="../../../../../java/com/avalara/avatax/services/GetTaxResult.html">GetTaxResult</a> value)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Sets the value of the getTaxResult property.</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>value</td>
-          <td>Allowed object is
-     <code><a href="../../../../../java/com/avalara/avatax/services/GetTaxResult.html">GetTaxResult</a></code>
+     <code><a href="../../../../../java/com/avalara/avatax/services/TaxSummaryFetchResult.TaxSummaryReport.html">TaxSummaryFetchResult.TaxSummaryReport</a></code>
      
 </td>
         </tr>
