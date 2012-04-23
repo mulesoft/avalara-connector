@@ -473,7 +473,7 @@ public class AvalaraModule
                                           @Optional String country,
                                           @Optional String postalCode,
                                           @Optional String addressCode,
-                                          @Optional int taxRegionId,
+                                          Integer taxRegionId,
                                           @Optional String latitude,
                                           @Optional String longitude,
                                           @Optional @Default("DEFAULT") TextCaseType textCase,
