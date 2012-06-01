@@ -64,6 +64,8 @@
 
 
 
+
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -85,6 +87,7 @@
 <link href='http://fonts.googleapis.com/css?family=Ubuntu:300' rel='stylesheet' type='text/css'>
 <script src="../assets/search_autocomplete.js" type="text/javascript"></script>
 <script src="../assets/jquery-resizable.min.js" type="text/javascript"></script>
+<script src="../assets/jquery-toc.js" type="text/javascript"></script>
 <script src="../assets/mule-developer-docs.js" type="text/javascript"></script>
 <script src="../assets/prettify.js" type="text/javascript"></script>
 <script type="text/javascript">
@@ -101,6 +104,27 @@
     #resize-packages-nav{border-bottom:3px solid #666;}
   </style>
 </noscript>
+<script type="text/javascript" charset="utf-8">
+  var is_ssl = ("https:" == document.location.protocol);
+  var asset_host = is_ssl ? "https://s3.amazonaws.com/getsatisfaction.com/" : "http://s3.amazonaws.com/getsatisfaction.com/";
+  document.write(unescape("%3Cscript src='" + asset_host + "javascripts/feedback-v2.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+<script type="text/javascript" charset="utf-8">
+  var feedback_widget_options = {};
+
+  feedback_widget_options.display = "overlay";
+  feedback_widget_options.company = "mulesoft";
+  feedback_widget_options.placement = "right";
+  feedback_widget_options.color = "#2F74AE";
+  feedback_widget_options.style = "question";
+
+  feedback_widget_options.tag = "Mule Avalara Connector";
+
+  feedback_widget_options.limit = "3";
+
+  var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
+</script>
 </head>
 
 <body class="">
@@ -196,7 +220,6 @@ Summary:
 <div id="jd-header">
     org.mule.modules
 <h1>mule-module-avalara</h1>
-    2.0-SNAPSHOT
 
 </div><!-- end header -->
 
@@ -205,15 +228,17 @@ Summary:
 <div id="jd-content" class="api apilevel-">
 
 
+<br/>
+
 <div class="jd-tagdata">
       <table class="jd-tagtable">
         <tbody><tr>
           <th>Namespace</th><td>http://www.mulesoft.org/schema/mule/avalara</td>
         </tr><tr>
-          <th>Schema Location</th><td>http://www.mulesoft.org/schema/mule/avalara/2.0/mule-avalara.xsd</td>
+          <th>Schema Location</th><td>http://www.mulesoft.org/schema/mule/avalara/current/mule-avalara.xsd&nbsp;&nbsp;(<a href="avalara-schema.html">View Schema</a>)</td>
         </tr>
 <tr>
-          <th>Version</th><td>2.0</td>
+          <th>Schema Version</th><td>2.0</td>
         </tr>
 <tr>
           <th>Minimum Mule Version</th><td>3.2</td>
@@ -266,7 +291,7 @@ Summary:
         <span class="sympad"><a href="../mule/avalara.html#cancel-tax">&lt;avalara:cancel-tax&gt;</a></nobr>
         
         <div class="jd-descrdiv">Cancel tax, indicating the document that should be cancelled and the reason
- for the operation.<br/></div>
+ for the operation.</div>
         
   </td></tr>
 
@@ -278,7 +303,7 @@ Summary:
         
         <div class="jd-descrdiv">Commit Tax processor
 
- <br/></div>
+ </div>
         
   </td></tr>
 
@@ -288,7 +313,7 @@ Summary:
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/avalara.html#get-tax">&lt;avalara:get-tax&gt;</a></nobr>
         
-        <div class="jd-descrdiv">Get Tax processor.<br/></div>
+        <div class="jd-descrdiv">Get Tax processor.</div>
         
   </td></tr>
 
@@ -300,7 +325,7 @@ Summary:
         
         <div class="jd-descrdiv">Get Tax History processor
 
- <br/></div>
+ </div>
         
   </td></tr>
 
@@ -312,7 +337,7 @@ Summary:
         
         <div class="jd-descrdiv">Post Tax processor
 
- <br/></div>
+ </div>
         
   </td></tr>
 
@@ -322,7 +347,7 @@ Summary:
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/avalara.html#validate-address">&lt;avalara:validate-address&gt;</a></nobr>
         
-        <div class="jd-descrdiv">Validate Address processor.<br/></div>
+        <div class="jd-descrdiv">Validate Address processor.</div>
         
   </td></tr>
 
@@ -339,6 +364,26 @@ Summary:
 
 </div><!-- jd-descr (summary) -->
 
+
+<!-- ========= CONFIGURATION DETAIL ======== -->
+<A NAME="config"></A>
+<h2>Configuration</h2>
+<p>To use the this module within a flow the namespace to the module must be included. The resulting flow will look
+similar to the following:</p>
+<pre>
+&lt;mule xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:avalara="http://www.mulesoft.org/schema/mule/avalara"
+      xsi:schemaLocation="
+               http://www.mulesoft.org/schema/mule/core
+               http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+               http://www.mulesoft.org/schema/mule/avalara
+               http://www.mulesoft.org/schema/mule/avalara/current/mule-avalara.xsd"&gt;
+
+      &lt;!-- here goes your flows and configuration elements --&gt;
+
+&lt;/mule&gt;
+</pre>
 
 
 
@@ -502,10 +547,12 @@ Summary:
     
   
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Exception Payload</h5>
-      <table class="jd-tagtable">
+      <h5 class="jd-tagtitle">Exception Payloads</h5>
+      <table class="jd-sumtable">
+        <tr><th>Payload Class</th><th>Description</th></tr>
+        
         <tr>
-            <th><a href="../java/org/mule/modules/avalara/exception/AvalaraRuntimeException.html">AvalaraRuntimeException</a></td>
+            <td><a href="../java/org/mule/modules/avalara/exception/AvalaraRuntimeException.html">AvalaraRuntimeException</a></td>
             <td></td>
         </tr>
       </table>
@@ -661,10 +708,12 @@ Summary:
     
   
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Exception Payload</h5>
-      <table class="jd-tagtable">
+      <h5 class="jd-tagtitle">Exception Payloads</h5>
+      <table class="jd-sumtable">
+        <tr><th>Payload Class</th><th>Description</th></tr>
+        
         <tr>
-            <th><a href="../java/org/mule/modules/avalara/exception/AvalaraRuntimeException.html">AvalaraRuntimeException</a></td>
+            <td><a href="../java/org/mule/modules/avalara/exception/AvalaraRuntimeException.html">AvalaraRuntimeException</a></td>
             <td></td>
         </tr>
       </table>
@@ -989,7 +1038,7 @@ Summary:
                 
                 <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>commit</nobr></td>
-                    <td class="jd-descrcol"></td>
+                    <td class="jd-descrcol">false</td>
                     <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Commit flag. If Commit is set to true, tax for the transaction 
                is saved, posted and committed as tax document.</td>
                 </tr>
@@ -1019,7 +1068,7 @@ Summary:
                 
                 <tr class="alt-color api apilevel-" >
                     <td class="jd-linkcol"><nobr>serviceMode</nobr></td>
-                    <td class="jd-descrcol"></td>
+                    <td class="jd-descrcol">AUTOMATIC</td>
                     <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>This is only supported by AvaLocal servers. It provides the 
                     ability to controls whether tax is calculated locally or remotely 
                     when using an AvaLocal server. The default is Automatic which 
@@ -1097,7 +1146,7 @@ Summary:
             
           
             
-            <tr><th colspan="12"><nobr>&lt;avalara:baseAddresses&gt;</nobr></br><span style="font-weight: normal;">Collection of physical addresses that will be referred 
+            <tr><th colspan="12"><nobr>&lt;avalara:base-addresses&gt;</nobr></br><span style="font-weight: normal;">Collection of physical addresses that will be referred 
                       to as the destination or origination of 1 or more invoice 
                       line entries</span></th></tr>
             
@@ -1119,7 +1168,7 @@ Summary:
             
           
             
-            <tr><th colspan="12"><nobr>&lt;avalara:taxOverride&gt;</nobr></br><span style="font-weight: normal;"><i>Optional.&nbsp;</i>Indicates to apply tax override to the document.</span></th></tr>
+            <tr><th colspan="12"><nobr>&lt;avalara:tax-override&gt;</nobr></br><span style="font-weight: normal;"><i>Optional.&nbsp;</i>Indicates to apply tax override to the document.</span></th></tr>
             
             
           
@@ -1143,10 +1192,12 @@ Summary:
     
   
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Exception Payload</h5>
-      <table class="jd-tagtable">
+      <h5 class="jd-tagtitle">Exception Payloads</h5>
+      <table class="jd-sumtable">
+        <tr><th>Payload Class</th><th>Description</th></tr>
+        
         <tr>
-            <th><a href="../java/org/mule/modules/avalara/exception/AvalaraRuntimeException.html">AvalaraRuntimeException</a></td>
+            <td><a href="../java/org/mule/modules/avalara/exception/AvalaraRuntimeException.html">AvalaraRuntimeException</a></td>
             <td></td>
         </tr>
       </table>
@@ -1302,10 +1353,12 @@ Summary:
     
   
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Exception Payload</h5>
-      <table class="jd-tagtable">
+      <h5 class="jd-tagtitle">Exception Payloads</h5>
+      <table class="jd-sumtable">
+        <tr><th>Payload Class</th><th>Description</th></tr>
+        
         <tr>
-            <th><a href="../java/org/mule/modules/avalara/exception/AvalaraRuntimeException.html">AvalaraRuntimeException</a></td>
+            <td><a href="../java/org/mule/modules/avalara/exception/AvalaraRuntimeException.html">AvalaraRuntimeException</a></td>
             <td></td>
         </tr>
       </table>
@@ -1459,7 +1512,7 @@ Summary:
                 
                 <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>commit</nobr></td>
-                    <td class="jd-descrcol"></td>
+                    <td class="jd-descrcol">false</td>
                     <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The commit value. This has been defaulted to false. If this has 
                been set to true AvaTax will commit the document on this call. Seller's 
                system who wants to Post and Commit the document on one call should use 
@@ -1520,10 +1573,12 @@ Summary:
     
   
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Exception Payload</h5>
-      <table class="jd-tagtable">
+      <h5 class="jd-tagtitle">Exception Payloads</h5>
+      <table class="jd-sumtable">
+        <tr><th>Payload Class</th><th>Description</th></tr>
+        
         <tr>
-            <th><a href="../java/org/mule/modules/avalara/exception/AvalaraRuntimeException.html">AvalaraRuntimeException</a></td>
+            <td><a href="../java/org/mule/modules/avalara/exception/AvalaraRuntimeException.html">AvalaraRuntimeException</a></td>
             <td></td>
         </tr>
       </table>
@@ -1711,7 +1766,7 @@ Summary:
                 
                 <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>textCase</nobr></td>
-                    <td class="jd-descrcol"></td>
+                    <td class="jd-descrcol">DEFAULT</td>
                     <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The casing to apply to the validated address(es).</td>
                 </tr>
                 
@@ -1720,7 +1775,7 @@ Summary:
                 
                 <tr class="alt-color api apilevel-" >
                     <td class="jd-linkcol"><nobr>coordinates</nobr></td>
-                    <td class="jd-descrcol"></td>
+                    <td class="jd-descrcol">false</td>
                     <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>True, if you want in the result a not empty latitud and longitude.</td>
                 </tr>
                 
@@ -1729,7 +1784,7 @@ Summary:
                 
                 <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>taxability</nobr></td>
-                    <td class="jd-descrcol"></td>
+                    <td class="jd-descrcol">false</td>
                     <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>True, if you want the valid taxRegionId in the result.</td>
                 </tr>
                 
@@ -1799,10 +1854,12 @@ Summary:
     
   
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Exception Payload</h5>
-      <table class="jd-tagtable">
+      <h5 class="jd-tagtitle">Exception Payloads</h5>
+      <table class="jd-sumtable">
+        <tr><th>Payload Class</th><th>Description</th></tr>
+        
         <tr>
-            <th><a href="../java/org/mule/modules/avalara/exception/AvalaraRuntimeException.html">AvalaraRuntimeException</a></td>
+            <td><a href="../java/org/mule/modules/avalara/exception/AvalaraRuntimeException.html">AvalaraRuntimeException</a></td>
             <td></td>
         </tr>
       </table>
