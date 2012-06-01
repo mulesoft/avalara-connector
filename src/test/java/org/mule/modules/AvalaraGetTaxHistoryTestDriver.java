@@ -27,7 +27,7 @@ import org.mule.tck.FunctionalTestCase;
  * @since Nov 23, 2011
  */
 
-public class AvalaraGetTaxHistoryTest extends FunctionalTestCase
+public class AvalaraGetTaxHistoryTestDriver extends FunctionalTestCase
 {
     
     /** @see org.mule.tck.FunctionalTestCase#getConfigResources() */
