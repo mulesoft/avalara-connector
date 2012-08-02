@@ -278,6 +278,17 @@ Summary:
 <!-- Config -->
 
 
+<!-- =========== CONFIG SUMMARY =========== -->
+<table id="lconfig" class="jd-sumtable"><tr><th colspan="12">Configuration</th></tr>
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../mule/avalara.html#config">&lt;avalara:config&gt;</a></nobr>
+        <div class="jd-descrdiv">Configure an instance of this module</div>
+  </td></tr>
+</table>
+
+
 
 
 <!-- ========== MESSAGE PROCESSOR SUMMARY =========== -->
@@ -384,6 +395,43 @@ similar to the following:</p>
 
 &lt;/mule&gt;
 </pre>
+
+<p>This module is configured using the <i>config</i> element. This element must be placed outside of your flows and at
+the root of your Mule application. You can create as many configurations as you deem necessary as long as each carries
+its own name.</p>
+<p>Each message processor, message source or transformer carries a <i>config-ref</i> attribute that allows the invoker to
+specify which configuration to use.</p>
+<table id="lconfig" class="jd-sumtable">
+<tr><th colspan="12">Attributes</th></tr>
+<tr><th>Type</th><th>Name</th><th>Default Value</th><th>Description</th></tr>
+<td class="jd-typecol"><nobr>xs:string</nobr></td>
+<td class="jd-linkcol"><nobr>name</nobr></td>
+<td class="jd-descrcol"></td>
+<td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Give a name to this configuration so it can be later referenced.</td>
+
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          xs:string</nobr></td>
+          <td class="jd-linkcol"><nobr>addressServiceEndpoint</nobr></td>
+          <td class="jd-descrcol">https://development.avalara.net/Address/AddressSvc.asmx</td>
+          <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Address Webservice endpoint
+</td>
+      </tr>
+      
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          xs:string</nobr></td>
+          <td class="jd-linkcol"><nobr>taxServiceEndpoint</nobr></td>
+          <td class="jd-descrcol">https://development.avalara.net/Tax/TaxSvc.asmx</td>
+          <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Tax Webservice endpoint
+</td>
+      </tr>
+      
+    
+</table>
+
 
 
 

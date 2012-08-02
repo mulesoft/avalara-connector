@@ -392,6 +392,16 @@ tax holidays, exemptions, certificate management and product taxability rules.&l
               &lt;xs:documentation&gt;Give a name to this configuration so it can be later referenced by config-ref.&lt;/xs:documentation&gt;
             &lt;/xs:annotation&gt;
           &lt;/xs:attribute&gt;
+          &lt;xs:attribute name=&quot;taxServiceEndpoint&quot; default=&quot;https://development.avalara.net/Tax/TaxSvc.asmx&quot; use=&quot;optional&quot; type=&quot;xs:string&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Tax Webservice endpoint&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:attribute&gt;
+          &lt;xs:attribute name=&quot;addressServiceEndpoint&quot; default=&quot;https://development.avalara.net/Address/AddressSvc.asmx&quot; use=&quot;optional&quot; type=&quot;xs:string&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Address Webservice endpoint&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:attribute&gt;
         &lt;/xs:extension&gt;
       &lt;/xs:complexContent&gt;
     &lt;/xs:complexType&gt;

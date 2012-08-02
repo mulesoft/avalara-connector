@@ -514,9 +514,10 @@ Summary:
           private
           
           
-          <a href="../../../../../java/org/mule/modules/avalara/api/AvalaraClient.html">AvalaraClient</a></nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../org/mule/modules/avalara/AvalaraModule.html#apiClient">apiClient</a></td>
-          <td class="jd-descrcol" width="100%">Avalara's application client.</td>
+          String</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../org/mule/modules/avalara/AvalaraModule.html#addressServiceEndpoint">addressServiceEndpoint</a></td>
+          <td class="jd-descrcol" width="100%">Address Webservice endpoint
+</td>
       </tr>
       
     
@@ -524,10 +525,33 @@ Summary:
           <td class="jd-typecol"><nobr>
           private
           
+          
+          <a href="../../../../../java/org/mule/modules/avalara/api/AvalaraClient.html">AvalaraClient</a></nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../org/mule/modules/avalara/AvalaraModule.html#apiClient">apiClient</a></td>
+          <td class="jd-descrcol" width="100%">Avalara's application client.</td>
+      </tr>
+      
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
           final
           MapObjectMapper</nobr></td>
           <td class="jd-linkcol"><a href="../../../../../org/mule/modules/avalara/AvalaraModule.html#mom">mom</a></td>
           <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          String</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../org/mule/modules/avalara/AvalaraModule.html#taxServiceEndpoint">taxServiceEndpoint</a></td>
+          <td class="jd-descrcol" width="100%">Tax Webservice endpoint
+</td>
       </tr>
       
     
@@ -621,6 +645,22 @@ Summary:
             
             
             
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/modules/avalara/AvalaraModule.html#getAddressServiceEndpoint()">getAddressServiceEndpoint</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
             <a href="../../../../../java/com/avalara/avatax/services/GetTaxResult.html">GetTaxResult</a></nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
@@ -632,7 +672,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -648,6 +688,22 @@ Summary:
 
  </div>
   
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/modules/avalara/AvalaraModule.html#getTaxServiceEndpoint()">getTaxServiceEndpoint</a></span>()</nobr>
+        
   </td></tr>
 
 
@@ -714,10 +770,42 @@ Summary:
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/modules/avalara/AvalaraModule.html#setAddressServiceEndpoint(java.lang.String)">setAddressServiceEndpoint</a></span>(String addressServiceEndpoint)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../org/mule/modules/avalara/AvalaraModule.html#setClient(org.mule.modules.avalara.api.AvalaraClient)">setClient</a></span>(<a href="../../../../../java/org/mule/modules/avalara/api/AvalaraClient.html">AvalaraClient</a> client)</nobr>
         
         <div class="jd-descrdiv">Sets the apiClient.</div>
   
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/modules/avalara/AvalaraModule.html#setTaxServiceEndpoint(java.lang.String)">setTaxServiceEndpoint</a></span>(String taxServiceEndpoint)</nobr>
+        
   </td></tr>
 
 
@@ -987,6 +1075,37 @@ From class
 
 
 
+<A NAME="addressServiceEndpoint"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+         
+         
+        String
+      </span>
+        addressServiceEndpoint
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Address Webservice endpoint
+</p></div>
+
+    
+    </div>
+</div>
+
+
+
 <A NAME="apiClient"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -1041,6 +1160,37 @@ From class
     <div class="jd-details-descr">
       
   <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="taxServiceEndpoint"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+         
+         
+        String
+      </span>
+        taxServiceEndpoint
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Tax Webservice endpoint
+</p></div>
 
     
     </div>
@@ -1273,6 +1423,37 @@ From class
         </tr>
       </table>
   </div>
+
+    </div>
+</div>
+
+
+<A NAME="getAddressServiceEndpoint()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        String
+      </span>
+      <span class="sympad">getAddressServiceEndpoint</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
 
     </div>
 </div>
@@ -1570,6 +1751,37 @@ From class
 </div>
 
 
+<A NAME="getTaxServiceEndpoint()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        String
+      </span>
+      <span class="sympad">getTaxServiceEndpoint</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    </div>
+</div>
+
+
 <A NAME="init()"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -1767,6 +1979,46 @@ From class
 </div>
 
 
+<A NAME="setAddressServiceEndpoint(java.lang.String)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">setAddressServiceEndpoint</span>
+      <span class="normal">(String addressServiceEndpoint)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>addressServiceEndpoint</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
 <A NAME="setClient(org.mule.modules.avalara.api.AvalaraClient)"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -1798,6 +2050,46 @@ From class
       <table class="jd-tagtable">
         <tr>
           <th>client</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="setTaxServiceEndpoint(java.lang.String)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">setTaxServiceEndpoint</span>
+      <span class="normal">(String taxServiceEndpoint)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>taxServiceEndpoint</td>
           <td></td>
         </tr>
       </table>
