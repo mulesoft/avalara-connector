@@ -30,16 +30,16 @@
         				 avalaraClient="avalaraClient"
         				 companyCode ="#[variable:companyCode]"
                          docType="SALES_ORDER"
-                         docDate="#[variable:docDate]"
+                         docDate-ref="#[variable:docDate]"
                          customerCode="#[variable:customerCode]"
                          discount="0.2"
                          originCode="Origin"
                          destinationCode="Dest"
                          detailLevel="TAX"
                          serviceMode="LOCAL"
-                         paymentDate="#[variable:paymentDate]"
+                         paymentDate-ref="#[variable:paymentDate]"
                          exchangeRate="#[variable:exchangeRate]"
-                         exchangeRateEffDate="#[variable:exchangeRateEffDate]" >
+                         exchangeRateEffDate-ref="#[variable:exchangeRateEffDate]" >
             <avalara:base-addresses ref="#[variable:addresses]" />
             <avalara:lines ref="#[variable:lines]" /> 
         </avalara:get-tax>
@@ -85,7 +85,7 @@
                                   taxRegionId="#[variable:taxRegionId]"
                                   latitude="#[variable:latitude]"
                                   longitude="#[variable:longitude]"
-                                  date="#[variable:date]" />
+                                  date-ref="#[variable:date]" />
         <avalara:post-tax 
         				  account="avalaraAccount" 
         				  license="avalaraLicense" 
@@ -94,7 +94,7 @@
 		                  companyCode="#[variable:companyCode]"
 		                  docType="SALES_ORDER"
 		                  docCode="#[variable:docCode]"
-		                  docDate="2010-09-13T01:18:14-07:00"
+		                  docDate-ref="2010-09-13T01:18:14-07:00"
 		                  totalAmount="1200"
 		                  totalTax="100"
 		                  commit="false"
