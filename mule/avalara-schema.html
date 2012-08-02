@@ -563,7 +563,7 @@ displays details describing the calculation of tax for each line item.&lt;/xs:do
             &lt;xs:documentation&gt;The internal reference code used by the client application.&lt;/xs:documentation&gt;
           &lt;/xs:annotation&gt;
         &lt;/xs:attribute&gt;
-        &lt;xs:attribute xmlns=&quot;http://www.mulesoft.org/schema/mule/avalara&quot; name=&quot;docDate&quot; use=&quot;required&quot; type=&quot;dateTimeType&quot;&gt;
+        &lt;xs:attribute name=&quot;docDate-ref&quot; use=&quot;required&quot; type=&quot;xs:string&quot;&gt;
           &lt;xs:annotation&gt;
             &lt;xs:documentation&gt;Date of invoice, purchase order, etc.&lt;/xs:documentation&gt;
           &lt;/xs:annotation&gt;
@@ -643,7 +643,7 @@ displays details describing the calculation of tax for each line item.&lt;/xs:do
             &lt;xs:documentation&gt;This is only supported by AvaLocal servers. It provides the ability to controls whether tax is calculated locally or remotely when using an AvaLocal server. The default is Automatic which calculates locally unless remote is necessary for non-local addresses.&lt;/xs:documentation&gt;
           &lt;/xs:annotation&gt;
         &lt;/xs:attribute&gt;
-        &lt;xs:attribute xmlns=&quot;http://www.mulesoft.org/schema/mule/avalara&quot; name=&quot;paymentDate&quot; use=&quot;required&quot; type=&quot;dateTimeType&quot;&gt;
+        &lt;xs:attribute name=&quot;paymentDate-ref&quot; use=&quot;required&quot; type=&quot;xs:string&quot;&gt;
           &lt;xs:annotation&gt;
             &lt;xs:documentation&gt;The date on which payment was made.&lt;/xs:documentation&gt;
           &lt;/xs:annotation&gt;
@@ -653,7 +653,7 @@ displays details describing the calculation of tax for each line item.&lt;/xs:do
             &lt;xs:documentation&gt;The exchange rate value. The string represents a&lt;/xs:documentation&gt;
           &lt;/xs:annotation&gt;
         &lt;/xs:attribute&gt;
-        &lt;xs:attribute xmlns=&quot;http://www.mulesoft.org/schema/mule/avalara&quot; name=&quot;exchangeRateEffDate&quot; use=&quot;required&quot; type=&quot;dateTimeType&quot;&gt;
+        &lt;xs:attribute name=&quot;exchangeRateEffDate-ref&quot; use=&quot;required&quot; type=&quot;xs:string&quot;&gt;
           &lt;xs:annotation&gt;
             &lt;xs:documentation&gt;The exchange rate effective date value.&lt;/xs:documentation&gt;
           &lt;/xs:annotation&gt;
@@ -709,7 +709,7 @@ displays details describing the calculation of tax for each line item.&lt;/xs:do
             &lt;xs:documentation&gt;The internal reference code used by the client application.&lt;/xs:documentation&gt;
           &lt;/xs:annotation&gt;
         &lt;/xs:attribute&gt;
-        &lt;xs:attribute xmlns=&quot;http://www.mulesoft.org/schema/mule/avalara&quot; name=&quot;docDate&quot; use=&quot;required&quot; type=&quot;dateTimeType&quot;&gt;
+        &lt;xs:attribute name=&quot;docDate-ref&quot; use=&quot;required&quot; type=&quot;xs:string&quot;&gt;
           &lt;xs:annotation&gt;
             &lt;xs:documentation&gt;The date on the invoice, purchase order, etc&lt;/xs:documentation&gt;
           &lt;/xs:annotation&gt;
@@ -1007,7 +1007,7 @@ additional delivery details if successfully validated.&lt;/xs:documentation&gt;
             &lt;xs:documentation&gt;True, if you want the valid taxRegionId in the result.&lt;/xs:documentation&gt;
           &lt;/xs:annotation&gt;
         &lt;/xs:attribute&gt;
-        &lt;xs:attribute xmlns=&quot;http://www.mulesoft.org/schema/mule/avalara&quot; name=&quot;date&quot; use=&quot;required&quot; type=&quot;dateTimeType&quot;&gt;
+        &lt;xs:attribute name=&quot;date-ref&quot; use=&quot;required&quot; type=&quot;xs:string&quot;&gt;
           &lt;xs:annotation&gt;
             &lt;xs:documentation&gt;Date.&lt;/xs:documentation&gt;
           &lt;/xs:annotation&gt;

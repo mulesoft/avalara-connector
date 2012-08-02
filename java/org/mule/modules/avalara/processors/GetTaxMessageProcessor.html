@@ -464,7 +464,7 @@ Summary:
 
 
 <h2>Class Overview</h2>
-<p>GetTaxMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/modules/avalara/AvalaraModule.html#getTax(java.lang.String, java.lang.String, java.lang.String, java.lang.String, org.mule.modules.avalara.AvalaraDocumentType, java.lang.String, java.util.Date, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>, org.mule.modules.avalara.DetailLevelType, java.lang.String, java.lang.String, boolean, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>, java.lang.String, org.mule.modules.avalara.ServiceModeType, java.util.Date, java.lang.String, java.util.Date)">getTax(java.lang.String, java.lang.String, java.lang.String, java.lang.String, org.mule.modules.avalara.AvalaraDocumentType, java.lang.String, java.util.Date, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.List, java.util.List, org.mule.modules.avalara.DetailLevelType, java.lang.String, java.lang.String, boolean, java.lang.String, java.util.Map, java.lang.String, org.mule.modules.avalara.ServiceModeType, java.util.Date, java.lang.String, java.util.Date)</a></code> method in <code><a href="../../../../../../java/org/mule/modules/avalara/AvalaraModule.html">AvalaraModule</a></code>. For each argument there is a field in this processor to match it.  Before invoking the actual method the processor will evaluate and transform where possible to the expected argument type.
+<p>GetTaxMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/modules/avalara/AvalaraModule.html#getTax(java.lang.String, java.lang.String, java.lang.String, java.lang.String, org.mule.modules.avalara.AvalaraDocumentType, java.lang.String, javax.xml.datatype.XMLGregorianCalendar, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>, org.mule.modules.avalara.DetailLevelType, java.lang.String, java.lang.String, boolean, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>, java.lang.String, org.mule.modules.avalara.ServiceModeType, javax.xml.datatype.XMLGregorianCalendar, java.lang.String, javax.xml.datatype.XMLGregorianCalendar)">getTax(java.lang.String, java.lang.String, java.lang.String, java.lang.String, org.mule.modules.avalara.AvalaraDocumentType, java.lang.String, javax.xml.datatype.XMLGregorianCalendar, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.List, java.util.List, org.mule.modules.avalara.DetailLevelType, java.lang.String, java.lang.String, boolean, java.lang.String, java.util.Map, java.lang.String, org.mule.modules.avalara.ServiceModeType, javax.xml.datatype.XMLGregorianCalendar, java.lang.String, javax.xml.datatype.XMLGregorianCalendar)</a></code> method in <code><a href="../../../../../../java/org/mule/modules/avalara/AvalaraModule.html">AvalaraModule</a></code>. For each argument there is a field in this processor to match it.  Before invoking the actual method the processor will evaluate and transform where possible to the expected argument type.
  
 </p>
 
@@ -804,7 +804,7 @@ org.mule.api.lifecycle.Stoppable
           private
           
           
-          Date</nobr></td>
+          XMLGregorianCalendar</nobr></td>
           <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/processors/GetTaxMessageProcessor.html#_docDateType">_docDateType</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
@@ -826,7 +826,7 @@ org.mule.api.lifecycle.Stoppable
           private
           
           
-          Date</nobr></td>
+          XMLGregorianCalendar</nobr></td>
           <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/processors/GetTaxMessageProcessor.html#_exchangeRateEffDateType">_exchangeRateEffDateType</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
@@ -903,7 +903,7 @@ org.mule.api.lifecycle.Stoppable
           private
           
           
-          Date</nobr></td>
+          XMLGregorianCalendar</nobr></td>
           <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/processors/GetTaxMessageProcessor.html#_paymentDateType">_paymentDateType</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
@@ -3015,7 +3015,7 @@ From interface
         private 
          
          
-        Date
+        XMLGregorianCalendar
       </span>
         _docDateType
     </h4>
@@ -3075,7 +3075,7 @@ From interface
         private 
          
          
-        Date
+        XMLGregorianCalendar
       </span>
         _exchangeRateEffDateType
     </h4>
@@ -3285,7 +3285,7 @@ From interface
         private 
          
          
-        Date
+        XMLGregorianCalendar
       </span>
         _paymentDateType
     </h4>
