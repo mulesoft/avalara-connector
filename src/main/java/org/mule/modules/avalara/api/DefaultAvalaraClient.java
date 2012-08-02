@@ -8,6 +8,7 @@
 
 package org.mule.modules.avalara.api;
 
+import org.apache.commons.lang.Validate;
 import org.mule.modules.avalara.TaxRequestType;
 import org.mule.modules.avalara.exception.AvalaraRuntimeException;
 import org.mule.modules.avalara.util.AvalaraProfileHandler;
@@ -37,11 +38,24 @@ public class DefaultAvalaraClient implements AvalaraClient
 {
     private TaxSvcSoap taxSvcSoap;
     private AddressSvcSoap addressSvcSoap;
+    private String addressEndpoint;
+    private String taxEndpoint;
     
     private ThreadLocal<String> usernameLocal = new ThreadLocal<String>();
     private ThreadLocal<String> passwordLocal = new ThreadLocal<String>();
     private ThreadLocal<String> clientLocal = new ThreadLocal<String>();
 
+    public DefaultAvalaraClient() {
+
+    }
+    
+    public DefaultAvalaraClient(String addressEndpoint, String taxEndpoint) {
+        Validate.notNull(addressEndpoint);
+        Validate.notNull(taxEndpoint);
+        this.setAddressEndpoint(addressEndpoint);
+        this.setTaxEndpoint(taxEndpoint);
+    }
+    
     @Override
     public PingResult ping(String account, String license, String client, String message)
     {
@@ -100,7 +114,7 @@ public class DefaultAvalaraClient implements AvalaraClient
     {
         if (addressSvcSoap == null)
         {
-            addressSvcSoap = createConnection(AddressSvcSoap.class, AddressSvc.class, "address", AddressSvc.AddressSvcSoap);
+            addressSvcSoap = createConnection(AddressSvcSoap.class, AddressSvc.class, "address", AddressSvc.AddressSvcSoap, getAddressEndpoint());
         }
         return addressSvcSoap;
     }
@@ -109,12 +123,12 @@ public class DefaultAvalaraClient implements AvalaraClient
     {
         if (taxSvcSoap == null)
         {
-            taxSvcSoap = createConnection(TaxSvcSoap.class, TaxSvc.class, "tax", TaxSvc.TaxSvcSoap);
+            taxSvcSoap = createConnection(TaxSvcSoap.class, TaxSvc.class, "tax", TaxSvc.TaxSvcSoap, getTaxEndpoint());
         }
         return taxSvcSoap;
     }
     
-    protected <A> A createConnection(Class<A> portType, Class<? extends Service> serviceType, String schemaName, QName portName)
+    protected <A> A createConnection(Class<A> portType, Class<? extends Service> serviceType, String schemaName, QName portName, String endpoint)
     {
         return ConnectionBuilder.fromPortType(portType)
             .withServiceType(serviceType)
@@ -141,6 +155,7 @@ public class DefaultAvalaraClient implements AvalaraClient
                 }
             }))
             .withPortQName(portName)
+            .withEndpoint(endpoint)
             .build();
     }
 
@@ -154,6 +169,22 @@ public class DefaultAvalaraClient implements AvalaraClient
         usernameLocal.set(account);
         passwordLocal.set(license);
         clientLocal.set(client);
+    }
+
+    public String getAddressEndpoint() {
+        return addressEndpoint;
+    }
+
+    public void setAddressEndpoint(String addressEndpoint) {
+        this.addressEndpoint = addressEndpoint;
+    }
+
+    public String getTaxEndpoint() {
+        return taxEndpoint;
+    }
+
+    public void setTaxEndpoint(String taxEndpoint) {
+        this.taxEndpoint = taxEndpoint;
     }
 
 }

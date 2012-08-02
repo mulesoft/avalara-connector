@@ -11,8 +11,10 @@
  */
 package org.mule.modules.avalara;
 
+import org.mule.api.annotations.Configurable;
 import org.mule.api.annotations.Module;
 import org.mule.api.annotations.Processor;
+import org.mule.api.annotations.display.Placement;
 import org.mule.api.annotations.param.Default;
 import org.mule.api.annotations.param.Optional;
 import org.mule.modules.avalara.api.AvalaraClient;
@@ -58,6 +60,23 @@ import javax.annotation.PostConstruct;
 @Module(name = "avalara", schemaVersion = "2.0")
 public class AvalaraModule
 {
+    /**
+     * Tax Webservice endpoint
+     */
+    @Configurable
+    @Optional
+    @Default("https://development.avalara.net/Tax/TaxSvc.asmx")
+    @Placement(group = "Connection")
+    private String taxServiceEndpoint;
+    
+    /**
+     * Address Webservice endpoint
+     */
+    @Configurable
+    @Optional
+    @Default("https://development.avalara.net/Address/AddressSvc.asmx")
+    @Placement(group = "Connection")
+    private String addressServiceEndpoint;
     
     /**
      * Avalara's application client. By default uses DefaultAvalaraClient class.
@@ -513,7 +532,7 @@ public class AvalaraModule
     {
         if (apiClient == null )
         {
-            apiClient = new DefaultAvalaraClient();
+            apiClient = new DefaultAvalaraClient(getAddressServiceEndpoint(), getTaxServiceEndpoint());
         }
     }
     
@@ -526,6 +545,22 @@ public class AvalaraModule
     public void setClient(AvalaraClient client)
     {
         this.apiClient = client;
+    }
+
+    public String getTaxServiceEndpoint() {
+        return taxServiceEndpoint;
+    }
+
+    public void setTaxServiceEndpoint(String taxServiceEndpoint) {
+        this.taxServiceEndpoint = taxServiceEndpoint;
+    }
+
+    public String getAddressServiceEndpoint() {
+        return addressServiceEndpoint;
+    }
+
+    public void setAddressServiceEndpoint(String addressServiceEndpoint) {
+        this.addressServiceEndpoint = addressServiceEndpoint;
     }
     
 }
