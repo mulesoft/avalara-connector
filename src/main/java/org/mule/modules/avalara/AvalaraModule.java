@@ -46,6 +46,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 /**
  * Avalara provides automated sales tax solutions to streamline cumbersome, 
@@ -174,7 +175,7 @@ public class AvalaraModule
                                String companyCode,
                                AvalaraDocumentType docType,
                                @Optional String docCode,
-                               Date docDate,
+                               XMLGregorianCalendar docDate,
                                @Optional String salespersonCode,
                                String customerCode,
                                @Optional String customerUsageType,
@@ -193,9 +194,9 @@ public class AvalaraModule
                                @Optional Map<String, Object> taxOverride,
                                @Optional String currencyCode,
                                @Optional @Default("AUTOMATIC") ServiceModeType serviceMode,
-                               Date paymentDate,
+                               XMLGregorianCalendar paymentDate,
                                String exchangeRate,
-                               Date exchangeRateEffDate)
+                               XMLGregorianCalendar exchangeRateEffDate)
     {
         BigDecimal discountDecimal = discount == null ? null :  new BigDecimal(discount);
         BigDecimal exchangeRateDecimal = exchangeRate == null ? null :  new BigDecimal(exchangeRate);
@@ -288,7 +289,7 @@ public class AvalaraModule
                                  String companyCode,
                                  AvalaraDocumentType docType,
                                  @Optional String docCode,
-                                 Date docDate,
+                                 XMLGregorianCalendar docDate,
                                  String totalAmount,
                                  String totalTax,
                                  @Optional @Default("false") boolean commit,
@@ -496,7 +497,7 @@ public class AvalaraModule
                                           @Optional @Default("DEFAULT") TextCaseType textCase,
                                           @Optional @Default("false") boolean coordinates,
                                           @Optional @Default("false") boolean taxability,
-                                          Date date)
+                                          XMLGregorianCalendar date)
     {
         BaseAddress address = new BaseAddress();
         address.setAddressCode(addressCode);

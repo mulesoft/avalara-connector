@@ -8,34 +8,19 @@
 
 package org.mule.modules;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
-import org.mule.modules.avalara.AvalaraDocumentType;
-import org.mule.modules.avalara.AvalaraModule;
-import org.mule.modules.avalara.CancelCodeType;
-import org.mule.modules.avalara.DetailLevelType;
-import org.mule.modules.avalara.ServiceModeType;
-import org.mule.modules.avalara.TextCaseType;
-
-import com.avalara.avatax.services.CancelTaxResult;
-import com.avalara.avatax.services.GetTaxHistoryResult;
-import com.avalara.avatax.services.GetTaxRequest;
-import com.avalara.avatax.services.GetTaxResult;
-import com.avalara.avatax.services.PingResult;
-import com.avalara.avatax.services.PostTaxResult;
-import com.avalara.avatax.services.SeverityLevel;
-import com.avalara.avatax.services.ValidateResult;
-
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import com.avalara.avatax.services.*;
 import org.junit.Before;
 import org.junit.Test;
+import org.mule.modules.avalara.*;
+
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
+import java.math.BigDecimal;
+import java.util.*;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * @author Gaston Ponti
@@ -44,7 +29,7 @@ import org.junit.Test;
 public class AvalaraTestDriver
 {
     private AvalaraModule module;
-    private Date testDate;
+    private XMLGregorianCalendar testDate;
     private String license;
     private String account;
     private String client;
@@ -55,7 +40,16 @@ public class AvalaraTestDriver
     @Before
     public void setup()
     {
-        testDate = new Date();
+        GregorianCalendar gregory = new GregorianCalendar();
+        gregory.setTime(new Date());
+
+        try {
+            testDate = DatatypeFactory.newInstance()
+                    .newXMLGregorianCalendar(
+                            gregory);
+        } catch (DatatypeConfigurationException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
         module = new AvalaraModule();
         account = System.getenv("avalaraAccount");
         license = System.getenv("avalaraLicense");
@@ -127,7 +121,7 @@ public class AvalaraTestDriver
         return module.getTax(account, license, client, "TC", AvalaraDocumentType.SALES_INVOICE, docCode, testDate,
             null, "cusomer Code", null, "0", null, null, "Origin", "Dest", addresses,
             lines, DetailLevelType.DOCUMENT, null, "Test LocationCode", false, null,
-            null, null, ServiceModeType.AUTOMATIC, new Date(), "0", testDate);
+            null, null, ServiceModeType.AUTOMATIC, testDate, "0", testDate);
     }
     @Test
     public void testGettingPostingGettingHistoryAndCancelIt()
@@ -172,8 +166,10 @@ public class AvalaraTestDriver
     @Test
     public void validateAValidAddress() throws Exception
     {
+
+
         ValidateResult response = module.validateAddress(account, license, client, "435 Ericksen Ave", null, null, null, "NE", null,
-            "98110", null, 0, null, null, TextCaseType.DEFAULT, false, false, new Date());
+            "98110", null, 0, null, null, TextCaseType.DEFAULT, false, false, testDate);
 
         assertNotNull(response);
         assertEquals("Bainbridge Island", response.getValidAddresses().getValidAddress().get(0).getCity());
@@ -183,7 +179,7 @@ public class AvalaraTestDriver
     public void validateAnInvalidAddress() throws Exception
     {
         ValidateResult response = module.validateAddress(account, license, client, "SARLAZA", null, null, null, null, null,
-            null, null, 0, null, null, TextCaseType.DEFAULT, false, false, new Date());
+            null, null, 0, null, null, TextCaseType.DEFAULT, false, false, testDate);
 
         assertEquals(SeverityLevel.ERROR, response.getResultCode());
     }
