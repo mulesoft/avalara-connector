@@ -6,7 +6,7 @@
     			 companyCode="some company code"
                  docType="PURCHASE_ORDER"
                  docCode="some doc code"
-                 docDate="2010-09-13T01:18:14-07:00"
+                 docDate-ref="2010-09-13T01:18:14-07:00"
                  salespersonCode="some sales person code"
                  customerCode="some customer code"
                  customerUsageType="some customer usage type"
@@ -22,9 +22,9 @@
                  batchCode="some batch code"
                  currencyCode="some currency code"
                  serviceMode="LOCAL"
-                 paymentDate="2010-09-13T01:18:14-07:00"
+                 paymentDate-ref="2010-09-13T01:18:14-07:00"
                  exchangeRate="some exchange rate"
-                 exchangeRateEffDate="2010-09-13T01:18:14-07:00">
+                 exchangeRateEffDate-ref="2010-09-13T01:18:14-07:00" >
                  
     <avalara:base-addresses>
         <avalara:base-address>
@@ -96,7 +96,7 @@
                     companyCode="some company code"
                     docType="SALES_ORDER"
                     docCode="some document code"
-                    docDate="2010-09-13T01:18:14-07:00"
+                    docDate-ref="2010-09-13T01:18:14-07:00"
                     totalAmount="1200"
                     totalTax="100"
                     commit="false"
@@ -158,5 +158,5 @@
                           textCase="DEFAULT"
                           coordinates="true"
                           taxability="false"
-                          date="2010-09-13T01:18:14-07:00" />
+                          date-ref="2010-09-13T01:18:14-07:00" />
 <!-- END_INCLUDE(avalara:validate-address) -->
