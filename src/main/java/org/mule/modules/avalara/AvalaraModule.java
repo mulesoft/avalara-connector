@@ -58,7 +58,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *
  * @author Gaston Ponti
  */
-@Module(name = "avalara", schemaVersion = "2.0")
+@Module(name = "avalara", schemaVersion = "2.0", friendlyName = "Avalara")
 public class AvalaraModule
 {
     /**
