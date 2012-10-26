@@ -25,8 +25,11 @@ import com.avalara.avatax.services.ValidateResult;
 import com.zauberlabs.commons.ws.connection.ConnectionBuilder;
 import com.zauberlabs.commons.ws.security.Credential;
 
+import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 
@@ -69,9 +72,12 @@ public class DefaultAvalaraClient implements AvalaraClient
     {
         T response;
         setCredential(account, license, client);
+
         try
         {
+
             response = (T) getTaxService().getClass().getMethod(entityType.getResourceName(), obj.getClass()).invoke(getTaxService(), obj);
+
         }
         catch (InvocationTargetException e)
         {
@@ -124,6 +130,7 @@ public class DefaultAvalaraClient implements AvalaraClient
         if (taxSvcSoap == null)
         {
             taxSvcSoap = createConnection(TaxSvcSoap.class, TaxSvc.class, "tax", TaxSvc.TaxSvcSoap, getTaxEndpoint());
+
         }
         return taxSvcSoap;
     }

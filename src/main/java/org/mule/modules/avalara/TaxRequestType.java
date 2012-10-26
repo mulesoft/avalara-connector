@@ -8,13 +8,14 @@
 
 package org.mule.modules.avalara;
 
-import org.apache.commons.lang.StringUtils;
 
+import com.avalara.avatax.services.AdjustTax;
 import com.avalara.avatax.services.CancelTax;
-import com.avalara.avatax.services.CommitTax;
 import com.avalara.avatax.services.GetTax;
-import com.avalara.avatax.services.GetTaxHistory;
 import com.avalara.avatax.services.PostTax;
+import com.avalara.avatax.services.CommitTax;
+import com.avalara.avatax.services.GetTaxHistory;
+import org.apache.commons.lang.StringUtils;
 
 
 /**
@@ -87,8 +88,16 @@ public enum TaxRequestType
      * A Voided invoice cannot have its status changed (and the invoice number cannot
      * be re-used).
      */
-    CancelTax(CancelTax.class);
-        
+    CancelTax(CancelTax.class),
+    /**
+     * AdjustTax provides a mechanism to adjust tax.
+     */
+
+    AdjustTax(AdjustTax.class);
+
+
+
+
     private final Class<?> type;
     
     private TaxRequestType(Class<?> type)

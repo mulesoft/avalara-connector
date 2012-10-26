@@ -12,6 +12,8 @@ import com.avalara.avatax.services.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.mule.modules.avalara.*;
+import org.mule.modules.avalara.api.AvalaraClient;
+import org.mule.modules.avalara.api.DefaultAvalaraClient;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
@@ -50,7 +52,13 @@ public class AvalaraTestDriver
         } catch (DatatypeConfigurationException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
+        System.out.println("Avalara account"+System.getenv("avalaraAccount"));
+        System.out.println("Avalara account"+System.getenv("avalaraLicense"));
         module = new AvalaraModule();
+        module.setAddressServiceEndpoint("https://development.avalara.net/Tax/TaxSvc.asmx");
+        AvalaraClient ac = new DefaultAvalaraClient();
+
+        module.setClient(ac);
         account = System.getenv("avalaraAccount");
         license = System.getenv("avalaraLicense");
         client = "Mule";
@@ -123,13 +131,68 @@ public class AvalaraTestDriver
             lines, DetailLevelType.DOCUMENT, null, "Test LocationCode", false, null,
             null, null, ServiceModeType.AUTOMATIC, testDate, "0", testDate);
     }
+
+    private AdjustTaxResult adjustTax(String docCode)
+    {
+        List<Map<String, Object>> addresses = new ArrayList<Map<String, Object>>() { {
+            add(new HashMap<String, Object>() { {
+                put("addressCode", "Origin");
+                put("line1", "Avalara");
+                put("line2", "900 Winslow Way");
+                put("line3", "Suite 100");
+                put("city", "Bainbridge Island");
+                put("region", "WA");
+                put("postalCode", "98110");
+                put("country", "USA");
+            } });
+            add(new HashMap<String, Object>() { {
+                put("addressCode", "Dest");
+                put("line1", "3130 Elliott");
+                put("city", "Seattle");
+                put("region", "WA");
+                put("postalCode", "98121");
+                put("country", "USA");
+            } });
+        } };
+
+        List<Map<String, Object>> lines = new ArrayList<Map<String, Object>>() { {
+            add(new HashMap<String, Object>() { {
+                put("no", "001");
+                put("itemCode", "ITEM CODE 1");
+                put("qty", 1);
+                put("amount", 4000);
+                put("discounted", false);
+                put("description", "item number 1");
+                put("taxIncluded", false);
+            } });
+            add(new HashMap<String, Object>() { {
+                put("no", "002");
+                put("itemCode", "ITEM CODE 1");
+                put("qty", 1);
+                put("amount", 1000);
+                put("discounted", false);
+                put("description", "item number 1");
+                put("taxIncluded", false);
+            } });
+        } };
+
+        return module.adjustTax(account, license, client, 1,"some reason", "TC",AvalaraDocumentType.SALES_INVOICE, docCode, testDate,
+                null, "cusomer Code",null, "0", null, null, "Origin", "Dest", addresses,
+                lines, DetailLevelType.DOCUMENT, null, "Test LocationCode", false, null,
+                null, null, ServiceModeType.AUTOMATIC, testDate, "0", testDate);
+    }
     @Test
     public void testGettingPostingGettingHistoryAndCancelIt()
     {
         String docCode = "Test " + Long.toString(new Date().getTime());
         GetTaxResult taxResult = getTaxResultElement(docCode);
 
+
+
+
         assertEquals(SeverityLevel.SUCCESS, taxResult.getResultCode());
+
+        AdjustTaxResult adjustTaxResult = adjustTax(docCode);
 
         PostTaxResult postResult = module.postTax(account, license, client, null, "TC", AvalaraDocumentType.SALES_INVOICE,
             docCode, testDate, taxResult.getTotalAmount().toPlainString(),
@@ -141,8 +204,8 @@ public class AvalaraTestDriver
         CancelTaxResult cancelResult = module.cancelTax(account, license, client, null, "TC", AvalaraDocumentType.SALES_INVOICE, docCode, CancelCodeType.DOC_VOIDED);
 
         assertEquals(SeverityLevel.SUCCESS, cancelResult.getResultCode());
-
         // Check tax history
+
         GetTaxHistoryResult taxHistoryResult = module.getTaxHistory(account, license, client, null, "TC",
             AvalaraDocumentType.SALES_INVOICE, docCode, DetailLevelType.TAX);
 

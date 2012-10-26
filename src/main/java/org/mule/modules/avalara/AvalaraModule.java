@@ -11,6 +11,7 @@
  */
 package org.mule.modules.avalara;
 
+import com.avalara.avatax.services.*;
 import org.mule.api.annotations.Configurable;
 import org.mule.api.annotations.Module;
 import org.mule.api.annotations.Processor;
@@ -23,20 +24,6 @@ import org.mule.modules.avalara.api.MapBuilder;
 import org.mule.modules.avalara.exception.AvalaraRuntimeException;
 import org.mule.modules.utils.mom.JaxbMapObjectMappers;
 
-import com.avalara.avatax.services.BaseAddress;
-import com.avalara.avatax.services.CancelTaxRequest;
-import com.avalara.avatax.services.CancelTaxResult;
-import com.avalara.avatax.services.CommitTaxRequest;
-import com.avalara.avatax.services.CommitTaxResult;
-import com.avalara.avatax.services.GetTaxHistoryRequest;
-import com.avalara.avatax.services.GetTaxHistoryResult;
-import com.avalara.avatax.services.GetTaxRequest;
-import com.avalara.avatax.services.GetTaxResult;
-import com.avalara.avatax.services.PingResult;
-import com.avalara.avatax.services.PostTaxRequest;
-import com.avalara.avatax.services.PostTaxResult;
-import com.avalara.avatax.services.ValidateRequest;
-import com.avalara.avatax.services.ValidateResult;
 import com.zauberlabs.commons.mom.MapObjectMapper;
 
 import java.math.BigDecimal;
@@ -246,6 +233,171 @@ public class AvalaraModule
             )
         );
     }
+
+    /**
+     * Adjust Tax processor.
+     * <p>
+     * The Get Tax operation calculates tax for one or more invoiced items and
+     * displays details describing the calculation of tax for each line item.
+     *
+     * {@sample.xml ../../../doc/avalara-connector.xml.sample avalara:adjust-tax}
+     *
+     * @param account Avalara's account
+     * @param license Avalara's license
+     * @param avalaraClient Avalara's client
+     * @param companyCode Client application company reference code
+     * @param adjustmentReason The reason for this tax adjustment.
+     * @param adjustmentDescription A description of a tax adjustment.
+     * @param docType The document type specifies the category of the document and affects
+     *                how the document is treated after a tax calculation; see
+     *                {@link AvalaraDocumentType} for more information about the specific
+     *                document types.
+     * @param docCode The internal reference code used by the client application.
+     * @param docDate Date of invoice, purchase order, etc.
+     * @param salespersonCode The client application salesperson reference code.
+     * @param customerCode Client application customer reference code
+     * @param customerUsageType Client application customer or usage type.
+     *                          CustomerUsageType determines the exempt status of
+     *                          the transaction based on the exemption tax rules for
+     *                          the jurisdictions involved. CustomerUsageType may
+     *                          also be set at the line item level. <p>
+     *                          The standard values for the CustomerUsageType (A-L).<br/>
+    A Federal Government<br/>
+    B State/Local Govt.<br/>
+    C Tribal Government<br/>
+    D Foreign Diplomat<br/>
+    E Charitable Organization<br/>
+    F Religious/Education<br/>
+    G Resale<br/>
+    H Agricultural Production<br/>
+    I Industrial Prod/Mfg.<br/>
+    J Direct Pay Permit<br/>
+    K Direct Mail<br/>
+    L - Other
+     * @param discount The discount amount to apply to the document. The string
+     *                 represents a {@link BigDecimal}.
+     * @param purchaseOrderNo Purchase order identifier. PurchaseOrderNo is required
+     *                        for single use exemption certificates to match the
+     *                        order and invoice with the certificate.
+     * @param exemptionNo Exemption number used for this transaction
+     * @param originCode Code that refers one of the address of the baseAddress collection.
+     *                   It has to be the same code of one of the address's addressCode.
+     *                   It represents the origin address.
+     * @param destinationCode Code that refers one of the address of the baseAddress collection.
+     *                        It has to be the same code of one of the address's addressCode.
+     *                        It represents the destination address.
+     * @param baseAddresses Collection of physical addresses that will be referred
+     *                      to as the destination or origination of 1 or more invoice
+     *                      line entries
+     * @param lines Collection of invoice lines requiring tax calculation
+     * @param detailLevel Specifies the level of tax detail to return
+     * @param referenceCode For returns (see {@link AvalaraDocumentType}), refers to the
+     *                      {@link AdjustTaxRequest} of the original invoice.
+     * @param locationCode Location Code value. It is Also referred to as a Store
+     *                     Location, Outlet Id, or Outlet code is a number assigned by
+     *                     the State which identifies a Store location. Some state returns
+     *                     require taxes are broken out separately for Store Locations.
+     * @param commit Commit flag. If Commit is set to true, tax for the transaction
+     *               is saved, posted and committed as tax document.
+     * @param batchCode The batchCode value.
+     * @param taxOverride Indicates to apply tax override to the document.
+     * @param currencyCode It is 3 character ISO 4217 currency code.
+     * @param serviceMode This is only supported by AvaLocal servers. It provides the
+     *                    ability to controls whether tax is calculated locally or remotely
+     *                    when using an AvaLocal server. The default is Automatic which
+     *                    calculates locally unless remote is necessary for non-local
+     *                    addresses.
+     * @param paymentDate The date on which payment was made.
+     * @param exchangeRate The exchange rate value. The string represents a
+     *                     {@link BigDecimal}
+     * @param exchangeRateEffDate The exchange rate effective date value.
+     * @return The {@link AdjustTaxResult}
+     *
+     * @throws AvalaraRuntimeException
+     */
+
+    @Processor
+    public AdjustTaxResult adjustTax(String account, String license, String avalaraClient,
+                                     int adjustmentReason,
+                                     String   adjustmentDescription,
+                               String companyCode,
+                               AvalaraDocumentType docType,
+                               @Optional String docCode,
+                               XMLGregorianCalendar docDate,
+                               @Optional String salespersonCode,
+                               String customerCode,
+                               @Optional String customerUsageType,
+                               String discount,
+                               @Optional String purchaseOrderNo,
+                               @Optional String exemptionNo,
+                               String originCode,
+                               String destinationCode,
+                               List<Map<String, Object>> baseAddresses,
+                               List<Map<String, Object>> lines,
+                               DetailLevelType detailLevel,
+                               @Optional String referenceCode,
+                               @Optional String locationCode,
+                               @Optional @Default("false") boolean commit,
+                               @Optional String batchCode,
+                               @Optional Map<String, Object> taxOverride,
+                               @Optional String currencyCode,
+                               @Optional @Default("AUTOMATIC") ServiceModeType serviceMode,
+                               XMLGregorianCalendar paymentDate,
+                               String exchangeRate,
+                               XMLGregorianCalendar exchangeRateEffDate)
+    {
+        BigDecimal discountDecimal = discount == null ? null :  new BigDecimal(discount);
+        BigDecimal exchangeRateDecimal = exchangeRate == null ? null :  new BigDecimal(exchangeRate);
+
+        Map<String, Object> addresses = null;
+        if (baseAddresses != null && !baseAddresses.isEmpty())
+        {
+            addresses = new HashMap<String, Object>();
+            addresses.put("baseAddress", baseAddresses);
+        }
+
+        Map<String, Object> mapLines = null;
+        if (lines != null && !lines.isEmpty())
+        {
+            mapLines = new HashMap<String, Object>();
+            mapLines.put("line", lines);
+        }
+        GetTaxRequest getTaxRequest = (GetTaxRequest) mom.unmap(new MapBuilder().with("companyCode", companyCode)
+                .with("docType", docType.toDocumentType())
+                .with("docCode", docCode)
+                .with("docDate", docDate)
+                .with("salespersonCode", salespersonCode)
+                .with("customerCode", customerCode)
+                .with("customerUsageType", customerUsageType)
+                .with("discount", discountDecimal)
+                .with("purchaseOrderNo", purchaseOrderNo)
+                .with("exemptionNo", exemptionNo)
+                .with("originCode", originCode)
+                .with("destinationCode", destinationCode)
+                .with("addresses", addresses)
+                .with("lines", mapLines)
+                .with("detailLevel", detailLevel.toAvalaraDetailLevel())
+                .with("referenceCode", referenceCode)
+                .with("locationCode", locationCode)
+                .with("commit", commit)
+                .with("batchCode", batchCode)
+                .with("taxOverride", taxOverride)
+                .with("currencyCode", currencyCode)
+                .with("serviceMode", serviceMode.toAvalaraServiceMode())
+                .with("paymentDate", paymentDate)
+                .with("exchangeRate", exchangeRateDecimal)
+                .with("exchangeRateEffDate", exchangeRateEffDate).build(), GetTaxRequest.class);
+
+        return apiClient.sendToAvalara(account, license, avalaraClient, TaxRequestType.AdjustTax, mom.unmap(
+                new MapBuilder()
+                        .with("adjustmentReason", adjustmentReason)
+                        .with("adjustmentDescription", adjustmentDescription)
+                        .with("getTaxRequest", getTaxRequest)
+                        .build(), AdjustTaxRequest.class
+        )
+        );
+    }
+
 
     /**
      * Post Tax processor
