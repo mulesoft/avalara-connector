@@ -299,6 +299,16 @@ Summary:
 	 
     <tr class="alt-color api apilevel-" >
         <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../mule/avalara-config.html#adjust-tax">&lt;avalara:adjust-tax&gt;</a></nobr>
+        
+        <div class="jd-descrdiv">Adjust Tax processor.</div>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/avalara-config.html#cancel-tax">&lt;avalara:cancel-tax&gt;</a></nobr>
         
         <div class="jd-descrdiv">Cancel tax, indicating the document that should be cancelled and the reason
@@ -308,7 +318,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/avalara-config.html#commit-tax">&lt;avalara:commit-tax&gt;</a></nobr>
         
@@ -320,7 +330,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/avalara-config.html#get-tax">&lt;avalara:get-tax&gt;</a></nobr>
         
@@ -330,7 +340,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/avalara-config.html#get-tax-history">&lt;avalara:get-tax-history&gt;</a></nobr>
         
@@ -342,7 +352,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/avalara-config.html#post-tax">&lt;avalara:post-tax&gt;</a></nobr>
         
@@ -354,7 +364,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/avalara-config.html#validate-address">&lt;avalara:validate-address&gt;</a></nobr>
         
@@ -466,6 +476,626 @@ specify which configuration to use.</p>
 
     
     
+
+
+<A NAME="adjust-tax"></A>
+
+<div class="jd-details api apilevel-">
+    <h4 class="jd-details-title">
+      <span class="sympad">&lt;avalara:adjust-tax&gt;</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Adjust Tax processor.
+ <p>
+ The Get Tax operation calculates tax for one or more invoiced items and
+ displays details describing the calculation of tax for each line item.
+
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;avalara:adjust-tax
+			 account="avalaraAccount"
+    		 license="avalaraLicense"
+    		 avalaraClient="avalaraClient"
+    		 adjustmentReason="0"
+    		 adjustmentDescription="Reson for the adjustment"
+			 companyCode="some company code"
+             docType="PURCHASE_ORDER"
+             docCode="some doc code"
+             docDate-ref="2010-09-13T01:18:14-07:00"
+             salespersonCode="some sales person code"
+             customerCode="some customer code"
+             customerUsageType="some customer usage type"
+             discount="0.2"
+             purchaseOrderNo="some purchase order number"
+             exemptionNo="some exemption number"
+             originCode="some origin code"
+             destinationCode="some destination code"
+             detailLevel="TAX"
+             referenceCode="some reference code"
+             locationCode="some location code"
+             commit="false"
+             batchCode="some batch code"
+             currencyCode="some currency code"
+             serviceMode="LOCAL"
+             paymentDate-ref="2010-09-13T01:18:14-07:00"
+             exchangeRate="some exchange rate"
+             exchangeRateEffDate-ref="2010-09-13T01:18:14-07:00" &gt;
+
+&lt;avalara:base-addresses&gt;
+    &lt;avalara:base-address&gt;
+        &lt;addressCode&gt;some origin code&lt;/addressCode&gt;
+        &lt;line1&gt;some line 1&lt;/line1&gt;
+        &lt;line2&gt;some line 2&lt;/line2&gt;
+        &lt;line3&gt;some line 3&lt;/line3&gt;
+        &lt;city&gt;some city&lt;/city&gt;
+        &lt;region&gt;some region&lt;/region&gt;
+        &lt;postalCode&gt;some postal code&lt;/postalCode&gt;
+        &lt;country&gt;some country&lt;/country&gt;
+        &lt;taxRegionId&gt;3&lt;/taxRegionId&gt;
+        &lt;latitude&gt;some latitude&lt;/latitude&gt;
+        &lt;longitude&gt;some longitude&lt;/longitude&gt;
+    &lt;/avalara:base-address&gt;
+    &lt;avalara:base-address&gt;
+        &lt;addressCode&gt;some destination code&lt;/addressCode&gt;
+        &lt;line1&gt;some line 1&lt;/line1&gt;
+        &lt;line2&gt;some line 2&lt;/line2&gt;
+        &lt;line3&gt;some line 3&lt;/line3&gt;
+        &lt;city&gt;some city&lt;/city&gt;
+        &lt;region&gt;some region&lt;/region&gt;
+        &lt;postalCode&gt;some postal code&lt;/postalCode&gt;
+        &lt;country&gt;some country&lt;/country&gt;
+        &lt;taxRegionId&gt;3&lt;/taxRegionId&gt;
+        &lt;latitude&gt;some latitude&lt;/latitude&gt;
+        &lt;longitude&gt;some longitude&lt;/longitude&gt;
+    &lt;/avalara:base-address&gt;
+&lt;/avalara:base-addresses&gt;
+&lt;avalara:lines&gt;
+    &lt;avalara:line&gt;
+        &lt;no&gt;some number&lt;/no&gt;
+        &lt;originCode&gt;some origin code&lt;/originCode&gt;
+        &lt;destinationCode&gt;some destination code&lt;/destinationCode&gt;
+        &lt;itemCode&gt;some item code&lt;/itemCode&gt;
+        &lt;taxCode&gt;some tax code&lt;/taxCode&gt;
+        &lt;qty&gt;#[groovy: new BigDecimal(3.0)]&lt;/qty&gt;
+        &lt;amount&gt;#[groovy: new BigDecimal(500.5)]&lt;/amount&gt;
+        &lt;discounted&gt;true&lt;/discounted&gt;
+        &lt;revAcct&gt;some rev acct&lt;/revAcct&gt;
+        &lt;ref1&gt;some reference 1&lt;/ref1&gt;
+        &lt;ref2&gt;some reference 2&lt;/ref2&gt;
+        &lt;exemptionNo&gt;some exemption number&lt;/exemptionNo&gt;
+        &lt;customerUsageType&gt;some customer usage type&lt;/customerUsageType&gt;
+        &lt;description&gt;some description&lt;/description&gt;
+        &lt;taxOverride&gt;#[groovy: [ 'taxOverrideType' : TaxOverrideType.TAX_AMOUNT,
+                                 'taxAmount' : 10.0G ,
+                                 'taxDate' : new Date() ,
+                                 'reason' : 'some reason' ] ]
+        &lt;/taxOverride&gt;
+        &lt;taxIncluded&gt;false&lt;/taxIncluded&gt;
+    &lt;/avalara:line&gt;
+&lt;/avalara:lines&gt;
+&lt;avalara:tax-override&gt;
+    &lt;taxOverrideType&gt;TAX_AMOUNT&lt;/taxOverrideType&gt;
+    &lt;taxAmount&gt;#[groovy: new BigDecimal(9.3)]&lt;/taxAmount&gt;
+    &lt;taxDate&gt;#[groovy: new Date()]&lt;/taxDate&gt;
+    &lt;reason&gt;some reason&lt;/reason&gt;
+&lt;/avalara:tax-override&gt;
+&lt;/avalara:adjust-tax&gt;</pre></div></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Attributes</h5>
+
+        <table id="lconfig" class="jd-sumtable">
+        <tr><th>Name</th><th>Default Value</th><th>Description</th><th>Java Type</th><th>MIME Type</th><th>Encoding</th></tr>
+        <tr>
+          <td class="jd-linkcol"><nobr>config-ref</nobr></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol"></td>
+        </tr>
+          
+          
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>account</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">Avalara's account</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>license</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">Avalara's license</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>avalaraClient</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">Avalara's client</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>adjustmentReason</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">The reason for this tax adjustment.</td>
+                        <td class="jd-descrcol">int</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol"></td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>adjustmentDescription</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">A description of a tax adjustment.</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>companyCode</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">Client application company reference code</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>docType</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">The document type specifies the category of the document and affects
+                how the document is treated after a tax calculation; see
+                <code><a href="../java/org/mule/modules/avalara/AvalaraDocumentType.html">AvalaraDocumentType</a></code> for more information about the specific
+                document types.</td>
+                        <td class="jd-descrcol"><a href="../java/org/mule/modules/avalara/AvalaraDocumentType.html">AvalaraDocumentType</a></td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol"></td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>docCode</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>The internal reference code used by the client application.</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>docDate</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">Date of invoice, purchase order, etc.</td>
+                        <td class="jd-descrcol">XMLGregorianCalendar</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol"></td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>salespersonCode</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>The client application salesperson reference code.</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>customerCode</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">Client application customer reference code</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>customerUsageType</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Client application customer or usage type.
+                          CustomerUsageType determines the exempt status of
+                          the transaction based on the exemption tax rules for
+                          the jurisdictions involved. CustomerUsageType may
+                          also be set at the line item level. <p>
+                          The standard values for the CustomerUsageType (A-L).<br/>
+    A Federal Government<br/>
+    B State/Local Govt.<br/>
+    C Tribal Government<br/>
+    D Foreign Diplomat<br/>
+    E Charitable Organization<br/>
+    F Religious/Education<br/>
+    G Resale<br/>
+    H Agricultural Production<br/>
+    I Industrial Prod/Mfg.<br/>
+    J Direct Pay Permit<br/>
+    K Direct Mail<br/>
+    L - Other</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>discount</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">The discount amount to apply to the document. The string
+                 represents a BigDecimal.</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>purchaseOrderNo</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Purchase order identifier. PurchaseOrderNo is required
+                        for single use exemption certificates to match the
+                        order and invoice with the certificate.</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>exemptionNo</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Exemption number used for this transaction</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>originCode</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">Code that refers one of the address of the baseAddress collection.
+                   It has to be the same code of one of the address's addressCode.
+                   It represents the origin address.</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>destinationCode</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">Code that refers one of the address of the baseAddress collection.
+                        It has to be the same code of one of the address's addressCode.
+                        It represents the destination address.</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+                
+          
+                
+          
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>detailLevel</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">Specifies the level of tax detail to return</td>
+                        <td class="jd-descrcol"><a href="../java/org/mule/modules/avalara/DetailLevelType.html">DetailLevelType</a></td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol"></td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>referenceCode</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>For returns (see <code><a href="../java/org/mule/modules/avalara/AvalaraDocumentType.html">AvalaraDocumentType</a></code>), refers to the
+                      <code><a href="../java/com/avalara/avatax/services/AdjustTaxRequest.html">AdjustTaxRequest</a></code> of the original invoice.</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>locationCode</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Location Code value. It is Also referred to as a Store
+                     Location, Outlet Id, or Outlet code is a number assigned by
+                     the State which identifies a Store location. Some state returns
+                     require taxes are broken out separately for Store Locations.</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>commit</nobr></td>
+                        <td class="jd-descrcol">false</td>
+                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Commit flag. If Commit is set to true, tax for the transaction
+               is saved, posted and committed as tax document.</td>
+                        <td class="jd-descrcol">boolean</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol"></td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>batchCode</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>The batchCode value.</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+                
+          
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>currencyCode</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>It is 3 character ISO 4217 currency code.</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>serviceMode</nobr></td>
+                        <td class="jd-descrcol">AUTOMATIC</td>
+                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>This is only supported by AvaLocal servers. It provides the
+                    ability to controls whether tax is calculated locally or remotely
+                    when using an AvaLocal server. The default is Automatic which
+                    calculates locally unless remote is necessary for non-local
+                    addresses.</td>
+                        <td class="jd-descrcol"><a href="../java/org/mule/modules/avalara/ServiceModeType.html">ServiceModeType</a></td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol"></td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>paymentDate</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">The date on which payment was made.</td>
+                        <td class="jd-descrcol">XMLGregorianCalendar</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol"></td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>exchangeRate</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">The exchange rate value. The string represents a
+                     BigDecimal</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>exchangeRateEffDate</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">The exchange rate effective date value.</td>
+                        <td class="jd-descrcol">XMLGregorianCalendar</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol"></td>
+                    </tr>
+                
+                
+          
+          
+          
+        </table>
+  </div>
+  
+      <div class="jd-tagdata">
+          <h5 class="jd-tagtitle">Child Elements</h5>
+            <table id="lconfig" class="jd-sumtable">
+              
+              <tr><th>Name</th><th>Default Value</th><th>Description</th><th>Java Type</th></td>
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+                    <tr>
+                        <td><nobr>&lt;avalara:base-addresses&gt;</nobr></td>
+                        <td></td>
+                        <td>Collection of physical addresses that will be referred
+                      to as the destination or origination of 1 or more invoice
+                      line entries</td>
+                        <td>List&lt;Map&lt;String,&nbsp;Object&gt;&gt;</td>
+                    </tr>
+                
+                
+              
+                
+                    <tr>
+                        <td><nobr>&lt;avalara:lines&gt;</nobr></td>
+                        <td></td>
+                        <td>Collection of invoice lines requiring tax calculation</td>
+                        <td>List&lt;Map&lt;String,&nbsp;Object&gt;&gt;</td>
+                    </tr>
+                
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+                    <tr>
+                        <td><nobr>&lt;avalara:tax-override&gt;</nobr></td>
+                        <td></td>
+                        <td><i>Optional.&nbsp;</i>Indicates to apply tax override to the document.</td>
+                        <td>Map&lt;String,&nbsp;Object&gt;</td>
+                    </tr>
+                
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+          </table>
+      </div>
+  
+  
+      <div class="jd-tagdata">
+         <h5 class="jd-tagtitle">Returns</h5>
+         <table id="lconfig" class="jd-sumtable">
+             <tr>
+                <th>Return Type</th>
+                <th>Description</th>
+             </tr>
+             <tr>
+                <td class="jd-descrcol"><a href="../java/com/avalara/avatax/services/AdjustTaxResult.html">AdjustTaxResult</a></td>
+                <td class="jd-descrcol">The <code><a href="../java/com/avalara/avatax/services/AdjustTaxResult.html">AdjustTaxResult</a></code></td>
+             </tr>
+         </table>
+  </div>
+    
+  
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Exception Payloads</h5>
+      <table class="jd-sumtable">
+        <tr><th>Payload Class</th><th>Description</th></tr>
+        
+        <tr>
+            <td><a href="../java/org/mule/modules/avalara/exception/AvalaraRuntimeException.html">AvalaraRuntimeException</a></td>
+            <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
 
 
 <A NAME="cancel-tax"></A>
