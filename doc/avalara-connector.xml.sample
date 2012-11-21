@@ -251,3 +251,30 @@
                           taxability="false"
                           date-ref="2010-09-13T01:18:14-07:00" />
 <!-- END_INCLUDE(avalara:validate-address) -->
+
+<!-- BEGIN_INCLUDE(avalara:fetch-batch-file) -->
+<avalara:fetch-batch-file
+						  account="avalaraAccount"
+        		    	  license="avalaraLicense"
+		    	    	  avalaraClient="avalaraClient"
+		    	    	  batchId="123456"/>
+<!-- END_INCLUDE(avalara:fetch-batch-file) -->
+
+<!-- BEGIN_INCLUDE(avalara:save-batch) -->
+<avalara:save-batch
+						  consoleUserName="avalaraAccount"
+        		    	  consolePassword="avalaraLicense"
+		    	    	  avalaraClient="avalaraClient"
+		    	    	  batchType="TRANSACTION_IMPORT"
+		    	    	  companyId="123546"
+		    	    	  content="some content"
+		    	    	  batchName="some batch name"/>
+<!-- END_INCLUDE(avalara:save-batch) -->
+
+<!-- BEGIN_INCLUDE(avalara:is-batch-finished) -->
+<avalara:is-batch-finished
+						  account="avalaraAccount"
+                          license="avalaraLicense"
+		    	    	  avalaraClient="avalaraClient"
+		    	    	  batchId="123456"/>
+<!-- END_INCLUDE(avalara:is-batch-finished) -->
