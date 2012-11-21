@@ -18,6 +18,7 @@ import org.mule.api.annotations.Processor;
 import org.mule.api.annotations.display.Placement;
 import org.mule.api.annotations.param.Default;
 import org.mule.api.annotations.param.Optional;
+import org.mule.api.annotations.param.Payload;
 import org.mule.modules.avalara.api.AvalaraClient;
 import org.mule.modules.avalara.api.DefaultAvalaraClient;
 import org.mule.modules.avalara.api.MapBuilder;
@@ -26,13 +27,16 @@ import org.mule.modules.utils.mom.JaxbMapObjectMappers;
 
 import com.zauberlabs.commons.mom.MapObjectMapper;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.annotation.PostConstruct;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 /**
@@ -65,6 +69,17 @@ public class AvalaraModule
     @Default("https://development.avalara.net/Address/AddressSvc.asmx")
     @Placement(group = "Connection")
     private String addressServiceEndpoint;
+
+
+    /**
+     * Batch Webservice endpoint
+     */
+    @Configurable
+    @Optional
+    @Default("https://development.avalara.net/Batch/BatchSvc.asmx")
+    @Placement(group = "Connection")
+    private String batchServiceEndpoint;
+
     
     /**
      * Avalara's application client. By default uses DefaultAvalaraClient class.
@@ -663,7 +678,7 @@ public class AvalaraModule
         address.setPostalCode(postalCode);
         address.setRegion(region);
         address.setTaxRegionId(taxRegionId);
-        
+
         return apiClient.validateAddress(
             account, license, avalaraClient, 
             (ValidateRequest) mom.unmap(            
@@ -677,6 +692,180 @@ public class AvalaraModule
             )
         );
     }
+
+     // Albin: Does not seem to be a way to get the content of the batch file using this method.
+    /**
+     * Batch Fetch processor.
+     * <p>
+     * Fetches a Batch result
+     *
+     * {@sample.xml ../../../doc/avalara-connector.xml.sample avalara:fetch-batch}
+     *
+     * @param account Avalara's account
+     * @param license Avalara's license
+     * @param avalaraClient Avalara's client
+     * @param maxCount The max count from the batch.
+     * @param pageIndex The page index of tha batch.
+     * @param pageSize The size of the page.
+     * @param recordCount City name. Required, when PostalCode is not specified.
+     * @param fields The fileds to be returned.
+     * @param filters Which filters to apply.
+     * @param sort Which order the app should be sorted in.
+     * @return The {@link BatchFetchResult}
+     *
+     * @throws AvalaraRuntimeException
+
+    @Processor
+    public BatchFetchResult fetchBatch(String account, String license, String avalaraClient)
+
+                                          int maxCount,
+                                          int pageIndex,
+                                          int pageSize,
+                                          int recordCount,
+                                          @Optional String fields,
+                                          @Optional String filters,
+                                          @Optional String sort)
+
+    {
+
+        FetchRequest fetchRequest = new FetchRequest();
+        fetchRequest.setFields("*,Content");
+        fetchRequest.setFilters("BatchId=129829");
+        //fetchRequest.setMaxCount(maxCount);
+        //fetchRequest.setPageIndex(pageIndex);
+        //fetchRequest.setPageSize(pageSize);
+        //fetchRequest.setRecordCount(recordCount);
+        //fetchRequest.setSort(sort);
+
+        return apiClient.fetchBatch(account, license, avalaraClient, fetchRequest);
+    }
+    */
+    /**
+     * Batch Fetch processor.
+     * <p>
+     * Fetches a Batch result
+     *
+     * {@sample.xml ../../../doc/avalara-connector.xml.sample avalara:fetch-batch-file}
+     *
+     * @param account Avalara's account
+     * @param license Avalara's license
+     * @param avalaraClient Avalara's client
+     * @param batchId The numerical identifier of the BatchFile.
+     * @return The {@link Map<String,BatchFileFetchResult>}
+     *
+     * @throws AvalaraRuntimeException
+     */
+    @Processor
+    public Map<String,BatchFileFetchResult> fetchBatchFile(String account, String license, String avalaraClient, String batchId)
+    {
+        //Albin This Request is needed to retrive the batch file ids. The actual content cannot be retrieved at once.
+        FetchRequest batchFetchRequest = new FetchRequest();
+        batchFetchRequest.setFields("Files");
+        batchFetchRequest.setFilters("BatchId="+batchId);
+        BatchFetchResult batchFetchResult = apiClient.fetchBatch(account, license, avalaraClient, batchFetchRequest);
+        Map<String,BatchFileFetchResult> resultHashMap = new HashMap<String, BatchFileFetchResult>();
+        //Albin: This is in order to be able to return result and error file to the caller.
+        for(BatchFile bf : batchFetchResult.getBatches().getBatch().get(0).getFiles().getBatchFile()){
+            if(bf.getName().equalsIgnoreCase("Result")){
+                FetchRequest fetchRequest = new FetchRequest();
+                fetchRequest.setFields("*,Content");
+                fetchRequest.setFilters("BatchFileId="+bf.getBatchFileId());
+                resultHashMap.put("result",apiClient.fetchBatchFile(account, license, avalaraClient, fetchRequest));
+            }else if(bf.getName().equalsIgnoreCase("Error")){
+                FetchRequest fetchRequest = new FetchRequest();
+                fetchRequest.setFields("*,Content");
+                fetchRequest.setFilters("BatchFileId="+bf.getBatchFileId());
+                resultHashMap.put("error",apiClient.fetchBatchFile(account, license, avalaraClient, fetchRequest));
+            }
+        }
+
+        return resultHashMap;
+    }
+
+
+    /**
+     * Has the Batch Processing finished
+     * <p>
+     * Fetches a Batch result
+     *
+     * {@sample.xml ../../../doc/avalara-connector.xml.sample avalara:is-batch-finished}
+     *
+     * @param account Avalara's account
+     * @param license Avalara's license
+     * @param avalaraClient Avalara's client
+     * @param batchId The numerical identifier of the BatchFile.
+     * @return The {@link Map<String,BatchFileFetchResult>}
+     *
+     * @throws AvalaraRuntimeException
+     */
+    @Processor
+    public boolean isBatchFinished(String account, String license, String avalaraClient, String batchId)
+    {
+        //Albin This Request is needed to retrive the batch file ids. The actual content cannot be retrieved at once.
+        FetchRequest batchFetchRequest = new FetchRequest();
+        //batchFetchRequest.setFields("Files");
+        batchFetchRequest.setFilters("BatchId="+batchId);
+        BatchFetchResult batchFetchResult = apiClient.fetchBatch(account, license, avalaraClient, batchFetchRequest);
+        if(batchFetchResult.getBatches().getBatch().get(0).getRecordCount() > batchFetchResult.getBatches().getBatch().get(0).getCurrentRecord()){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+
+    /**
+     * Batch Save processor.
+     * <p>
+     * Saves a Batch
+     *
+     * {@sample.xml ../../../doc/avalara-connector.xml.sample avalara:save-batch}
+     *
+     * @param consoleUserName The username that is used to login to the Avalara console (UI).
+     * @param consolePassword The password that is used to login to the Avalara console (UI).
+     * @param avalaraClient Avalara's client
+     * @param batchType The kind of records to be imported.
+     * @param companyId The id of the company. (Need to be retrived from address bar in Avalara after hitting the Organization Tab)
+     * @param content The content of this import, usually a csv file.
+     * @param batchName The name of the batch.
+     * @return The {@link BatchSaveResult}
+     *
+     * @throws AvalaraRuntimeException
+     */
+
+    @Processor
+    public BatchSaveResult saveBatch(String consoleUserName, String consolePassword, String avalaraClient,
+                                       BatchType batchType,
+                                       int companyId,
+                                       String content,
+                                       @Optional String batchName)
+    {
+        //Batch object to contain the file.
+        //Have tested batchfile as well but all examples from Avalara is using this one.
+        Batch batch = new Batch();
+        batch.setName(batchName);
+
+        batch.setBatchTypeId(batchType.value());
+        batch.setCompanyId(companyId);
+
+        BatchFile batchFile = new BatchFile();
+        //Thought this had to be base64 encoded but cxf seems to take care of that.
+        batchFile.setContent(content.getBytes());
+        batchFile.setContentType("application/csv");
+        //The file extension will have to be here otherwise Avalara will respond that Ext is missing.
+        batchFile.setName(batchName+".csv");
+        List<BatchFile> batchFileList = new ArrayList<BatchFile>();
+        ArrayOfBatchFile arrayOfBatchFile = new ArrayOfBatchFile();
+        arrayOfBatchFile.getBatchFile().add(batchFile);
+        batchFileList.add(batchFile);
+        batch.setFiles(arrayOfBatchFile);
+        return apiClient.saveBatch(consoleUserName, consolePassword, avalaraClient, batch);
+    }
+
+
+
+
+
     /**
      * 
      */
@@ -714,6 +903,14 @@ public class AvalaraModule
 
     public void setAddressServiceEndpoint(String addressServiceEndpoint) {
         this.addressServiceEndpoint = addressServiceEndpoint;
+    }
+
+    public String getBatchServiceEndpoint() {
+        return batchServiceEndpoint;
+    }
+
+    public void setBatchServiceEndpoint(String batchServiceEndpoint) {
+        this.batchServiceEndpoint = batchServiceEndpoint;
     }
     
 }

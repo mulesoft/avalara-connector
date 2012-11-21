@@ -8,20 +8,13 @@
 
 package org.mule.modules.avalara.api;
 
+import com.avalara.avatax.services.*;
 import org.apache.commons.lang.Validate;
+import org.mule.modules.avalara.BatchType;
 import org.mule.modules.avalara.TaxRequestType;
 import org.mule.modules.avalara.exception.AvalaraRuntimeException;
 import org.mule.modules.avalara.util.AvalaraProfileHandler;
 
-import com.avalara.avatax.services.AddressSvc;
-import com.avalara.avatax.services.AddressSvcSoap;
-import com.avalara.avatax.services.BaseResult;
-import com.avalara.avatax.services.PingResult;
-import com.avalara.avatax.services.SeverityLevel;
-import com.avalara.avatax.services.TaxSvc;
-import com.avalara.avatax.services.TaxSvcSoap;
-import com.avalara.avatax.services.ValidateRequest;
-import com.avalara.avatax.services.ValidateResult;
 import com.zauberlabs.commons.ws.connection.ConnectionBuilder;
 import com.zauberlabs.commons.ws.security.Credential;
 
@@ -30,6 +23,7 @@ import java.lang.reflect.InvocationTargetException;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 
@@ -41,8 +35,11 @@ public class DefaultAvalaraClient implements AvalaraClient
 {
     private TaxSvcSoap taxSvcSoap;
     private AddressSvcSoap addressSvcSoap;
+    private BatchSvcSoap batchSvcSoap;
+
     private String addressEndpoint;
     private String taxEndpoint;
+    private String batchEndpoint;
     
     private ThreadLocal<String> usernameLocal = new ThreadLocal<String>();
     private ThreadLocal<String> passwordLocal = new ThreadLocal<String>();
@@ -100,6 +97,27 @@ public class DefaultAvalaraClient implements AvalaraClient
         setCredential(account, license, client);
         return getAddressService().validate(validateRequest);
     }
+
+    @Override
+    public BatchFetchResult fetchBatch(String account, String license, String client, FetchRequest fetchRequest)
+    {
+        setCredential(account, license, client);
+        return getBatchService().batchFetch(fetchRequest);
+    }
+
+    @Override
+    public BatchFileFetchResult fetchBatchFile(String account, String license, String client, FetchRequest fetchRequest)
+    {
+        setCredential(account, license, client);
+        return getBatchService().batchFileFetch(fetchRequest);
+    }
+
+    @Override
+    public BatchSaveResult saveBatch(String account, String license, String client, Batch batch)
+    {
+        setCredential(account, license, client);
+        return getBatchService().batchSave(batch);
+    }
     
     public String getUsername()
     {
@@ -125,6 +143,15 @@ public class DefaultAvalaraClient implements AvalaraClient
         return addressSvcSoap;
     }
 
+    protected BatchSvcSoap getBatchService()
+    {
+        if (batchSvcSoap == null)
+        {
+            batchSvcSoap = createConnection(BatchSvcSoap.class, BatchSvc.class, "batch", BatchSvc.BatchSvcSoap, getBatchEndpoint());
+        }
+        return batchSvcSoap;
+    }
+
     protected TaxSvcSoap getTaxService()
     {
         if (taxSvcSoap == null)
@@ -137,6 +164,8 @@ public class DefaultAvalaraClient implements AvalaraClient
     
     protected <A> A createConnection(Class<A> portType, Class<? extends Service> serviceType, String schemaName, QName portName, String endpoint)
     {
+
+        System.out.println();
         return ConnectionBuilder.fromPortType(portType)
             .withServiceType(serviceType)
             .withClasspathWsdl(schemaLocation(schemaName))
@@ -180,6 +209,10 @@ public class DefaultAvalaraClient implements AvalaraClient
 
     public String getAddressEndpoint() {
         return addressEndpoint;
+    }
+
+    public String getBatchEndpoint() {
+        return batchEndpoint;
     }
 
     public void setAddressEndpoint(String addressEndpoint) {
