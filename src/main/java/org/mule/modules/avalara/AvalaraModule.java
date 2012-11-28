@@ -803,10 +803,9 @@ public class AvalaraModule
     {
         //Albin This Request is needed to retrive the batch file ids. The actual content cannot be retrieved at once.
         FetchRequest batchFetchRequest = new FetchRequest();
-        //batchFetchRequest.setFields("Files");
         batchFetchRequest.setFilters("BatchId="+batchId);
         BatchFetchResult batchFetchResult = apiClient.fetchBatch(account, license, avalaraClient, batchFetchRequest);
-        if(batchFetchResult.getBatches().getBatch().get(0).getRecordCount() > batchFetchResult.getBatches().getBatch().get(0).getCurrentRecord()){
+        if(batchFetchResult.getBatches().getBatch().size() == 0 || (batchFetchResult.getBatches().getBatch().get(0).getRecordCount() > batchFetchResult.getBatches().getBatch().get(0).getCurrentRecord())){
             return false;
         }else{
             return true;
