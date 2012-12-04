@@ -72,8 +72,22 @@ public class AvalaraModule
     private AvalaraClient apiClient;
     
     private final MapObjectMapper mom = JaxbMapObjectMappers.defaultWithPackage("com.avalara.avatax.services").build();
-    
-    public PingResult ping(String account, String license, String avalaraClient, String message)
+
+    /**
+     * Ping Avalara to test connectivity and version of the service.
+     *
+     * {@sample.xml ../../../doc/avalara-connector.xml.sample avalara:ping}
+     *
+     * @param account Avalara's account
+     * @param license Avalara's license
+     * @param avalaraClient Avalara's client
+     * @param message Ping Message
+     * @return The {@link PingResult}
+     *
+     * @throws AvalaraRuntimeException
+     */
+    @Processor
+    public PingResult ping(String account, String license, String avalaraClient, @Optional String message)
     {
         return apiClient.ping(account, license, avalaraClient, message);
     }
