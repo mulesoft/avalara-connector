@@ -48,6 +48,10 @@
                                     <wsdl>src/main/resources/schema/addresssvc.wsdl</wsdl>
                                     <autoNameResolution>true</autoNameResolution>
                                 </wsdlOption>
+                                <wsdlOption>
+                                    <wsdl>src/main/resources/schema/batchsvc.wsdl</wsdl>
+                                    <autoNameResolution>true</autoNameResolution>
+                                </wsdlOption>
                             </wsdlOptions>
                         </configuration>
                     </execution>
