@@ -858,6 +858,18 @@ org.mule.api.lifecycle.Stoppable
           <td class="jd-typecol"><nobr>
           private
           
+          
+          String</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/AvalaraModule.html#batchServiceEndpoint">batchServiceEndpoint</a></td>
+          <td class="jd-descrcol" width="100%">Batch Webservice endpoint
+</td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
           final
           MapObjectMapper</nobr></td>
           <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/AvalaraModule.html#mom">mom</a></td>
@@ -865,7 +877,7 @@ org.mule.api.lifecycle.Stoppable
       </tr>
       
     
-      <tr class=" api apilevel-" >
+      <tr class="alt-color api apilevel-" >
           <td class="jd-typecol"><nobr>
           private
           
@@ -1279,10 +1291,44 @@ From class
             
             
             
+            Map&lt;String,&nbsp;<a href="../../../../../../java/com/avalara/avatax/services/BatchFileFetchResult.html">BatchFileFetchResult</a>&gt;</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/AvalaraModule.html#fetchBatchFile(java.lang.String, java.lang.String, java.lang.String, java.lang.String)">fetchBatchFile</a></span>(String account, String license, String avalaraClient, String batchId)</nobr>
+        
+        <div class="jd-descrdiv">Batch Fetch processor.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
             String</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/AvalaraModule.html#getAddressServiceEndpoint()">getAddressServiceEndpoint</a></span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/AvalaraModule.html#getBatchServiceEndpoint()">getBatchServiceEndpoint</a></span>()</nobr>
         
   </td></tr>
 
@@ -1365,16 +1411,40 @@ From class
             
             
             
-            <a href="../../../../../../java/com/avalara/avatax/services/PingResult.html">PingResult</a></nobr>
+            boolean</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/AvalaraModule.html#ping(java.lang.String, java.lang.String, java.lang.String, java.lang.String)">ping</a></span>(String account, String license, String avalaraClient, String message)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/AvalaraModule.html#isBatchFinished(java.lang.String, java.lang.String, java.lang.String, java.lang.String)">isBatchFinished</a></span>(String account, String license, String avalaraClient, String batchId)</nobr>
         
+        <div class="jd-descrdiv">Has the Batch Processing finished
+ <p>
+ Fetches a Batch result
+
+ </div>
+  
   </td></tr>
 
 
 	 
     <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            <a href="../../../../../../java/com/avalara/avatax/services/PingResult.html">PingResult</a></nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/AvalaraModule.html#ping(java.lang.String, java.lang.String, java.lang.String, java.lang.String)">ping</a></span>(String account, String license, String avalaraClient, String message)</nobr>
+        
+        <div class="jd-descrdiv">Ping Avalara to test connectivity and version of the service.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1389,6 +1459,24 @@ From class
         <div class="jd-descrdiv">Post Tax processor
 
  </div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            <a href="../../../../../../java/com/avalara/avatax/services/BatchSaveResult.html">BatchSaveResult</a></nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/AvalaraModule.html#saveBatch(java.lang.String, java.lang.String, java.lang.String, org.mule.modules.avalara.BatchType, int, java.lang.String, java.lang.String)">saveBatch</a></span>(String consoleUserName, String consolePassword, String avalaraClient, <a href="../../../../../../java/org/mule/modules/avalara/BatchType.html">BatchType</a> batchType, int companyId, String content, String batchName)</nobr>
+        
+        <div class="jd-descrdiv">Batch Save processor.</div>
   
   </td></tr>
 
@@ -1420,6 +1508,22 @@ From class
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/AvalaraModule.html#setBatchServiceEndpoint(java.lang.String)">setBatchServiceEndpoint</a></span>(String batchServiceEndpoint)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/AvalaraModule.html#setClient(org.mule.modules.avalara.api.AvalaraClient)">setClient</a></span>(<a href="../../../../../../java/org/mule/modules/avalara/api/AvalaraClient.html">AvalaraClient</a> client)</nobr>
         
         <div class="jd-descrdiv">Sets the apiClient.</div>
@@ -1428,7 +1532,7 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1444,7 +1548,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             

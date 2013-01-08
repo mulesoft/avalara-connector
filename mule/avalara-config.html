@@ -332,6 +332,16 @@ Summary:
 	 
     <tr class=" api apilevel-" >
         <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../mule/avalara-config.html#fetch-batch-file">&lt;avalara:fetch-batch-file&gt;</a></nobr>
+        
+        <div class="jd-descrdiv">Batch Fetch processor.</div>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/avalara-config.html#get-tax">&lt;avalara:get-tax&gt;</a></nobr>
         
         <div class="jd-descrdiv">Get Tax processor.</div>
@@ -340,7 +350,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/avalara-config.html#get-tax-history">&lt;avalara:get-tax-history&gt;</a></nobr>
         
@@ -352,13 +362,47 @@ Summary:
 
 
 	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../mule/avalara-config.html#is-batch-finished">&lt;avalara:is-batch-finished&gt;</a></nobr>
+        
+        <div class="jd-descrdiv">Has the Batch Processing finished
+ <p>
+ Fetches a Batch result
+
+ </div>
+        
+  </td></tr>
+
+
+	 
     <tr class=" api apilevel-" >
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../mule/avalara-config.html#ping">&lt;avalara:ping&gt;</a></nobr>
+        
+        <div class="jd-descrdiv">Ping Avalara to test connectivity and version of the service.</div>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/avalara-config.html#post-tax">&lt;avalara:post-tax&gt;</a></nobr>
         
         <div class="jd-descrdiv">Post Tax processor
 
  </div>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../mule/avalara-config.html#save-batch">&lt;avalara:save-batch&gt;</a></nobr>
+        
+        <div class="jd-descrdiv">Batch Save processor.</div>
         
   </td></tr>
 
@@ -441,6 +485,19 @@ specify which configuration to use.</p>
       
     
       <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          xs:string</nobr></td>
+          <td class="jd-linkcol"><nobr>batchServiceEndpoint</nobr></td>
+          <td class="jd-descrcol">https://development.avalara.net/Batch/BatchSvc.asmx</td>
+          <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Batch Webservice endpoint
+</td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol"></td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
           <td class="jd-typecol"><nobr>
           xs:string</nobr></td>
           <td class="jd-linkcol"><nobr>taxServiceEndpoint</nobr></td>
@@ -1451,6 +1508,128 @@ specify which configuration to use.</p>
 </div>
 
 
+<A NAME="fetch-batch-file"></A>
+
+<div class="jd-details api apilevel-">
+    <h4 class="jd-details-title">
+      <span class="sympad">&lt;avalara:fetch-batch-file&gt;</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Batch Fetch processor.
+ <p>
+ Fetches a Batch result
+
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;avalara:fetch-batch-file
+						  account="avalaraAccount"
+        		    	  license="avalaraLicense"
+		    	    	  avalaraClient="avalaraClient"
+		    	    	  batchId="123456"/&gt;</pre></div></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Attributes</h5>
+
+        <table id="lconfig" class="jd-sumtable">
+        <tr><th>Name</th><th>Default Value</th><th>Description</th><th>Java Type</th><th>MIME Type</th><th>Encoding</th></tr>
+        <tr>
+          <td class="jd-linkcol"><nobr>config-ref</nobr></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol"></td>
+        </tr>
+          
+          
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>account</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">Avalara's account</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>license</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">Avalara's license</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>avalaraClient</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">Avalara's client</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>batchId</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">The numerical identifier of the BatchFile.</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+          
+          
+        </table>
+  </div>
+  
+  
+      <div class="jd-tagdata">
+         <h5 class="jd-tagtitle">Returns</h5>
+         <table id="lconfig" class="jd-sumtable">
+             <tr>
+                <th>Return Type</th>
+                <th>Description</th>
+             </tr>
+             <tr>
+                <td class="jd-descrcol">Map&lt;String,&nbsp;<a href="../java/com/avalara/avatax/services/BatchFileFetchResult.html">BatchFileFetchResult</a>&gt;</td>
+                <td class="jd-descrcol">The Map<String,BatchFileFetchResult></td>
+             </tr>
+         </table>
+  </div>
+    
+  
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Exception Payloads</h5>
+      <table class="jd-sumtable">
+        <tr><th>Payload Class</th><th>Description</th></tr>
+        
+        <tr>
+            <td><a href="../java/org/mule/modules/avalara/exception/AvalaraRuntimeException.html">AvalaraRuntimeException</a></td>
+            <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
 <A NAME="get-tax"></A>
 
 <div class="jd-details api apilevel-">
@@ -2217,6 +2396,248 @@ specify which configuration to use.</p>
 </div>
 
 
+<A NAME="is-batch-finished"></A>
+
+<div class="jd-details api apilevel-">
+    <h4 class="jd-details-title">
+      <span class="sympad">&lt;avalara:is-batch-finished&gt;</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Has the Batch Processing finished
+ <p>
+ Fetches a Batch result
+
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;avalara:is-batch-finished
+						  account="avalaraAccount"
+                          license="avalaraLicense"
+		    	    	  avalaraClient="avalaraClient"
+		    	    	  batchId="123456"/&gt;</pre></div></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Attributes</h5>
+
+        <table id="lconfig" class="jd-sumtable">
+        <tr><th>Name</th><th>Default Value</th><th>Description</th><th>Java Type</th><th>MIME Type</th><th>Encoding</th></tr>
+        <tr>
+          <td class="jd-linkcol"><nobr>config-ref</nobr></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol"></td>
+        </tr>
+          
+          
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>account</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">Avalara's account</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>license</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">Avalara's license</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>avalaraClient</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">Avalara's client</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>batchId</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">The numerical identifier of the BatchFile.</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+          
+          
+        </table>
+  </div>
+  
+  
+      <div class="jd-tagdata">
+         <h5 class="jd-tagtitle">Returns</h5>
+         <table id="lconfig" class="jd-sumtable">
+             <tr>
+                <th>Return Type</th>
+                <th>Description</th>
+             </tr>
+             <tr>
+                <td class="jd-descrcol">boolean</td>
+                <td class="jd-descrcol">The Map<String,BatchFileFetchResult></td>
+             </tr>
+         </table>
+  </div>
+    
+  
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Exception Payloads</h5>
+      <table class="jd-sumtable">
+        <tr><th>Payload Class</th><th>Description</th></tr>
+        
+        <tr>
+            <td><a href="../java/org/mule/modules/avalara/exception/AvalaraRuntimeException.html">AvalaraRuntimeException</a></td>
+            <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="ping"></A>
+
+<div class="jd-details api apilevel-">
+    <h4 class="jd-details-title">
+      <span class="sympad">&lt;avalara:ping&gt;</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Ping Avalara to test connectivity and version of the service.
+
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;avalara:ping
+					account="avalaraAccount"
+        		    license="avalaraLicense"
+		    	    avalaraClient="avalaraClient"
+					message="a ping Message" /&gt;</pre></div></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Attributes</h5>
+
+        <table id="lconfig" class="jd-sumtable">
+        <tr><th>Name</th><th>Default Value</th><th>Description</th><th>Java Type</th><th>MIME Type</th><th>Encoding</th></tr>
+        <tr>
+          <td class="jd-linkcol"><nobr>config-ref</nobr></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol"></td>
+        </tr>
+          
+          
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>account</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">Avalara's account</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>license</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">Avalara's license</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>avalaraClient</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">Avalara's client</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>message</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Ping Message</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+          
+          
+        </table>
+  </div>
+  
+  
+      <div class="jd-tagdata">
+         <h5 class="jd-tagtitle">Returns</h5>
+         <table id="lconfig" class="jd-sumtable">
+             <tr>
+                <th>Return Type</th>
+                <th>Description</th>
+             </tr>
+             <tr>
+                <td class="jd-descrcol"><a href="../java/com/avalara/avatax/services/PingResult.html">PingResult</a></td>
+                <td class="jd-descrcol">The <code><a href="../java/com/avalara/avatax/services/PingResult.html">PingResult</a></code></td>
+             </tr>
+         </table>
+  </div>
+    
+  
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Exception Payloads</h5>
+      <table class="jd-sumtable">
+        <tr><th>Payload Class</th><th>Description</th></tr>
+        
+        <tr>
+            <td><a href="../java/org/mule/modules/avalara/exception/AvalaraRuntimeException.html">AvalaraRuntimeException</a></td>
+            <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
 <A NAME="post-tax"></A>
 
 <div class="jd-details api apilevel-">
@@ -2435,6 +2856,167 @@ specify which configuration to use.</p>
              <tr>
                 <td class="jd-descrcol"><a href="../java/com/avalara/avatax/services/PostTaxResult.html">PostTaxResult</a></td>
                 <td class="jd-descrcol">The <code><a href="../java/com/avalara/avatax/services/PostTaxResult.html">PostTaxResult</a></code></td>
+             </tr>
+         </table>
+  </div>
+    
+  
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Exception Payloads</h5>
+      <table class="jd-sumtable">
+        <tr><th>Payload Class</th><th>Description</th></tr>
+        
+        <tr>
+            <td><a href="../java/org/mule/modules/avalara/exception/AvalaraRuntimeException.html">AvalaraRuntimeException</a></td>
+            <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="save-batch"></A>
+
+<div class="jd-details api apilevel-">
+    <h4 class="jd-details-title">
+      <span class="sympad">&lt;avalara:save-batch&gt;</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Batch Save processor.
+ <p>
+ Saves a Batch
+
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;avalara:save-batch
+						  consoleUserName="avalaraAccount"
+        		    	  consolePassword="avalaraLicense"
+		    	    	  avalaraClient="avalaraClient"
+		    	    	  batchType="TRANSACTION_IMPORT"
+		    	    	  companyId="123546"
+		    	    	  content="some content"
+		    	    	  batchName="some batch name"/&gt;</pre></div></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Attributes</h5>
+
+        <table id="lconfig" class="jd-sumtable">
+        <tr><th>Name</th><th>Default Value</th><th>Description</th><th>Java Type</th><th>MIME Type</th><th>Encoding</th></tr>
+        <tr>
+          <td class="jd-linkcol"><nobr>config-ref</nobr></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol"></td>
+        </tr>
+          
+          
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>consoleUserName</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">The username that is used to login to the Avalara console (UI).</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>consolePassword</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">The password that is used to login to the Avalara console (UI).</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>avalaraClient</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">Avalara's client</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>batchType</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">The kind of records to be imported.</td>
+                        <td class="jd-descrcol"><a href="../java/org/mule/modules/avalara/BatchType.html">BatchType</a></td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol"></td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>companyId</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">The id of the company. (Need to be retrived from address bar in Avalara after hitting the Organization Tab)</td>
+                        <td class="jd-descrcol">int</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol"></td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>content</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">The content of this import, usually a csv file.</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>batchName</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>The name of the batch.</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+          
+          
+        </table>
+  </div>
+  
+  
+      <div class="jd-tagdata">
+         <h5 class="jd-tagtitle">Returns</h5>
+         <table id="lconfig" class="jd-sumtable">
+             <tr>
+                <th>Return Type</th>
+                <th>Description</th>
+             </tr>
+             <tr>
+                <td class="jd-descrcol"><a href="../java/com/avalara/avatax/services/BatchSaveResult.html">BatchSaveResult</a></td>
+                <td class="jd-descrcol">The <code><a href="../java/com/avalara/avatax/services/BatchSaveResult.html">BatchSaveResult</a></code></td>
              </tr>
          </table>
   </div>
