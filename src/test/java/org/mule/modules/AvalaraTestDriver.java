@@ -14,6 +14,7 @@ import org.junit.Test;
 import org.mule.modules.avalara.*;
 import org.mule.modules.avalara.api.AvalaraClient;
 import org.mule.modules.avalara.api.DefaultAvalaraClient;
+import org.mule.modules.avalara.api.MapBuilder;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
@@ -83,57 +84,51 @@ public class AvalaraTestDriver {
     }
 
     private GetTaxResult getTaxResultElement(String docCode) {
+        @SuppressWarnings("serial")
         List<Map<String, Object>> addresses = new ArrayList<Map<String, Object>>() {
             {
-                add(new HashMap<String, Object>() {
-                    {
-                        put("addressCode", "Origin");
-                        put("line1", "Avalara");
-                        put("line2", "900 Winslow Way");
-                        put("line3", "Suite 100");
-                        put("city", "Bainbridge Island");
-                        put("region", "WA");
-                        put("postalCode", "98110");
-                        put("country", "USA");
-                    }
-                });
-                add(new HashMap<String, Object>() {
-                    {
-                        put("addressCode", "Dest");
-                        put("line1", "3130 Elliott");
-                        put("city", "Seattle");
-                        put("region", "WA");
-                        put("postalCode", "98121");
-                        put("country", "USA");
-                    }
-                });
+                add(new MapBuilder()
+                        .with("addressCode", "Origin")
+                        .with("line1", "Avalara")
+                        .with("line2", "900 Winslow Way")
+                        .with("line3", "Suite 100")
+                        .with("city", "Bainbridge Island")
+                        .with("region", "WA")
+                        .with("postalCode", "98110")
+                        .with("country", "USA")
+                        .build());
+                add(new MapBuilder()
+                        .with("addressCode", "Dest")
+                        .with("line1", "3130 Elliott")
+                        .with("city", "Seattle")
+                        .with("region", "WA")
+                        .with("postalCode", "98121")
+                        .with("country", "USA")
+                        .build());
             }
         };
 
+        @SuppressWarnings("serial")
         List<Map<String, Object>> lines = new ArrayList<Map<String, Object>>() {
             {
-                add(new HashMap<String, Object>() {
-                    {
-                        put("no", "001");
-                        put("itemCode", "ITEM CODE 1");
-                        put("qty", 1);
-                        put("amount", 4000);
-                        put("discounted", false);
-                        put("description", "item number 1");
-                        put("taxIncluded", false);
-                    }
-                });
-                add(new HashMap<String, Object>() {
-                    {
-                        put("no", "002");
-                        put("itemCode", "ITEM CODE 1");
-                        put("qty", 1);
-                        put("amount", 1000);
-                        put("discounted", false);
-                        put("description", "item number 1");
-                        put("taxIncluded", false);
-                    }
-                });
+                add(new MapBuilder()
+                        .with("no", "001")
+                        .with("itemCode", "ITEM CODE 1")
+                        .with("qty", 1)
+                        .with("amount", 4000)
+                        .with("discounted", false)
+                        .with("description", "item number 1")
+                        .with("taxIncluded", false)
+                        .build());
+                add(new MapBuilder()
+                        .with("no", "002")
+                        .with("itemCode", "ITEM CODE 1")
+                        .with("qty", 1)
+                        .with("amount", 1000)
+                        .with("discounted", false)
+                        .with("description", "item number 1")
+                        .with("taxIncluded", false)
+                        .build());
             }
         };
 
@@ -144,57 +139,51 @@ public class AvalaraTestDriver {
     }
 
     private AdjustTaxResult adjustTax(String docCode) {
+        @SuppressWarnings("serial")
         List<Map<String, Object>> addresses = new ArrayList<Map<String, Object>>() {
             {
-                add(new HashMap<String, Object>() {
-                    {
-                        put("addressCode", "Origin");
-                        put("line1", "Avalara");
-                        put("line2", "900 Winslow Way");
-                        put("line3", "Suite 100");
-                        put("city", "Bainbridge Island");
-                        put("region", "WA");
-                        put("postalCode", "98110");
-                        put("country", "USA");
-                    }
-                });
-                add(new HashMap<String, Object>() {
-                    {
-                        put("addressCode", "Dest");
-                        put("line1", "3130 Elliott");
-                        put("city", "Seattle");
-                        put("region", "WA");
-                        put("postalCode", "98121");
-                        put("country", "USA");
-                    }
-                });
+                add(new MapBuilder()
+                        .with("addressCode", "Origin")
+                        .with("line1", "Avalara")
+                        .with("line2", "900 Winslow Way")
+                        .with("line3", "Suite 100")
+                        .with("city", "Bainbridge Island")
+                        .with("region", "WA")
+                        .with("postalCode", "98110")
+                        .with("country", "USA")
+                        .build());
+                add(new MapBuilder()
+                        .with("addressCode", "Dest")
+                        .with("line1", "3130 Elliott")
+                        .with("city", "Seattle")
+                        .with("region", "WA")
+                        .with("postalCode", "98121")
+                        .with("country", "USA")
+                        .build());
             }
         };
 
+        @SuppressWarnings("serial")
         List<Map<String, Object>> lines = new ArrayList<Map<String, Object>>() {
             {
-                add(new HashMap<String, Object>() {
-                    {
-                        put("no", "001");
-                        put("itemCode", "ITEM CODE 1");
-                        put("qty", 1);
-                        put("amount", 4000);
-                        put("discounted", false);
-                        put("description", "item number 1");
-                        put("taxIncluded", false);
-                    }
-                });
-                add(new HashMap<String, Object>() {
-                    {
-                        put("no", "002");
-                        put("itemCode", "ITEM CODE 1");
-                        put("qty", 1);
-                        put("amount", 1000);
-                        put("discounted", false);
-                        put("description", "item number 1");
-                        put("taxIncluded", false);
-                    }
-                });
+                add(new MapBuilder()
+                        .with("no", "001")
+                        .with("itemCode", "ITEM CODE 1")
+                        .with("qty", 1)
+                        .with("amount", 4000)
+                        .with("discounted", false)
+                        .with("description", "item number 1")
+                        .with("taxIncluded", false)
+                        .build());
+                add(new MapBuilder()
+                        .with("no", "002")
+                        .with("itemCode", "ITEM CODE 1")
+                        .with("qty", 1)
+                        .with("amount", 1000)
+                        .with("discounted", false)
+                        .with("description", "item number 1")
+                        .with("taxIncluded", false)
+                        .build());
             }
         };
 
