@@ -322,19 +322,4 @@ public class AvalaraTestDriver {
 
     }
 
-
-
-    private static OutputStream convertStringtoStream(String string) {
-        byte[] stringByte = string.getBytes();
-        ByteArrayOutputStream bos = new ByteArrayOutputStream(string.length());
-
-        try {
-            bos.write(stringByte);
-        } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
-        return bos;
-    }
-
-
 }
