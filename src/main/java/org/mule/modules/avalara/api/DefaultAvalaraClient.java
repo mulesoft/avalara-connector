@@ -10,7 +10,6 @@ package org.mule.modules.avalara.api;
 
 import com.avalara.avatax.services.*;
 import org.apache.commons.lang.Validate;
-import org.mule.modules.avalara.BatchType;
 import org.mule.modules.avalara.TaxRequestType;
 import org.mule.modules.avalara.exception.AvalaraRuntimeException;
 import org.mule.modules.avalara.util.AvalaraProfileHandler;
@@ -18,12 +17,8 @@ import org.mule.modules.avalara.util.AvalaraProfileHandler;
 import com.zauberlabs.commons.ws.connection.ConnectionBuilder;
 import com.zauberlabs.commons.ws.security.Credential;
 
-import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 

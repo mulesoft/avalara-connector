@@ -8,8 +8,6 @@
 
 package org.mule.modules.avalara;
 
-import com.avalara.avatax.services.DocumentType;
-
 /**
  * The document type specifies the category of the document and affects how the document
  * is treated after a tax calculation. Specified when constructing a {@link com.avalara.avatax.services.GetTaxRequest}.
