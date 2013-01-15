@@ -8,22 +8,44 @@
 
 package org.mule.modules;
 
-import com.avalara.avatax.services.*;
-import org.junit.Before;
-import org.junit.Test;
-import org.mule.modules.avalara.*;
-import org.mule.modules.avalara.api.AvalaraClient;
-import org.mule.modules.avalara.api.DefaultAvalaraClient;
-import org.mule.modules.avalara.api.MapBuilder;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.Map;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
-import java.math.BigDecimal;
-import java.util.*;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import org.junit.Before;
+import org.junit.Test;
+import org.mule.modules.avalara.AvalaraDocumentType;
+import org.mule.modules.avalara.AvalaraModule;
+import org.mule.modules.avalara.BatchType;
+import org.mule.modules.avalara.CancelCodeType;
+import org.mule.modules.avalara.DetailLevelType;
+import org.mule.modules.avalara.ServiceModeType;
+import org.mule.modules.avalara.TextCaseType;
+import org.mule.modules.avalara.api.AvalaraClient;
+import org.mule.modules.avalara.api.DefaultAvalaraClient;
+import org.mule.modules.avalara.api.MapBuilder;
+
+import com.avalara.avatax.services.AdjustTaxResult;
+import com.avalara.avatax.services.BatchFileFetchResult;
+import com.avalara.avatax.services.BatchSaveResult;
+import com.avalara.avatax.services.CancelTaxResult;
+import com.avalara.avatax.services.GetTaxHistoryResult;
+import com.avalara.avatax.services.GetTaxRequest;
+import com.avalara.avatax.services.GetTaxResult;
+import com.avalara.avatax.services.PingResult;
+import com.avalara.avatax.services.PostTaxResult;
+import com.avalara.avatax.services.SeverityLevel;
+import com.avalara.avatax.services.ValidateResult;
 
 /**
  * @author Gaston Ponti
@@ -32,42 +54,26 @@ import static org.junit.Assert.assertNotNull;
 public class AvalaraTestDriver {
     private AvalaraModule module;
     private XMLGregorianCalendar testDate;
-    private String license;
-    private String account;
+    private String ACCOUNT = ""; // FILL WITH YOUR ACCOUNT
+    private final String LICENSE = ""; // FILL WITH YOUR LICENSE
     private String client;
 
-    /**
-     *
-     */
     @Before
-    public void setup() {
-        GregorianCalendar gregory = new GregorianCalendar();
-        gregory.setTime(new Date());
-
-        try {
-            testDate = DatatypeFactory.newInstance()
-                    .newXMLGregorianCalendar(
-                            gregory);
-        } catch (DatatypeConfigurationException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
-        System.out.println("Avalara account" + System.getenv("avalaraAccount"));
-        System.out.println("Avalara account" + System.getenv("avalaraLicense"));
+    public void setup() throws DatatypeConfigurationException {
+        testDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar());
         module = new AvalaraModule();
         module.setAddressServiceEndpoint("https://development.avalara.net/Tax/TaxSvc.asmx");
         module.setBatchServiceEndpoint("https://development.avalara.net/Batch/BatchSvc.asmx");
         AvalaraClient ac = new DefaultAvalaraClient();
 
         module.setClient(ac);
-        account = System.getenv("avalaraAccount");
-        license = System.getenv("avalaraLicense");
         client = "Mule";
         module.init();
     }
 
     @Test
     public void ping() {
-        PingResult result = module.ping(account, license, client, "Hi");
+        PingResult result = module.ping(ACCOUNT, LICENSE, client, "Hi");
         assertNotNull(result);
         assertEquals(SeverityLevel.SUCCESS, result.getResultCode());
     }
@@ -129,7 +135,7 @@ public class AvalaraTestDriver {
             }
         };
 
-        return module.getTax(account, license, client, "TC", AvalaraDocumentType.SALES_INVOICE, docCode, testDate,
+        return module.getTax(ACCOUNT, LICENSE, client, "TC", AvalaraDocumentType.SALES_INVOICE, docCode, testDate,
                 null, "cusomer Code", null, "0", null, null, "Origin", "Dest", addresses,
                 lines, DetailLevelType.DOCUMENT, null, "Test LocationCode", false, null,
                 null, null, ServiceModeType.AUTOMATIC, testDate, "0", testDate);
@@ -184,7 +190,7 @@ public class AvalaraTestDriver {
             }
         };
 
-        return module.adjustTax(account, license, client, 1, "some reason", "TC", AvalaraDocumentType.SALES_INVOICE, docCode, testDate,
+        return module.adjustTax(ACCOUNT, LICENSE, client, 1, "some reason", "TC", AvalaraDocumentType.SALES_INVOICE, docCode, testDate,
                 null, "cusomer Code", null, "0", null, null, "Origin", "Dest", addresses,
                 lines, DetailLevelType.DOCUMENT, null, "Test LocationCode", false, null,
                 null, null, ServiceModeType.AUTOMATIC, testDate, "0", testDate);
@@ -200,19 +206,19 @@ public class AvalaraTestDriver {
 
         AdjustTaxResult adjustTaxResult = adjustTax(docCode);
 
-        PostTaxResult postResult = module.postTax(account, license, client, null, "TC", AvalaraDocumentType.SALES_INVOICE,
+        PostTaxResult postResult = module.postTax(ACCOUNT, LICENSE, client, null, "TC", AvalaraDocumentType.SALES_INVOICE,
                 docCode, testDate, taxResult.getTotalAmount().toPlainString(),
                 taxResult.getTotalTax().toPlainString(), false, docCode);
 
         assertEquals(SeverityLevel.SUCCESS, postResult.getResultCode());
 
         //Finally Cancel Tax and remove the entry from the system by calling new DocVoided
-        CancelTaxResult cancelResult = module.cancelTax(account, license, client, null, "TC", AvalaraDocumentType.SALES_INVOICE, docCode, CancelCodeType.DOC_VOIDED);
+        CancelTaxResult cancelResult = module.cancelTax(ACCOUNT, LICENSE, client, null, "TC", AvalaraDocumentType.SALES_INVOICE, docCode, CancelCodeType.DOC_VOIDED);
 
         assertEquals(SeverityLevel.SUCCESS, cancelResult.getResultCode());
         // Check tax history
 
-        GetTaxHistoryResult taxHistoryResult = module.getTaxHistory(account, license, client, null, "TC",
+        GetTaxHistoryResult taxHistoryResult = module.getTaxHistory(ACCOUNT, LICENSE, client, null, "TC",
                 AvalaraDocumentType.SALES_INVOICE, docCode, DetailLevelType.TAX);
 
         assertEquals(SeverityLevel.SUCCESS, taxHistoryResult.getResultCode());
@@ -226,7 +232,7 @@ public class AvalaraTestDriver {
 
         //Finally Cancel Tax and remove the entry from the system by calling new DocVoided
         //Delete the document from the system
-        cancelResult = module.cancelTax(account, license, client, null, "TC", AvalaraDocumentType.SALES_INVOICE,
+        cancelResult = module.cancelTax(ACCOUNT, LICENSE, client, null, "TC", AvalaraDocumentType.SALES_INVOICE,
                 docCode, CancelCodeType.DOC_DELETED);
 
         assertEquals(SeverityLevel.SUCCESS, cancelResult.getResultCode());
@@ -234,7 +240,7 @@ public class AvalaraTestDriver {
 
     @Test
     public void validateAValidAddress() throws Exception {
-        ValidateResult response = module.validateAddress(account, license, client, "435 Ericksen Ave", null, null, null, "NE", null,
+        ValidateResult response = module.validateAddress(ACCOUNT, LICENSE, client, "435 Ericksen Ave", null, null, null, "NE", null,
                 "98110", null, 0, null, null, TextCaseType.DEFAULT, false, false, testDate);
 
         assertNotNull(response);
@@ -243,7 +249,7 @@ public class AvalaraTestDriver {
 
     @Test
     public void validateAnInvalidAddress() throws Exception {
-        ValidateResult response = module.validateAddress(account, license, client, "SARLAZA", null, null, null, null, null,
+        ValidateResult response = module.validateAddress(ACCOUNT, LICENSE, client, "SARLAZA", null, null, null, null, null,
                 null, null, 0, null, null, TextCaseType.DEFAULT, false, false, testDate);
 
         assertEquals(SeverityLevel.ERROR, response.getResultCode());
@@ -253,32 +259,16 @@ public class AvalaraTestDriver {
     public void saveBatchFile() throws Exception {
         String fileString = "ProcessCode,DocCode,DocType,DocDate,CompanyCode,CustomerCode,EntityUseCode,LineNo,TaxCode,TaxDate,ItemCode,Description,Qty,Amount,Discount,Ref1,Ref2,ExemptionNo,RevAcct,DestAddress,DestCity,DestRegion,DestPostalCode,DestCountry,OrigAddress,OrigCity,OrigRegion,OrigPostalCode,OrigCountry,LocationCode,SalesPersonCode,PurchaseOrderNo,CurrencyCode,ExchangeRate,ExchangeRateEffDate,PaymentDate,TaxIncluded,DestTaxRegion,OrigTaxRegion,Taxable,TaxType,TotalTax,CountryName,CountryCode,CountryRate,CountryTax,StateName,StateCode,StateRate,StateTax,CountyName,CountyCode,CountyRate,CountyTax,CityName,CityCode,CityRate,CityTax,Other1Name,Other1Code,Other1Rate,Other1Tax,Other2Name,Other2Code,Other2Rate,Other2Tax,Other3Name,Other3Code,Other3Rate,Other3Tax,Other4Name,Other4Code,Other4Rate,Other4Tax,ReferenceCode\n" +
                 "3,INV00000137,3,2012-11-06,TC,A00000001,,2c92c0943aaaf3bf013add2b74db437a,,2012-11-06,Mule iON,,1,20,,2c92c0943aaaf3bf013add2b74db437a,2c92c0943aaaf3bf013add2b74c24378,,,30 Maiden Ln,San Francisco,California,94108-5429,United States,,,,,,,,,USD,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,";
-        System.out.print(fileString);
 
-        BatchSaveResult saveResult = module.saveBatch("emiliano.lesende@mulesource.com", "muleftw1", client, BatchType.TRANSACTION_IMPORT, 156785, fileString, "filenr004");
-        System.out.println(saveResult.getResultCode().value());
-        //BatchFileSaveResult saveResult = module.saveBatchFile(account, license, client, 2, 2,"csv", "testbatch2", content);
-        if (saveResult.getResultCode().value() != "Success") {
-            for (Message message : saveResult.getMessages().getMessage()) {
-                System.out.println(message.getRefersTo());
-                System.out.println(message.getDetails());
-                System.out.println(message.getSummary());
-                System.out.println(message.getHelpLink());
-                System.out.println(message.getSource());
-            }
-
-        } else {
-            System.out.println("Batch Id = " + saveResult.getBatchId());
-            System.out.println("Estimated Completion = " + saveResult.getEstimatedCompletion());
-
-        }
+        BatchSaveResult saveResult = module.saveBatch(ACCOUNT, LICENSE, client, BatchType.TRANSACTION_IMPORT, 156785, fileString, "filenr004");
+        assertEquals(SeverityLevel.SUCCESS, saveResult.getResultCode());
+        assertNotNull(saveResult.getBatchId());
+        assertNotNull(saveResult.getEstimatedCompletion());
     }
 
     @Test
     public void fetchBatch() throws Exception {
-
-        //BatchFileFetchResult fetchResult = module.fetchBatchFile(account, license, client, "129829");
-        Map<String, BatchFileFetchResult> fetchResult = module.fetchBatchFile(account, license, client, "129275");
+        Map<String, BatchFileFetchResult> fetchResult = module.fetchBatchFile(ACCOUNT, LICENSE, client, "129275");
 
         System.out.println("result size= " + fetchResult.get("result").getBatchFiles().getBatchFile().size());
         System.out.println(new String(fetchResult.get("result").getBatchFiles().getBatchFile().get(0).getContent()));
@@ -287,17 +277,12 @@ public class AvalaraTestDriver {
             System.out.println("result size= " + fetchResult.get("error").getBatchFiles().getBatchFile().size());
             System.out.println(new String(fetchResult.get("error").getBatchFiles().getBatchFile().get(0).getContent()));
         }
-
-        //System.out.println("Batches = " + new String(fetchResult.getBatches().getBatch().get(0).getFiles().getBatchFile().get(0).getContent()));
     }
 
     @Test
     public void isBatchFinished() throws Exception {
         //BatchFileFetchResult fetchResult = module.fetchBatchFile(account, license, client, "129829");
-        boolean isFinished = module.isBatchFinished(account, license, client, "129275");
-
+        boolean isFinished = module.isBatchFinished(ACCOUNT, LICENSE, client, "129275");
         System.out.println("isFinished= " + isFinished);
-        //System.out.println("Batches = " + new String(fetchResult.getBatches().getBatch().get(0).getFiles().getBatchFile().get(0).getContent()));
     }
-
 }
