@@ -11,11 +11,26 @@
  */
 package org.mule.modules.avalara;
 
-import com.avalara.avatax.services.*;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.PostConstruct;
+import javax.xml.datatype.XMLGregorianCalendar;
+
+import org.mule.api.ConnectionException;
 import org.mule.api.annotations.Configurable;
-import org.mule.api.annotations.Module;
+import org.mule.api.annotations.Connect;
+import org.mule.api.annotations.ConnectionIdentifier;
+import org.mule.api.annotations.Connector;
+import org.mule.api.annotations.Disconnect;
 import org.mule.api.annotations.Processor;
+import org.mule.api.annotations.ValidateConnection;
+import org.mule.api.annotations.display.Password;
 import org.mule.api.annotations.display.Placement;
+import org.mule.api.annotations.param.ConnectionKey;
 import org.mule.api.annotations.param.Default;
 import org.mule.api.annotations.param.Optional;
 import org.mule.modules.avalara.api.AvalaraClient;
@@ -24,13 +39,30 @@ import org.mule.modules.avalara.api.MapBuilder;
 import org.mule.modules.avalara.exception.AvalaraRuntimeException;
 import org.mule.modules.utils.mom.JaxbMapObjectMappers;
 
+import com.avalara.avatax.services.AdjustTaxRequest;
+import com.avalara.avatax.services.AdjustTaxResult;
+import com.avalara.avatax.services.ArrayOfBatchFile;
+import com.avalara.avatax.services.BaseAddress;
+import com.avalara.avatax.services.Batch;
+import com.avalara.avatax.services.BatchFetchResult;
+import com.avalara.avatax.services.BatchFile;
+import com.avalara.avatax.services.BatchFileFetchResult;
+import com.avalara.avatax.services.BatchSaveResult;
+import com.avalara.avatax.services.CancelTaxRequest;
+import com.avalara.avatax.services.CancelTaxResult;
+import com.avalara.avatax.services.CommitTaxRequest;
+import com.avalara.avatax.services.CommitTaxResult;
+import com.avalara.avatax.services.FetchRequest;
+import com.avalara.avatax.services.GetTaxHistoryRequest;
+import com.avalara.avatax.services.GetTaxHistoryResult;
+import com.avalara.avatax.services.GetTaxRequest;
+import com.avalara.avatax.services.GetTaxResult;
+import com.avalara.avatax.services.PingResult;
+import com.avalara.avatax.services.PostTaxRequest;
+import com.avalara.avatax.services.PostTaxResult;
+import com.avalara.avatax.services.ValidateRequest;
+import com.avalara.avatax.services.ValidateResult;
 import com.zauberlabs.commons.mom.MapObjectMapper;
-
-import java.math.BigDecimal;
-import java.util.*;
-
-import javax.annotation.PostConstruct;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 /**
  * Avalara provides automated sales tax solutions to streamline cumbersome, 
@@ -42,7 +74,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *
  * @author Gaston Ponti
  */
-@Module(name = "avalara", schemaVersion = "2.0", friendlyName = "Avalara")
+@Connector(name = "avalara", schemaVersion = "2.0", friendlyName = "Avalara")
 public class AvalaraModule
 {
     /**
@@ -876,12 +908,46 @@ public class AvalaraModule
      * 
      */
     @PostConstruct
+    @Deprecated //Moving to the Managed Connections Approach, so this won't be used anymore
     public void init()
     {
         if (apiClient == null )
         {
             apiClient = new DefaultAvalaraClient(getAddressServiceEndpoint(), getTaxServiceEndpoint());
         }
+    }
+    
+    /**
+     * Connects to Avalara
+     *
+     * @param avalaraAccount Registered Avalara account
+     * @param avalaraLicense The matching license for the account
+     */
+    @Connect
+    public synchronized void connect(@ConnectionKey String avalaraAccount, @Password String avalaraLicense)
+            throws ConnectionException {
+        if (apiClient == null )
+        {
+            apiClient = new DefaultAvalaraClient(getAddressServiceEndpoint(), getTaxServiceEndpoint());
+        }
+    }
+
+    @ValidateConnection
+    public boolean isConnected() {
+        return apiClient != null;
+    }
+
+    /**
+     * Destroys the session
+     */
+    @Disconnect
+    public synchronized void disconnect() {
+        apiClient = null;
+    }
+
+    @ConnectionIdentifier
+    public String getSessionId() {
+        return ""; // FIXME ?
     }
     
     /**
