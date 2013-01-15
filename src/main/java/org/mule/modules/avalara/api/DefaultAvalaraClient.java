@@ -159,8 +159,6 @@ public class DefaultAvalaraClient implements AvalaraClient
     
     protected <A> A createConnection(Class<A> portType, Class<? extends Service> serviceType, String schemaName, QName portName, String endpoint)
     {
-
-        System.out.println();
         return ConnectionBuilder.fromPortType(portType)
             .withServiceType(serviceType)
             .withClasspathWsdl(schemaLocation(schemaName))
