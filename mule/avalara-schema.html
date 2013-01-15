@@ -1316,172 +1316,6 @@ Saves a Batch&lt;/xs:documentation&gt;
       &lt;/xs:extension&gt;
     &lt;/xs:complexContent&gt;
   &lt;/xs:complexType&gt;
-  &lt;xs:simpleType name=&quot;AvalaraDocumentTypeEnumType&quot;&gt;
-    &lt;xs:annotation&gt;
-      &lt;xs:documentation&gt;The document type specifies the category of the document and affects how the document
-is treated after a tax calculation. Specified when constructing a .&lt;/xs:documentation&gt;
-    &lt;/xs:annotation&gt;
-    &lt;xs:union&gt;
-      &lt;xs:simpleType&gt;
-        &lt;xs:restriction base=&quot;xs:string&quot;&gt;
-          &lt;xs:enumeration value=&quot;SALES_ORDER&quot;&gt;
-            &lt;xs:annotation&gt;
-              &lt;xs:documentation&gt;Sales Order, estimate or quote. This is a temporary document type and is not saved in tax history.
- will return with a  of &amp;lt;b&amp;gt;Temporary&amp;lt;/b&amp;gt;.&lt;/xs:documentation&gt;
-            &lt;/xs:annotation&gt;
-          &lt;/xs:enumeration&gt;
-          &lt;xs:enumeration value=&quot;SALES_INVOICE&quot;&gt;
-            &lt;xs:annotation&gt;
-              &lt;xs:documentation&gt;The document is a permanent invoice; document and tax calculation results are saved in the tax history.
- will return with a  of &amp;lt;b&amp;gt;Saved&amp;lt;/b&amp;gt;&lt;/xs:documentation&gt;
-            &lt;/xs:annotation&gt;
-          &lt;/xs:enumeration&gt;
-          &lt;xs:enumeration value=&quot;PURCHASE_ORDER&quot;&gt;
-            &lt;xs:annotation&gt;
-              &lt;xs:documentation&gt;Purchase order, estimate, or quote. This is a temporary document type and is not saved in tax history.
- will return with a  of &amp;lt;b&amp;gt;Temporary&amp;lt;/b&amp;gt;.&lt;/xs:documentation&gt;
-            &lt;/xs:annotation&gt;
-          &lt;/xs:enumeration&gt;
-          &lt;xs:enumeration value=&quot;PURCHASE_INVOICE&quot;&gt;
-            &lt;xs:annotation&gt;
-              &lt;xs:documentation&gt;The document is a permanent invoice; document and tax calculation results are saved in the tax history.
- will return with a  of &amp;lt;b&amp;gt;Saved&amp;lt;/b&amp;gt;.&lt;/xs:documentation&gt;
-            &lt;/xs:annotation&gt;
-          &lt;/xs:enumeration&gt;
-          &lt;xs:enumeration value=&quot;RETURN_ORDER&quot;&gt;
-            &lt;xs:annotation&gt;
-              &lt;xs:documentation&gt;Sales Return Order. This is a temporary document type and is not saved in tax history.
- will return with a  of &amp;lt;b&amp;gt;Temporary&amp;lt;/b&amp;gt;.&lt;/xs:documentation&gt;
-            &lt;/xs:annotation&gt;
-          &lt;/xs:enumeration&gt;
-          &lt;xs:enumeration value=&quot;RETURN_INVOICE&quot;&gt;
-            &lt;xs:annotation&gt;
-              &lt;xs:documentation&gt;The document is a permanent sales return invoice; document and tax calculation results are
-saved in the tax history  will return with a 
-of &amp;lt;b&amp;gt;Saved&amp;lt;/b&amp;gt;.&lt;/xs:documentation&gt;
-            &lt;/xs:annotation&gt;
-          &lt;/xs:enumeration&gt;
-        &lt;/xs:restriction&gt;
-      &lt;/xs:simpleType&gt;
-      &lt;xs:simpleType&gt;
-        &lt;xs:restriction xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; base=&quot;mule:propertyPlaceholderType&quot;&gt;&lt;/xs:restriction&gt;
-      &lt;/xs:simpleType&gt;
-    &lt;/xs:union&gt;
-  &lt;/xs:simpleType&gt;
-  &lt;xs:simpleType name=&quot;ServiceModeTypeEnumType&quot;&gt;
-    &lt;xs:annotation&gt;
-      &lt;xs:documentation&gt;Specifies the type of tax override.
-This is only supported by AvaLocal servers. It provides the ability to controls whether tax is calculated locally or remotely when using an AvaLocal server.
-The default is Automatic which calculates locally unless remote is necessary for non-local addresses&lt;/xs:documentation&gt;
-    &lt;/xs:annotation&gt;
-    &lt;xs:union&gt;
-      &lt;xs:simpleType&gt;
-        &lt;xs:restriction base=&quot;xs:string&quot;&gt;
-          &lt;xs:enumeration value=&quot;AUTOMATIC&quot;&gt;
-            &lt;xs:annotation&gt;
-              &lt;xs:documentation&gt;Automated handling by local and/or remote server.&lt;/xs:documentation&gt;
-            &lt;/xs:annotation&gt;
-          &lt;/xs:enumeration&gt;
-          &lt;xs:enumeration value=&quot;LOCAL&quot;&gt;
-            &lt;xs:annotation&gt;
-              &lt;xs:documentation&gt;AvaLocal server only. Lines requiring remote will not be calculated.&lt;/xs:documentation&gt;
-            &lt;/xs:annotation&gt;
-          &lt;/xs:enumeration&gt;
-          &lt;xs:enumeration value=&quot;REMOTE&quot;&gt;
-            &lt;xs:annotation&gt;
-              &lt;xs:documentation&gt;All lines are calculated by AvaTax remote server.&lt;/xs:documentation&gt;
-            &lt;/xs:annotation&gt;
-          &lt;/xs:enumeration&gt;
-        &lt;/xs:restriction&gt;
-      &lt;/xs:simpleType&gt;
-      &lt;xs:simpleType&gt;
-        &lt;xs:restriction xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; base=&quot;mule:propertyPlaceholderType&quot;&gt;&lt;/xs:restriction&gt;
-      &lt;/xs:simpleType&gt;
-    &lt;/xs:union&gt;
-  &lt;/xs:simpleType&gt;
-  &lt;xs:simpleType name=&quot;TextCaseTypeEnumType&quot;&gt;
-    &lt;xs:annotation&gt;
-      &lt;xs:documentation&gt;The casing to apply to the valid address(es) returned in the validation result.&lt;/xs:documentation&gt;
-    &lt;/xs:annotation&gt;
-    &lt;xs:union&gt;
-      &lt;xs:simpleType&gt;
-        &lt;xs:restriction base=&quot;xs:string&quot;&gt;
-          &lt;xs:enumeration value=&quot;DEFAULT&quot;&gt;
-            &lt;xs:annotation&gt;
-              &lt;xs:documentation&gt;Default casing for the account.&lt;/xs:documentation&gt;
-            &lt;/xs:annotation&gt;
-          &lt;/xs:enumeration&gt;
-          &lt;xs:enumeration value=&quot;UPPER&quot;&gt;
-            &lt;xs:annotation&gt;
-              &lt;xs:documentation&gt;Upper case.&lt;/xs:documentation&gt;
-            &lt;/xs:annotation&gt;
-          &lt;/xs:enumeration&gt;
-          &lt;xs:enumeration value=&quot;MIXED&quot;&gt;
-            &lt;xs:annotation&gt;
-              &lt;xs:documentation&gt;Mixed case.&lt;/xs:documentation&gt;
-            &lt;/xs:annotation&gt;
-          &lt;/xs:enumeration&gt;
-        &lt;/xs:restriction&gt;
-      &lt;/xs:simpleType&gt;
-      &lt;xs:simpleType&gt;
-        &lt;xs:restriction xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; base=&quot;mule:propertyPlaceholderType&quot;&gt;&lt;/xs:restriction&gt;
-      &lt;/xs:simpleType&gt;
-    &lt;/xs:union&gt;
-  &lt;/xs:simpleType&gt;
-  &lt;xs:simpleType name=&quot;CancelCodeTypeEnumType&quot;&gt;
-    &lt;xs:annotation&gt;
-      &lt;xs:documentation&gt;Specifies the reason the tax calculation is being canceled (or in the case of
-posting, returned to its prior state).&lt;/xs:documentation&gt;
-    &lt;/xs:annotation&gt;
-    &lt;xs:union&gt;
-      &lt;xs:simpleType&gt;
-        &lt;xs:restriction base=&quot;xs:string&quot;&gt;
-          &lt;xs:enumeration value=&quot;UNSPECIFIED&quot;&gt;
-            &lt;xs:annotation&gt;
-              &lt;xs:documentation&gt;Unspecified reason&lt;/xs:documentation&gt;
-            &lt;/xs:annotation&gt;
-          &lt;/xs:enumeration&gt;
-          &lt;xs:enumeration value=&quot;POST_FAILED&quot;&gt;
-            &lt;xs:annotation&gt;
-              &lt;xs:documentation&gt;Specifies the post operation failed when attempting to post an invoice within
-a client's application, for example, to the client's General Ledger; The
-document's status will be changed to &amp;lt;b&amp;gt;Saved&amp;lt;/b&amp;gt;.&lt;/xs:documentation&gt;
-            &lt;/xs:annotation&gt;
-          &lt;/xs:enumeration&gt;
-          &lt;xs:enumeration value=&quot;DOC_DELETED&quot;&gt;
-            &lt;xs:annotation&gt;
-              &lt;xs:documentation&gt;Specifies the document was deleted within the client's application and
-should be removed from the AvaTax records; If the document within AvaTax
-is already committed, the document status will be changed to &amp;lt;b&amp;gt;Cancelled&amp;lt;/b&amp;gt;
-and retained for historical records;  If the document was not committed,
-(was &amp;lt;b&amp;gt;Saved&amp;lt;/b&amp;gt; or &amp;lt;b&amp;gt;Posted&amp;lt;/b&amp;gt;) the document will be deleted within AvaTax.&lt;/xs:documentation&gt;
-            &lt;/xs:annotation&gt;
-          &lt;/xs:enumeration&gt;
-          &lt;xs:enumeration value=&quot;DOC_VOIDED&quot;&gt;
-            &lt;xs:annotation&gt;
-              &lt;xs:documentation&gt;Specifies the document was voided within the client's application and
-should be removed from the AvaTax records; If the document within AvaTax
-is already committed, the document status will be changed to &amp;lt;b&amp;gt;Cancelled&amp;lt;/b&amp;gt;
-and retained for historical records;  If the document was not committed,
-(was &amp;lt;b&amp;gt;Saved&amp;lt;/b&amp;gt; or &amp;lt;b&amp;gt;Posted&amp;lt;/b&amp;gt;) the document will be deleted within AvaTax.&lt;/xs:documentation&gt;
-            &lt;/xs:annotation&gt;
-          &lt;/xs:enumeration&gt;
-          &lt;xs:enumeration value=&quot;ADJUSTMENT_CANCELLED&quot;&gt;
-            &lt;xs:annotation&gt;
-              &lt;xs:documentation&gt;Specifies the document was adjusted within the client's application and
-should be removed from the AvaTax records; If the document within AvaTax
-is already committed, the document status will be changed to &amp;lt;b&amp;gt;Cancelled&amp;lt;/b&amp;gt;
-and retained for historical records;  If the document was not committed,
-(was &amp;lt;b&amp;gt;Saved&amp;lt;/b&amp;gt; or &amp;lt;b&amp;gt;Posted&amp;lt;/b&amp;gt;) the document will be deleted within AvaTax.&lt;/xs:documentation&gt;
-            &lt;/xs:annotation&gt;
-          &lt;/xs:enumeration&gt;
-        &lt;/xs:restriction&gt;
-      &lt;/xs:simpleType&gt;
-      &lt;xs:simpleType&gt;
-        &lt;xs:restriction xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; base=&quot;mule:propertyPlaceholderType&quot;&gt;&lt;/xs:restriction&gt;
-      &lt;/xs:simpleType&gt;
-    &lt;/xs:union&gt;
-  &lt;/xs:simpleType&gt;
   &lt;xs:simpleType name=&quot;DetailLevelTypeEnumType&quot;&gt;
     &lt;xs:annotation&gt;
       &lt;xs:documentation&gt;In a GetTaxRequest (or GetTaxHistoryRequest) the DetailLevel specifies the level
@@ -1561,6 +1395,172 @@ is treated after a tax calculation. Specified when constructing a .&lt;/xs:docum
           &lt;xs:enumeration value=&quot;DOCUMENT_IMPORT&quot;&gt;
             &lt;xs:annotation&gt;
               &lt;xs:documentation&gt;Reserved for future use.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+        &lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; base=&quot;mule:propertyPlaceholderType&quot;&gt;&lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+    &lt;/xs:union&gt;
+  &lt;/xs:simpleType&gt;
+  &lt;xs:simpleType name=&quot;TextCaseTypeEnumType&quot;&gt;
+    &lt;xs:annotation&gt;
+      &lt;xs:documentation&gt;The casing to apply to the valid address(es) returned in the validation result.&lt;/xs:documentation&gt;
+    &lt;/xs:annotation&gt;
+    &lt;xs:union&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction base=&quot;xs:string&quot;&gt;
+          &lt;xs:enumeration value=&quot;DEFAULT&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Default casing for the account.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+          &lt;xs:enumeration value=&quot;UPPER&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Upper case.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+          &lt;xs:enumeration value=&quot;MIXED&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Mixed case.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+        &lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; base=&quot;mule:propertyPlaceholderType&quot;&gt;&lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+    &lt;/xs:union&gt;
+  &lt;/xs:simpleType&gt;
+  &lt;xs:simpleType name=&quot;AvalaraDocumentTypeEnumType&quot;&gt;
+    &lt;xs:annotation&gt;
+      &lt;xs:documentation&gt;The document type specifies the category of the document and affects how the document
+is treated after a tax calculation. Specified when constructing a .&lt;/xs:documentation&gt;
+    &lt;/xs:annotation&gt;
+    &lt;xs:union&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction base=&quot;xs:string&quot;&gt;
+          &lt;xs:enumeration value=&quot;SALES_ORDER&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Sales Order, estimate or quote. This is a temporary document type and is not saved in tax history.
+ will return with a  of &amp;lt;b&amp;gt;Temporary&amp;lt;/b&amp;gt;.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+          &lt;xs:enumeration value=&quot;SALES_INVOICE&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;The document is a permanent invoice; document and tax calculation results are saved in the tax history.
+ will return with a  of &amp;lt;b&amp;gt;Saved&amp;lt;/b&amp;gt;&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+          &lt;xs:enumeration value=&quot;PURCHASE_ORDER&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Purchase order, estimate, or quote. This is a temporary document type and is not saved in tax history.
+ will return with a  of &amp;lt;b&amp;gt;Temporary&amp;lt;/b&amp;gt;.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+          &lt;xs:enumeration value=&quot;PURCHASE_INVOICE&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;The document is a permanent invoice; document and tax calculation results are saved in the tax history.
+ will return with a  of &amp;lt;b&amp;gt;Saved&amp;lt;/b&amp;gt;.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+          &lt;xs:enumeration value=&quot;RETURN_ORDER&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Sales Return Order. This is a temporary document type and is not saved in tax history.
+ will return with a  of &amp;lt;b&amp;gt;Temporary&amp;lt;/b&amp;gt;.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+          &lt;xs:enumeration value=&quot;RETURN_INVOICE&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;The document is a permanent sales return invoice; document and tax calculation results are
+saved in the tax history  will return with a 
+of &amp;lt;b&amp;gt;Saved&amp;lt;/b&amp;gt;.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+        &lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; base=&quot;mule:propertyPlaceholderType&quot;&gt;&lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+    &lt;/xs:union&gt;
+  &lt;/xs:simpleType&gt;
+  &lt;xs:simpleType name=&quot;CancelCodeTypeEnumType&quot;&gt;
+    &lt;xs:annotation&gt;
+      &lt;xs:documentation&gt;Specifies the reason the tax calculation is being canceled (or in the case of
+posting, returned to its prior state).&lt;/xs:documentation&gt;
+    &lt;/xs:annotation&gt;
+    &lt;xs:union&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction base=&quot;xs:string&quot;&gt;
+          &lt;xs:enumeration value=&quot;UNSPECIFIED&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Unspecified reason&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+          &lt;xs:enumeration value=&quot;POST_FAILED&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Specifies the post operation failed when attempting to post an invoice within
+a client's application, for example, to the client's General Ledger; The
+document's status will be changed to &amp;lt;b&amp;gt;Saved&amp;lt;/b&amp;gt;.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+          &lt;xs:enumeration value=&quot;DOC_DELETED&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Specifies the document was deleted within the client's application and
+should be removed from the AvaTax records; If the document within AvaTax
+is already committed, the document status will be changed to &amp;lt;b&amp;gt;Cancelled&amp;lt;/b&amp;gt;
+and retained for historical records;  If the document was not committed,
+(was &amp;lt;b&amp;gt;Saved&amp;lt;/b&amp;gt; or &amp;lt;b&amp;gt;Posted&amp;lt;/b&amp;gt;) the document will be deleted within AvaTax.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+          &lt;xs:enumeration value=&quot;DOC_VOIDED&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Specifies the document was voided within the client's application and
+should be removed from the AvaTax records; If the document within AvaTax
+is already committed, the document status will be changed to &amp;lt;b&amp;gt;Cancelled&amp;lt;/b&amp;gt;
+and retained for historical records;  If the document was not committed,
+(was &amp;lt;b&amp;gt;Saved&amp;lt;/b&amp;gt; or &amp;lt;b&amp;gt;Posted&amp;lt;/b&amp;gt;) the document will be deleted within AvaTax.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+          &lt;xs:enumeration value=&quot;ADJUSTMENT_CANCELLED&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Specifies the document was adjusted within the client's application and
+should be removed from the AvaTax records; If the document within AvaTax
+is already committed, the document status will be changed to &amp;lt;b&amp;gt;Cancelled&amp;lt;/b&amp;gt;
+and retained for historical records;  If the document was not committed,
+(was &amp;lt;b&amp;gt;Saved&amp;lt;/b&amp;gt; or &amp;lt;b&amp;gt;Posted&amp;lt;/b&amp;gt;) the document will be deleted within AvaTax.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+        &lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; base=&quot;mule:propertyPlaceholderType&quot;&gt;&lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+    &lt;/xs:union&gt;
+  &lt;/xs:simpleType&gt;
+  &lt;xs:simpleType name=&quot;ServiceModeTypeEnumType&quot;&gt;
+    &lt;xs:annotation&gt;
+      &lt;xs:documentation&gt;Specifies the type of tax override.
+This is only supported by AvaLocal servers. It provides the ability to controls whether tax is calculated locally or remotely when using an AvaLocal server.
+The default is Automatic which calculates locally unless remote is necessary for non-local addresses&lt;/xs:documentation&gt;
+    &lt;/xs:annotation&gt;
+    &lt;xs:union&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction base=&quot;xs:string&quot;&gt;
+          &lt;xs:enumeration value=&quot;AUTOMATIC&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Automated handling by local and/or remote server.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+          &lt;xs:enumeration value=&quot;LOCAL&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;AvaLocal server only. Lines requiring remote will not be calculated.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+          &lt;xs:enumeration value=&quot;REMOTE&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;All lines are calculated by AvaTax remote server.&lt;/xs:documentation&gt;
             &lt;/xs:annotation&gt;
           &lt;/xs:enumeration&gt;
         &lt;/xs:restriction&gt;
