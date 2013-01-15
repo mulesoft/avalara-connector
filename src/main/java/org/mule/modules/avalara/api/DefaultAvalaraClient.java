@@ -40,21 +40,26 @@ public class DefaultAvalaraClient implements AvalaraClient
     private ThreadLocal<String> passwordLocal = new ThreadLocal<String>();
     private ThreadLocal<String> clientLocal = new ThreadLocal<String>();
 
-    public DefaultAvalaraClient() {
-
+    public DefaultAvalaraClient(String account, String client, String license) {
+        Validate.notNull(account);
+        Validate.notNull(client);
+        Validate.notNull(license);
+        setCredential(account, license, client); //FIXME: temp impl. Set credential won't be used anymore
     }
-    
-    public DefaultAvalaraClient(String addressEndpoint, String taxEndpoint) {
+
+    public DefaultAvalaraClient(String account, String client, String license, String addressEndpoint, String taxEndpoint) {
         Validate.notNull(addressEndpoint);
         Validate.notNull(taxEndpoint);
+        Validate.notNull(account);
+        Validate.notNull(client);
+        Validate.notNull(license);
         this.setAddressEndpoint(addressEndpoint);
         this.setTaxEndpoint(taxEndpoint);
+        setCredential(account, license, client); //FIXME: temp impl. Set credential won't be used anymore
     }
-    
+
     @Override
-    public PingResult ping(String account, String license, String client, String message)
-    {
-        setCredential(account, license, client);
+    public PingResult ping(String message) {
         return getTaxService().ping(message);
     }
 

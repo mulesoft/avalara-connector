@@ -24,6 +24,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mule.api.ConnectionException;
 import org.mule.modules.avalara.AvalaraDocumentType;
 import org.mule.modules.avalara.AvalaraModule;
 import org.mule.modules.avalara.BatchType;
@@ -31,8 +32,6 @@ import org.mule.modules.avalara.CancelCodeType;
 import org.mule.modules.avalara.DetailLevelType;
 import org.mule.modules.avalara.ServiceModeType;
 import org.mule.modules.avalara.TextCaseType;
-import org.mule.modules.avalara.api.AvalaraClient;
-import org.mule.modules.avalara.api.DefaultAvalaraClient;
 import org.mule.modules.avalara.api.MapBuilder;
 
 import com.avalara.avatax.services.AdjustTaxResult;
@@ -59,20 +58,18 @@ public class AvalaraTestDriver {
     private final String CLIENT = ""; // FILL WITH A CLIENT FROM YOUR ACCOUNT
 
     @Before
-    public void setup() throws DatatypeConfigurationException {
+    public void setup() throws DatatypeConfigurationException, ConnectionException {
         testDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar());
         module = new AvalaraModule();
-        module.setAddressServiceEndpoint("https://development.avalara.net/Tax/TaxSvc.asmx");
+        module.setAddressServiceEndpoint("https://development.avalara.net/Address/AddressSvc.asmx");
         module.setBatchServiceEndpoint("https://development.avalara.net/Batch/BatchSvc.asmx");
-        AvalaraClient ac = new DefaultAvalaraClient();
-
-        module.setClient(ac);
-        module.init();
+        module.setTaxServiceEndpoint("https://development.avalara.net/Tax/TaxSvc.asmx");
+        module.connect(ACCOUNT, CLIENT, LICENSE);
     }
 
     @Test
     public void ping() {
-        PingResult result = module.ping(ACCOUNT, LICENSE, CLIENT, "Hi");
+        PingResult result = module.ping("Hi");
         assertNotNull(result);
         assertEquals(SeverityLevel.SUCCESS, result.getResultCode());
     }

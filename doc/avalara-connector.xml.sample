@@ -1,9 +1,5 @@
 <!-- BEGIN_INCLUDE(avalara:ping) -->
-<avalara:ping
-					account="avalaraAccount"
-        		    license="avalaraLicense"
-		    	    avalaraClient="avalaraClient"
-					message="a ping Message" />
+    <avalara:ping message="a ping Message" />
 <!-- END_INCLUDE(avalara:ping) -->
 
 <!-- BEGIN_INCLUDE(avalara:get-tax) -->

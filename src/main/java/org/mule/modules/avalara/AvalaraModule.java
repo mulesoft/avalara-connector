@@ -105,7 +105,6 @@ public class AvalaraModule
     @Placement(group = "Connection")
     private String batchServiceEndpoint;
 
-    
     /**
      * Avalara's application client. By default uses DefaultAvalaraClient class.
      */
@@ -127,11 +126,10 @@ public class AvalaraModule
      * @throws AvalaraRuntimeException
      */
     @Processor
-    public PingResult ping(String account, String license, String avalaraClient, @Optional String message)
-    {
-        return apiClient.ping(account, license, avalaraClient, message);
+    public PingResult ping(@Optional String message) {
+        return apiClient.ping(message);
     }
-    
+
     /**
      * Get Tax processor.
      * <p>
@@ -899,42 +897,25 @@ public class AvalaraModule
         batch.setFiles(arrayOfBatchFile);
         return apiClient.saveBatch(consoleUserName, consolePassword, avalaraClient, batch);
     }
-
-
-
-
-
-    /**
-     * 
-     */
-    @PostConstruct
-    @Deprecated //Moving to the Managed Connections Approach, so this won't be used anymore
-    public void init()
-    {
-        if (apiClient == null )
-        {
-            apiClient = new DefaultAvalaraClient(getAddressServiceEndpoint(), getTaxServiceEndpoint());
-        }
-    }
     
     /**
      * Connects to Avalara
      *
      * @param avalaraAccount Registered Avalara account
+     * @param client Target client to which make the call
      * @param avalaraLicense The matching license for the account
      */
     @Connect
-    public synchronized void connect(@ConnectionKey String avalaraAccount, @Password String avalaraLicense)
+    public synchronized void connect(@ConnectionKey String avalaraAccount, @ConnectionKey String client, @Password String avalaraLicense)
             throws ConnectionException {
-        if (apiClient == null )
-        {
-            apiClient = new DefaultAvalaraClient(getAddressServiceEndpoint(), getTaxServiceEndpoint());
+        if (apiClient == null ) {
+            apiClient = new DefaultAvalaraClient(avalaraAccount, client, avalaraLicense, getAddressServiceEndpoint(), getTaxServiceEndpoint());
         }
     }
 
     @ValidateConnection
     public boolean isConnected() {
-        return apiClient != null;
+        return false;
     }
 
     /**
@@ -984,5 +965,4 @@ public class AvalaraModule
     public void setBatchServiceEndpoint(String batchServiceEndpoint) {
         this.batchServiceEndpoint = batchServiceEndpoint;
     }
-    
 }

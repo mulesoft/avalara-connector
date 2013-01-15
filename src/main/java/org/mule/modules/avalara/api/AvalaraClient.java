@@ -26,5 +26,5 @@ public interface AvalaraClient {
 
     BatchSaveResult saveBatch(String account, String licence, String client, Batch batch);
 
-    PingResult ping(String account, String licence, String client, String message);
+    PingResult ping(String message);
 }

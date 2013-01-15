@@ -40,11 +40,9 @@ public class AvalaraModuleUnitTest
     }
 
     @Test
-    public void testPing()
-    {
-        module.ping("", "", "", "hello world");
-        
-        verify(clientMock).ping(Mockito.anyString(), Mockito.anyString(), Mockito.anyString(), eq("hello world"));
+    public void testPing() {
+        module.ping("hello world");
+        verify(clientMock).ping(eq("hello world"));
     }
 
 //    @Test
