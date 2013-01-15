@@ -16,8 +16,7 @@
 
 import org.junit.Test;
 import org.mule.api.processor.MessageProcessor;
-import org.mule.tck.AbstractMuleTestCase;
-import org.mule.tck.FunctionalTestCase;
+import org.mule.tck.junit4.FunctionalTestCase;
 
 	
 /**
@@ -38,18 +37,9 @@ public class AvalaraGetTaxHistoryTestDriver extends FunctionalTestCase
     @Test
     public void testFlow() throws Exception
     {
-        lookupFlowConstruct("main").process(getTestEvent(""));
+        ((MessageProcessor)this.getFlowConstruct("main")).process(getTestEvent(""));
     }
 
-    /**
-     * Retrieve a flow by name from the registry
-     *
-     * @param name Name of the flow to retrieve
-     */
-    protected MessageProcessor lookupFlowConstruct(String name)
-    {
-        return (MessageProcessor) AbstractMuleTestCase.muleContext.getRegistry().lookupFlowConstruct(name);
-    }
 
 }
 

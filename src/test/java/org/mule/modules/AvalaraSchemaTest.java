@@ -9,7 +9,7 @@
 package org.mule.modules;
 
 import org.junit.Test;
-import org.mule.tck.FunctionalTestCase;
+import org.mule.tck.junit4.FunctionalTestCase;
 
 public class AvalaraSchemaTest extends FunctionalTestCase
 {
