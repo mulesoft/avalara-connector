@@ -264,15 +264,12 @@ public class AvalaraTestDriver {
 
     @Test
     public void fetchBatch() throws Exception {
-        Map<String, BatchFileFetchResult> fetchResult = module.fetchBatchFile(ACCOUNT, LICENSE, CLIENT, "129275");
-
-        System.out.println("result size= " + fetchResult.get("result").getBatchFiles().getBatchFile().size());
+        // FIXME: Not sure what's the deal with this test...
+        Map<String, BatchFileFetchResult> fetchResult = module.fetchBatchFile("129275");
+        assertEquals(1, fetchResult.get("result").getBatchFiles().getBatchFile().size());
         System.out.println(new String(fetchResult.get("result").getBatchFiles().getBatchFile().get(0).getContent()));
-
-        if (fetchResult.get("error") != null) {
-            System.out.println("result size= " + fetchResult.get("error").getBatchFiles().getBatchFile().size());
-            System.out.println(new String(fetchResult.get("error").getBatchFiles().getBatchFile().get(0).getContent()));
-        }
+        assertEquals(1, fetchResult.get("error").getBatchFiles().getBatchFile().size());
+        System.out.println(new String(fetchResult.get("error").getBatchFiles().getBatchFile().get(0).getContent()));
     }
 
     @Test

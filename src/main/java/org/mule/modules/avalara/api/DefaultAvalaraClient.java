@@ -102,9 +102,7 @@ public class DefaultAvalaraClient implements AvalaraClient
     }
 
     @Override
-    public BatchFileFetchResult fetchBatchFile(String account, String license, String client, FetchRequest fetchRequest)
-    {
-        setCredential(account, license, client);
+    public BatchFileFetchResult fetchBatchFile(FetchRequest fetchRequest) {
         return getBatchService().batchFileFetch(fetchRequest);
     }
 

@@ -22,7 +22,7 @@ public interface AvalaraClient {
 
     BatchFetchResult fetchBatch(FetchRequest fetchRequest);
 
-    BatchFileFetchResult fetchBatchFile(String account, String licence, String client, FetchRequest fetchRequest);
+    BatchFileFetchResult fetchBatchFile(FetchRequest fetchRequest);
 
     BatchSaveResult saveBatch(String account, String licence, String client, Batch batch);
 

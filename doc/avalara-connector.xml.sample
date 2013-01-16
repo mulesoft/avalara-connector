@@ -254,11 +254,7 @@
 <!-- END_INCLUDE(avalara:validate-address) -->
 
 <!-- BEGIN_INCLUDE(avalara:fetch-batch-file) -->
-<avalara:fetch-batch-file
-						  account="avalaraAccount"
-        		    	  license="avalaraLicense"
-		    	    	  avalaraClient="avalaraClient"
-		    	    	  batchId="123456"/>
+    <avalara:fetch-batch-file batchId="123456"/>
 <!-- END_INCLUDE(avalara:fetch-batch-file) -->
 
 <!-- BEGIN_INCLUDE(avalara:save-batch) -->

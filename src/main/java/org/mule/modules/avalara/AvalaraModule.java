@@ -779,26 +779,25 @@ public class AvalaraModule
      * @throws AvalaraRuntimeException
      */
     @Processor
-    public Map<String,BatchFileFetchResult> fetchBatchFile(String account, String license, String avalaraClient, String batchId)
-    {
-        //Albin This Request is needed to retrive the batch file ids. The actual content cannot be retrieved at once.
+    public Map<String,BatchFileFetchResult> fetchBatchFile(String batchId) {
+        // This Request is needed to retrieve the batch file ids. The actual content cannot be retrieved at once.
         FetchRequest batchFetchRequest = new FetchRequest();
         batchFetchRequest.setFields("Files");
-        batchFetchRequest.setFilters("BatchId="+batchId);
+        batchFetchRequest.setFilters("BatchId=" + batchId);
         BatchFetchResult batchFetchResult = apiClient.fetchBatch(batchFetchRequest);
         Map<String,BatchFileFetchResult> resultHashMap = new HashMap<String, BatchFileFetchResult>();
-        //Albin: This is in order to be able to return result and error file to the caller.
-        for(BatchFile bf : batchFetchResult.getBatches().getBatch().get(0).getFiles().getBatchFile()){
-            if(bf.getName().equalsIgnoreCase("Result")){
+        // This is in order to be able to return result and error file to the caller.
+        for (BatchFile bf : batchFetchResult.getBatches().getBatch().get(0).getFiles().getBatchFile()) {
+            if (bf.getName().equalsIgnoreCase("Result")) {
                 FetchRequest fetchRequest = new FetchRequest();
                 fetchRequest.setFields("*,Content");
-                fetchRequest.setFilters("BatchFileId="+bf.getBatchFileId());
-                resultHashMap.put("result",apiClient.fetchBatchFile(account, license, avalaraClient, fetchRequest));
-            }else if(bf.getName().equalsIgnoreCase("Error")){
+                fetchRequest.setFilters("BatchFileId=" + bf.getBatchFileId());
+                resultHashMap.put("result",apiClient.fetchBatchFile(fetchRequest));
+            } else if (bf.getName().equalsIgnoreCase("Error")) {
                 FetchRequest fetchRequest = new FetchRequest();
                 fetchRequest.setFields("*,Content");
-                fetchRequest.setFilters("BatchFileId="+bf.getBatchFileId());
-                resultHashMap.put("error",apiClient.fetchBatchFile(account, license, avalaraClient, fetchRequest));
+                fetchRequest.setFilters("BatchFileId=" + bf.getBatchFileId());
+                resultHashMap.put("error", apiClient.fetchBatchFile(fetchRequest));
             }
         }
 
