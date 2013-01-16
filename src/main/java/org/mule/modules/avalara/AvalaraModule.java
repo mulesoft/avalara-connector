@@ -682,7 +682,7 @@ public class AvalaraModule
      * @throws AvalaraRuntimeException
      */
     @Processor
-    public ValidateResult validateAddress(String line1, @Optional String line2, @Optional String line3, 
+    public ValidateResult validateAddress(String line1, @Optional String line2, @Optional String line3,
                                           @Optional String city, @Optional String region, @Optional String country,
                                           @Optional String postalCode, @Optional String addressCode,
                                           Integer taxRegionId,
