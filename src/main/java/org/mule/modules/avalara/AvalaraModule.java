@@ -683,22 +683,15 @@ public class AvalaraModule
      * @throws AvalaraRuntimeException
      */
     @Processor
-    public ValidateResult validateAddress(String line1,
-                                          @Optional String line2,
-                                          @Optional String line3, 
-                                          @Optional String city,
-                                          @Optional String region,
-                                          @Optional String country,
-                                          @Optional String postalCode,
-                                          @Optional String addressCode,
+    public ValidateResult validateAddress(String line1, @Optional String line2, @Optional String line3, 
+                                          @Optional String city, @Optional String region, @Optional String country,
+                                          @Optional String postalCode, @Optional String addressCode,
                                           Integer taxRegionId,
-                                          @Optional String latitude,
-                                          @Optional String longitude,
+                                          @Optional String latitude, @Optional String longitude,
                                           @Optional @Default("DEFAULT") TextCaseType textCase,
                                           @Optional @Default("false") boolean coordinates,
                                           @Optional @Default("false") boolean taxability,
-                                          XMLGregorianCalendar date)
-    {
+                                          XMLGregorianCalendar date) {
         BaseAddress address = new BaseAddress();
         address.setAddressCode(addressCode);
         address.setCity(city);
