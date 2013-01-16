@@ -10,6 +10,7 @@ package org.mule.modules;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -274,8 +275,7 @@ public class AvalaraTestDriver {
 
     @Test
     public void isBatchFinished() throws Exception {
-        //BatchFileFetchResult fetchResult = module.fetchBatchFile(account, license, client, "129829");
-        boolean isFinished = module.isBatchFinished(ACCOUNT, LICENSE, CLIENT, "129275");
-        System.out.println("isFinished= " + isFinished);
+        boolean isFinished = module.isBatchFinished("129275");
+        assertTrue(isFinished);
     }
 }

@@ -248,9 +248,5 @@
 <!-- END_INCLUDE(avalara:save-batch) -->
 
 <!-- BEGIN_INCLUDE(avalara:is-batch-finished) -->
-<avalara:is-batch-finished
-						  account="avalaraAccount"
-                          license="avalaraLicense"
-		    	    	  avalaraClient="avalaraClient"
-		    	    	  batchId="123456"/>
+    <avalara:is-batch-finished batchId="123456"/>
 <!-- END_INCLUDE(avalara:is-batch-finished) -->

@@ -710,28 +710,22 @@ public class AvalaraModule
      *
      * {@sample.xml ../../../doc/avalara-connector.xml.sample avalara:is-batch-finished}
      *
-     * @param account Avalara's account
-     * @param license Avalara's license
-     * @param avalaraClient Avalara's client
      * @param batchId The numerical identifier of the BatchFile.
-     * @return The {@link Map<String,BatchFileFetchResult>}
+     * @return a boolean representing if the Batch finished or not
      *
      * @throws AvalaraRuntimeException
      */
     @Processor
-    public boolean isBatchFinished(String account, String license, String avalaraClient, String batchId)
-    {
-        //Albin This Request is needed to retrive the batch file ids. The actual content cannot be retrieved at once.
-        FetchRequest batchFetchRequest = new FetchRequest();
+    public boolean isBatchFinished(String batchId) {
+        final FetchRequest batchFetchRequest = new FetchRequest();
         batchFetchRequest.setFilters("BatchId="+batchId);
         BatchFetchResult batchFetchResult = apiClient.fetchBatch(batchFetchRequest);
-        if(batchFetchResult.getBatches().getBatch().size() == 0 || (batchFetchResult.getBatches().getBatch().get(0).getRecordCount() > batchFetchResult.getBatches().getBatch().get(0).getCurrentRecord())){
+        if (batchFetchResult.getBatches().getBatch().size() == 0 || (batchFetchResult.getBatches().getBatch().get(0).getRecordCount() > batchFetchResult.getBatches().getBatch().get(0).getCurrentRecord())) {
             return false;
-        }else{
+        } else {
             return true;
         }
     }
-
 
     /**
      * Batch Save processor.
