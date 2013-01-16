@@ -14,6 +14,7 @@ import static org.junit.Assert.assertSame;
 import org.junit.Test;
 
 import com.avalara.avatax.services.AddressSvcSoap;
+import com.avalara.avatax.services.BatchSvcSoap;
 import com.avalara.avatax.services.TaxSvcSoap;
 
 public class DefaultAvalaraClientUnitTest {
@@ -21,17 +22,23 @@ public class DefaultAvalaraClientUnitTest {
    private DefaultAvalaraClient client = new DefaultAvalaraClient("", "", "");
 
    @Test
-   public void taxSvcGetsCached() 
-   {
+   public void taxServiceShouldBeCached() {
       TaxSvcSoap taxService = client.getTaxService();
       assertNotNull(taxService);
       assertSame(taxService, client.getTaxService());
    }
 
    @Test
-   public void addressSvcGetsCached() {
+   public void addressServiceShouldBeCached() {
       AddressSvcSoap addressService = client.getAddressService();
       assertNotNull(addressService);
       assertSame(addressService, client.getAddressService());
-   }   
+   }
+
+   @Test
+   public void batchServiceShouldBeCached() {
+      BatchSvcSoap batchService = client.getBatchService();
+      assertNotNull(batchService);
+      assertSame(batchService, client.getBatchService());
+   }
 }
