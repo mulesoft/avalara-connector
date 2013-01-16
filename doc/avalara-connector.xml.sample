@@ -235,10 +235,7 @@
 <!-- END_INCLUDE(avalara:cancel-tax) -->
 
 <!-- BEGIN_INCLUDE(avalara:validate-address) -->
-<avalara:validate-address 
-						  account="avalaraAccount" 
-        		    	  license="avalaraLicense" 
-		    	    	  avalaraClient="avalaraClient"
+<avalara:validate-address
 						  line1="435 Ericksen Ave"
                           line2="some line 2"
                           line3="some line 3" 

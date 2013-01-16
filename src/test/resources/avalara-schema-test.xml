@@ -70,10 +70,7 @@
                             docType="SALES_ORDER"
                             docCode="#[variable:docCode]"
                             cancelCode="UNSPECIFIED"/>
-        <avalara:validate-address 
-        						  account="avalaraAccount" 
-			       				  license="avalaraLicense" 
-        				 		  avalaraClient="avalaraClient"
+        <avalara:validate-address
         						  line1="#[variable:line1]"
                                   line2="#[variable:line2]"
                                   line3="#[variable:line3]"

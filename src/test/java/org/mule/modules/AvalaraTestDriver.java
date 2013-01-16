@@ -236,7 +236,7 @@ public class AvalaraTestDriver {
 
     @Test
     public void validateAValidAddress() throws Exception {
-        ValidateResult response = module.validateAddress(ACCOUNT, LICENSE, CLIENT, "435 Ericksen Ave", null, null, null, "NE", null,
+        ValidateResult response = module.validateAddress("435 Ericksen Ave", null, null, null, "NE", null,
                 "98110", null, 0, null, null, TextCaseType.DEFAULT, false, false, testDate);
 
         assertNotNull(response);
@@ -245,7 +245,7 @@ public class AvalaraTestDriver {
 
     @Test
     public void validateAnInvalidAddress() throws Exception {
-        ValidateResult response = module.validateAddress(ACCOUNT, LICENSE, CLIENT, "SARLAZA", null, null, null, null, null,
+        ValidateResult response = module.validateAddress("SARLAZA", null, null, null, null, null,
                 null, null, 0, null, null, TextCaseType.DEFAULT, false, false, testDate);
 
         assertEquals(SeverityLevel.ERROR, response.getResultCode());

@@ -30,13 +30,10 @@ public class AvalaraModuleUnitTest
     private AvalaraClient clientMock;
 
     @Before
-    public void setUp()
-    {
+    public void setUp() {
         clientMock = mock(AvalaraClient.class);
-
         module = new AvalaraModule();
         module.setClient(clientMock);
-        module.init();
     }
 
     @Test

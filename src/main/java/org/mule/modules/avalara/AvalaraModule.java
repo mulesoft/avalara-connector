@@ -662,9 +662,6 @@ public class AvalaraModule
      *
      * {@sample.xml ../../../doc/avalara-connector.xml.sample avalara:validate-address}
      * 
-     * @param account Avalara's account
-     * @param license Avalara's license
-     * @param avalaraClient Avalara's client
      * @param line1 Address line 1
      * @param line2 Address line 2
      * @param line3 Address line 3
@@ -686,8 +683,7 @@ public class AvalaraModule
      * @throws AvalaraRuntimeException
      */
     @Processor
-    public ValidateResult validateAddress(String account, String license, String avalaraClient,
-                                          String line1,
+    public ValidateResult validateAddress(String line1,
                                           @Optional String line2,
                                           @Optional String line3, 
                                           @Optional String city,
@@ -716,9 +712,7 @@ public class AvalaraModule
         address.setRegion(region);
         address.setTaxRegionId(taxRegionId);
 
-        return apiClient.validateAddress(
-            account, license, avalaraClient, 
-            (ValidateRequest) mom.unmap(            
+        return apiClient.validateAddress((ValidateRequest) mom.unmap( 
                 new MapBuilder()
                 .with("address", address)
                 .with("textCase", textCase.toAvalaraTextCase())

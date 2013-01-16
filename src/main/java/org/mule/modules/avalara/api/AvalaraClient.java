@@ -18,7 +18,7 @@ import org.mule.modules.avalara.TaxRequestType;
 public interface AvalaraClient {
     <T extends BaseResult> T sendToAvalara(String account, String licence, String client, TaxRequestType requestType, Object obj);
 
-    ValidateResult validateAddress(String account, String licence, String client, ValidateRequest validateRequest);
+    ValidateResult validateAddress(ValidateRequest validateRequest);
 
     BatchFetchResult fetchBatch(String account, String licence, String client, FetchRequest fetchRequest);
 

@@ -92,9 +92,7 @@ public class DefaultAvalaraClient implements AvalaraClient
     }
 
     @Override
-    public ValidateResult validateAddress(String account, String license, String client, ValidateRequest validateRequest)
-    {
-        setCredential(account, license, client);
+    public ValidateResult validateAddress(ValidateRequest validateRequest) {
         return getAddressService().validate(validateRequest);
     }
 
