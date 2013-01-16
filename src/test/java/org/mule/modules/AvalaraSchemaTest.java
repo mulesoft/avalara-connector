@@ -11,18 +11,16 @@ package org.mule.modules;
 import org.junit.Test;
 import org.mule.tck.junit4.FunctionalTestCase;
 
-public class AvalaraSchemaTest extends FunctionalTestCase
-{
+public class AvalaraSchemaTest extends FunctionalTestCase {
+
     @Override
-    protected String getConfigResources()
-    {
+    protected String getConfigResources() {
         return "avalara-schema-test.xml";
     }
 
     @Test
-    public void testCanParseXmlWithoutSchemaValidationErrors() throws Exception
-    {
+    public void testCanParseXmlWithoutSchemaValidationErrors() throws Exception {
         //Nothing. Will fail if can not parse        
     }
- 
+
 }

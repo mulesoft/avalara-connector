@@ -19,9 +19,8 @@
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
         http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
         http://www.mulesoft.org/schema/mule/avalara http://www.mulesoft.org/schema/mule/avalara/2.0/mule-avalara.xsd">
-        
-        
-        <avalara:config/>
+
+        <avalara:config avalaraAccount="${avalaraAccount}" avalaraLicense="${avalaraLicense}" client="${avalaraClient}" name="avalara-config"/>
 
     <flow name="testFlow">
         <avalara:get-tax 

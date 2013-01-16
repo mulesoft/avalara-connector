@@ -6,41 +6,26 @@
  * place, you may not use the software.
  */
 
-
-	
-	/*
-	 * Copyright (c) 2011 Zauber S.A.  -- All rights reserved
-	 */
-	
-	package org.mule.modules;
+package org.mule.modules;
 
 import org.junit.Test;
 import org.mule.api.processor.MessageProcessor;
 import org.mule.tck.junit4.FunctionalTestCase;
 
-	
 /**
  * @author Gaston Ponti
  * @since Nov 23, 2011
  */
 
-public class AvalaraGetTaxHistoryTestDriver extends FunctionalTestCase
-{
-    
+public class AvalaraGetTaxHistoryTestDriver extends FunctionalTestCase {
     /** @see org.mule.tck.FunctionalTestCase#getConfigResources() */
     @Override
-    protected String getConfigResources()
-    {
+    protected String getConfigResources() {
             return "avalara-get-tax-history-test.xml";
     }
 
     @Test
-    public void testFlow() throws Exception
-    {
+    public void testFlow() throws Exception {
         ((MessageProcessor)this.getFlowConstruct("main")).process(getTestEvent(""));
     }
-
-
 }
-
-	
