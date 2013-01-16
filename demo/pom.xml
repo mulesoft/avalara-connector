@@ -9,9 +9,9 @@
 	<version>2.0</version>
 
 	<properties>
-		<muleVersion>3.2.1</muleVersion>
+		<muleVersion>3.3.2</muleVersion>
 		<ibeansVersion>1.1</ibeansVersion>
-		<mule.zuora.version>1.8-SNAPSHOT</mule.zuora.version>
+		<mule.zuora.version>1.9.2-SNAPSHOT</mule.zuora.version>
 		<mule.avalara.version>3.0.0-SNAPSHOT</mule.avalara.version>
 	</properties>
 
