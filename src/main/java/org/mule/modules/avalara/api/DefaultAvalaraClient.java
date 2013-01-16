@@ -8,19 +8,33 @@
 
 package org.mule.modules.avalara.api;
 
-import com.avalara.avatax.services.*;
-import org.apache.commons.lang.Validate;
-import org.mule.modules.avalara.TaxRequestType;
-import org.mule.modules.avalara.exception.AvalaraRuntimeException;
-import org.mule.modules.avalara.util.AvalaraProfileHandler;
-
-import com.zauberlabs.commons.ws.connection.ConnectionBuilder;
-import com.zauberlabs.commons.ws.security.Credential;
-
 import java.lang.reflect.InvocationTargetException;
 
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
+
+import org.apache.commons.lang.Validate;
+import org.mule.modules.avalara.TaxRequestType;
+import org.mule.modules.avalara.exception.AvalaraRuntimeException;
+
+import com.avalara.avatax.services.AddressSvc;
+import com.avalara.avatax.services.AddressSvcSoap;
+import com.avalara.avatax.services.BaseResult;
+import com.avalara.avatax.services.Batch;
+import com.avalara.avatax.services.BatchFetchResult;
+import com.avalara.avatax.services.BatchFileFetchResult;
+import com.avalara.avatax.services.BatchSaveResult;
+import com.avalara.avatax.services.BatchSvc;
+import com.avalara.avatax.services.BatchSvcSoap;
+import com.avalara.avatax.services.FetchRequest;
+import com.avalara.avatax.services.PingResult;
+import com.avalara.avatax.services.SeverityLevel;
+import com.avalara.avatax.services.TaxSvc;
+import com.avalara.avatax.services.TaxSvcSoap;
+import com.avalara.avatax.services.ValidateRequest;
+import com.avalara.avatax.services.ValidateResult;
+import com.zauberlabs.commons.ws.connection.ConnectionBuilder;
+import com.zauberlabs.commons.ws.security.BasicCredential;
 
 /**
  * @author Gaston Ponti
@@ -161,33 +175,12 @@ public class DefaultAvalaraClient implements AvalaraClient
         }
         return taxSvcSoap;
     }
-    
-    protected <A> A createConnection(Class<A> portType, Class<? extends Service> serviceType, String schemaName, QName portName, String endpoint)
-    {
+
+    protected <A> A createConnection(Class<A> portType, Class<? extends Service> serviceType, String schemaName, QName portName, String endpoint) {
         return ConnectionBuilder.fromPortType(portType)
             .withServiceType(serviceType)
             .withClasspathWsdl(schemaLocation(schemaName))
-            .withCredential(new Credential()
-            {
-                @Override
-                public String getUsername()
-                {
-                    return usernameLocal.get();
-                }
-                
-                @Override
-                public String getPassword()
-                {
-                    return passwordLocal.get();
-                }
-            })
-            .withHeader(new AvalaraProfileHandler(new AvalaraProfile(){
-                @Override
-                public String getClient()
-                {
-                    return clientLocal.get();
-                }
-            }))
+            .withCredential(new BasicCredential(usernameLocal.get(),passwordLocal.get()))
             .withPortQName(portName)
             .withEndpoint(endpoint)
             .build();
