@@ -676,68 +676,6 @@ public class AvalaraModule
         );
     }
 
-     // Albin: Does not seem to be a way to get the content of the batch file using this method.
-    /**
-     * Batch Fetch processor.
-     * <p>
-     * Fetches a Batch result
-     *
-     * {@sample.xml ../../../doc/avalara-connector.xml.sample avalara:fetch-batch}
-     *
-     * @param account Avalara's account
-     * @param license Avalara's license
-     * @param avalaraClient Avalara's client
-     * @param maxCount The max count from the batch.
-     * @param pageIndex The page index of tha batch.
-     * @param pageSize The size of the page.
-     * @param recordCount City name. Required, when PostalCode is not specified.
-     * @param fields The fileds to be returned.
-     * @param filters Which filters to apply.
-     * @param sort Which order the app should be sorted in.
-     * @return The {@link BatchFetchResult}
-     *
-     * @throws AvalaraRuntimeException
-
-    @Processor
-    public BatchFetchResult fetchBatch(String account, String license, String avalaraClient)
-
-                                          int maxCount,
-                                          int pageIndex,
-                                          int pageSize,
-                                          int recordCount,
-                                          @Optional String fields,
-                                          @Optional String filters,
-                                          @Optional String sort)
-
-    {
-
-        FetchRequest fetchRequest = new FetchRequest();
-        fetchRequest.setFields("*,Content");
-        fetchRequest.setFilters("BatchId=129829");
-        //fetchRequest.setMaxCount(maxCount);
-        //fetchRequest.setPageIndex(pageIndex);
-        //fetchRequest.setPageSize(pageSize);
-        //fetchRequest.setRecordCount(recordCount);
-        //fetchRequest.setSort(sort);
-
-        return apiClient.fetchBatch(account, license, avalaraClient, fetchRequest);
-    }
-    */
-    /**
-     * Batch Fetch processor.
-     * <p>
-     * Fetches a Batch result
-     *
-     * {@sample.xml ../../../doc/avalara-connector.xml.sample avalara:fetch-batch-file}
-     *
-     * @param account Avalara's account
-     * @param license Avalara's license
-     * @param avalaraClient Avalara's client
-     * @param batchId The numerical identifier of the BatchFile.
-     * @return The {@link Map<String,BatchFileFetchResult>}
-     *
-     * @throws AvalaraRuntimeException
-     */
     @Processor
     public Map<String,BatchFileFetchResult> fetchBatchFile(String batchId) {
         // This Request is needed to retrieve the batch file ids. The actual content cannot be retrieved at once.
