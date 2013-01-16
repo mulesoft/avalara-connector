@@ -12,7 +12,7 @@
 		<muleVersion>3.2.1</muleVersion>
 		<ibeansVersion>1.1</ibeansVersion>
 		<mule.zuora.version>1.8-SNAPSHOT</mule.zuora.version>
-		<mule.avalara.version>2.0-SNAPSHOT</mule.avalara.version>
+		<mule.avalara.version>3.0.0-SNAPSHOT</mule.avalara.version>
 	</properties>
 
 	<description>Example that shows how to calculate taxes</description>
