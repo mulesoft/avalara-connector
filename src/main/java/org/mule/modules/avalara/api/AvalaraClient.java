@@ -16,7 +16,7 @@ import org.mule.modules.avalara.TaxRequestType;
  * @since Oct 17, 2011
  */
 public interface AvalaraClient {
-    <T extends BaseResult> T sendToAvalara(String account, String licence, String client, TaxRequestType requestType, Object obj);
+    <T extends BaseResult> T sendToAvalara(TaxRequestType requestType, Object obj);
 
     ValidateResult validateAddress(ValidateRequest validateRequest);
 

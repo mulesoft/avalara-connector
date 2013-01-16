@@ -25,9 +25,6 @@
 
     <flow name="testFlow">
         <avalara:get-tax 
-        				 account="avalaraAccount" 
-        				 license="avalaraLicense" 
-        				 avalaraClient="avalaraClient"
         				 companyCode ="#[variable:companyCode]"
                          docType="SALES_ORDER"
                          docDate-ref="#[variable:docDate]"
@@ -44,27 +41,18 @@
             <avalara:lines ref="#[variable:lines]" /> 
         </avalara:get-tax>
         <avalara:commit-tax 
-        					account="avalaraAccount" 
-        				 	license="avalaraLicense" 
-        				 	avalaraClient="avalaraClient"
         				 	docId="#[variable:docId]"
                             companyCode="#[variable:companyCode]"
                             docType="SALES_ORDER"
                             docCode="#[variable:docCode]"
                             newDocCode="#[variable:newDocCode]"/>
         <avalara:get-tax-history 
-					        	 account="avalaraAccount" 
-					        	 license="avalaraLicense" 
-					        	 avalaraClient="avalaraClient"
         						 docId="#[variable:docId]"
                                  companyCode="#[variable:companyCode]"
                                  docType="SALES_ORDER"
                                  docCode="#[variable:docCode]"
                                  detailLevel="TAX"/>
         <avalara:cancel-tax 
-        					account="avalaraAccount" 
-        				 	license="avalaraLicense" 
-        				 	avalaraClient="avalaraClient"
         					docId="#[variable:docId]"
                             companyCode="#[variable:companyCode]"
                             docType="SALES_ORDER"
@@ -84,9 +72,6 @@
                                   longitude="#[variable:longitude]"
                                   date-ref="#[variable:date]" />
         <avalara:post-tax 
-        				  account="avalaraAccount" 
-        				  license="avalaraLicense" 
-        				  avalaraClient="avalaraClient"
         				  docId="#[variable:docId]"
 		                  companyCode="#[variable:companyCode]"
 		                  docType="SALES_ORDER"

@@ -4,9 +4,6 @@
 
 <!-- BEGIN_INCLUDE(avalara:get-tax) -->
     <avalara:get-tax
-    			 account="avalaraAccount" 
-        		 license="avalaraLicense" 
-        		 avalaraClient="avalaraClient"
     			 companyCode="some company code"
                  docType="PURCHASE_ORDER"
                  docCode="some doc code"
@@ -93,9 +90,6 @@
 
 <!-- BEGIN_INCLUDE(avalara:adjust-tax) -->
     <avalara:adjust-tax
-    			 account="avalaraAccount"
-        		 license="avalaraLicense"
-        		 avalaraClient="avalaraClient"
         		 adjustmentReason="0"
         		 adjustmentDescription="Reson for the adjustment"
     			 companyCode="some company code"
@@ -184,9 +178,6 @@
 
 <!-- BEGIN_INCLUDE(avalara:post-tax) -->
 <avalara:post-tax 
-					account="avalaraAccount" 
-        		    license="avalaraLicense" 
-        		    avalaraClient="avalaraClient"
 					docId="some document id"
                     companyCode="some company code"
                     docType="SALES_ORDER"
@@ -200,9 +191,6 @@
 
 <!-- BEGIN_INCLUDE(avalara:commit-tax) -->
 <avalara:commit-tax 
-					account="avalaraAccount" 
-        		    license="avalaraLicense" 
-        		    avalaraClient="avalaraClient"
 					docId="some document id"
                     companyCode="some company code"
                     docType="SALES_ORDER"
@@ -212,9 +200,6 @@
 
 <!-- BEGIN_INCLUDE(avalara:get-tax-history) -->
 <avalara:get-tax-history 
-						 account="avalaraAccount" 
-        		    	 license="avalaraLicense" 
-        		    	 avalaraClient="avalaraClient"
 						 docId="some document id"
                          companyCode="some company code"
                          docType="SALES_ORDER"
@@ -224,9 +209,6 @@
 
 <!-- BEGIN_INCLUDE(avalara:cancel-tax) -->
 <avalara:cancel-tax 
-					account="avalaraAccount" 
-        		    license="avalaraLicense" 
-		    	    avalaraClient="avalaraClient"
 					docId="some document id"
                     companyCode="some company code"
                     docType="SALES_ORDER"

@@ -136,9 +136,6 @@ public class AvalaraModule
      *
      * {@sample.xml ../../../doc/avalara-connector.xml.sample avalara:get-tax}
      * 
-     * @param account Avalara's account
-     * @param license Avalara's license
-     * @param avalaraClient Avalara's client
      * @param companyCode Client application company reference code
      * @param docType The document type specifies the category of the document and affects
      *                how the document is treated after a tax calculation; see 
@@ -208,8 +205,7 @@ public class AvalaraModule
      * @throws AvalaraRuntimeException
      */
     @Processor
-    public GetTaxResult getTax(String account, String license, String avalaraClient,
-                               String companyCode,
+    public GetTaxResult getTax(String companyCode,
                                AvalaraDocumentType docType,
                                @Optional String docCode,
                                XMLGregorianCalendar docDate,
@@ -233,26 +229,23 @@ public class AvalaraModule
                                @Optional @Default("AUTOMATIC") ServiceModeType serviceMode,
                                XMLGregorianCalendar paymentDate,
                                String exchangeRate,
-                               XMLGregorianCalendar exchangeRateEffDate)
-    {
+                               XMLGregorianCalendar exchangeRateEffDate) {
         BigDecimal discountDecimal = discount == null ? null :  new BigDecimal(discount);
         BigDecimal exchangeRateDecimal = exchangeRate == null ? null :  new BigDecimal(exchangeRate);
         
         Map<String, Object> addresses = null;
-        if (baseAddresses != null && !baseAddresses.isEmpty())
-        {
+        if (baseAddresses != null && !baseAddresses.isEmpty()) {
             addresses = new HashMap<String, Object>();
             addresses.put("baseAddress", baseAddresses);
         }
         
         Map<String, Object> mapLines = null;
-        if (lines != null && !lines.isEmpty())
-        {
+        if (lines != null && !lines.isEmpty()) {
             mapLines = new HashMap<String, Object>();
             mapLines.put("line", lines);
         }
         
-        return apiClient.sendToAvalara(account, license, avalaraClient, TaxRequestType.GetTax, mom.unmap(            
+        return apiClient.sendToAvalara(TaxRequestType.GetTax, mom.unmap(    
                 new MapBuilder()
                 .with("companyCode", companyCode)
                 .with("docType", docType.toDocumentType())
@@ -292,9 +285,6 @@ public class AvalaraModule
      *
      * {@sample.xml ../../../doc/avalara-connector.xml.sample avalara:adjust-tax}
      *
-     * @param account Avalara's account
-     * @param license Avalara's license
-     * @param avalaraClient Avalara's client
      * @param companyCode Client application company reference code
      * @param adjustmentReason The reason for this tax adjustment.
      * @param adjustmentDescription A description of a tax adjustment.
@@ -365,10 +355,8 @@ public class AvalaraModule
      *
      * @throws AvalaraRuntimeException
      */
-
     @Processor
-    public AdjustTaxResult adjustTax(String account, String license, String avalaraClient,
-                                     int adjustmentReason,
+    public AdjustTaxResult adjustTax(int adjustmentReason,
                                      String   adjustmentDescription,
                                String companyCode,
                                AvalaraDocumentType docType,
@@ -394,21 +382,18 @@ public class AvalaraModule
                                @Optional @Default("AUTOMATIC") ServiceModeType serviceMode,
                                XMLGregorianCalendar paymentDate,
                                String exchangeRate,
-                               XMLGregorianCalendar exchangeRateEffDate)
-    {
+                               XMLGregorianCalendar exchangeRateEffDate) {
         BigDecimal discountDecimal = discount == null ? null :  new BigDecimal(discount);
         BigDecimal exchangeRateDecimal = exchangeRate == null ? null :  new BigDecimal(exchangeRate);
 
         Map<String, Object> addresses = null;
-        if (baseAddresses != null && !baseAddresses.isEmpty())
-        {
+        if (baseAddresses != null && !baseAddresses.isEmpty()) {
             addresses = new HashMap<String, Object>();
             addresses.put("baseAddress", baseAddresses);
         }
 
         Map<String, Object> mapLines = null;
-        if (lines != null && !lines.isEmpty())
-        {
+        if (lines != null && !lines.isEmpty()) {
             mapLines = new HashMap<String, Object>();
             mapLines.put("line", lines);
         }
@@ -438,14 +423,14 @@ public class AvalaraModule
                 .with("exchangeRate", exchangeRateDecimal)
                 .with("exchangeRateEffDate", exchangeRateEffDate).build(), GetTaxRequest.class);
 
-        return apiClient.sendToAvalara(account, license, avalaraClient, TaxRequestType.AdjustTax, mom.unmap(
+        return apiClient.sendToAvalara(TaxRequestType.AdjustTax, mom.unmap(
                 new MapBuilder()
                         .with("adjustmentReason", adjustmentReason)
                         .with("adjustmentDescription", adjustmentDescription)
                         .with("getTaxRequest", getTaxRequest)
                         .build(), AdjustTaxRequest.class
-        )
-        );
+                )
+            );
     }
 
 
@@ -454,9 +439,6 @@ public class AvalaraModule
      *
      * {@sample.xml ../../../doc/avalara-connector.xml.sample avalara:post-tax}
      *
-     * @param account Avalara's account
-     * @param license Avalara's license
-     * @param avalaraClient Avalara's client
      * @param docId The original document's type, such as Sales Invoice or Purchase Invoice.
      * @param companyCode Client application company reference code. If docId is specified, 
      *                    this is not needed.
@@ -486,8 +468,7 @@ public class AvalaraModule
      * @throws AvalaraRuntimeException
      */
     @Processor
-    public PostTaxResult postTax(String account, String license, String avalaraClient,
-                                 @Optional String docId,
+    public PostTaxResult postTax(@Optional String docId,
                                  String companyCode,
                                  AvalaraDocumentType docType,
                                  @Optional String docCode,
@@ -495,15 +476,13 @@ public class AvalaraModule
                                  String totalAmount,
                                  String totalTax,
                                  @Optional @Default("false") boolean commit,
-                                 @Optional String newDocCode)
-    {
+                                 @Optional String newDocCode) {
         BigDecimal totalAmountDecimal = totalAmount == null ? null :  new BigDecimal(totalAmount);
         BigDecimal totalTaxDecimal = totalTax == null ? null :  new BigDecimal(totalTax);
         
         return (PostTaxResult) apiClient.sendToAvalara(
-            account, license, avalaraClient, 
             TaxRequestType.PostTax,
-            mom.unmap(           
+            mom.unmap(
                 new MapBuilder()
                 .with("docId", docId)
                 .with("companyCode", companyCode)
@@ -524,9 +503,6 @@ public class AvalaraModule
      *
      * {@sample.xml ../../../doc/avalara-connector.xml.sample avalara:commit-tax}
      *
-     * @param account Avalara's account
-     * @param license Avalara's license
-     * @param avalaraClient Avalara's client
      * @param docId The original document's type, such as Sales Invoice or Purchase Invoice.
      * @param companyCode Client application company reference code. If docId is specified, 
      *                    this is not needed.
@@ -541,17 +517,14 @@ public class AvalaraModule
      * @throws AvalaraRuntimeException
      */
     @Processor
-    public CommitTaxResult commitTax(String account, String license, String avalaraClient,
-                                     @Optional String docId,
+    public CommitTaxResult commitTax(@Optional String docId,
                                      String companyCode,
                                      AvalaraDocumentType docType,
                                      @Optional String docCode,
-                                     @Optional String newDocCode)
-    {
+                                     @Optional String newDocCode) {
         return (CommitTaxResult) apiClient.sendToAvalara(
-            account, license, avalaraClient, 
             TaxRequestType.CommitTax,
-            mom.unmap(            
+            mom.unmap(
                 new MapBuilder()
                 .with("docId", docId)
                 .with("companyCode", companyCode)
@@ -568,9 +541,6 @@ public class AvalaraModule
      *
      * {@sample.xml ../../../doc/avalara-connector.xml.sample avalara:get-tax-history}
      *
-     * @param account Avalara's account
-     * @param license Avalara's license
-     * @param avalaraClient Avalara's client
      * @param docId The original document's type, such as Sales Invoice or Purchase Invoice.
      * @param companyCode Client application company reference code. If docId is specified, 
      *                    this is not needed.
@@ -585,17 +555,14 @@ public class AvalaraModule
      * @throws AvalaraRuntimeException
      */
     @Processor
-    public GetTaxHistoryResult getTaxHistory(String account, String license, String avalaraClient,
-                                             @Optional String docId,
+    public GetTaxHistoryResult getTaxHistory(@Optional String docId,
                                              String companyCode,
                                              AvalaraDocumentType docType,
                                              @Optional String docCode,
-                                             DetailLevelType detailLevel)
-    {
+                                             DetailLevelType detailLevel) {
         return (GetTaxHistoryResult) apiClient.sendToAvalara(
-            account, license, avalaraClient, 
             TaxRequestType.GetTaxHistory,
-            mom.unmap(       
+            mom.unmap(
                 new MapBuilder()
                 .with("docId", docId)
                 .with("companyCode", companyCode)
@@ -608,14 +575,11 @@ public class AvalaraModule
     }
     
     /**
-     * Cancel tax, indicating the document that should be cancelled and the reason
+     * Cancel tax, indicating the document that should be canceled and the reason
      * for the operation.
      *
      * {@sample.xml ../../../doc/avalara-connector.xml.sample avalara:cancel-tax}
      * 
-     * @param account Avalara's account
-     * @param license Avalara's license
-     * @param avalaraClient Avalara's client
      * @param docId The original document's type, such as Sales Invoice or Purchase Invoice.
      * @param companyCode Client application company reference code. If docId is specified, 
      *                    this is not needed.
@@ -630,17 +594,14 @@ public class AvalaraModule
      * @throws AvalaraRuntimeException
      */
     @Processor
-    public CancelTaxResult cancelTax(String account, String license, String avalaraClient,
-                                     @Optional String docId,
+    public CancelTaxResult cancelTax(@Optional String docId,
                                      String companyCode,
                                      AvalaraDocumentType docType,
                                      @Optional String docCode,
-                                     CancelCodeType cancelCode)
-    {
+                                     CancelCodeType cancelCode) {
         return (CancelTaxResult) apiClient.sendToAvalara(
-            account, license, avalaraClient, 
             TaxRequestType.CancelTax,
-            mom.unmap(           
+            mom.unmap(
                 new MapBuilder()
                 .with("docId", docId)
                 .with("companyCode", companyCode)

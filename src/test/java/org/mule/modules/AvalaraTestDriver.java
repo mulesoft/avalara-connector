@@ -131,7 +131,7 @@ public class AvalaraTestDriver {
             }
         };
 
-        return module.getTax(ACCOUNT, LICENSE, CLIENT, "TC", AvalaraDocumentType.SALES_INVOICE, docCode, testDate,
+        return module.getTax("TC", AvalaraDocumentType.SALES_INVOICE, docCode, testDate,
                 null, "cusomer Code", null, "0", null, null, "Origin", "Dest", addresses,
                 lines, DetailLevelType.DOCUMENT, null, "Test LocationCode", false, null,
                 null, null, ServiceModeType.AUTOMATIC, testDate, "0", testDate);
@@ -186,7 +186,7 @@ public class AvalaraTestDriver {
             }
         };
 
-        return module.adjustTax(ACCOUNT, LICENSE, CLIENT, 1, "some reason", "TC", AvalaraDocumentType.SALES_INVOICE, docCode, testDate,
+        return module.adjustTax(1, "some reason", "TC", AvalaraDocumentType.SALES_INVOICE, docCode, testDate,
                 null, "cusomer Code", null, "0", null, null, "Origin", "Dest", addresses,
                 lines, DetailLevelType.DOCUMENT, null, "Test LocationCode", false, null,
                 null, null, ServiceModeType.AUTOMATIC, testDate, "0", testDate);
@@ -202,19 +202,19 @@ public class AvalaraTestDriver {
 
         AdjustTaxResult adjustTaxResult = adjustTax(docCode);
 
-        PostTaxResult postResult = module.postTax(ACCOUNT, LICENSE, CLIENT, null, "TC", AvalaraDocumentType.SALES_INVOICE,
+        PostTaxResult postResult = module.postTax(null, "TC", AvalaraDocumentType.SALES_INVOICE,
                 docCode, testDate, taxResult.getTotalAmount().toPlainString(),
                 taxResult.getTotalTax().toPlainString(), false, docCode);
 
         assertEquals(SeverityLevel.SUCCESS, postResult.getResultCode());
 
         //Finally Cancel Tax and remove the entry from the system by calling new DocVoided
-        CancelTaxResult cancelResult = module.cancelTax(ACCOUNT, LICENSE, CLIENT, null, "TC", AvalaraDocumentType.SALES_INVOICE, docCode, CancelCodeType.DOC_VOIDED);
+        CancelTaxResult cancelResult = module.cancelTax(null, "TC", AvalaraDocumentType.SALES_INVOICE, docCode, CancelCodeType.DOC_VOIDED);
 
         assertEquals(SeverityLevel.SUCCESS, cancelResult.getResultCode());
         // Check tax history
 
-        GetTaxHistoryResult taxHistoryResult = module.getTaxHistory(ACCOUNT, LICENSE, CLIENT, null, "TC",
+        GetTaxHistoryResult taxHistoryResult = module.getTaxHistory(null, "TC",
                 AvalaraDocumentType.SALES_INVOICE, docCode, DetailLevelType.TAX);
 
         assertEquals(SeverityLevel.SUCCESS, taxHistoryResult.getResultCode());
@@ -228,7 +228,7 @@ public class AvalaraTestDriver {
 
         //Finally Cancel Tax and remove the entry from the system by calling new DocVoided
         //Delete the document from the system
-        cancelResult = module.cancelTax(ACCOUNT, LICENSE, CLIENT, null, "TC", AvalaraDocumentType.SALES_INVOICE,
+        cancelResult = module.cancelTax(null, "TC", AvalaraDocumentType.SALES_INVOICE,
                 docCode, CancelCodeType.DOC_DELETED);
 
         assertEquals(SeverityLevel.SUCCESS, cancelResult.getResultCode());

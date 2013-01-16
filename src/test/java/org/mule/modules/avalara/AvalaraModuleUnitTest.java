@@ -13,7 +13,6 @@ import static org.mockito.Mockito.*;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import org.mule.modules.avalara.api.AvalaraClient;
 
@@ -58,9 +57,8 @@ public class AvalaraModuleUnitTest
 //    }
 
     @Test
-    public void testCommitTax()
-    {
-        module.commitTax("", "", "", "123", "Mule", AvalaraDocumentType.PURCHASE_INVOICE, "OldCode", "NewCode");
+    public void testCommitTax() {
+        module.commitTax("123", "Mule", AvalaraDocumentType.PURCHASE_INVOICE, "OldCode", "NewCode");
         CommitTaxRequest commitTaxRequest = new CommitTaxRequest() { {
             docId = "123";
             companyCode  = "Mule";
@@ -68,14 +66,12 @@ public class AvalaraModuleUnitTest
             docCode = "OldCode";
             newDocCode = "NewCode";
         } };
-        verify(clientMock).sendToAvalara(Mockito.anyString(), Mockito.anyString(), Mockito.anyString(), eq(TaxRequestType.CommitTax), refEq(commitTaxRequest));
-        
+        verify(clientMock).sendToAvalara(eq(TaxRequestType.CommitTax), refEq(commitTaxRequest));
     }
 
     @Test
-    public void testGetTaxHistory()
-    {
-        module.getTaxHistory("", "", "", null, "Mule", AvalaraDocumentType.PURCHASE_ORDER, null,
+    public void testGetTaxHistory() {
+        module.getTaxHistory(null, "Mule", AvalaraDocumentType.PURCHASE_ORDER, null,
             DetailLevelType.DIAGNOSTIC);
         
         GetTaxHistoryRequest getTaxRequest = new GetTaxHistoryRequest() { {
@@ -83,13 +79,12 @@ public class AvalaraModuleUnitTest
             detailLevel = DetailLevel.DIAGNOSTIC;
             docType = DocumentType.PURCHASE_ORDER;
         } };
-        verify(clientMock).sendToAvalara(Mockito.anyString(), Mockito.anyString(), Mockito.anyString(), eq(TaxRequestType.GetTaxHistory), refEq(getTaxRequest));
+        verify(clientMock).sendToAvalara(eq(TaxRequestType.GetTaxHistory), refEq(getTaxRequest));
     }
 
     @Test
-    public void testCancelTax()
-    {
-        module.cancelTax("", "", "", null, "Mule", AvalaraDocumentType.PURCHASE_ORDER, null,
+    public void testCancelTax() {
+        module.cancelTax(null, "Mule", AvalaraDocumentType.PURCHASE_ORDER, null,
             CancelCodeType.DOC_DELETED);
         
         CancelTaxRequest cancelTaxRequest = new CancelTaxRequest() { {
@@ -97,7 +92,7 @@ public class AvalaraModuleUnitTest
             cancelCode = CancelCode.DOC_DELETED;
             docType = DocumentType.PURCHASE_ORDER;
         } };
-        verify(clientMock).sendToAvalara(Mockito.anyString(), Mockito.anyString(), Mockito.anyString(), eq(TaxRequestType.CancelTax), refEq(cancelTaxRequest));
+        verify(clientMock).sendToAvalara(eq(TaxRequestType.CancelTax), refEq(cancelTaxRequest));
     }
 
 }

@@ -65,27 +65,19 @@ public class DefaultAvalaraClient implements AvalaraClient
 
     /** @see org.mule.modules.avalara.api.AvalaraClient#sendToAvalara(org.mule.modules.avalara.TaxRequestType, java.lang.Object) */
     @Override
-    public <T extends BaseResult> T sendToAvalara(String account, String license, String client, TaxRequestType entityType, Object obj)
-    {
+    public <T extends BaseResult> T sendToAvalara(TaxRequestType entityType, Object obj) {
         T response;
-        setCredential(account, license, client);
 
-        try
-        {
-
+        try {
             response = (T) getTaxService().getClass().getMethod(entityType.getResourceName(), obj.getClass()).invoke(getTaxService(), obj);
-
         }
-        catch (InvocationTargetException e)
-        {
+        catch (InvocationTargetException e) {
             throw new AvalaraRuntimeException(e.getCause().getMessage());
         }
-        catch (Exception e)
-        {
+        catch (Exception e) {
             throw new AssertionError(e);
         }
-        if (!response.getResultCode().equals(SeverityLevel.SUCCESS))
-        {
+        if (!response.getResultCode().equals(SeverityLevel.SUCCESS)) {
             throw new AvalaraRuntimeException(response.getMessages());
         }
         return response;
