@@ -183,4 +183,9 @@ public class DefaultAvalaraClient implements AvalaraClient
         this.taxEndpoint = taxEndpoint;
     }
 
+    @Override
+    public String getConnectionIdentifier() {
+        return this.account + "-" + this.client;
+    }
+
 }

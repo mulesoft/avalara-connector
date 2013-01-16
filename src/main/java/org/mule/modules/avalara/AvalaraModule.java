@@ -807,8 +807,8 @@ public class AvalaraModule
     }
 
     @ConnectionIdentifier
-    public String getSessionId() {
-        return ""; // FIXME TODO ?
+    public String getConnectionIdentifier() {
+        return apiClient.getConnectionIdentifier();
     }
     
     /**

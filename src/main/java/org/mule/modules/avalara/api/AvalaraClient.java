@@ -27,4 +27,6 @@ public interface AvalaraClient {
     BatchSaveResult saveBatch(Batch batch);
 
     PingResult ping(String message);
+
+    String getConnectionIdentifier();
 }
