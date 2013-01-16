@@ -36,15 +36,17 @@ public class DefaultAvalaraClient implements AvalaraClient
     private String taxEndpoint;
     private String batchEndpoint;
     
-    private ThreadLocal<String> usernameLocal = new ThreadLocal<String>();
-    private ThreadLocal<String> passwordLocal = new ThreadLocal<String>();
-    private ThreadLocal<String> clientLocal = new ThreadLocal<String>();
+    private final String account;
+    private final String license;
+    private final String client;
 
     public DefaultAvalaraClient(String account, String client, String license) {
         Validate.notNull(account);
         Validate.notNull(client);
         Validate.notNull(license);
-        setCredential(account, license, client); //FIXME: temp impl. Set credential won't be used anymore
+        this.account = account;
+        this.client = client;
+        this.license = license;
     }
 
     public DefaultAvalaraClient(String account, String client, String license, String addressEndpoint, String taxEndpoint) {
@@ -55,7 +57,9 @@ public class DefaultAvalaraClient implements AvalaraClient
         Validate.notNull(license);
         this.setAddressEndpoint(addressEndpoint);
         this.setTaxEndpoint(taxEndpoint);
-        setCredential(account, license, client); //FIXME: temp impl. Set credential won't be used anymore
+        this.account = account;
+        this.client = client;
+        this.license = license;
     }
 
     @Override
@@ -103,19 +107,16 @@ public class DefaultAvalaraClient implements AvalaraClient
         return getBatchService().batchSave(batch);
     }
     
-    public String getUsername()
-    {
-        return usernameLocal.get();
+    public String getAccount() {
+        return this.account;
     }
 
-    public String getPassword()
-    {
-        return passwordLocal.get();
+    public String getLicense() {
+        return this.license;
     }
 
-    public String getClient()
-    {
-        return clientLocal.get();
+    public String getClient() {
+        return this.client;
     }
 
     protected AddressSvcSoap getAddressService()
@@ -150,8 +151,8 @@ public class DefaultAvalaraClient implements AvalaraClient
         return ConnectionBuilder.fromPortType(portType)
             .withServiceType(serviceType)
             .withClasspathWsdl(schemaLocation(schemaName))
-            .withCredential(new BasicCredential(usernameLocal.get(),passwordLocal.get()))
-            .withHeader(new AvalaraProfileHandler(clientLocal.get()))
+            .withCredential(new BasicCredential(this.getAccount() ,this.getLicense()))
+            .withHeader(new AvalaraProfileHandler(this.getClient()))
             .withPortQName(portName)
             .withEndpoint(endpoint)
             .build();
@@ -160,13 +161,6 @@ public class DefaultAvalaraClient implements AvalaraClient
     protected String schemaLocation(String schemaName)
     {
         return "schema/" + schemaName + "svc.wsdl";
-    }
-    
-    protected void setCredential(String account, String license, String client)
-    {
-        usernameLocal.set(account);
-        passwordLocal.set(license);
-        clientLocal.set(client);
     }
 
     public String getAddressEndpoint() {
