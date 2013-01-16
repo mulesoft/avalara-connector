@@ -107,9 +107,7 @@ public class DefaultAvalaraClient implements AvalaraClient
     }
 
     @Override
-    public BatchSaveResult saveBatch(String account, String license, String client, Batch batch)
-    {
-        setCredential(account, license, client);
+    public BatchSaveResult saveBatch(Batch batch) {
         return getBatchService().batchSave(batch);
     }
     

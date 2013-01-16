@@ -259,13 +259,10 @@
 
 <!-- BEGIN_INCLUDE(avalara:save-batch) -->
 <avalara:save-batch
-						  consoleUserName="avalaraAccount"
-        		    	  consolePassword="avalaraLicense"
-		    	    	  avalaraClient="avalaraClient"
-		    	    	  batchType="TRANSACTION_IMPORT"
-		    	    	  companyId="123546"
-		    	    	  content="some content"
-		    	    	  batchName="some batch name"/>
+                          batchType="TRANSACTION_IMPORT"
+                          companyId="123546"
+                          content="some content"
+                          batchName="some batch name"/>
 <!-- END_INCLUDE(avalara:save-batch) -->
 
 <!-- BEGIN_INCLUDE(avalara:is-batch-finished) -->

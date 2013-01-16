@@ -12,7 +12,6 @@
 package org.mule.modules.avalara;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -855,34 +854,28 @@ public class AvalaraModule
      */
 
     @Processor
-    public BatchSaveResult saveBatch(String consoleUserName, String consolePassword, String avalaraClient,
-                                       BatchType batchType,
+    public BatchSaveResult saveBatch(BatchType batchType,
                                        int companyId,
                                        String content,
-                                       @Optional String batchName)
-    {
+                                       @Optional String batchName) {
+
+        final BatchFile batchFile = new BatchFile();
+        batchFile.setContent(content.getBytes()); // cxf takes care of base64 encoding
+        batchFile.setContentType("application/csv");
+        batchFile.setName(batchName+".csv"); // Must set extension, or Avalara will complain about missing ext
+        final ArrayOfBatchFile arrayOfBatchFile = new ArrayOfBatchFile();
+        arrayOfBatchFile.getBatchFile().add(batchFile);
+
         //Batch object to contain the file.
         //Have tested batchfile as well but all examples from Avalara is using this one.
-        Batch batch = new Batch();
+        final Batch batch = new Batch();
         batch.setName(batchName);
-
         batch.setBatchTypeId(batchType.value());
         batch.setCompanyId(companyId);
-
-        BatchFile batchFile = new BatchFile();
-        //Thought this had to be base64 encoded but cxf seems to take care of that.
-        batchFile.setContent(content.getBytes());
-        batchFile.setContentType("application/csv");
-        //The file extension will have to be here otherwise Avalara will respond that Ext is missing.
-        batchFile.setName(batchName+".csv");
-        List<BatchFile> batchFileList = new ArrayList<BatchFile>();
-        ArrayOfBatchFile arrayOfBatchFile = new ArrayOfBatchFile();
-        arrayOfBatchFile.getBatchFile().add(batchFile);
-        batchFileList.add(batchFile);
         batch.setFiles(arrayOfBatchFile);
-        return apiClient.saveBatch(consoleUserName, consolePassword, avalaraClient, batch);
+        return apiClient.saveBatch(batch);
     }
-    
+
     /**
      * Connects to Avalara
      *

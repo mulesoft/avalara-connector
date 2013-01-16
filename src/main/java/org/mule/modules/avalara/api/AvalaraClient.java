@@ -24,7 +24,7 @@ public interface AvalaraClient {
 
     BatchFileFetchResult fetchBatchFile(FetchRequest fetchRequest);
 
-    BatchSaveResult saveBatch(String account, String licence, String client, Batch batch);
+    BatchSaveResult saveBatch(Batch batch);
 
     PingResult ping(String message);
 }
