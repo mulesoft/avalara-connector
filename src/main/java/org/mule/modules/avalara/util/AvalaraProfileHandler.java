@@ -26,27 +26,9 @@ import javax.xml.ws.handler.soap.SOAPMessageContext;
 
 public class AvalaraProfileHandler implements SOAPHandler<SOAPMessageContext> {
 
-    public static final String PROFILE_ELEMENT = "Profile";
-    public static final String NAMESPACE = "http://avatax.avalara.com/services";
-    public static final String AVALARA_PREFIX = "aval";
-    
-//    /** Namespace for the SOAP Envelope. */
-//    private static String SOAPENVNamespace = "http://schemas.xmlsoap.org/soap/envelope/";
-//
-//    /** The prefix that will be used for the SOAP Envelope namespace. */
-//    private static String SOAPENVPrefix = "soapenv";
-//
-//    /** Namespace for the WS-Security SOAP header elements. */
-//    private static String WSSENamespace = "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd";
-//
-//    /** The prefix that will be used for the WS-Security namespace. */
-//    private static String WSSEPrefix = "wsse";
-//
-//    /**
-//     * The WS-Security URI that specifies that the password will be transmitted as
-//     * plain text.
-//     */
-//    private static String WSSEPasswordText = "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText";
+    private static final String PROFILE_ELEMENT = "Profile";
+    private static final String NAMESPACE = "http://avatax.avalara.com/services";
+    private static final String AVALARA_PREFIX = "aval";
 
     private final String profile;
 
@@ -109,8 +91,6 @@ public class AvalaraProfileHandler implements SOAPHandler<SOAPMessageContext> {
             }
 
             SOAPElement headerProfile = header.addChildElement(PROFILE_ELEMENT, AVALARA_PREFIX, NAMESPACE);
-//            headerProfile.addAttribute(message.getSOAPPart().getEnvelope().createName("mustUnderstand",
-//                SOAPENVPrefix, SOAPENVNamespace), "1");
             headerProfile.addChildElement("Client", AVALARA_PREFIX, NAMESPACE).addTextNode(client);
         }
         catch (SOAPException e) {
