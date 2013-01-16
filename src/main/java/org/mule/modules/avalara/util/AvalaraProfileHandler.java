@@ -8,8 +8,6 @@
 
 package org.mule.modules.avalara.util;
 
-import org.mule.modules.avalara.api.AvalaraProfile;
-
 import java.util.Set;
 
 import javax.xml.namespace.QName;
@@ -26,8 +24,7 @@ import javax.xml.ws.handler.soap.SOAPMessageContext;
  * @since Oct 25, 2011
  */
 
-public class AvalaraProfileHandler implements SOAPHandler<SOAPMessageContext>
-{
+public class AvalaraProfileHandler implements SOAPHandler<SOAPMessageContext> {
 
     public static final String PROFILE_ELEMENT = "Profile";
     public static final String NAMESPACE = "http://avatax.avalara.com/services";
@@ -51,38 +48,32 @@ public class AvalaraProfileHandler implements SOAPHandler<SOAPMessageContext>
 //     */
 //    private static String WSSEPasswordText = "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText";
 
-    /**
-     */
-    private AvalaraProfile profile;
+    private final String profile;
 
     /**
-     * Creates a SOAPSimpleCredentials handler and initialises the member variables. In
+     * Creates a SOAPSimpleCredentials handler and initializes the member variables. In
      * most cases, the sign static method should be used instead.
      * 
      * @param client The client for the system user.
      */
-    public AvalaraProfileHandler(AvalaraProfile profile)
-    {
+    public AvalaraProfileHandler(final String profile) {
         this.profile = profile;
     }
 
     /**
      * Returns null as this handler doesn't process any Headers, it just adds one.
      */
-    public Set<QName> getHeaders()
-    {
+    public Set<QName> getHeaders() {
         return null;
     }
 
     /**
      * Adds WS-Security header to request messages.
      */
-    public boolean handleMessage(SOAPMessageContext smc)
-    {
+    public boolean handleMessage(SOAPMessageContext smc) {
         Boolean outboundProperty = (Boolean) smc.get(MessageContext.MESSAGE_OUTBOUND_PROPERTY);
-        if (outboundProperty.booleanValue())
-        {
-            addProfileHeader(smc, profile.getClient());
+        if (outboundProperty.booleanValue()) {
+            addProfileHeader(smc, profile);
         }
         return true;
     }
@@ -90,13 +81,11 @@ public class AvalaraProfileHandler implements SOAPHandler<SOAPMessageContext>
     /**
      * Returns true, no action is taken for faults messages.
      */
-    public boolean handleFault(SOAPMessageContext smc)
-    {
+    public boolean handleFault(SOAPMessageContext smc) {
         return true;
     }
 
-    public void close(MessageContext messageContext)
-    {
+    public void close(MessageContext messageContext) {
     }
 
     /**
@@ -108,16 +97,12 @@ public class AvalaraProfileHandler implements SOAPHandler<SOAPMessageContext>
      * @throws java.lang.RuntimeException This exception will be thrown if a
      *             SOAPException occurs when modifying the message.
      */
-    private void addProfileHeader(SOAPMessageContext smc, String client)
-    {
-
-        try
-        {
+    private void addProfileHeader(SOAPMessageContext smc, String client) {
+        try {
             // Get the SOAP Header
             SOAPMessage message = smc.getMessage();
             SOAPHeader header = message.getSOAPHeader();
-            if (header == null)
-            {
+            if (header == null) {
                 // Create header as it doesn't already exist
                 message.getSOAPPart().getEnvelope().addHeader();
                 header = message.getSOAPHeader();
@@ -126,12 +111,9 @@ public class AvalaraProfileHandler implements SOAPHandler<SOAPMessageContext>
             SOAPElement headerProfile = header.addChildElement(PROFILE_ELEMENT, AVALARA_PREFIX, NAMESPACE);
 //            headerProfile.addAttribute(message.getSOAPPart().getEnvelope().createName("mustUnderstand",
 //                SOAPENVPrefix, SOAPENVNamespace), "1");
-  
             headerProfile.addChildElement("Client", AVALARA_PREFIX, NAMESPACE).addTextNode(client);
-            
         }
-        catch (SOAPException e)
-        {
+        catch (SOAPException e) {
             throw new RuntimeException("Failed to add Profile header to request", e);
         }
     }
