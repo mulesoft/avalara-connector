@@ -115,9 +115,6 @@ public class AvalaraModule
      *
      * {@sample.xml ../../../doc/avalara-connector.xml.sample avalara:ping}
      *
-     * @param account Avalara's account
-     * @param license Avalara's license
-     * @param avalaraClient Avalara's client
      * @param message Ping Message
      * @return The {@link PingResult}
      *
@@ -683,9 +680,6 @@ public class AvalaraModule
      *
      * {@sample.xml ../../../doc/avalara-connector.xml.sample avalara:fetch-batch-file}
      *
-     * @param account Avalara's account
-     * @param license Avalara's license
-     * @param avalaraClient Avalara's client
      * @param batchId The numerical identifier of the BatchFile.
      * @return The {@link Map<String,BatchFileFetchResult>}
      *
