@@ -795,7 +795,7 @@ public class AvalaraModule
 
     @ValidateConnection
     public boolean isConnected() {
-        return false;
+        return apiClient != null;
     }
 
     /**
@@ -808,7 +808,7 @@ public class AvalaraModule
 
     @ConnectionIdentifier
     public String getSessionId() {
-        return ""; // FIXME ?
+        return ""; // FIXME TODO ?
     }
     
     /**
