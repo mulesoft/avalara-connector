@@ -16,7 +16,6 @@ import org.mule.modules.avalara.util.AvalaraProfileHandler;
 
 import com.zauberlabs.commons.ws.connection.ConnectionBuilder;
 import com.zauberlabs.commons.ws.security.BasicCredential;
-import com.zauberlabs.commons.ws.security.Credential;
 
 import java.lang.reflect.InvocationTargetException;
 
