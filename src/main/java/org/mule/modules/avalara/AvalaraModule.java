@@ -676,6 +676,21 @@ public class AvalaraModule
         );
     }
 
+    /**
+     * Batch Fetch processor.
+     * <p>
+     * Fetches a Batch result
+     *
+     * {@sample.xml ../../../doc/avalara-connector.xml.sample avalara:fetch-batch-file}
+     *
+     * @param account Avalara's account
+     * @param license Avalara's license
+     * @param avalaraClient Avalara's client
+     * @param batchId The numerical identifier of the BatchFile.
+     * @return The {@link Map<String,BatchFileFetchResult>}
+     *
+     * @throws AvalaraRuntimeException
+     */
     @Processor
     public Map<String,BatchFileFetchResult> fetchBatchFile(String batchId) {
         // This Request is needed to retrieve the batch file ids. The actual content cannot be retrieved at once.
