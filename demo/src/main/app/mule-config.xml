@@ -43,8 +43,7 @@
     <flow-ref name="GetZuoraInvoiceItemsByInvoiceId"/>
     <flow-ref name="GetTaxesForInvoceAndItems"/>
     <expression-transformer 
-        expression="Taxes calculates successfully for 
-                    invoice #[header:inbound:invoiceNumber]. Total tax is $#[groovy:payload.totalTaxable]" 
+        expression="Taxes calculates successfully for invoice #[header:inbound:invoiceNumber]. Total tax is $#[groovy:payload.totalTaxable]" 
         evaluator="string"/>     
   </flow>
 
@@ -69,7 +68,7 @@
     </scripting:component>                   
     <message-properties-transformer scope="invocation">
       <add-message-property key="accountId" value="#[groovy:payload.accountId]" />
-      <add-message-property key="createdDate" value="#[groovy:payload.createDate]" />
+      <add-message-property key="createdDate" value="#[groovy:payload.createdDate]" />
       <add-message-property key="dueDate" value="#[groovy:payload.dueDate]" />
       <add-message-property key="invoiceId" value="#[groovy:payload.id]" />
     </message-properties-transformer>
@@ -118,10 +117,10 @@
       </scripting:script>
     </scripting:component>
     <avalara:get-tax config-ref="avalara-config" 
-    			 companyCode="TC"
+                 companyCode="TC"
                  docType="SALES_ORDER"
                  docCode="#[variable:invoiceId]"
-                 docDate="#[groovy: message.getInvocationProperty('createdDate').toGregorianCalendar().time]"
+                 docDate-ref="#[groovy: message.getInvocationProperty('createdDate')]"
                  customerCode="#[variable:accountId]"
                  customerUsageType="Other"
                  discount="0"
@@ -130,9 +129,9 @@
                  destinationCode="Dest"
                  detailLevel="TAX"
                  serviceMode="AUTOMATIC"
-                 paymentDate="#[groovy: message.getInvocationProperty('dueDate').toGregorianCalendar().time]"
+                 paymentDate-ref="#[groovy: message.getInvocationProperty('dueDate')]"
                  exchangeRate="0"
-                 exchangeRateEffDate="#[groovy: message.getInvocationProperty('dueDate').toGregorianCalendar().time]">
+                 exchangeRateEffDate-ref="#[groovy: message.getInvocationProperty('dueDate')]">
           <avalara:base-addresses ref="#[groovy: [
               [ 'addressCode' : 'Origin' ,
                 'line1' : 'Avalara' ,

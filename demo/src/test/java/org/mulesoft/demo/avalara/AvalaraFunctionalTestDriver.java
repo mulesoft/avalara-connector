@@ -15,24 +15,20 @@ import org.mule.tck.junit4.FunctionalTestCase;
 
 import org.junit.Test;
 
-public class AvalaraFunctionalTestDriver extends FunctionalTestCase
-{
+public class AvalaraFunctionalTestDriver extends FunctionalTestCase {
     @Override
-    protected String getConfigResources()
-    {
+    protected String getConfigResources() {
         return "mule-config.xml";
     }
 
     @Test
-    public void getTax() throws Exception
-    {
+    public void getTax() throws Exception {
         MuleEvent event = getTestEvent(null);
         event.getMessage().setProperty("invoiceNumber", "INV00000224", PropertyScope.INBOUND);
         lookupFlowConstruct("GetTaxes").process(event);
     }
 
-    private MessageProcessor lookupFlowConstruct(final String name)
-    {
+    private MessageProcessor lookupFlowConstruct(final String name) {
         return (MessageProcessor) muleContext.getRegistry().lookupFlowConstruct(name);
     }
 
