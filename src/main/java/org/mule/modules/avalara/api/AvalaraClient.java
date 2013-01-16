@@ -20,7 +20,7 @@ public interface AvalaraClient {
 
     ValidateResult validateAddress(ValidateRequest validateRequest);
 
-    BatchFetchResult fetchBatch(String account, String licence, String client, FetchRequest fetchRequest);
+    BatchFetchResult fetchBatch(FetchRequest fetchRequest);
 
     BatchFileFetchResult fetchBatchFile(String account, String licence, String client, FetchRequest fetchRequest);
 
