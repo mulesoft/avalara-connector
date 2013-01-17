@@ -116,7 +116,8 @@
         ]]>
       </scripting:script>
     </scripting:component>
-    <avalara:get-tax config-ref="avalara-config" 
+    <avalara:get-tax config-ref="avalara-config">
+        <avalara:get-tax-request
                  companyCode="TC"
                  docType="SALES_ORDER"
                  docCode="#[variable:invoiceId]"
@@ -132,7 +133,7 @@
                  paymentDate-ref="#[groovy: message.getInvocationProperty('dueDate')]"
                  exchangeRate="0"
                  exchangeRateEffDate-ref="#[groovy: message.getInvocationProperty('dueDate')]">
-          <avalara:base-addresses ref="#[groovy: [
+                 addresses-ref="#[groovy: [
               [ 'addressCode' : 'Origin' ,
                 'line1' : 'Avalara' ,
                 'line2' : '900 Winslow Way' ,
@@ -147,8 +148,8 @@
                 'region' : 'WA' ,
                 'postalCode' : '98121' ,
                 'country' : 'USA' ]
-          ] ]" />
-          <avalara:lines ref="#[payload]" />
+          ] ]"
+                 lines-ref="#[payload]" />
       </avalara:get-tax>
   </flow>
 

@@ -23,7 +23,8 @@
         <avalara:config avalaraAccount="${avalaraAccount}" avalaraLicense="${avalaraLicense}" client="${avalaraClient}" name="avalara-config"/>
 
     <flow name="testFlow">
-        <avalara:get-tax 
+        <avalara:get-tax>
+            <avalara:get-tax-request
         				 companyCode ="#[variable:companyCode]"
                          docType="SALES_ORDER"
                          docDate-ref="#[variable:docDate]"
@@ -35,9 +36,9 @@
                          serviceMode="LOCAL"
                          paymentDate-ref="#[variable:paymentDate]"
                          exchangeRate="#[variable:exchangeRate]"
-                         exchangeRateEffDate-ref="#[variable:exchangeRateEffDate]" >
-            <avalara:base-addresses ref="#[variable:addresses]" />
-            <avalara:lines ref="#[variable:lines]" /> 
+                         exchangeRateEffDate-ref="#[variable:exchangeRateEffDate]"
+                         addresses-ref="#[variable:addresses]"
+                         lines-ref="#[variable:lines]" />
         </avalara:get-tax>
         <avalara:commit-tax 
         				 	docId="#[variable:docId]"

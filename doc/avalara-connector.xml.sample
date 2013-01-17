@@ -3,7 +3,8 @@
 <!-- END_INCLUDE(avalara:ping) -->
 
 <!-- BEGIN_INCLUDE(avalara:get-tax) -->
-    <avalara:get-tax
+    <avalara:get-tax>
+        <avalara:get-tax-request
     			 companyCode="some company code"
                  docType="PURCHASE_ORDER"
                  docCode="some doc code"
@@ -24,67 +25,15 @@
                  currencyCode="some currency code"
                  serviceMode="LOCAL"
                  paymentDate-ref="2010-09-13T01:18:14-07:00"
-                 exchangeRate="some exchange rate"
-                 exchangeRateEffDate-ref="2010-09-13T01:18:14-07:00" >
-                 
-    <avalara:base-addresses>
-        <avalara:base-address>
-            <addressCode>some origin code</addressCode>
-            <line1>some line 1</line1>
-            <line2>some line 2</line2>
-            <line3>some line 3</line3>
-            <city>some city</city>
-            <region>some region</region>
-            <postalCode>some postal code</postalCode>
-            <country>some country</country>
-            <taxRegionId>3</taxRegionId>
-            <latitude>some latitude</latitude>
-            <longitude>some longitude</longitude>
-        </avalara:base-address>
-        <avalara:base-address>
-            <addressCode>some destination code</addressCode>
-            <line1>some line 1</line1>
-            <line2>some line 2</line2>
-            <line3>some line 3</line3>
-            <city>some city</city>
-            <region>some region</region>
-            <postalCode>some postal code</postalCode>
-            <country>some country</country>
-            <taxRegionId>3</taxRegionId>
-            <latitude>some latitude</latitude>
-            <longitude>some longitude</longitude>
-        </avalara:base-address>
-    </avalara:base-addresses>
-    <avalara:lines>
-        <avalara:line>
-            <no>some number</no>
-            <originCode>some origin code</originCode>
-            <destinationCode>some destination code</destinationCode>
-            <itemCode>some item code</itemCode>
-            <taxCode>some tax code</taxCode>
-            <qty>#[groovy: new BigDecimal(3.0)]</qty>
-            <amount>#[groovy: new BigDecimal(500.5)]</amount>
-            <discounted>true</discounted>
-            <revAcct>some rev acct</revAcct>
-            <ref1>some reference 1</ref1>
-            <ref2>some reference 2</ref2>
-            <exemptionNo>some exemption number</exemptionNo>
-            <customerUsageType>some customer usage type</customerUsageType>
-            <description>some description</description>
-            <taxOverride>#[groovy: [ 'taxOverrideType' : TaxOverrideType.TAX_AMOUNT,
-                                     'taxAmount' : 10.0G ,
-                                     'taxDate' : new Date() ,
-                                     'reason' : 'some reason' ] ]
-            </taxOverride>
-            <taxIncluded>false</taxIncluded>
-        </avalara:line>
-    </avalara:lines>
-    <avalara:tax-override>
-        <taxOverrideType>TAX_AMOUNT</taxOverrideType>
-        <taxAmount>#[groovy: new BigDecimal(9.3)]</taxAmount>
-        <taxDate>#[groovy: new Date()]</taxDate>
-        <reason>some reason</reason>
-    </avalara:tax-override>
+                 exchangeRate="0.5"
+                 exchangeRateEffDate-ref="2010-09-13T01:18:14-07:00">
+        <avalara:tax-override
+            taxOverrideType="TAX_AMOUNT"
+            taxAmount="9.3"
+            taxDate-ref="2010-09-13T01:18:14-07:00"
+            reason="some reason"/>
+        
+    </avalara:get-tax-request>
 </avalara:get-tax>
 <!-- END_INCLUDE(avalara:get-tax) -->
 
