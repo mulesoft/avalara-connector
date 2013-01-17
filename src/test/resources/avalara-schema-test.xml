@@ -40,12 +40,14 @@
                          addresses-ref="#[variable:addresses]"
                          lines-ref="#[variable:lines]" />
         </avalara:get-tax>
-        <avalara:commit-tax 
+        <avalara:commit-tax>
+            <avalara:commit-tax-request
         				 	docId="#[variable:docId]"
                             companyCode="#[variable:companyCode]"
                             docType="SALES_ORDER"
                             docCode="#[variable:docCode]"
                             newDocCode="#[variable:newDocCode]"/>
+        </avalara:commit-tax>
         <avalara:get-tax-history 
         						 docId="#[variable:docId]"
                                  companyCode="#[variable:companyCode]"

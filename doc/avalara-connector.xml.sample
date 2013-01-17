@@ -142,12 +142,14 @@
 <!-- END_INCLUDE(avalara:post-tax) -->
 
 <!-- BEGIN_INCLUDE(avalara:commit-tax) -->
-<avalara:commit-tax 
-					docId="some document id"
-                    companyCode="some company code"
-                    docType="SALES_ORDER"
-                    docCode="some document code"
-                    newDocCode="some new document code" />
+<avalara:commit-tax>
+    <avalara:commit-tax-request
+    		docId="some document id"
+            companyCode="some company code"
+            docType="SALES_ORDER"
+            docCode="some document code"
+            newDocCode="some new document code" />
+</avalara:commit-tax>
 <!-- END_INCLUDE(avalara:commit-tax) -->
 
 <!-- BEGIN_INCLUDE(avalara:get-tax-history) -->

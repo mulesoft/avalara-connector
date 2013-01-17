@@ -410,39 +410,29 @@ public class AvalaraModule
      *
      * {@sample.xml ../../../doc/avalara-connector.xml.sample avalara:commit-tax}
      *
-     * @param docId The original document's type, such as Sales Invoice or Purchase Invoice.
-     * @param companyCode Client application company reference code. If docId is specified, 
-     *                    this is not needed.
-     * @param docType The document type specifies the category of the document and affects
+     * @param commitTaxRequest a {@link CommitTaxRequest} to commit. Its fields represent:
+     * <ul>
+     *  <li>docId The original document's type, such as Sales Invoice or Purchase Invoice.</li>
+     *  <li>companyCode Client application company reference code. If docId is specified, 
+     *                    this is not needed.</li>
+     *  <li>docType The document type specifies the category of the document and affects
      *                how the document is treated after a tax calculation; see 
      *                {@link AvalaraDocumentType} for more information about the specific 
-     *                document types.
-     * @param docCode The internal reference code used by the client application.
-     * @param newDocCode The new document code value.
+     *                document types.</li>
+     *  <li>docCode The internal reference code used by the client application.</li>
+     *  <li>newDocCode The new document code value.</li>
+     * </ul>
+     *
      * @return The {@link CommitTaxRequest}
      * 
      * @throws AvalaraRuntimeException
      */
     @Processor
-    public CommitTaxResult commitTax(@Optional String docId,
-                                     String companyCode,
-                                     AvalaraDocumentType docType,
-                                     @Optional String docCode,
-                                     @Optional String newDocCode) {
+    public CommitTaxResult commitTax(@Optional @Default("#[payload]") CommitTaxRequest commitTaxRequest) {
         return (CommitTaxResult) apiClient.sendToAvalara(
-            TaxRequestType.CommitTax,
-            mom.unmap(
-                new MapBuilder()
-                .with("docId", docId)
-                .with("companyCode", companyCode)
-                .with("docType", docType.toDocumentType())
-                .with("docCode", docCode)
-                .with("newDocCode", newDocCode)
-                .build(), CommitTaxRequest.class
-            )
-        );
+            TaxRequestType.CommitTax, commitTaxRequest);
     }
-    
+
     /**
      * Get Tax History processor
      *
