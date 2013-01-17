@@ -8,17 +8,15 @@
 
 package org.mule.modules.avalara;
 
-import static org.mockito.Matchers.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Matchers.refEq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 import org.junit.Before;
 import org.junit.Test;
-
 import org.mule.modules.avalara.api.AvalaraClient;
 
-import com.avalara.avatax.services.CancelCode;
-import com.avalara.avatax.services.CancelTaxRequest;
-import com.avalara.avatax.services.CommitTaxRequest;
 import com.avalara.avatax.services.DetailLevel;
 import com.avalara.avatax.services.DocumentType;
 import com.avalara.avatax.services.GetTaxHistoryRequest;
@@ -68,18 +66,4 @@ public class AvalaraModuleUnitTest
         } };
         verify(clientMock).sendToAvalara(eq(TaxRequestType.GetTaxHistory), refEq(getTaxRequest));
     }
-
-    @Test
-    public void testCancelTax() {
-        module.cancelTax(null, "Mule", AvalaraDocumentType.PURCHASE_ORDER, null,
-            CancelCodeType.DOC_DELETED);
-        
-        CancelTaxRequest cancelTaxRequest = new CancelTaxRequest() { {
-            companyCode = "Mule";
-            cancelCode = CancelCode.DOC_DELETED;
-            docType = DocumentType.PURCHASE_ORDER;
-        } };
-        verify(clientMock).sendToAvalara(eq(TaxRequestType.CancelTax), refEq(cancelTaxRequest));
-    }
-
 }

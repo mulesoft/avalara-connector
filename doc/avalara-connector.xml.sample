@@ -162,12 +162,14 @@
 <!-- END_INCLUDE(avalara:get-tax-history) -->
 
 <!-- BEGIN_INCLUDE(avalara:cancel-tax) -->
-<avalara:cancel-tax 
-					docId="some document id"
-                    companyCode="some company code"
-                    docType="SALES_ORDER"
-                    docCode="some document code"
-                    cancelCode="UNSPECIFIED" />
+<avalara:cancel-tax>
+    <avalara:cancel-tax-request
+        docId="some document id"
+        companyCode="some company code"
+        docType="SALES_ORDER"
+        docCode="some document code"
+        cancelCode="UNSPECIFIED" />
+</avalara:cancel-tax>
 <!-- END_INCLUDE(avalara:cancel-tax) -->
 
 <!-- BEGIN_INCLUDE(avalara:validate-address) -->

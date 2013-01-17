@@ -29,7 +29,6 @@ import org.mule.api.ConnectionException;
 import org.mule.modules.avalara.AvalaraDocumentType;
 import org.mule.modules.avalara.AvalaraModule;
 import org.mule.modules.avalara.BatchType;
-import org.mule.modules.avalara.CancelCodeType;
 import org.mule.modules.avalara.DetailLevelType;
 import org.mule.modules.avalara.ServiceModeType;
 import org.mule.modules.avalara.TextCaseType;
@@ -41,6 +40,8 @@ import com.avalara.avatax.services.ArrayOfLine;
 import com.avalara.avatax.services.BaseAddress;
 import com.avalara.avatax.services.BatchFileFetchResult;
 import com.avalara.avatax.services.BatchSaveResult;
+import com.avalara.avatax.services.CancelCode;
+import com.avalara.avatax.services.CancelTaxRequest;
 import com.avalara.avatax.services.CancelTaxResult;
 import com.avalara.avatax.services.DetailLevel;
 import com.avalara.avatax.services.DocumentType;
@@ -217,35 +218,41 @@ public class AvalaraTestDriver {
 
     @Test
     public void testGettingPostingGettingHistoryAndCancelIt() {
-        String docCode = "Test " + Long.toString(new Date().getTime());
-        GetTaxResult taxResult = getTaxResultElement(docCode);
+        final String oldDocCode = "Test " + Long.toString(new Date().getTime());
+        GetTaxResult taxResult = getTaxResultElement(oldDocCode);
 
 
         assertEquals(SeverityLevel.SUCCESS, taxResult.getResultCode());
 
-        AdjustTaxResult adjustTaxResult = adjustTax(docCode);
+        AdjustTaxResult adjustTaxResult = adjustTax(oldDocCode);
 
         final PostTaxRequest postTaxRequest = new PostTaxRequest();
         postTaxRequest.setCompanyCode("TC");
         postTaxRequest.setDocType(DocumentType.SALES_INVOICE);
-        postTaxRequest.setDocCode(docCode);
+        postTaxRequest.setDocCode(oldDocCode);
         postTaxRequest.setDocDate(testDate);
         postTaxRequest.setTotalAmount(taxResult.getTotalAmount());
         postTaxRequest.setTotalTax(taxResult.getTotalTax());
         postTaxRequest.setCommit(false);
-        postTaxRequest.setNewDocCode(docCode);
+        postTaxRequest.setNewDocCode(oldDocCode);
         PostTaxResult postResult = module.postTax(postTaxRequest);
 
         assertEquals(SeverityLevel.SUCCESS, postResult.getResultCode());
 
+        final CancelTaxRequest cancelTaxRequest = new CancelTaxRequest();
+        cancelTaxRequest.setDocId(null);
+        cancelTaxRequest.setCompanyCode("TC");
+        cancelTaxRequest.setDocType(DocumentType.SALES_INVOICE);
+        cancelTaxRequest.setDocCode(oldDocCode);
+        cancelTaxRequest.setCancelCode(CancelCode.DOC_VOIDED);
         //Finally Cancel Tax and remove the entry from the system by calling new DocVoided
-        CancelTaxResult cancelResult = module.cancelTax(null, "TC", AvalaraDocumentType.SALES_INVOICE, docCode, CancelCodeType.DOC_VOIDED);
+        CancelTaxResult cancelResult = module.cancelTax(cancelTaxRequest);
 
         assertEquals(SeverityLevel.SUCCESS, cancelResult.getResultCode());
         // Check tax history
 
         GetTaxHistoryResult taxHistoryResult = module.getTaxHistory(null, "TC",
-                AvalaraDocumentType.SALES_INVOICE, docCode, DetailLevelType.TAX);
+                AvalaraDocumentType.SALES_INVOICE, oldDocCode, DetailLevelType.TAX);
 
         assertEquals(SeverityLevel.SUCCESS, taxHistoryResult.getResultCode());
         GetTaxRequest historyTaxRequest = taxHistoryResult.getGetTaxRequest();
@@ -256,10 +263,15 @@ public class AvalaraTestDriver {
         assertNotNull(historyTaxResult);
         assertEquals(2, historyTaxResult.getTaxLines().getTaxLine().size());
 
+        final CancelTaxRequest cancelTaxRequestForDelete = new CancelTaxRequest();
+        cancelTaxRequestForDelete.setDocId(null);
+        cancelTaxRequestForDelete.setCompanyCode("TC");
+        cancelTaxRequestForDelete.setDocType(DocumentType.SALES_INVOICE);
+        cancelTaxRequestForDelete.setDocCode(oldDocCode);
+        cancelTaxRequestForDelete.setCancelCode(CancelCode.DOC_DELETED);
         //Finally Cancel Tax and remove the entry from the system by calling new DocVoided
         //Delete the document from the system
-        cancelResult = module.cancelTax(null, "TC", AvalaraDocumentType.SALES_INVOICE,
-                docCode, CancelCodeType.DOC_DELETED);
+        cancelResult = module.cancelTax(cancelTaxRequestForDelete);
 
         assertEquals(SeverityLevel.SUCCESS, cancelResult.getResultCode());
     }

@@ -413,7 +413,7 @@ public class AvalaraModule
      * @param commitTaxRequest a {@link CommitTaxRequest} to commit. Its fields represent:
      * <ul>
      *  <li>docId The original document's type, such as Sales Invoice or Purchase Invoice.</li>
-     *  <li>companyCode Client application company reference code. If docId is specified, 
+     *  <li>companyCode Client application company reference code. If docId is specified,
      *                    this is not needed.</li>
      *  <li>docType The document type specifies the category of the document and affects
      *                how the document is treated after a tax calculation; see 
@@ -477,6 +477,10 @@ public class AvalaraModule
      *
      * {@sample.xml ../../../doc/avalara-connector.xml.sample avalara:cancel-tax}
      * 
+     * @param cancelTaxRequest a {@link CancelTaxRequest} to post. Its fields represent:
+     * <ul>
+     *  <li></li>
+     * </ul>
      * @param docId The original document's type, such as Sales Invoice or Purchase Invoice.
      * @param companyCode Client application company reference code. If docId is specified, 
      *                    this is not needed.
@@ -491,25 +495,10 @@ public class AvalaraModule
      * @throws AvalaraRuntimeException
      */
     @Processor
-    public CancelTaxResult cancelTax(@Optional String docId,
-                                     String companyCode,
-                                     AvalaraDocumentType docType,
-                                     @Optional String docCode,
-                                     CancelCodeType cancelCode) {
-        return (CancelTaxResult) apiClient.sendToAvalara(
-            TaxRequestType.CancelTax,
-            mom.unmap(
-                new MapBuilder()
-                .with("docId", docId)
-                .with("companyCode", companyCode)
-                .with("docType", docType.toDocumentType())
-                .with("docCode", docCode)
-                .with("cancelCode", cancelCode.toAvalaraCancelCode())
-                .build(), CancelTaxRequest.class
-            )
-        );
+    public CancelTaxResult cancelTax(@Optional @Default("#[payload]") CancelTaxRequest cancelTaxRequest) {
+        return (CancelTaxResult) apiClient.sendToAvalara(TaxRequestType.CancelTax, cancelTaxRequest);
     }
-    
+
     /**
      * Validate Address processor.
      * <p>

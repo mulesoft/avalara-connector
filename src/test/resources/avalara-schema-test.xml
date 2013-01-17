@@ -54,12 +54,14 @@
                                  docType="SALES_ORDER"
                                  docCode="#[variable:docCode]"
                                  detailLevel="TAX"/>
-        <avalara:cancel-tax 
+        <avalara:cancel-tax>
+            <avalara:cancel-tax-request
         					docId="#[variable:docId]"
                             companyCode="#[variable:companyCode]"
                             docType="SALES_ORDER"
                             docCode="#[variable:docCode]"
                             cancelCode="UNSPECIFIED"/>
+        </avalara:cancel-tax>
         <avalara:validate-address
         						  line1="#[variable:line1]"
                                   line2="#[variable:line2]"
