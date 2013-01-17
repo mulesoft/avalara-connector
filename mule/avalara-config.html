@@ -311,7 +311,7 @@ Summary:
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/avalara-config.html#cancel-tax">&lt;avalara:cancel-tax&gt;</a></nobr>
         
-        <div class="jd-descrdiv">Cancel tax, indicating the document that should be cancelled and the reason
+        <div class="jd-descrdiv">Cancel tax, indicating the document that should be canceled and the reason
  for the operation.</div>
         
   </td></tr>
@@ -519,6 +519,97 @@ specify which configuration to use.</p>
 
 
 
+<!-- ========= CONNECTION MANAGEMENT DETAIL ======== -->
+<h2>Connection Pool</h2>
+<p>This connector offers automatic connection management via the use of a connection pool. The pool will act a storage mechanism for all the connections that are in-use by the user of
+this connector.</p>
+<p>Prior to execution of a processor, the connector will attempt to lookup an already established connection and if one doesn't exists it will
+create one. That lookup mechanism is done in the connection pool via the use of connection variables declared as keys.</p>
+<p>The user of the connector can configure the pool by adding a <code>connection-pooling-profile</code> to the connector configuration like this:</p>
+<pre>
+    &lt;avalara:connection-pooling-profile maxActive="10" maxIdle="10"
+                             exhaustedAction="WHEN_EXHAUSTED_GROW" maxWait="120" minEvictionMillis="60000" evictionCheckIntervalMillis="30000"/&gt;
+</pre>
+<p>The following is a list of connection attributes, each connection attribute can be configured at the config element level or
+they can also be added to each processor. If they are used at the processor level they get the benefit of full expression
+resolution.</p>
+<table id="lconfig" class="jd-sumtable">
+<tr><th colspan="12">Connection Attributes</th></tr>
+<tr><th>Name</th><th>Default Value</th><th>Description</th><th>Java Type</th><th>MIME Type</th><th>Encoding</th></tr>
+<tr><td class="jd-linkcol"><nobr>config-ref</nobr></td>
+<td class="jd-descrcol"></td>
+<td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td><td/><td/><td/></tr>
+
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-linkcol"><nobr>avalaraAccount</nobr></td>
+          <td class="jd-descrcol"><nobr></nobr></td>
+          <td class="jd-descrcol" width="100%">Registered Avalara account</td>
+          <td class="jd-descrcol">String</td>
+          <td class="jd-descrcol">*/*</td>
+          <td class="jd-descrcol">UTF-8</td>
+      </tr>
+      
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-linkcol"><nobr>client</nobr></td>
+          <td class="jd-descrcol"><nobr></nobr></td>
+          <td class="jd-descrcol" width="100%">Target client to which make the call</td>
+          <td class="jd-descrcol">String</td>
+          <td class="jd-descrcol">*/*</td>
+          <td class="jd-descrcol">UTF-8</td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-linkcol"><nobr>avalaraLicense</nobr></td>
+          <td class="jd-descrcol"><nobr></nobr></td>
+          <td class="jd-descrcol" width="100%">The matching license for the account
+</td>
+          <td class="jd-descrcol">String</td>
+          <td class="jd-descrcol">*/*</td>
+          <td class="jd-descrcol">UTF-8</td>
+      </tr>
+      
+    
+</table>
+<h2>Reconnection Strategies</h2>
+<p>Reconnection Strategies specify how a connector behaves when its connection fails. You can control how Mule attempts to reconnect by specifying a number of criteria:</p>
+<ul>
+<li>The type of exception</li>
+<li>Number and frequency of reconnection attempts</li>
+<li>The notifications generated, and more</li>
+</ul>
+<p>With a reconnection strategy, you can better control the behavior of a failed connection, by configuring it, for example,
+to re-attempt the connection only once every 15 minutes, and to give up after 30 attempts. You can also send an automatic
+notification to your IT administrator whenever this reconnection strategy goes into effect. You can even define a strategy that
+attempts to reconnect only during business hours. Such a setting can prove useful if your server is frequently shut down for
+ nightly maintenance.</p>
+<h3>Configuration</h3>
+<p>A reconnection strategy that allows the user to configure how many times a reconnection should be attempted and how long to wait between attempts.</p>
+<pre>
+    &lt;avalara:config&gt;
+         &lt;reconnect count="5" frequency="1000"/&gt;
+    &lt;/avalara:config&gt;
+</pre>
+<table id="lconfig" class="jd-sumtable">
+<tr><th colspan="12">Reconnect Attributes</th></tr>
+<tr><th>Name</th><th>Default Value</th><th>Description</th></tr>
+<tr class="api" >
+<td class="jd-linkcol"><nobr>frequency</nobr></td>
+<td class="jd-descrcol"><nobr>2000</nobr></td>
+<td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>How often (in ms) to reconnect</td>
+</tr>
+<tr class="api" >
+<td class="jd-linkcol"><nobr>count</nobr></td>
+<td class="jd-descrcol"><nobr>2</nobr></td>
+<td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>How many reconnection attempts to make</td>
+</tr>
+</table>
+<p>For more information about reconnection strategies in Mule, or even how to write your own custom reconnection strategy please check <a href="http://www.mulesoft.org/documentation/display/MULE3USER/Configuring+Reconnection+Strategies">this</a> section.</p>
+
+
+
 
 
 
@@ -554,9 +645,6 @@ specify which configuration to use.</p>
  displays details describing the calculation of tax for each line item.
 
  <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;avalara:adjust-tax
-			 account="avalaraAccount"
-    		 license="avalaraLicense"
-    		 avalaraClient="avalaraClient"
     		 adjustmentReason="0"
     		 adjustmentDescription="Reson for the adjustment"
 			 companyCode="some company code"
@@ -658,42 +746,6 @@ specify which configuration to use.</p>
           
                 
                     <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>account</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Avalara's account</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>license</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Avalara's license</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>avalaraClient</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Avalara's client</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>adjustmentReason</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">The reason for this tax adjustment.</td>
@@ -705,7 +757,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>adjustmentDescription</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">A description of a tax adjustment.</td>
@@ -717,7 +769,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>companyCode</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">Client application company reference code</td>
@@ -729,7 +781,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>docType</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">The document type specifies the category of the document and affects
@@ -744,7 +796,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>docCode</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>The internal reference code used by the client application.</td>
@@ -756,7 +808,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>docDate</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">Date of invoice, purchase order, etc.</td>
@@ -768,7 +820,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>salespersonCode</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>The client application salesperson reference code.</td>
@@ -780,7 +832,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>customerCode</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">Client application customer reference code</td>
@@ -792,7 +844,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>customerUsageType</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>Client application customer or usage type.
@@ -821,7 +873,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>discount</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">The discount amount to apply to the document. The string
@@ -834,7 +886,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>purchaseOrderNo</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>Purchase order identifier. PurchaseOrderNo is required
@@ -848,7 +900,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>exemptionNo</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>Exemption number used for this transaction</td>
@@ -860,7 +912,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>originCode</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">Code that refers one of the address of the baseAddress collection.
@@ -874,7 +926,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>destinationCode</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">Code that refers one of the address of the baseAddress collection.
@@ -892,7 +944,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>detailLevel</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">Specifies the level of tax detail to return</td>
@@ -904,7 +956,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>referenceCode</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>For returns (see <code><a href="../java/org/mule/modules/avalara/AvalaraDocumentType.html">AvalaraDocumentType</a></code>), refers to the
@@ -917,7 +969,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>locationCode</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>Location Code value. It is Also referred to as a Store
@@ -932,7 +984,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>commit</nobr></td>
                         <td class="jd-descrcol">false</td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>Commit flag. If Commit is set to true, tax for the transaction
@@ -945,7 +997,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>batchCode</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>The batchCode value.</td>
@@ -959,7 +1011,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>currencyCode</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>It is 3 character ISO 4217 currency code.</td>
@@ -971,7 +1023,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>serviceMode</nobr></td>
                         <td class="jd-descrcol">AUTOMATIC</td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>This is only supported by AvaLocal servers. It provides the
@@ -987,7 +1039,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>paymentDate</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">The date on which payment was made.</td>
@@ -999,7 +1051,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>exchangeRate</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">The exchange rate value. The string represents a
@@ -1012,7 +1064,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>exchangeRateEffDate</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">The exchange rate effective date value.</td>
@@ -1024,6 +1076,40 @@ specify which configuration to use.</p>
                 
           
           
+              <tr><th colspan="12">Connection Parameters<br/><span style="font-weight: 200;">This are only required if you didn't specified them at the configuration element. They are also useful for overriding the values of the configurations or even if you need to extract them from the Mule message since they support expression evaluation.</span></th></tr>
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>avalaraAccount</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Registered Avalara account</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                    
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>client</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Target client to which make the call</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                    
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>avalaraLicense</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The matching license for the account
+</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                    
+                
+          
           
         </table>
   </div>
@@ -1033,12 +1119,6 @@ specify which configuration to use.</p>
             <table id="lconfig" class="jd-sumtable">
               
               <tr><th>Name</th><th>Default Value</th><th>Description</th><th>Java Type</th></td>
-              
-                
-              
-                
-              
-                
               
                 
               
@@ -1168,13 +1248,10 @@ specify which configuration to use.</p>
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Cancel tax, indicating the document that should be cancelled and the reason
+  <div class="jd-tagdata jd-tagdescr"><p>Cancel tax, indicating the document that should be canceled and the reason
  for the operation.
 
  <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;avalara:cancel-tax 
-					account="avalaraAccount" 
-        		    license="avalaraLicense" 
-		    	    avalaraClient="avalaraClient"
 					docId="some document id"
                     companyCode="some company code"
                     docType="SALES_ORDER"
@@ -1197,42 +1274,6 @@ specify which configuration to use.</p>
           
                 
                     <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>account</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Avalara's account</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>license</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Avalara's license</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>avalaraClient</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Avalara's client</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>docId</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>The original document's type, such as Sales Invoice or Purchase Invoice.</td>
@@ -1244,7 +1285,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>companyCode</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">Client application company reference code. If docId is specified, 
@@ -1257,7 +1298,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>docType</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">The document type specifies the category of the document and affects
@@ -1272,7 +1313,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>docCode</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>The internal reference code used by the client application.</td>
@@ -1284,7 +1325,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>cancelCode</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">A code indicating the reason the document is getting canceled.</td>
@@ -1295,6 +1336,40 @@ specify which configuration to use.</p>
                 
                 
           
+          
+              <tr><th colspan="12">Connection Parameters<br/><span style="font-weight: 200;">This are only required if you didn't specified them at the configuration element. They are also useful for overriding the values of the configurations or even if you need to extract them from the Mule message since they support expression evaluation.</span></th></tr>
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>avalaraAccount</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Registered Avalara account</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                    
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>client</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Target client to which make the call</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                    
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>avalaraLicense</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The matching license for the account
+</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                    
+                
           
           
         </table>
@@ -1348,9 +1423,6 @@ specify which configuration to use.</p>
   <div class="jd-tagdata jd-tagdescr"><p>Commit Tax processor
 
  <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;avalara:commit-tax 
-					account="avalaraAccount" 
-        		    license="avalaraLicense" 
-        		    avalaraClient="avalaraClient"
 					docId="some document id"
                     companyCode="some company code"
                     docType="SALES_ORDER"
@@ -1373,42 +1445,6 @@ specify which configuration to use.</p>
           
                 
                     <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>account</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Avalara's account</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>license</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Avalara's license</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>avalaraClient</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Avalara's client</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>docId</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>The original document's type, such as Sales Invoice or Purchase Invoice.</td>
@@ -1420,7 +1456,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>companyCode</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">Client application company reference code. If docId is specified, 
@@ -1433,7 +1469,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>docType</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">The document type specifies the category of the document and affects
@@ -1448,7 +1484,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>docCode</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>The internal reference code used by the client application.</td>
@@ -1460,7 +1496,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>newDocCode</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>The new document code value.</td>
@@ -1471,6 +1507,40 @@ specify which configuration to use.</p>
                 
                 
           
+          
+              <tr><th colspan="12">Connection Parameters<br/><span style="font-weight: 200;">This are only required if you didn't specified them at the configuration element. They are also useful for overriding the values of the configurations or even if you need to extract them from the Mule message since they support expression evaluation.</span></th></tr>
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>avalaraAccount</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Registered Avalara account</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                    
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>client</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Target client to which make the call</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                    
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>avalaraLicense</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The matching license for the account
+</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                    
+                
           
           
         </table>
@@ -1525,11 +1595,7 @@ specify which configuration to use.</p>
  <p>
  Fetches a Batch result
 
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;avalara:fetch-batch-file
-						  account="avalaraAccount"
-        		    	  license="avalaraLicense"
-		    	    	  avalaraClient="avalaraClient"
-		    	    	  batchId="123456"/&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;avalara:fetch-batch-file batchId="123456"/&gt;</pre></div></p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -1547,42 +1613,6 @@ specify which configuration to use.</p>
           
                 
                     <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>account</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Avalara's account</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>license</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Avalara's license</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>avalaraClient</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Avalara's client</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>batchId</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">The numerical identifier of the BatchFile.</td>
@@ -1593,6 +1623,40 @@ specify which configuration to use.</p>
                 
                 
           
+          
+              <tr><th colspan="12">Connection Parameters<br/><span style="font-weight: 200;">This are only required if you didn't specified them at the configuration element. They are also useful for overriding the values of the configurations or even if you need to extract them from the Mule message since they support expression evaluation.</span></th></tr>
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>avalaraAccount</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Registered Avalara account</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                    
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>client</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Target client to which make the call</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                    
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>avalaraLicense</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The matching license for the account
+</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                    
+                
           
           
         </table>
@@ -1649,9 +1713,6 @@ specify which configuration to use.</p>
  displays details describing the calculation of tax for each line item.
 
  <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;avalara:get-tax
-			 account="avalaraAccount" 
-    		 license="avalaraLicense" 
-    		 avalaraClient="avalaraClient"
 			 companyCode="some company code"
              docType="PURCHASE_ORDER"
              docCode="some doc code"
@@ -1751,42 +1812,6 @@ specify which configuration to use.</p>
           
                 
                     <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>account</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Avalara's account</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>license</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Avalara's license</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>avalaraClient</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Avalara's client</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>companyCode</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">Client application company reference code</td>
@@ -1798,7 +1823,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>docType</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">The document type specifies the category of the document and affects
@@ -1813,7 +1838,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>docCode</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>The internal reference code used by the client application.</td>
@@ -1825,7 +1850,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>docDate</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">Date of invoice, purchase order, etc.</td>
@@ -1837,7 +1862,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>salespersonCode</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>The client application salesperson reference code.</td>
@@ -1849,7 +1874,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>customerCode</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">Client application customer reference code </td>
@@ -1861,7 +1886,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>customerUsageType</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>Client application customer or usage type.
@@ -1890,7 +1915,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>discount</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">The discount amount to apply to the document. The string
@@ -1903,7 +1928,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>purchaseOrderNo</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>Purchase order identifier. PurchaseOrderNo is required 
@@ -1917,7 +1942,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>exemptionNo</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>Exemption number used for this transaction</td>
@@ -1929,7 +1954,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>originCode</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">Code that refers one of the address of the baseAddress collection.
@@ -1943,7 +1968,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>destinationCode</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">Code that refers one of the address of the baseAddress collection.
@@ -1961,7 +1986,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>detailLevel</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">Specifies the level of tax detail to return</td>
@@ -1973,7 +1998,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>referenceCode</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>For returns (see <code><a href="../java/org/mule/modules/avalara/AvalaraDocumentType.html">AvalaraDocumentType</a></code>), refers to the 
@@ -1986,7 +2011,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>locationCode</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>Location Code value. It is Also referred to as a Store 
@@ -2001,7 +2026,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>commit</nobr></td>
                         <td class="jd-descrcol">false</td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>Commit flag. If Commit is set to true, tax for the transaction 
@@ -2014,7 +2039,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>batchCode</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>The batchCode value.</td>
@@ -2028,7 +2053,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>currencyCode</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>It is 3 character ISO 4217 currency code.</td>
@@ -2040,7 +2065,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>serviceMode</nobr></td>
                         <td class="jd-descrcol">AUTOMATIC</td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>This is only supported by AvaLocal servers. It provides the 
@@ -2056,7 +2081,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>paymentDate</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">The date on which payment was made.</td>
@@ -2068,7 +2093,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>exchangeRate</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">The exchange rate value. The string represents a 
@@ -2081,7 +2106,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>exchangeRateEffDate</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">The exchange rate effective date value.</td>
@@ -2093,6 +2118,40 @@ specify which configuration to use.</p>
                 
           
           
+              <tr><th colspan="12">Connection Parameters<br/><span style="font-weight: 200;">This are only required if you didn't specified them at the configuration element. They are also useful for overriding the values of the configurations or even if you need to extract them from the Mule message since they support expression evaluation.</span></th></tr>
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>avalaraAccount</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Registered Avalara account</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                    
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>client</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Target client to which make the call</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                    
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>avalaraLicense</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The matching license for the account
+</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                    
+                
+          
           
         </table>
   </div>
@@ -2102,12 +2161,6 @@ specify which configuration to use.</p>
             <table id="lconfig" class="jd-sumtable">
               
               <tr><th>Name</th><th>Default Value</th><th>Description</th><th>Java Type</th></td>
-              
-                
-              
-                
-              
-                
               
                 
               
@@ -2236,9 +2289,6 @@ specify which configuration to use.</p>
   <div class="jd-tagdata jd-tagdescr"><p>Get Tax History processor
 
  <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;avalara:get-tax-history 
-						 account="avalaraAccount" 
-        		    	 license="avalaraLicense" 
-        		    	 avalaraClient="avalaraClient"
 						 docId="some document id"
                          companyCode="some company code"
                          docType="SALES_ORDER"
@@ -2261,42 +2311,6 @@ specify which configuration to use.</p>
           
                 
                     <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>account</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Avalara's account</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>license</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Avalara's license</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>avalaraClient</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Avalara's client</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>docId</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>The original document's type, such as Sales Invoice or Purchase Invoice.</td>
@@ -2308,7 +2322,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>companyCode</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">Client application company reference code. If docId is specified, 
@@ -2321,7 +2335,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>docType</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">The document type specifies the category of the document and affects
@@ -2336,7 +2350,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>docCode</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>The internal reference code used by the client application.</td>
@@ -2348,7 +2362,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>detailLevel</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">Specifies the level of detail to return. See <code><a href="../java/org/mule/modules/avalara/DetailLevelType.html">DetailLevelType</a></code>.</td>
@@ -2359,6 +2373,40 @@ specify which configuration to use.</p>
                 
                 
           
+          
+              <tr><th colspan="12">Connection Parameters<br/><span style="font-weight: 200;">This are only required if you didn't specified them at the configuration element. They are also useful for overriding the values of the configurations or even if you need to extract them from the Mule message since they support expression evaluation.</span></th></tr>
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>avalaraAccount</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Registered Avalara account</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                    
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>client</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Target client to which make the call</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                    
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>avalaraLicense</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The matching license for the account
+</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                    
+                
           
           
         </table>
@@ -2413,11 +2461,7 @@ specify which configuration to use.</p>
  <p>
  Fetches a Batch result
 
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;avalara:is-batch-finished
-						  account="avalaraAccount"
-                          license="avalaraLicense"
-		    	    	  avalaraClient="avalaraClient"
-		    	    	  batchId="123456"/&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;avalara:is-batch-finished batchId="123456"/&gt;</pre></div></p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -2435,42 +2479,6 @@ specify which configuration to use.</p>
           
                 
                     <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>account</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Avalara's account</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>license</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Avalara's license</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>avalaraClient</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Avalara's client</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>batchId</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">The numerical identifier of the BatchFile.</td>
@@ -2481,6 +2489,40 @@ specify which configuration to use.</p>
                 
                 
           
+          
+              <tr><th colspan="12">Connection Parameters<br/><span style="font-weight: 200;">This are only required if you didn't specified them at the configuration element. They are also useful for overriding the values of the configurations or even if you need to extract them from the Mule message since they support expression evaluation.</span></th></tr>
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>avalaraAccount</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Registered Avalara account</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                    
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>client</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Target client to which make the call</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                    
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>avalaraLicense</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The matching license for the account
+</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                    
+                
           
           
         </table>
@@ -2496,7 +2538,7 @@ specify which configuration to use.</p>
              </tr>
              <tr>
                 <td class="jd-descrcol">boolean</td>
-                <td class="jd-descrcol">The Map<String,BatchFileFetchResult></td>
+                <td class="jd-descrcol">a boolean representing if the Batch finished or not</td>
              </tr>
          </table>
   </div>
@@ -2533,11 +2575,7 @@ specify which configuration to use.</p>
       
   <div class="jd-tagdata jd-tagdescr"><p>Ping Avalara to test connectivity and version of the service.
 
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;avalara:ping
-					account="avalaraAccount"
-        		    license="avalaraLicense"
-		    	    avalaraClient="avalaraClient"
-					message="a ping Message" /&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;avalara:ping message="a ping Message" /&gt;</pre></div></p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -2555,42 +2593,6 @@ specify which configuration to use.</p>
           
                 
                     <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>account</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Avalara's account</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>license</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Avalara's license</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>avalaraClient</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Avalara's client</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>message</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>Ping Message</td>
@@ -2601,6 +2603,40 @@ specify which configuration to use.</p>
                 
                 
           
+          
+              <tr><th colspan="12">Connection Parameters<br/><span style="font-weight: 200;">This are only required if you didn't specified them at the configuration element. They are also useful for overriding the values of the configurations or even if you need to extract them from the Mule message since they support expression evaluation.</span></th></tr>
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>avalaraAccount</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Registered Avalara account</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                    
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>client</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Target client to which make the call</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                    
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>avalaraLicense</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The matching license for the account
+</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                    
+                
           
           
         </table>
@@ -2654,9 +2690,6 @@ specify which configuration to use.</p>
   <div class="jd-tagdata jd-tagdescr"><p>Post Tax processor
 
  <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;avalara:post-tax 
-					account="avalaraAccount" 
-        		    license="avalaraLicense" 
-        		    avalaraClient="avalaraClient"
 					docId="some document id"
                     companyCode="some company code"
                     docType="SALES_ORDER"
@@ -2683,42 +2716,6 @@ specify which configuration to use.</p>
           
                 
                     <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>account</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Avalara's account</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>license</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Avalara's license</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>avalaraClient</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Avalara's client</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>docId</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>The original document's type, such as Sales Invoice or Purchase Invoice.</td>
@@ -2730,7 +2727,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>companyCode</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">Client application company reference code. If docId is specified, 
@@ -2743,7 +2740,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>docType</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">The document type specifies the category of the document and affects
@@ -2758,7 +2755,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>docCode</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>The internal reference code used by the client application.</td>
@@ -2770,7 +2767,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>docDate</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">The date on the invoice, purchase order, etc</td>
@@ -2782,7 +2779,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>totalAmount</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">The total amount (not including tax) for the document.
@@ -2798,7 +2795,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>totalTax</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">The total tax for the document. This is used for verification 
@@ -2814,7 +2811,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>commit</nobr></td>
                         <td class="jd-descrcol">false</td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>The commit value. This has been defaulted to false. If this has 
@@ -2829,7 +2826,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>newDocCode</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>The new document code value.</td>
@@ -2840,6 +2837,40 @@ specify which configuration to use.</p>
                 
                 
           
+          
+              <tr><th colspan="12">Connection Parameters<br/><span style="font-weight: 200;">This are only required if you didn't specified them at the configuration element. They are also useful for overriding the values of the configurations or even if you need to extract them from the Mule message since they support expression evaluation.</span></th></tr>
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>avalaraAccount</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Registered Avalara account</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                    
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>client</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Target client to which make the call</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                    
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>avalaraLicense</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The matching license for the account
+</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                    
+                
           
           
         </table>
@@ -2895,13 +2926,10 @@ specify which configuration to use.</p>
  Saves a Batch
 
  <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;avalara:save-batch
-						  consoleUserName="avalaraAccount"
-        		    	  consolePassword="avalaraLicense"
-		    	    	  avalaraClient="avalaraClient"
-		    	    	  batchType="TRANSACTION_IMPORT"
-		    	    	  companyId="123546"
-		    	    	  content="some content"
-		    	    	  batchName="some batch name"/&gt;</pre></div></p></div>
+                          batchType="TRANSACTION_IMPORT"
+                          companyId="123546"
+                          content="some content"
+                          batchName="some batch name"/&gt;</pre></div></p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -2919,42 +2947,6 @@ specify which configuration to use.</p>
           
                 
                     <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>consoleUserName</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The username that is used to login to the Avalara console (UI).</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>consolePassword</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">The password that is used to login to the Avalara console (UI).</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>avalaraClient</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Avalara's client</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>batchType</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">The kind of records to be imported.</td>
@@ -2966,7 +2958,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>companyId</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">The id of the company. (Need to be retrived from address bar in Avalara after hitting the Organization Tab)</td>
@@ -2978,7 +2970,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>content</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">The content of this import, usually a csv file.</td>
@@ -2990,7 +2982,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>batchName</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>The name of the batch.</td>
@@ -3001,6 +2993,40 @@ specify which configuration to use.</p>
                 
                 
           
+          
+              <tr><th colspan="12">Connection Parameters<br/><span style="font-weight: 200;">This are only required if you didn't specified them at the configuration element. They are also useful for overriding the values of the configurations or even if you need to extract them from the Mule message since they support expression evaluation.</span></th></tr>
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>avalaraAccount</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Registered Avalara account</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                    
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>client</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Target client to which make the call</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                    
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>avalaraLicense</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The matching license for the account
+</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                    
+                
           
           
         </table>
@@ -3056,10 +3082,7 @@ specify which configuration to use.</p>
  This operation validates the supplied address, returning canonical form and 
  additional delivery details if successfully validated.
 
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;avalara:validate-address 
-						  account="avalaraAccount" 
-        		    	  license="avalaraLicense" 
-		    	    	  avalaraClient="avalaraClient"
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;avalara:validate-address
 						  line1="435 Ericksen Ave"
                           line2="some line 2"
                           line3="some line 3" 
@@ -3092,42 +3115,6 @@ specify which configuration to use.</p>
           
                 
                     <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>account</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Avalara's account</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class="alt-color api apilevel-" >
-                        <td class="jd-linkcol"><nobr>license</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Avalara's license</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class=" api apilevel-" >
-                        <td class="jd-linkcol"><nobr>avalaraClient</nobr></td>
-                        <td class="jd-descrcol"></td>
-                        <td class="jd-descrcol">Avalara's client</td>
-                        <td class="jd-descrcol">String</td>
-                        <td class="jd-descrcol">*/*</td>
-                        <td class="jd-descrcol">UTF-8</td>
-                    </tr>
-                
-                
-          
-                
-                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>line1</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">Address line 1</td>
@@ -3139,7 +3126,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>line2</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>Address line 2</td>
@@ -3151,7 +3138,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>line3</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>Address line 3</td>
@@ -3163,7 +3150,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>city</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>City name. Required, when PostalCode is not specified.</td>
@@ -3175,7 +3162,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>region</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>State or region name. Requirad, when PostalCode is not specified.</td>
@@ -3187,7 +3174,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>country</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>Country code</td>
@@ -3199,7 +3186,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>postalCode</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>Postal or ZIP code. Required, when City and Region are not 
@@ -3212,7 +3199,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>addressCode</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>The address code.</td>
@@ -3224,7 +3211,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>taxRegionId</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">The tax region id.</td>
@@ -3236,7 +3223,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>latitude</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>Latitude. </td>
@@ -3248,7 +3235,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>longitude</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>Longitude.</td>
@@ -3260,7 +3247,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>textCase</nobr></td>
                         <td class="jd-descrcol">DEFAULT</td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>The casing to apply to the validated address(es).</td>
@@ -3272,7 +3259,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>coordinates</nobr></td>
                         <td class="jd-descrcol">false</td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>True, if you want in the result a not empty latitud and longitude.</td>
@@ -3284,7 +3271,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class=" api apilevel-" >
+                    <tr class="alt-color api apilevel-" >
                         <td class="jd-linkcol"><nobr>taxability</nobr></td>
                         <td class="jd-descrcol">false</td>
                         <td class="jd-descrcol"><i>Optional.&nbsp;</i>True, if you want the valid taxRegionId in the result.</td>
@@ -3296,7 +3283,7 @@ specify which configuration to use.</p>
                 
           
                 
-                    <tr class="alt-color api apilevel-" >
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>date</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol">Date.</td>
@@ -3307,6 +3294,40 @@ specify which configuration to use.</p>
                 
                 
           
+          
+              <tr><th colspan="12">Connection Parameters<br/><span style="font-weight: 200;">This are only required if you didn't specified them at the configuration element. They are also useful for overriding the values of the configurations or even if you need to extract them from the Mule message since they support expression evaluation.</span></th></tr>
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>avalaraAccount</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Registered Avalara account</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                    
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>client</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Target client to which make the call</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                    
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>avalaraLicense</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The matching license for the account
+</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                    
+                
           
           
         </table>

@@ -217,6 +217,8 @@
     <li class="api apilevel-">
   <a href="../../../../../../java/org/mule/modules/avalara/config/spring/package-summary.html">org.mule.modules.avalara.config.spring</a></li>
     <li class="api apilevel-">
+  <a href="../../../../../../java/org/mule/modules/avalara/connectivity/package-summary.html">org.mule.modules.avalara.connectivity</a></li>
+    <li class="api apilevel-">
   <a href="../../../../../../java/org/mule/modules/avalara/exception/package-summary.html">org.mule.modules.avalara.exception</a></li>
     <li class="api apilevel-">
   <a href="../../../../../../java/org/mule/modules/avalara/process/package-summary.html">org.mule.modules.avalara.process</a></li>
@@ -235,6 +237,7 @@
               
     <li><h2>Classes</h2>
       <ul>
+          <li class="api apilevel-"><a href="../../../../../../java/org/mule/modules/avalara/processors/AbstractConnectedProcessor.html">AbstractConnectedProcessor</a></li>
           <li class="api apilevel-"><a href="../../../../../../java/org/mule/modules/avalara/processors/AbstractExpressionEvaluator.html">AbstractExpressionEvaluator</a></li>
           <li class="api apilevel-"><a href="../../../../../../java/org/mule/modules/avalara/processors/AbstractListeningMessageProcessor.html">AbstractListeningMessageProcessor</a>&lt;O&gt;</li>
           <li class="api apilevel-"><a href="../../../../../../java/org/mule/modules/avalara/processors/AbstractMessageProcessor.html">AbstractMessageProcessor</a>&lt;O&gt;</li>
@@ -291,6 +294,15 @@
 <div id="api-info-block">
 
 
+
+  
+   
+  
+  
+  
+   
+  
+  
 
   
    
@@ -442,6 +454,10 @@ Summary:
   
 
   
+  
+  
+
+  
     extends <a href="../../../../../../java/org/mule/modules/avalara/processors/AbstractMessageProcessor.html">AbstractMessageProcessor</a>&lt;O&gt;<br/>
   
   
@@ -475,7 +491,7 @@ Summary:
 
     <tr>
         
-        <td colspan="4" class="jd-inheritance-class-cell">java.lang.Object</td>
+        <td colspan="5" class="jd-inheritance-class-cell">java.lang.Object</td>
     </tr>
     
 
@@ -483,11 +499,23 @@ Summary:
         
             <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;&#x21b3;</td>
         
-        <td colspan="3" class="jd-inheritance-class-cell"><a href="../../../../../../java/org/mule/modules/avalara/processors/AbstractExpressionEvaluator.html">org.mule.modules.avalara.processors.AbstractExpressionEvaluator</a></td>
+        <td colspan="4" class="jd-inheritance-class-cell"><a href="../../../../../../java/org/mule/modules/avalara/processors/AbstractExpressionEvaluator.html">org.mule.modules.avalara.processors.AbstractExpressionEvaluator</a></td>
     </tr>
     
 
     <tr>
+        
+            <td class="jd-inheritance-space">&nbsp;</td>
+        
+            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;&#x21b3;</td>
+        
+        <td colspan="3" class="jd-inheritance-class-cell"><a href="../../../../../../java/org/mule/modules/avalara/processors/AbstractConnectedProcessor.html">org.mule.modules.avalara.processors.AbstractConnectedProcessor</a></td>
+    </tr>
+    
+
+    <tr>
+        
+            <td class="jd-inheritance-space">&nbsp;</td>
         
             <td class="jd-inheritance-space">&nbsp;</td>
         
@@ -498,6 +526,8 @@ Summary:
     
 
     <tr>
+        
+            <td class="jd-inheritance-space">&nbsp;</td>
         
             <td class="jd-inheritance-space">&nbsp;</td>
         
@@ -521,7 +551,7 @@ Summary:
 
 
 <h2>Class Overview</h2>
-<p>AdjustTaxMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/modules/avalara/AvalaraModule.html#adjustTax(java.lang.String, java.lang.String, java.lang.String, int, java.lang.String, java.lang.String, org.mule.modules.avalara.AvalaraDocumentType, java.lang.String, javax.xml.datatype.XMLGregorianCalendar, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>, org.mule.modules.avalara.DetailLevelType, java.lang.String, java.lang.String, boolean, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>, java.lang.String, org.mule.modules.avalara.ServiceModeType, javax.xml.datatype.XMLGregorianCalendar, java.lang.String, javax.xml.datatype.XMLGregorianCalendar)">adjustTax(java.lang.String, java.lang.String, java.lang.String, int, java.lang.String, java.lang.String, org.mule.modules.avalara.AvalaraDocumentType, java.lang.String, javax.xml.datatype.XMLGregorianCalendar, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.List, java.util.List, org.mule.modules.avalara.DetailLevelType, java.lang.String, java.lang.String, boolean, java.lang.String, java.util.Map, java.lang.String, org.mule.modules.avalara.ServiceModeType, javax.xml.datatype.XMLGregorianCalendar, java.lang.String, javax.xml.datatype.XMLGregorianCalendar)</a></code> method in <code><a href="../../../../../../java/org/mule/modules/avalara/AvalaraModule.html">AvalaraModule</a></code>. For each argument there is a field in this processor to match it.  Before invoking the actual method the processor will evaluate and transform where possible to the expected argument type.
+<p>AdjustTaxMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/modules/avalara/AvalaraModule.html#adjustTax(int, java.lang.String, java.lang.String, org.mule.modules.avalara.AvalaraDocumentType, java.lang.String, javax.xml.datatype.XMLGregorianCalendar, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>, org.mule.modules.avalara.DetailLevelType, java.lang.String, java.lang.String, boolean, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>, java.lang.String, org.mule.modules.avalara.ServiceModeType, javax.xml.datatype.XMLGregorianCalendar, java.lang.String, javax.xml.datatype.XMLGregorianCalendar)">adjustTax(int, java.lang.String, java.lang.String, org.mule.modules.avalara.AvalaraDocumentType, java.lang.String, javax.xml.datatype.XMLGregorianCalendar, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.List, java.util.List, org.mule.modules.avalara.DetailLevelType, java.lang.String, java.lang.String, boolean, java.lang.String, java.util.Map, java.lang.String, org.mule.modules.avalara.ServiceModeType, javax.xml.datatype.XMLGregorianCalendar, java.lang.String, javax.xml.datatype.XMLGregorianCalendar)</a></code> method in <code><a href="../../../../../../java/org/mule/modules/avalara/AvalaraModule.html">AvalaraModule</a></code>. For each argument there is a field in this processor to match it.  Before invoking the actual method the processor will evaluate and transform where possible to the expected argument type.
  
 </p>
 
@@ -570,6 +600,8 @@ Summary:
 <table id="inhconstants" class="jd-sumtable"><tr><th>
   <a href="#" class="toggle-all" onclick="return toggleAllInherited(this, null)">[Expand]</a>
   <div style="clear:left;">Inherited Constants</div></th></tr>
+
+
 
 
 
@@ -723,40 +755,18 @@ org.mule.api.lifecycle.Stoppable
           
           
           String</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/processors/AdjustTaxMessageProcessor.html#_accountType">_accountType</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class=" api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          protected
-          
-          
-          String</nobr></td>
           <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/processors/AdjustTaxMessageProcessor.html#_adjustmentDescriptionType">_adjustmentDescriptionType</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
       
     
-      <tr class="alt-color api apilevel-" >
+      <tr class=" api apilevel-" >
           <td class="jd-typecol"><nobr>
           protected
           
           
           int</nobr></td>
           <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/processors/AdjustTaxMessageProcessor.html#_adjustmentReasonType">_adjustmentReasonType</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class=" api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          protected
-          
-          
-          String</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/processors/AdjustTaxMessageProcessor.html#_avalaraClientType">_avalaraClientType</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
       
@@ -942,24 +952,13 @@ org.mule.api.lifecycle.Stoppable
           protected
           
           
-          String</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/processors/AdjustTaxMessageProcessor.html#_licenseType">_licenseType</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class=" api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          protected
-          
-          
           List&lt;Map&lt;String,&nbsp;Object&gt;&gt;</nobr></td>
           <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/processors/AdjustTaxMessageProcessor.html#_linesType">_linesType</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
       
     
-      <tr class="alt-color api apilevel-" >
+      <tr class=" api apilevel-" >
           <td class="jd-typecol"><nobr>
           protected
           
@@ -970,7 +969,7 @@ org.mule.api.lifecycle.Stoppable
       </tr>
       
     
-      <tr class=" api apilevel-" >
+      <tr class="alt-color api apilevel-" >
           <td class="jd-typecol"><nobr>
           protected
           
@@ -981,7 +980,7 @@ org.mule.api.lifecycle.Stoppable
       </tr>
       
     
-      <tr class="alt-color api apilevel-" >
+      <tr class=" api apilevel-" >
           <td class="jd-typecol"><nobr>
           protected
           
@@ -992,7 +991,7 @@ org.mule.api.lifecycle.Stoppable
       </tr>
       
     
-      <tr class=" api apilevel-" >
+      <tr class="alt-color api apilevel-" >
           <td class="jd-typecol"><nobr>
           protected
           
@@ -1003,7 +1002,7 @@ org.mule.api.lifecycle.Stoppable
       </tr>
       
     
-      <tr class="alt-color api apilevel-" >
+      <tr class=" api apilevel-" >
           <td class="jd-typecol"><nobr>
           protected
           
@@ -1014,7 +1013,7 @@ org.mule.api.lifecycle.Stoppable
       </tr>
       
     
-      <tr class=" api apilevel-" >
+      <tr class="alt-color api apilevel-" >
           <td class="jd-typecol"><nobr>
           protected
           
@@ -1025,7 +1024,7 @@ org.mule.api.lifecycle.Stoppable
       </tr>
       
     
-      <tr class="alt-color api apilevel-" >
+      <tr class=" api apilevel-" >
           <td class="jd-typecol"><nobr>
           protected
           
@@ -1036,24 +1035,13 @@ org.mule.api.lifecycle.Stoppable
       </tr>
       
     
-      <tr class=" api apilevel-" >
+      <tr class="alt-color api apilevel-" >
           <td class="jd-typecol"><nobr>
           protected
           
           
           Map&lt;String,&nbsp;Object&gt;</nobr></td>
           <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/processors/AdjustTaxMessageProcessor.html#_taxOverrideType">_taxOverrideType</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class="alt-color api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          protected
-          
-          
-          Object</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/processors/AdjustTaxMessageProcessor.html#account">account</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
       
@@ -1086,23 +1074,12 @@ org.mule.api.lifecycle.Stoppable
           
           
           Object</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/processors/AdjustTaxMessageProcessor.html#avalaraClient">avalaraClient</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class="alt-color api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          protected
-          
-          
-          Object</nobr></td>
           <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/processors/AdjustTaxMessageProcessor.html#baseAddresses">baseAddresses</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
       
     
-      <tr class=" api apilevel-" >
+      <tr class="alt-color api apilevel-" >
           <td class="jd-typecol"><nobr>
           protected
           
@@ -1113,7 +1090,7 @@ org.mule.api.lifecycle.Stoppable
       </tr>
       
     
-      <tr class="alt-color api apilevel-" >
+      <tr class=" api apilevel-" >
           <td class="jd-typecol"><nobr>
           protected
           
@@ -1124,7 +1101,7 @@ org.mule.api.lifecycle.Stoppable
       </tr>
       
     
-      <tr class=" api apilevel-" >
+      <tr class="alt-color api apilevel-" >
           <td class="jd-typecol"><nobr>
           protected
           
@@ -1135,7 +1112,7 @@ org.mule.api.lifecycle.Stoppable
       </tr>
       
     
-      <tr class="alt-color api apilevel-" >
+      <tr class=" api apilevel-" >
           <td class="jd-typecol"><nobr>
           protected
           
@@ -1146,7 +1123,7 @@ org.mule.api.lifecycle.Stoppable
       </tr>
       
     
-      <tr class=" api apilevel-" >
+      <tr class="alt-color api apilevel-" >
           <td class="jd-typecol"><nobr>
           protected
           
@@ -1157,7 +1134,7 @@ org.mule.api.lifecycle.Stoppable
       </tr>
       
     
-      <tr class="alt-color api apilevel-" >
+      <tr class=" api apilevel-" >
           <td class="jd-typecol"><nobr>
           protected
           
@@ -1168,7 +1145,7 @@ org.mule.api.lifecycle.Stoppable
       </tr>
       
     
-      <tr class=" api apilevel-" >
+      <tr class="alt-color api apilevel-" >
           <td class="jd-typecol"><nobr>
           protected
           
@@ -1179,7 +1156,7 @@ org.mule.api.lifecycle.Stoppable
       </tr>
       
     
-      <tr class="alt-color api apilevel-" >
+      <tr class=" api apilevel-" >
           <td class="jd-typecol"><nobr>
           protected
           
@@ -1190,7 +1167,7 @@ org.mule.api.lifecycle.Stoppable
       </tr>
       
     
-      <tr class=" api apilevel-" >
+      <tr class="alt-color api apilevel-" >
           <td class="jd-typecol"><nobr>
           protected
           
@@ -1201,7 +1178,7 @@ org.mule.api.lifecycle.Stoppable
       </tr>
       
     
-      <tr class="alt-color api apilevel-" >
+      <tr class=" api apilevel-" >
           <td class="jd-typecol"><nobr>
           protected
           
@@ -1212,7 +1189,7 @@ org.mule.api.lifecycle.Stoppable
       </tr>
       
     
-      <tr class=" api apilevel-" >
+      <tr class="alt-color api apilevel-" >
           <td class="jd-typecol"><nobr>
           protected
           
@@ -1223,7 +1200,7 @@ org.mule.api.lifecycle.Stoppable
       </tr>
       
     
-      <tr class="alt-color api apilevel-" >
+      <tr class=" api apilevel-" >
           <td class="jd-typecol"><nobr>
           protected
           
@@ -1234,7 +1211,7 @@ org.mule.api.lifecycle.Stoppable
       </tr>
       
     
-      <tr class=" api apilevel-" >
+      <tr class="alt-color api apilevel-" >
           <td class="jd-typecol"><nobr>
           protected
           
@@ -1245,7 +1222,7 @@ org.mule.api.lifecycle.Stoppable
       </tr>
       
     
-      <tr class="alt-color api apilevel-" >
+      <tr class=" api apilevel-" >
           <td class="jd-typecol"><nobr>
           protected
           
@@ -1256,24 +1233,13 @@ org.mule.api.lifecycle.Stoppable
       </tr>
       
     
-      <tr class=" api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          protected
-          
-          
-          Object</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/processors/AdjustTaxMessageProcessor.html#exemptionNo">exemptionNo</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
       <tr class="alt-color api apilevel-" >
           <td class="jd-typecol"><nobr>
           protected
           
           
           Object</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/processors/AdjustTaxMessageProcessor.html#license">license</a></td>
+          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/processors/AdjustTaxMessageProcessor.html#exemptionNo">exemptionNo</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
       
@@ -1453,6 +1419,96 @@ org.mule.api.lifecycle.Stoppable
 
 
 
+<tr class="api apilevel-" >
+<td colspan="12">
+
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-fields-org.mule.modules.avalara.processors.AbstractConnectedProcessor" class="jd-expando-trigger closed"
+          ><img id="inherited-fields-org.mule.modules.avalara.processors.AbstractConnectedProcessor-trigger"
+          src="../../../../../../assets/images/triangle-closed.png"
+          class="jd-expando-trigger-img" /></a>From class
+<a href="../../../../../../org/mule/modules/avalara/processors/AbstractConnectedProcessor.html">org.mule.modules.avalara.processors.AbstractConnectedProcessor</a>
+<div id="inherited-fields-org.mule.modules.avalara.processors.AbstractConnectedProcessor">
+  <div id="inherited-fields-org.mule.modules.avalara.processors.AbstractConnectedProcessor-list"
+        class="jd-inheritedlinks">
+  </div>
+  <div id="inherited-fields-org.mule.modules.avalara.processors.AbstractConnectedProcessor-summary" style="display: none;">
+    <table class="jd-sumtable-expando">
+    
+
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          protected
+          
+          
+          String</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/processors/AbstractConnectedProcessor.html#_avalaraAccountType">_avalaraAccountType</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          protected
+          
+          
+          String</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/processors/AbstractConnectedProcessor.html#_avalaraLicenseType">_avalaraLicenseType</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          protected
+          
+          
+          String</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/processors/AbstractConnectedProcessor.html#_clientType">_clientType</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          protected
+          
+          
+          Object</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/processors/AbstractConnectedProcessor.html#avalaraAccount">avalaraAccount</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          protected
+          
+          
+          Object</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/processors/AbstractConnectedProcessor.html#avalaraLicense">avalaraLicense</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          protected
+          
+          
+          Object</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/processors/AbstractConnectedProcessor.html#client">client</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+</table>
+  </div>
+</div>
+</td></tr>
+
+
+
 
 
 
@@ -1572,24 +1628,6 @@ org.mule.api.lifecycle.Stoppable
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/processors/AdjustTaxMessageProcessor.html#setAccount(java.lang.Object)">setAccount</a></span>(Object value)</nobr>
-        
-        <div class="jd-descrdiv">Sets account</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/processors/AdjustTaxMessageProcessor.html#setAdjustmentDescription(java.lang.Object)">setAdjustmentDescription</a></span>(Object value)</nobr>
         
         <div class="jd-descrdiv">Sets adjustmentDescription</div>
@@ -1598,7 +1636,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1611,24 +1649,6 @@ org.mule.api.lifecycle.Stoppable
         <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/processors/AdjustTaxMessageProcessor.html#setAdjustmentReason(java.lang.Object)">setAdjustmentReason</a></span>(Object value)</nobr>
         
         <div class="jd-descrdiv">Sets adjustmentReason</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/processors/AdjustTaxMessageProcessor.html#setAvalaraClient(java.lang.Object)">setAvalaraClient</a></span>(Object value)</nobr>
-        
-        <div class="jd-descrdiv">Sets avalaraClient</div>
   
   </td></tr>
 
@@ -1950,24 +1970,6 @@ org.mule.api.lifecycle.Stoppable
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/processors/AdjustTaxMessageProcessor.html#setLicense(java.lang.Object)">setLicense</a></span>(Object value)</nobr>
-        
-        <div class="jd-descrdiv">Sets license</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            void</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/processors/AdjustTaxMessageProcessor.html#setLines(java.lang.Object)">setLines</a></span>(Object value)</nobr>
         
         <div class="jd-descrdiv">Sets lines</div>
@@ -1976,7 +1978,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1994,7 +1996,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2012,7 +2014,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2030,7 +2032,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2048,7 +2050,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2066,7 +2068,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2084,7 +2086,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2102,7 +2104,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2120,7 +2122,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2138,7 +2140,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2154,7 +2156,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -2331,6 +2333,146 @@ From class
         <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/processors/AbstractMessageProcessor.html#setMuleContext(org.mule.api.MuleContext)">setMuleContext</a></span>(MuleContext value)</nobr>
         
         <div class="jd-descrdiv">Sets muleContext</div>
+  
+  </td></tr>
+
+
+</table>
+  </div>
+</div>
+</td></tr>
+
+
+
+<tr class="api apilevel-" >
+<td colspan="12">
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.modules.avalara.processors.AbstractConnectedProcessor" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-org.mule.modules.avalara.processors.AbstractConnectedProcessor-trigger"
+          src="../../../../../../assets/images/triangle-closed.png"
+          class="jd-expando-trigger-img" /></a>
+From class
+
+  <a href="../../../../../../org/mule/modules/avalara/processors/AbstractConnectedProcessor.html">org.mule.modules.avalara.processors.AbstractConnectedProcessor</a>
+
+<div id="inherited-methods-org.mule.modules.avalara.processors.AbstractConnectedProcessor">
+  <div id="inherited-methods-org.mule.modules.avalara.processors.AbstractConnectedProcessor-list"
+        class="jd-inheritedlinks">
+  </div>
+  <div id="inherited-methods-org.mule.modules.avalara.processors.AbstractConnectedProcessor-summary" style="display: none;">
+    <table class="jd-sumtable-expando">
+    
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Object</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/processors/AbstractConnectedProcessor.html#getAvalaraAccount()">getAvalaraAccount</a></span>()</nobr>
+        
+        <div class="jd-descrdiv">Retrieves avalaraAccount
+ 
+</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Object</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/processors/AbstractConnectedProcessor.html#getAvalaraLicense()">getAvalaraLicense</a></span>()</nobr>
+        
+        <div class="jd-descrdiv">Retrieves avalaraLicense
+ 
+</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Object</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/processors/AbstractConnectedProcessor.html#getClient()">getClient</a></span>()</nobr>
+        
+        <div class="jd-descrdiv">Retrieves client
+ 
+</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/processors/AbstractConnectedProcessor.html#setAvalaraAccount(java.lang.Object)">setAvalaraAccount</a></span>(Object value)</nobr>
+        
+        <div class="jd-descrdiv">Sets avalaraAccount</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/processors/AbstractConnectedProcessor.html#setAvalaraLicense(java.lang.Object)">setAvalaraLicense</a></span>(Object value)</nobr>
+        
+        <div class="jd-descrdiv">Sets avalaraLicense</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/processors/AbstractConnectedProcessor.html#setClient(java.lang.Object)">setClient</a></span>(Object value)</nobr>
+        
+        <div class="jd-descrdiv">Sets client</div>
   
   </td></tr>
 
@@ -3093,36 +3235,6 @@ From interface
 
 
 
-<A NAME="_accountType"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        protected 
-         
-         
-        String
-      </span>
-        _accountType
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
 <A NAME="_adjustmentDescriptionType"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -3164,36 +3276,6 @@ From interface
         int
       </span>
         _adjustmentReasonType
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="_avalaraClientType"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        protected 
-         
-         
-        String
-      </span>
-        _avalaraClientType
     </h4>
       <div class="api-level">
         
@@ -3693,36 +3775,6 @@ From interface
 
 
 
-<A NAME="_licenseType"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        protected 
-         
-         
-        String
-      </span>
-        _licenseType
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
 <A NAME="_linesType"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -3993,36 +4045,6 @@ From interface
 
 
 
-<A NAME="account"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        protected 
-         
-         
-        Object
-      </span>
-        account
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
 <A NAME="adjustmentDescription"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -4064,36 +4086,6 @@ From interface
         Object
       </span>
         adjustmentReason
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
-<A NAME="avalaraClient"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        protected 
-         
-         
-        Object
-      </span>
-        avalaraClient
     </h4>
       <div class="api-level">
         
@@ -4593,36 +4585,6 @@ From interface
 
 
 
-<A NAME="license"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        protected 
-         
-         
-        Object
-      </span>
-        license
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
 <A NAME="lines"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -5068,47 +5030,6 @@ From interface
 </div>
 
 
-<A NAME="setAccount(java.lang.Object)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setAccount</span>
-      <span class="normal">(Object value)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Sets account</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>value</td>
-          <td>Value to set
-</td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
 <A NAME="setAdjustmentDescription(java.lang.Object)"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -5176,47 +5097,6 @@ From interface
     <div class="jd-details-descr">
       
   <div class="jd-tagdata jd-tagdescr"><p>Sets adjustmentReason</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>value</td>
-          <td>Value to set
-</td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setAvalaraClient(java.lang.Object)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setAvalaraClient</span>
-      <span class="normal">(Object value)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Sets avalaraClient</p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">
@@ -5920,47 +5800,6 @@ From interface
         <tr>
           <th>flowConstruct</td>
           <td>Flow construct to set
-</td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setLicense(java.lang.Object)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setLicense</span>
-      <span class="normal">(Object value)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Sets license</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>value</td>
-          <td>Value to set
 </td>
         </tr>
       </table>

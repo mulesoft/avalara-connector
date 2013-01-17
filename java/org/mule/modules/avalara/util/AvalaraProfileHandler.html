@@ -217,6 +217,8 @@
     <li class="api apilevel-">
   <a href="../../../../../../java/org/mule/modules/avalara/config/spring/package-summary.html">org.mule.modules.avalara.config.spring</a></li>
     <li class="api apilevel-">
+  <a href="../../../../../../java/org/mule/modules/avalara/connectivity/package-summary.html">org.mule.modules.avalara.connectivity</a></li>
+    <li class="api apilevel-">
   <a href="../../../../../../java/org/mule/modules/avalara/exception/package-summary.html">org.mule.modules.avalara.exception</a></li>
     <li class="api apilevel-">
   <a href="../../../../../../java/org/mule/modules/avalara/process/package-summary.html">org.mule.modules.avalara.process</a></li>
@@ -489,8 +491,8 @@ Summary:
           <td class="jd-typecol"><nobr>
           private
           
-          
-          <a href="../../../../../../java/org/mule/modules/avalara/api/AvalaraProfile.html">AvalaraProfile</a></nobr></td>
+          final
+          String</nobr></td>
           <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/util/AvalaraProfileHandler.html#profile">profile</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
@@ -521,9 +523,9 @@ Summary:
             </nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/util/AvalaraProfileHandler.html#AvalaraProfileHandler(org.mule.modules.avalara.api.AvalaraProfile)">AvalaraProfileHandler</a></span>(<a href="../../../../../../java/org/mule/modules/avalara/api/AvalaraProfile.html">AvalaraProfile</a> profile)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/util/AvalaraProfileHandler.html#AvalaraProfileHandler(java.lang.String)">AvalaraProfileHandler</a></span>(String profile)</nobr>
         
-        <div class="jd-descrdiv">Creates a SOAPSimpleCredentials handler and initialises the member variables.</div>
+        <div class="jd-descrdiv">Creates a SOAPSimpleCredentials handler and initializes the member variables.</div>
   
   </td></tr>
 
@@ -977,7 +979,7 @@ From interface
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
       <span class="normal">
-        public 
+        private 
         static 
         final 
         String
@@ -1016,7 +1018,7 @@ From interface
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
       <span class="normal">
-        public 
+        private 
         static 
         final 
         String
@@ -1055,7 +1057,7 @@ From interface
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
       <span class="normal">
-        public 
+        private 
         static 
         final 
         String
@@ -1106,8 +1108,8 @@ From interface
       <span class="normal">
         private 
          
-         
-        <a href="../../../../../../java/org/mule/modules/avalara/api/AvalaraProfile.html">AvalaraProfile</a>
+        final 
+        String
       </span>
         profile
     </h4>
@@ -1138,7 +1140,7 @@ From interface
 
 
 
-<A NAME="AvalaraProfileHandler(org.mule.modules.avalara.api.AvalaraProfile)"></A>
+<A NAME="AvalaraProfileHandler(java.lang.String)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -1151,7 +1153,7 @@ From interface
         
       </span>
       <span class="sympad">AvalaraProfileHandler</span>
-      <span class="normal">(<a href="../../../../../../java/org/mule/modules/avalara/api/AvalaraProfile.html">AvalaraProfile</a> profile)</span>
+      <span class="normal">(String profile)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -1163,7 +1165,7 @@ From interface
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p>Creates a SOAPSimpleCredentials handler and initialises the member variables. In
+  <div class="jd-tagdata jd-tagdescr"><p>Creates a SOAPSimpleCredentials handler and initializes the member variables. In
  most cases, the sign static method should be used instead.</p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
