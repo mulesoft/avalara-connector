@@ -177,16 +177,19 @@
 <!-- END_INCLUDE(avalara:adjust-tax) -->
 
 <!-- BEGIN_INCLUDE(avalara:post-tax) -->
-<avalara:post-tax 
-					docId="some document id"
-                    companyCode="some company code"
-                    docType="SALES_ORDER"
-                    docCode="some document code"
-                    docDate-ref="2010-09-13T01:18:14-07:00"
-                    totalAmount="1200"
-                    totalTax="100"
-                    commit="false"
-                    newDocCode="some new document code" />
+    <avalara:post-tax>
+        <avalara:post-tax-request
+            docId="some document id"
+            companyCode="some company code"
+            docType="SALES_ORDER"
+            docCode="some document code"
+            docDate-ref="2010-09-13T01:18:14-07:00"
+            totalAmount="1200"
+            totalTax="100"
+            commit="false"
+            newDocCode="some new document code"
+        />
+    </avalara:post-tax>
 <!-- END_INCLUDE(avalara:post-tax) -->
 
 <!-- BEGIN_INCLUDE(avalara:commit-tax) -->

@@ -26,6 +26,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import org.junit.Before;
 import org.junit.Test;
 import org.mule.api.ConnectionException;
+import org.mule.api.annotations.param.Default;
+import org.mule.api.annotations.param.Optional;
 import org.mule.modules.avalara.AvalaraDocumentType;
 import org.mule.modules.avalara.AvalaraModule;
 import org.mule.modules.avalara.BatchType;
@@ -39,10 +41,12 @@ import com.avalara.avatax.services.AdjustTaxResult;
 import com.avalara.avatax.services.BatchFileFetchResult;
 import com.avalara.avatax.services.BatchSaveResult;
 import com.avalara.avatax.services.CancelTaxResult;
+import com.avalara.avatax.services.DocumentType;
 import com.avalara.avatax.services.GetTaxHistoryResult;
 import com.avalara.avatax.services.GetTaxRequest;
 import com.avalara.avatax.services.GetTaxResult;
 import com.avalara.avatax.services.PingResult;
+import com.avalara.avatax.services.PostTaxRequest;
 import com.avalara.avatax.services.PostTaxResult;
 import com.avalara.avatax.services.SeverityLevel;
 import com.avalara.avatax.services.ValidateResult;
@@ -203,9 +207,16 @@ public class AvalaraTestDriver {
 
         AdjustTaxResult adjustTaxResult = adjustTax(docCode);
 
-        PostTaxResult postResult = module.postTax(null, "TC", AvalaraDocumentType.SALES_INVOICE,
-                docCode, testDate, taxResult.getTotalAmount().toPlainString(),
-                taxResult.getTotalTax().toPlainString(), false, docCode);
+        final PostTaxRequest postTaxRequest = new PostTaxRequest();
+        postTaxRequest.setCompanyCode("TC");
+        postTaxRequest.setDocType(DocumentType.SALES_INVOICE);
+        postTaxRequest.setDocCode(docCode);
+        postTaxRequest.setDocDate(testDate);
+        postTaxRequest.setTotalAmount(taxResult.getTotalAmount());
+        postTaxRequest.setTotalTax(taxResult.getTotalTax());
+        postTaxRequest.setCommit(false);
+        postTaxRequest.setNewDocCode(docCode);
+        PostTaxResult postResult = module.postTax(postTaxRequest);
 
         assertEquals(SeverityLevel.SUCCESS, postResult.getResultCode());
 

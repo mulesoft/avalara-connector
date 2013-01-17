@@ -436,65 +436,41 @@ public class AvalaraModule
      *
      * {@sample.xml ../../../doc/avalara-connector.xml.sample avalara:post-tax}
      *
-     * @param docId The original document's type, such as Sales Invoice or Purchase Invoice.
-     * @param companyCode Client application company reference code. If docId is specified, 
-     *                    this is not needed.
-     * @param docType The document type specifies the category of the document and affects
+     * @param postTaxRequest a {@link PostTaxRequest} to post. Its fields represent:
+     * <ul>
+     *  <li>docId The original document's type, such as Sales Invoice or Purchase Invoice.</li>
+     *  <li>companyCode Client application company reference code. If docId is specified,
+     *                this is not needed.</li>
+     *  <li>docType The document type specifies the category of the document and affects
      *                how the document is treated after a tax calculation; see 
      *                {@link AvalaraDocumentType} for more information about the specific 
-     *                document types.
-     * @param docCode The internal reference code used by the client application.
-     * @param docDate The date on the invoice, purchase order, etc
-     * @param totalAmount The total amount (not including tax) for the document.
+     *                document types.</li>
+     *  <li>docCode The internal reference code used by the client application.</li>
+     *  <li>docDate The date on the invoice, purchase order, etc</li>
+     *  <li>totalAmount The total amount (not including tax) for the document.
      *                    This is used for verification and reconciliation. This should 
      *                    be the <b>TotalAmount</b> returned by {@link GetTaxResult} when 
      *                    tax was calculated for this document; otherwise the web service 
-     *                    will return an error. The string represents a {@link BigDecimal}
-     * @param totalTax The total tax for the document. This is used for verification 
-     *                 and reconciliation. This should be the <b>TotalTax</b> returned by
-     *                 {@link GetTaxResult} when tax was calculated for this document; 
-     *                 otherwise the web service will return an error.
-     *                 The string represents a {@link BigDecimal}
-     * @param commit The commit value. This has been defaulted to false. If this has 
+     *                    will return an error.</li>
+     *  <li>totalTax The total tax for the document. This is used for verification
+     *                 and reconciliation. This should be the <b>TotalTax</b> returned by 
+     *                 {@link GetTaxResult} when tax was calculated for this document;
+     *                 otherwise the web service will return an error.</li>
+     *  <li>commit The commit value. This has been defaulted to false. If this has 
      *               been set to true AvaTax will commit the document on this call. Seller's 
      *               system who wants to Post and Commit the document on one call should use 
-     *               this flag.
-     * @param newDocCode The new document code value.
+     *               this flag.</li>
+     *  <li>newDocCode The new document code value.</li>
+     * </ul>
      * @return The {@link PostTaxResult}
      * 
      * @throws AvalaraRuntimeException
      */
     @Processor
-    public PostTaxResult postTax(@Optional String docId,
-                                 String companyCode,
-                                 AvalaraDocumentType docType,
-                                 @Optional String docCode,
-                                 XMLGregorianCalendar docDate,
-                                 String totalAmount,
-                                 String totalTax,
-                                 @Optional @Default("false") boolean commit,
-                                 @Optional String newDocCode) {
-        BigDecimal totalAmountDecimal = totalAmount == null ? null :  new BigDecimal(totalAmount);
-        BigDecimal totalTaxDecimal = totalTax == null ? null :  new BigDecimal(totalTax);
-        
-        return (PostTaxResult) apiClient.sendToAvalara(
-            TaxRequestType.PostTax,
-            mom.unmap(
-                new MapBuilder()
-                .with("docId", docId)
-                .with("companyCode", companyCode)
-                .with("docType", docType.toDocumentType())
-                .with("docCode", docCode)
-                .with("docDate", docDate)
-                .with("totalAmount", totalAmountDecimal)
-                .with("totalTax", totalTaxDecimal)
-                .with("commit", commit)
-                .with("newDocCode", newDocCode)
-                .build(), PostTaxRequest.class
-            )
-        );
+    public PostTaxResult postTax(final @Optional @Default("#[payload]") PostTaxRequest postTaxRequest) {
+        return (PostTaxResult) apiClient.sendToAvalara(TaxRequestType.PostTax, postTaxRequest);
     }
-    
+
     /**
      * Commit Tax processor
      *

@@ -70,16 +70,18 @@
                                   latitude="#[variable:latitude]"
                                   longitude="#[variable:longitude]"
                                   date-ref="#[variable:date]" />
-        <avalara:post-tax 
-        				  docId="#[variable:docId]"
-		                  companyCode="#[variable:companyCode]"
-		                  docType="SALES_ORDER"
-		                  docCode="#[variable:docCode]"
-		                  docDate-ref="2010-09-13T01:18:14-07:00"
-		                  totalAmount="1200"
-		                  totalTax="100"
-		                  commit="false"
-		                  newDocCode="#[variable:newDocCode]"/>
+        <avalara:post-tax>
+            <avalara:post-tax-request
+                companyCode="#[variable:companyCode]"
+                docType="SALES_ORDER"
+                docCode="#[variable:docCode]"
+                docDate-ref="2010-09-13T01:18:14-07:00"
+                totalAmount="1200"
+                totalTax="100"
+                commit="false"
+                newDocCode="#[variable:newDocCode]"
+		    />
+		</avalara:post-tax>
 		
     </flow>
 
