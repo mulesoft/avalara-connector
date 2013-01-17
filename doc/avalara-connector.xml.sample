@@ -144,7 +144,7 @@
 <!-- BEGIN_INCLUDE(avalara:commit-tax) -->
 <avalara:commit-tax>
     <avalara:commit-tax-request
-    		docId="some document id"
+            docId="some document id"
             companyCode="some company code"
             docType="SALES_ORDER"
             docCode="some document code"
