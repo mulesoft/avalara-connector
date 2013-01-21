@@ -34,7 +34,7 @@
                 <executions>
                     <execution>
                         <id>generate-sources</id>
-                        <phase>generate-sources</phase>
+                        <phase>initialize</phase>
                         <goals>
                             <goal>wsdl2java</goal>
                         </goals>
@@ -43,26 +43,27 @@
                                 <wsdlOption>
                                     <wsdl>src/main/resources/schema/taxsvc.wsdl</wsdl>
                                     <autoNameResolution>true</autoNameResolution>
+                                    <extraargs><extraarg>-xjc-Xsetters</extraarg></extraargs>
                                 </wsdlOption>
                                 <wsdlOption>
                                     <wsdl>src/main/resources/schema/addresssvc.wsdl</wsdl>
                                     <autoNameResolution>true</autoNameResolution>
+                                    <extraargs><extraarg>-xjc-Xsetters</extraarg></extraargs>
                                 </wsdlOption>
                                 <wsdlOption>
                                     <wsdl>src/main/resources/schema/batchsvc.wsdl</wsdl>
                                     <autoNameResolution>true</autoNameResolution>
+                                    <extraargs><extraarg>-xjc-Xsetters</extraarg></extraargs>
                                 </wsdlOption>
                             </wsdlOptions>
-                            <extraargs>
-                                <extraarg>-xjc-Xcollection-setter-injector</extraarg>
-                            </extraargs>
                         </configuration>
                     </execution>
                 </executions>
                 <dependencies>
 	                <dependency>
-						<groupId>net.java.dev.vcc.thirdparty</groupId>
-						<artifactId>collection-setter-injector</artifactId><version>0.5.0-1</version>
+	                   <groupId>org.jvnet.jaxb2_commons</groupId>
+	                   <artifactId>jaxb2-basics</artifactId>
+	                   <version>0.6.4</version>
 	               </dependency>
                 </dependencies>
             </plugin>
