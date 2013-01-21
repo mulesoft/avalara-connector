@@ -5,7 +5,7 @@
 <!-- BEGIN_INCLUDE(avalara:get-tax) -->
     <avalara:get-tax>
         <avalara:get-tax-request
-    			 companyCode="some company code"
+                companyCode="some company code"
                  docType="PURCHASE_ORDER"
                  docCode="some doc code"
                  docDate-ref="2010-09-13T01:18:14-07:00"
@@ -27,12 +27,56 @@
                  paymentDate-ref="2010-09-13T01:18:14-07:00"
                  exchangeRate="0.5"
                  exchangeRateEffDate-ref="2010-09-13T01:18:14-07:00">
-        <avalara:tax-override
-            taxOverrideType="TAX_AMOUNT"
-            taxAmount="9.3"
-            taxDate-ref="2010-09-13T01:18:14-07:00"
-            reason="some reason"/>
-        
+            <avalara:addresses>
+            <avalara:base-address>
+                <avalara:base-addres
+                    addressCode="some origin code"
+                    line1="some line 1"
+                    line2="some line 2"
+                    line3="some line 3"
+                    city="some city"
+                    region="some region"
+                    postalCode="some postal code"
+                    country="some country"
+                    taxRegionId="3"
+                    latitude="some latitude"
+                    longitude="some longitude"
+                />
+            </avalara:base-address>
+            </avalara:addresses>
+            <avalara:lines>
+                <avalara:line>
+                <avalara:line
+                    no="some number"
+                    originCode="some origin code"
+                    destinationCode="some destination code"
+                    itemCode="some item code"
+                    taxCode="some tax code"
+                    qty="#[groovy: new BigDecimal(3.0)]"
+                    amount="#[groovy: new BigDecimal(500.5)]"
+                    discounted="true"
+                    revAcct="some rev acct"
+                    ref1="some reference 1"
+                    ref2="some reference 2"
+                    exemptionNo="some exemption number"
+                    customerUsageType="some customer usage type"
+                    description="some description"
+                    taxIncluded="false"
+                    >
+                    <avalara:tax-override
+                        taxOverrideType="#[groovy:TaxOverrideType.TAX_AMOUNT]"
+                        taxAmount="#[groovy:10.0G]"
+                        taxDate-ref="#[groovy:new Date()]"
+                        reason="some reason"
+                    />
+                </avalara:line>
+                </avalara:line>
+            </avalara:lines>
+            <avalara:tax-override
+                taxOverrideType="TAX_AMOUNT"
+                taxAmount="9.3"
+                taxDate-ref="2010-09-13T01:18:14-07:00"
+                reason="some reason"/>
     </avalara:get-tax-request>
 </avalara:get-tax>
 <!-- END_INCLUDE(avalara:get-tax) -->
