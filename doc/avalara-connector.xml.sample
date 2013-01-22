@@ -220,7 +220,11 @@
 
 <!-- BEGIN_INCLUDE(avalara:validate-address) -->
 <avalara:validate-address
-						  line1="435 Ericksen Ave"
+                          textCase="DEFAULT"
+                          coordinates="true"
+                          taxability="false"
+                          date-ref="2010-09-13T01:18:14-07:00">
+    <avalara:address line1="435 Ericksen Ave"
                           line2="some line 2"
                           line3="some line 3" 
                           city="some city"
@@ -230,11 +234,8 @@
                           addressCode="some address code"
                           taxRegionId="1"
                           latitude="26"
-                          longitude="40"
-                          textCase="DEFAULT"
-                          coordinates="true"
-                          taxability="false"
-                          date-ref="2010-09-13T01:18:14-07:00" />
+                          longitude="40"/>
+</avalara:validate-address>
 <!-- END_INCLUDE(avalara:validate-address) -->
 
 <!-- BEGIN_INCLUDE(avalara:fetch-batch-file) -->

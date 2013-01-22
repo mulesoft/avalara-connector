@@ -497,18 +497,7 @@ public class AvalaraModule
      *
      * {@sample.xml ../../../doc/avalara-connector.xml.sample avalara:validate-address}
      * 
-     * @param line1 Address line 1
-     * @param line2 Address line 2
-     * @param line3 Address line 3
-     * @param city City name. Required, when PostalCode is not specified.
-     * @param region State or region name. Requirad, when PostalCode is not specified.
-     * @param country Country code
-     * @param postalCode Postal or ZIP code. Required, when City and Region are not 
-     *                   specified
-     * @param addressCode the address code.
-     * @param taxRegionId The tax region id.
-     * @param latitude Latitude. 
-     * @param longitude Longitude.
+     * @param address the @{link BaseAddress} to validate.
      * @param textCase The casing to apply to the validated address(es).
      * @param coordinates True, if you want in the result a not empty latitud and longitude.
      * @param taxability True, if you want the valid taxRegionId in the result.
@@ -518,28 +507,11 @@ public class AvalaraModule
      * @throws AvalaraRuntimeException
      */
     @Processor
-    public ValidateResult validateAddress(String line1, @Optional String line2, @Optional String line3,
-                                          @Optional String city, @Optional String region, @Optional String country,
-                                          @Optional String postalCode, @Optional String addressCode,
-                                          Integer taxRegionId,
-                                          @Optional String latitude, @Optional String longitude,
+    public ValidateResult validateAddress(@Optional @Default("#[payload]") BaseAddress address,
                                           @Optional @Default("DEFAULT") TextCaseType textCase,
                                           @Optional @Default("false") boolean coordinates,
                                           @Optional @Default("false") boolean taxability,
                                           XMLGregorianCalendar date) {
-        BaseAddress address = new BaseAddress();
-        address.setAddressCode(addressCode);
-        address.setCity(city);
-        address.setCountry(country);
-        address.setLatitude(latitude);
-        address.setLine1(line1);
-        address.setLine2(line2);
-        address.setLine3(line3);
-        address.setLongitude(longitude);
-        address.setPostalCode(postalCode);
-        address.setRegion(region);
-        address.setTaxRegionId(taxRegionId);
-
         return apiClient.validateAddress((ValidateRequest) mom.unmap( 
                 new MapBuilder()
                 .with("address", address)

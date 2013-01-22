@@ -26,6 +26,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import org.junit.Before;
 import org.junit.Test;
 import org.mule.api.ConnectionException;
+import org.mule.api.annotations.param.Optional;
 import org.mule.modules.avalara.AvalaraDocumentType;
 import org.mule.modules.avalara.AvalaraModule;
 import org.mule.modules.avalara.BatchType;
@@ -283,18 +284,24 @@ public class AvalaraTestDriver {
 
     @Test
     public void validateAValidAddress() throws Exception {
-        ValidateResult response = module.validateAddress("435 Ericksen Ave", null, null, null, "NE", null,
-                "98110", null, 0, null, null, TextCaseType.DEFAULT, false, false, testDate);
+        final BaseAddress address = new BaseAddress();
+        address.setLine1("435 Ericksen Ave");
+        address.setRegion("NE");
+        address.setPostalCode("98110");
+        address.setTaxRegionId(0);
 
+        ValidateResult response = module.validateAddress(address, TextCaseType.DEFAULT, false, false, testDate);
         assertNotNull(response);
         assertEquals("Bainbridge Island", response.getValidAddresses().getValidAddress().get(0).getCity());
     }
 
     @Test
     public void validateAnInvalidAddress() throws Exception {
-        ValidateResult response = module.validateAddress("SARLAZA", null, null, null, null, null,
-                null, null, 0, null, null, TextCaseType.DEFAULT, false, false, testDate);
+        final BaseAddress address = new BaseAddress();
+        address.setLine1("Sarlaza");
+        address.setTaxRegionId(0);
 
+        ValidateResult response = module.validateAddress(address, TextCaseType.DEFAULT, false, false, testDate);
         assertEquals(SeverityLevel.ERROR, response.getResultCode());
     }
 
