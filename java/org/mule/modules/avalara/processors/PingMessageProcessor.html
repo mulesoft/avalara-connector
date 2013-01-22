@@ -870,23 +870,12 @@ org.mule.api.lifecycle.Stoppable
           
           
           String</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/processors/AbstractConnectedProcessor.html#_avalaraAccountType">_avalaraAccountType</a></td>
+          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/processors/AbstractConnectedProcessor.html#_accountType">_accountType</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
       
     
       <tr class=" api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          protected
-          
-          
-          String</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/processors/AbstractConnectedProcessor.html#_avalaraLicenseType">_avalaraLicenseType</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class="alt-color api apilevel-" >
           <td class="jd-typecol"><nobr>
           protected
           
@@ -897,13 +886,24 @@ org.mule.api.lifecycle.Stoppable
       </tr>
       
     
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          protected
+          
+          
+          String</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/processors/AbstractConnectedProcessor.html#_licenseType">_licenseType</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
       <tr class=" api apilevel-" >
           <td class="jd-typecol"><nobr>
           protected
           
           
           Object</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/processors/AbstractConnectedProcessor.html#avalaraAccount">avalaraAccount</a></td>
+          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/processors/AbstractConnectedProcessor.html#account">account</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
       
@@ -914,7 +914,7 @@ org.mule.api.lifecycle.Stoppable
           
           
           Object</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/processors/AbstractConnectedProcessor.html#avalaraLicense">avalaraLicense</a></td>
+          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/processors/AbstractConnectedProcessor.html#client">client</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
       
@@ -925,7 +925,7 @@ org.mule.api.lifecycle.Stoppable
           
           
           Object</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/processors/AbstractConnectedProcessor.html#client">client</a></td>
+          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/processors/AbstractConnectedProcessor.html#license">license</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
       
@@ -1334,9 +1334,9 @@ From class
             Object</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/processors/AbstractConnectedProcessor.html#getAvalaraAccount()">getAvalaraAccount</a></span>()</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/processors/AbstractConnectedProcessor.html#getAccount()">getAccount</a></span>()</nobr>
         
-        <div class="jd-descrdiv">Retrieves avalaraAccount
+        <div class="jd-descrdiv">Retrieves account
  
 </div>
   
@@ -1345,26 +1345,6 @@ From class
 
 	 
     <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            Object</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/processors/AbstractConnectedProcessor.html#getAvalaraLicense()">getAvalaraLicense</a></span>()</nobr>
-        
-        <div class="jd-descrdiv">Retrieves avalaraLicense
- 
-</div>
-  
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1384,6 +1364,26 @@ From class
 
 
 	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Object</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/processors/AbstractConnectedProcessor.html#getLicense()">getLicense</a></span>()</nobr>
+        
+        <div class="jd-descrdiv">Retrieves license
+ 
+</div>
+  
+  </td></tr>
+
+
+	 
     <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
@@ -1394,9 +1394,9 @@ From class
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/processors/AbstractConnectedProcessor.html#setAvalaraAccount(java.lang.Object)">setAvalaraAccount</a></span>(Object value)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/processors/AbstractConnectedProcessor.html#setAccount(java.lang.Object)">setAccount</a></span>(Object value)</nobr>
         
-        <div class="jd-descrdiv">Sets avalaraAccount</div>
+        <div class="jd-descrdiv">Sets account</div>
   
   </td></tr>
 
@@ -1412,9 +1412,9 @@ From class
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/processors/AbstractConnectedProcessor.html#setAvalaraLicense(java.lang.Object)">setAvalaraLicense</a></span>(Object value)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/processors/AbstractConnectedProcessor.html#setClient(java.lang.Object)">setClient</a></span>(Object value)</nobr>
         
-        <div class="jd-descrdiv">Sets avalaraLicense</div>
+        <div class="jd-descrdiv">Sets client</div>
   
   </td></tr>
 
@@ -1430,9 +1430,9 @@ From class
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/processors/AbstractConnectedProcessor.html#setClient(java.lang.Object)">setClient</a></span>(Object value)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/processors/AbstractConnectedProcessor.html#setLicense(java.lang.Object)">setLicense</a></span>(Object value)</nobr>
         
-        <div class="jd-descrdiv">Sets client</div>
+        <div class="jd-descrdiv">Sets license</div>
   
   </td></tr>
 
