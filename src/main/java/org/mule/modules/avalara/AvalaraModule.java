@@ -136,7 +136,7 @@ public class AvalaraModule
      *  <li>companyCode Client application company reference code</li>
      *  <li>docType The document type specifies the category of the document and affects
      *                how the document is treated after a tax calculation; see
-     *                {@link AvalaraDocumentType} for more information about the specific
+     *                {@link DocumentType} for more information about the specific
      *                document types.</li>
      *  <li>docCode The internal reference code used by the client application.</li>
      *  <li>docDate Date of invoice, purchase order, etc.</li>
@@ -176,7 +176,7 @@ public class AvalaraModule
      *                      line entries.</li>
      *  <li>lines Collection of invoice lines requiring tax calculation.</li>
      *  <li>detailLevel Specifies the level of tax detail to return</li>
-     *  <li>referenceCode For returns (see {@link AvalaraDocumentType}), refers to the
+     *  <li>referenceCode For returns (see {@link DocumentType}), refers to the
      *                      {@link GetTaxRequest#getDocCode} of the original invoice.</li>
      *  <li>locationCode Location Code value. It is Also referred to as a Store
      *                     Location, Outlet Id, or Outlet code is a number assigned by
@@ -221,7 +221,7 @@ public class AvalaraModule
      *  <li>companyCode Client application company reference code</li>
      *  <li>docType The document type specifies the category of the document and affects
      *                how the document is treated after a tax calculation; see
-     *                {@link AvalaraDocumentType} for more information about the specific
+     *                {@link DocumentType} for more information about the specific
      *                document types.</li>
      *  <li>docCode The internal reference code used by the client application.</li>
      *  <li>docDate Date of invoice, purchase order, etc.</li>
@@ -261,7 +261,7 @@ public class AvalaraModule
      *                      line entries.</li>
      *  <li>lines Collection of invoice lines requiring tax calculation.</li>
      *  <li>detailLevel Specifies the level of tax detail to return</li>
-     *  <li>referenceCode For returns (see {@link AvalaraDocumentType}), refers to the
+     *  <li>referenceCode For returns (see {@link DocumentType}), refers to the
      *                      {@link GetTaxRequest#getDocCode} of the original invoice.</li>
      *  <li>locationCode Location Code value. It is Also referred to as a Store
      *                     Location, Outlet Id, or Outlet code is a number assigned by
@@ -312,7 +312,7 @@ public class AvalaraModule
      *                this is not needed.</li>
      *  <li>docType The document type specifies the category of the document and affects
      *                how the document is treated after a tax calculation; see 
-     *                {@link AvalaraDocumentType} for more information about the specific 
+     *                {@link DocumentType} for more information about the specific
      *                document types.</li>
      *  <li>docCode The internal reference code used by the client application.</li>
      *  <li>docDate The date on the invoice, purchase order, etc</li>
@@ -352,7 +352,7 @@ public class AvalaraModule
      *                    this is not needed.</li>
      *  <li>docType The document type specifies the category of the document and affects
      *                how the document is treated after a tax calculation; see 
-     *                {@link AvalaraDocumentType} for more information about the specific 
+     *                {@link DocumentType} for more information about the specific
      *                document types.</li>
      *  <li>docCode The internal reference code used by the client application.</li>
      *  <li>newDocCode The new document code value.</li>
@@ -381,10 +381,10 @@ public class AvalaraModule
      *                    this is not needed.</li>
      *  <li>docType The document type specifies the category of the document and affects
      *                how the document is treated after a tax calculation; see 
-     *                {@link AvalaraDocumentType} for more information about the specific 
+     *                {@link DocumentType} for more information about the specific
      *                document types.</li>
      *  <li>docCode The internal reference code used by the client application.</li>
-     *  <li>detailLevel Specifies the level of detail to return. See {@link DetailLevelType}.</li>
+     *  <li>detailLevel Specifies the level of detail to return. See {@link DetailLevel}.</li>
      * </ul>
      * 
      * @return The {@link GetTaxHistoryResult}
@@ -409,7 +409,7 @@ public class AvalaraModule
      *                    this is not needed.</li>
      *  <li>docType The document type specifies the category of the document and affects
      *                how the document is treated after a tax calculation; see 
-     *                {@link AvalaraDocumentType} for more information about the specific 
+     *                {@link DocumentType} for more information about the specific
      *                document types.</li>
      *  <li>docCode The internal reference code used by the client application.</li>
      *  <li>cancelCode A code indicating the reason the document is getting canceled.</li>
