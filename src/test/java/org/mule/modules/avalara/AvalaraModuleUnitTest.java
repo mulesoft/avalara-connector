@@ -16,8 +16,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mule.modules.avalara.api.AvalaraClient;
 
-public class AvalaraModuleUnitTest
-{
+public class AvalaraModuleUnitTest {
     private AvalaraModule module;
     private AvalaraClient clientMock;
 
@@ -33,20 +32,5 @@ public class AvalaraModuleUnitTest
         module.ping("hello world");
         verify(clientMock).ping(eq("hello world"));
     }
-
-//    @Test
-//    public void testGetTax()
-//    {
-//        module.getTax(companyCode, docType, docCode, docDate, salespersonCode, customerCode,
-//            customerUsageType, discount, purchaseOrderNo, exemptionNo, originCode, destinationCode,
-//            baseAddresses, lines, detailLevel, referenceCode, locationCode, commit, batchCode, taxOverride,
-//            currencyCode, serviceMode, paymentDate, exchangeRate, exchangeRateEffDate);
-//    }
-//
-//    @Test
-//    public void testPostTax()
-//    {
-//        module.postTax(docId, companyCode, docType, docCode, docDate, totalAmount, totalTax, commit, newDocCode);
-//    }
 
 }
