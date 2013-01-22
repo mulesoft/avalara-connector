@@ -11,9 +11,7 @@
  */
 package org.mule.modules.avalara;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -133,7 +131,7 @@ public class AvalaraModule
      *
      * {@sample.xml ../../../doc/avalara-connector.xml.sample avalara:get-tax}
      * 
-     * @param getTaxRequest a {@link PostTaxRequest} to post. Its fields represent:
+     * @param getTaxRequest a {@link GetTaxRequest} to post. Its fields represent:
      * <ul>
      *  <li>companyCode Client application company reference code</li>
      *  <li>docType The document type specifies the category of the document and affects
