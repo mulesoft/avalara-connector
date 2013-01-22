@@ -92,12 +92,14 @@
                             docCode="#[variable:docCode]"
                             newDocCode="#[variable:newDocCode]"/>
         </avalara:commit-tax>
-        <avalara:get-tax-history 
+        <avalara:get-tax-history>
+            <avalara:get-tax-history-request
         						 docId="#[variable:docId]"
                                  companyCode="#[variable:companyCode]"
                                  docType="SALES_ORDER"
                                  docCode="#[variable:docCode]"
                                  detailLevel="TAX"/>
+        </avalara:get-tax-history>
         <avalara:cancel-tax>
             <avalara:cancel-tax-request
         					docId="#[variable:docId]"

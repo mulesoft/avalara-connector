@@ -197,12 +197,14 @@
 <!-- END_INCLUDE(avalara:commit-tax) -->
 
 <!-- BEGIN_INCLUDE(avalara:get-tax-history) -->
-<avalara:get-tax-history 
+<avalara:get-tax-history>
+    <avalara:get-tax-history-request
 						 docId="some document id"
                          companyCode="some company code"
                          docType="SALES_ORDER"
                          docCode="some document code"
                          detailLevel="DOCUMENT" />
+</avalara:get-tax-history>
 <!-- END_INCLUDE(avalara:get-tax-history) -->
 
 <!-- BEGIN_INCLUDE(avalara:cancel-tax) -->

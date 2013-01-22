@@ -45,6 +45,7 @@ import com.avalara.avatax.services.CancelTaxRequest;
 import com.avalara.avatax.services.CancelTaxResult;
 import com.avalara.avatax.services.DetailLevel;
 import com.avalara.avatax.services.DocumentType;
+import com.avalara.avatax.services.GetTaxHistoryRequest;
 import com.avalara.avatax.services.GetTaxHistoryResult;
 import com.avalara.avatax.services.GetTaxRequest;
 import com.avalara.avatax.services.GetTaxResult;
@@ -251,8 +252,12 @@ public class AvalaraTestDriver {
         assertEquals(SeverityLevel.SUCCESS, cancelResult.getResultCode());
         // Check tax history
 
-        GetTaxHistoryResult taxHistoryResult = module.getTaxHistory(null, "TC",
-                AvalaraDocumentType.SALES_INVOICE, oldDocCode, DetailLevelType.TAX);
+        final GetTaxHistoryRequest getTaxHistoryRequest = new GetTaxHistoryRequest();
+        getTaxHistoryRequest.setCompanyCode("TC");
+        getTaxHistoryRequest.setDocType(DocumentType.SALES_INVOICE);
+        getTaxHistoryRequest.setDocCode(oldDocCode);
+        getTaxHistoryRequest.setDetailLevel(DetailLevel.TAX);
+        GetTaxHistoryResult taxHistoryResult = module.getTaxHistory(getTaxHistoryRequest);
 
         assertEquals(SeverityLevel.SUCCESS, taxHistoryResult.getResultCode());
         GetTaxRequest historyTaxRequest = taxHistoryResult.getGetTaxRequest();

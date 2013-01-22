@@ -35,10 +35,11 @@
 			</scripting:script>
 		</scripting:transformer>
 
-		<avalara:get-tax-history config-ref="avalara-config"
+		<avalara:get-tax-history config-ref="avalara-config">
+		  <avalara:get-tax-history-request
 				  companyCode="TC"
 		          docType="#[map-payload:docType]" docCode="abc123" detailLevel="#[map-payload:detLevel]" />
-		
+		</avalra:get-tax-history>
 		<logger message="Result from Avalara = #[payload]" level="INFO" />
 	</flow>
 </mule>

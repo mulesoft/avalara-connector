@@ -9,17 +9,12 @@
 package org.mule.modules.avalara;
 
 import static org.mockito.Matchers.eq;
-import static org.mockito.Matchers.refEq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mule.modules.avalara.api.AvalaraClient;
-
-import com.avalara.avatax.services.DetailLevel;
-import com.avalara.avatax.services.DocumentType;
-import com.avalara.avatax.services.GetTaxHistoryRequest;
 
 public class AvalaraModuleUnitTest
 {
@@ -54,16 +49,4 @@ public class AvalaraModuleUnitTest
 //        module.postTax(docId, companyCode, docType, docCode, docDate, totalAmount, totalTax, commit, newDocCode);
 //    }
 
-    @Test
-    public void testGetTaxHistory() {
-        module.getTaxHistory(null, "Mule", AvalaraDocumentType.PURCHASE_ORDER, null,
-            DetailLevelType.DIAGNOSTIC);
-        
-        GetTaxHistoryRequest getTaxRequest = new GetTaxHistoryRequest() { {
-            companyCode = "Mule";
-            detailLevel = DetailLevel.DIAGNOSTIC;
-            docType = DocumentType.PURCHASE_ORDER;
-        } };
-        verify(clientMock).sendToAvalara(eq(TaxRequestType.GetTaxHistory), refEq(getTaxRequest));
-    }
 }
