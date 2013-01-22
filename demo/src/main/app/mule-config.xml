@@ -30,7 +30,7 @@
        >
 
    <zuora:config username="${zuoraUsername}" password="${zuoraPassword}" endpoint="https://apisandbox.zuora.com/apps/services/a/29.0" name="zuora-config" />
-   <avalara:config avalaraAccount="${avalaraAccount}" avalaraLicense="${avalaraLicense}" client="${avalaraClient}" name="avalara-config"/>
+   <avalara:config account="${avalaraAccount}" license="${avalaraLicense}" client="${avalaraClient}" name="avalara-config"/>
 
    <flow name="GetTaxes">
     <description>

@@ -567,15 +567,15 @@ public class AvalaraModule
     /**
      * Connects to Avalara
      *
-     * @param avalaraAccount Registered Avalara account
+     * @param account Registered Avalara account
      * @param client Target client to which make the call
-     * @param avalaraLicense The matching license for the account
+     * @param license The matching license for the account
      */
     @Connect
-    public synchronized void connect(@ConnectionKey String avalaraAccount, @ConnectionKey String client, @Password String avalaraLicense)
+    public synchronized void connect(@ConnectionKey String account, @ConnectionKey String client, @Password String license)
             throws ConnectionException {
         if (apiClient == null ) {
-            apiClient = new DefaultAvalaraClient(avalaraAccount, client, avalaraLicense, getAddressServiceEndpoint(), getTaxServiceEndpoint());
+            apiClient = new DefaultAvalaraClient(account, client, license, getAddressServiceEndpoint(), getTaxServiceEndpoint());
         }
     }
 
