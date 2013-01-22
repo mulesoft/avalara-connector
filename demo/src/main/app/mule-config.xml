@@ -132,24 +132,31 @@
                  serviceMode="AUTOMATIC"
                  paymentDate-ref="#[groovy: message.getInvocationProperty('dueDate')]"
                  exchangeRate="0"
-                 exchangeRateEffDate-ref="#[groovy: message.getInvocationProperty('dueDate')]">
-                 addresses-ref="#[groovy: [
-              [ 'addressCode' : 'Origin' ,
-                'line1' : 'Avalara' ,
-                'line2' : '900 Winslow Way' ,
-                'line3' : 'Suite 100' ,
-                'city' : 'Bainbridge Island' ,
-                'region' : 'WA' ,
-                'postalCode' : '98110' ,
-                'country' : 'USA' ] ,
-              [ 'addressCode' : 'Dest' ,
-                'line1' : '3130 Elliott' ,
-                'city' : 'Seattle' ,
-                'region' : 'WA' ,
-                'postalCode' : '98121' ,
-                'country' : 'USA' ]
-          ] ]"
+                 exchangeRateEffDate-ref="#[groovy: message.getInvocationProperty('dueDate')]"
                  lines-ref="#[payload]" />
+                 <avalara:addresses>
+            <avalara:base-address>
+                <avalara:base-addres
+                    addressCode="Origin"
+                    line1="Avalara"
+                    line2="900 Winslow Way"
+                    line3="Suite 100"
+                    city="Bainbridge Island"
+                    region="WA"
+                    postalCode="98110"
+                    country="USA"
+                />
+                <avalara:base-addres
+                    addressCode="Dest"
+                    line1="3130 Elliott"
+                    city="Seattle"
+                    region="WA"
+                    postalCode="98121"
+                    country="USA"
+                />
+            </avalara:base-address>
+            </avalara:addresses>
+            </avalara:get-tax-request>
       </avalara:get-tax>
   </flow>
 
