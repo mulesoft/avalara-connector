@@ -13,10 +13,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.List;
 import java.util.Map;
 
 import javax.xml.datatype.DatatypeConfigurationException;
@@ -26,14 +24,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import org.junit.Before;
 import org.junit.Test;
 import org.mule.api.ConnectionException;
-import org.mule.api.annotations.param.Optional;
-import org.mule.modules.avalara.AvalaraDocumentType;
 import org.mule.modules.avalara.AvalaraModule;
 import org.mule.modules.avalara.BatchType;
-import org.mule.modules.avalara.DetailLevelType;
-import org.mule.modules.avalara.ServiceModeType;
 import org.mule.modules.avalara.TextCaseType;
-import org.mule.modules.avalara.api.MapBuilder;
 
 import com.avalara.avatax.services.AdjustTaxResult;
 import com.avalara.avatax.services.ArrayOfBaseAddress;
@@ -95,127 +88,12 @@ public class AvalaraTestDriver {
     }
 
     private GetTaxResult getTaxResultElement(String docCode) {
-        final GetTaxRequest getTaxRequest = new GetTaxRequest();
-        getTaxRequest.setCompanyCode("TC");
-        getTaxRequest.setDocType(DocumentType.SALES_INVOICE);
-        getTaxRequest.setDocCode(docCode);
-        getTaxRequest.setDocDate(testDate);
-        getTaxRequest.setCustomerCode("customer Code");
-        getTaxRequest.setDiscount(BigDecimal.ZERO);
-        getTaxRequest.setOriginCode("Origin");
-        getTaxRequest.setDestinationCode("Dest");
-
-        final BaseAddress address1 = new BaseAddress();
-        address1.setAddressCode("Origin");
-        address1.setLine1("Avalara");
-        address1.setLine2("900 Winslow Way");
-        address1.setLine3("Suite 100");
-        address1.setCity("Bainbridge Island");
-        address1.setRegion("WA");
-        address1.setPostalCode("98110");
-        address1.setCountry("USA");
-
-        final BaseAddress address2 = new BaseAddress();
-        address2.setAddressCode("Dest");
-        address2.setLine1("3130 Elliott");
-        address2.setCity("Seattle");
-        address2.setRegion("WA");
-        address2.setPostalCode("98121");
-        address2.setCountry("USA");
-
-        final ArrayOfBaseAddress addresses = new ArrayOfBaseAddress();
-        addresses.getBaseAddress().add(address1);
-        addresses.getBaseAddress().add(address2);
-
-        getTaxRequest.setAddresses(addresses);
-
-        final Line line1 = new Line();
-        line1.setNo("001");
-        line1.setItemCode("ITEM CODE 1");
-        line1.setQty(BigDecimal.ONE);
-        line1.setAmount(BigDecimal.valueOf(4000));
-        line1.setDiscounted(false);
-        line1.setDescription("item number 1");
-        line1.setTaxIncluded(false);
-
-        final Line line2 = new Line();
-        line2.setNo("002");
-        line2.setItemCode("ITEM CODE 2");
-        line2.setQty(BigDecimal.ONE);
-        line2.setAmount(BigDecimal.valueOf(1000));
-        line2.setDiscounted(false);
-        line2.setDescription("item number 2");
-        line2.setTaxIncluded(false);
-
-        final ArrayOfLine lines = new ArrayOfLine();
-        lines.getLine().add(line1);
-        lines.getLine().add(line2);
-        getTaxRequest.setLines(lines);
-
-        getTaxRequest.setDetailLevel(DetailLevel.DOCUMENT);
-        getTaxRequest.setLocationCode("Test LocationCode");
-        getTaxRequest.setCommit(false);
-        getTaxRequest.setServiceMode(ServiceMode.AUTOMATIC);
-        getTaxRequest.setPaymentDate(testDate);
-        getTaxRequest.setExchangeRate(BigDecimal.ZERO);
-        getTaxRequest.setExchangeRateEffDate(testDate);
-
+        final GetTaxRequest getTaxRequest = createGetTaxRequest(docCode);
         return module.getTax(getTaxRequest);
     }
 
     private AdjustTaxResult adjustTax(String docCode) {
-        @SuppressWarnings("serial")
-        List<Map<String, Object>> addresses = new ArrayList<Map<String, Object>>() {
-            {
-                add(new MapBuilder()
-                        .with("addressCode", "Origin")
-                        .with("line1", "Avalara")
-                        .with("line2", "900 Winslow Way")
-                        .with("line3", "Suite 100")
-                        .with("city", "Bainbridge Island")
-                        .with("region", "WA")
-                        .with("postalCode", "98110")
-                        .with("country", "USA")
-                        .build());
-                add(new MapBuilder()
-                        .with("addressCode", "Dest")
-                        .with("line1", "3130 Elliott")
-                        .with("city", "Seattle")
-                        .with("region", "WA")
-                        .with("postalCode", "98121")
-                        .with("country", "USA")
-                        .build());
-            }
-        };
-
-        @SuppressWarnings("serial")
-        List<Map<String, Object>> lines = new ArrayList<Map<String, Object>>() {
-            {
-                add(new MapBuilder()
-                        .with("no", "001")
-                        .with("itemCode", "ITEM CODE 1")
-                        .with("qty", 1)
-                        .with("amount", 4000)
-                        .with("discounted", false)
-                        .with("description", "item number 1")
-                        .with("taxIncluded", false)
-                        .build());
-                add(new MapBuilder()
-                        .with("no", "002")
-                        .with("itemCode", "ITEM CODE 1")
-                        .with("qty", 1)
-                        .with("amount", 1000)
-                        .with("discounted", false)
-                        .with("description", "item number 1")
-                        .with("taxIncluded", false)
-                        .build());
-            }
-        };
-
-        return module.adjustTax(1, "some reason", "TC", AvalaraDocumentType.SALES_INVOICE, docCode, testDate,
-                null, "cusomer Code", null, "0", null, null, "Origin", "Dest", addresses,
-                lines, DetailLevelType.DOCUMENT, null, "Test LocationCode", false, null,
-                null, null, ServiceModeType.AUTOMATIC, testDate, "0", testDate);
+        return module.adjustTax(1, "some reason", createGetTaxRequest(docCode));
     }
 
     @Test
@@ -330,5 +208,73 @@ public class AvalaraTestDriver {
     public void isBatchFinished() throws Exception {
         boolean isFinished = module.isBatchFinished("129275");
         assertTrue(isFinished);
+    }
+
+    private GetTaxRequest createGetTaxRequest(final String docCode) {
+        final GetTaxRequest getTaxRequest = new GetTaxRequest();
+        getTaxRequest.setCompanyCode("TC");
+        getTaxRequest.setDocType(DocumentType.SALES_INVOICE);
+        getTaxRequest.setDocCode(docCode);
+        getTaxRequest.setDocDate(testDate);
+        getTaxRequest.setCustomerCode("customer Code");
+        getTaxRequest.setDiscount(BigDecimal.ZERO);
+        getTaxRequest.setOriginCode("Origin");
+        getTaxRequest.setDestinationCode("Dest");
+
+        final BaseAddress address1 = new BaseAddress();
+        address1.setAddressCode("Origin");
+        address1.setLine1("Avalara");
+        address1.setLine2("900 Winslow Way");
+        address1.setLine3("Suite 100");
+        address1.setCity("Bainbridge Island");
+        address1.setRegion("WA");
+        address1.setPostalCode("98110");
+        address1.setCountry("USA");
+
+        final BaseAddress address2 = new BaseAddress();
+        address2.setAddressCode("Dest");
+        address2.setLine1("3130 Elliott");
+        address2.setCity("Seattle");
+        address2.setRegion("WA");
+        address2.setPostalCode("98121");
+        address2.setCountry("USA");
+
+        final ArrayOfBaseAddress addresses = new ArrayOfBaseAddress();
+        addresses.getBaseAddress().add(address1);
+        addresses.getBaseAddress().add(address2);
+
+        getTaxRequest.setAddresses(addresses);
+
+        final Line line1 = new Line();
+        line1.setNo("001");
+        line1.setItemCode("ITEM CODE 1");
+        line1.setQty(BigDecimal.ONE);
+        line1.setAmount(BigDecimal.valueOf(4000));
+        line1.setDiscounted(false);
+        line1.setDescription("item number 1");
+        line1.setTaxIncluded(false);
+
+        final Line line2 = new Line();
+        line2.setNo("002");
+        line2.setItemCode("ITEM CODE 2");
+        line2.setQty(BigDecimal.ONE);
+        line2.setAmount(BigDecimal.valueOf(1000));
+        line2.setDiscounted(false);
+        line2.setDescription("item number 2");
+        line2.setTaxIncluded(false);
+
+        final ArrayOfLine lines = new ArrayOfLine();
+        lines.getLine().add(line1);
+        lines.getLine().add(line2);
+        getTaxRequest.setLines(lines);
+
+        getTaxRequest.setDetailLevel(DetailLevel.DOCUMENT);
+        getTaxRequest.setLocationCode("Test LocationCode");
+        getTaxRequest.setCommit(false);
+        getTaxRequest.setServiceMode(ServiceMode.AUTOMATIC);
+        getTaxRequest.setPaymentDate(testDate);
+        getTaxRequest.setExchangeRate(BigDecimal.ZERO);
+        getTaxRequest.setExchangeRateEffDate(testDate);
+        return getTaxRequest;
     }
 }

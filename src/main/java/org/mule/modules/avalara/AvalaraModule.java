@@ -216,72 +216,74 @@ public class AvalaraModule
      *
      * {@sample.xml ../../../doc/avalara-connector.xml.sample avalara:adjust-tax}
      *
-     * @param companyCode Client application company reference code
      * @param adjustmentReason The reason for this tax adjustment.
      * @param adjustmentDescription A description of a tax adjustment.
-     * @param docType The document type specifies the category of the document and affects
+     * @param getTaxRequest a {@link GetTaxRequest} representing the Tax to adjust. Its fields represent:
+     * <ul>
+     *  <li>companyCode Client application company reference code</li>
+     *  <li>docType The document type specifies the category of the document and affects
      *                how the document is treated after a tax calculation; see
      *                {@link AvalaraDocumentType} for more information about the specific
-     *                document types.
-     * @param docCode The internal reference code used by the client application.
-     * @param docDate Date of invoice, purchase order, etc.
-     * @param salespersonCode The client application salesperson reference code.
-     * @param customerCode Client application customer reference code
-     * @param customerUsageType Client application customer or usage type.
+     *                document types.</li>
+     *  <li>docCode The internal reference code used by the client application.</li>
+     *  <li>docDate Date of invoice, purchase order, etc.</li>
+     *  <li>salespersonCode The client application salesperson reference code.</li>
+     *  <li>customerCode Client application customer reference code.</li>
+     *  <li>customerUsageType Client application customer or usage type.
      *                          CustomerUsageType determines the exempt status of
      *                          the transaction based on the exemption tax rules for
      *                          the jurisdictions involved. CustomerUsageType may
-     *                          also be set at the line item level. <p>
-     *                          The standard values for the CustomerUsageType (A-L).<br/>
-    A Federal Government<br/>
-    B State/Local Govt.<br/>
-    C Tribal Government<br/>
-    D Foreign Diplomat<br/>
-    E Charitable Organization<br/>
-    F Religious/Education<br/>
-    G Resale<br/>
-    H Agricultural Production<br/>
-    I Industrial Prod/Mfg.<br/>
-    J Direct Pay Permit<br/>
-    K Direct Mail<br/>
-    L - Other
-     * @param discount The discount amount to apply to the document. The string
-     *                 represents a {@link BigDecimal}.
-     * @param purchaseOrderNo Purchase order identifier. PurchaseOrderNo is required
+     *                          also be set at the line item level.
+     *                          <p>The standard values for the CustomerUsageType (A-L).<br/>
+        A Federal Government<br/>
+        B State/Local Govt.<br/>
+        C Tribal Government<br/>
+        D Foreign Diplomat<br/>
+        E Charitable Organization<br/>
+        F Religious/Education<br/>
+        G Resale<br/>
+        H Agricultural Production<br/>
+        I Industrial Prod/Mfg.<br/>
+        J Direct Pay Permit<br/>
+        K Direct Mail<br/>
+        L - Other</li>
+     *  <li>discount The discount amount to apply to the document.</li>
+     *  <li>purchaseOrderNo Purchase order identifier. PurchaseOrderNo is required
      *                        for single use exemption certificates to match the
-     *                        order and invoice with the certificate.
-     * @param exemptionNo Exemption number used for this transaction
-     * @param originCode Code that refers one of the address of the baseAddress collection.
+     *                        order and invoice with the certificate.</li>
+     *  <li>exemptionNo Exemption number used for this transaction</li>
+     *  <li>originCode Code that refers one of the address of the baseAddress collection.
      *                   It has to be the same code of one of the address's addressCode.
-     *                   It represents the origin address.
-     * @param destinationCode Code that refers one of the address of the baseAddress collection.
+     *                   It represents the origin address.</li>
+     *  <li>destinationCode Code that refers one of the address of the baseAddress collection.
      *                        It has to be the same code of one of the address's addressCode.
-     *                        It represents the destination address.
-     * @param baseAddresses Collection of physical addresses that will be referred
+     *                        It represents the destination address.</li>
+     *  <li>baseAddresses Collection of physical addresses that will be referred
      *                      to as the destination or origination of 1 or more invoice
-     *                      line entries
-     * @param lines Collection of invoice lines requiring tax calculation
-     * @param detailLevel Specifies the level of tax detail to return
-     * @param referenceCode For returns (see {@link AvalaraDocumentType}), refers to the
-     *                      {@link AdjustTaxRequest} of the original invoice.
-     * @param locationCode Location Code value. It is Also referred to as a Store
+     *                      line entries.</li>
+     *  <li>lines Collection of invoice lines requiring tax calculation.</li>
+     *  <li>detailLevel Specifies the level of tax detail to return</li>
+     *  <li>referenceCode For returns (see {@link AvalaraDocumentType}), refers to the
+     *                      {@link GetTaxRequest#getDocCode} of the original invoice.</li>
+     *  <li>locationCode Location Code value. It is Also referred to as a Store
      *                     Location, Outlet Id, or Outlet code is a number assigned by
      *                     the State which identifies a Store location. Some state returns
-     *                     require taxes are broken out separately for Store Locations.
-     * @param commit Commit flag. If Commit is set to true, tax for the transaction
-     *               is saved, posted and committed as tax document.
-     * @param batchCode The batchCode value.
-     * @param taxOverride Indicates to apply tax override to the document.
-     * @param currencyCode It is 3 character ISO 4217 currency code.
-     * @param serviceMode This is only supported by AvaLocal servers. It provides the
+     *                     require taxes are broken out separately for Store Locations.</li>
+     *  <li>commit Commit flag. If Commit is set to true, tax for the transaction
+     *               is saved, posted and committed as tax document.</li>
+     *  <li>batchCode The batchCode value.</li>
+     *  <li>taxOverride Indicates to apply tax override to the document.</li>
+     *  <li>currencyCode It is 3 character ISO 4217 currency code.</li>
+     *  <li>serviceMode This is only supported by AvaLocal servers. It provides the
      *                    ability to controls whether tax is calculated locally or remotely
      *                    when using an AvaLocal server. The default is Automatic which
      *                    calculates locally unless remote is necessary for non-local
-     *                    addresses.
-     * @param paymentDate The date on which payment was made.
-     * @param exchangeRate The exchange rate value. The string represents a
-     *                     {@link BigDecimal}
-     * @param exchangeRateEffDate The exchange rate effective date value.
+     *                    addresses.</li>
+     *  <li>paymentDate The date on which payment was made.</li>
+     *  <li>exchangeRate The exchange rate value.</li>
+     *  <li>exchangeRateEffDate The exchange rate effective date value.</li>
+     * </ul>
+     *
      * @return The {@link AdjustTaxResult}
      *
      * @throws AvalaraRuntimeException
@@ -289,71 +291,7 @@ public class AvalaraModule
     @Processor
     public AdjustTaxResult adjustTax(int adjustmentReason,
                                      String   adjustmentDescription,
-                               String companyCode,
-                               AvalaraDocumentType docType,
-                               @Optional String docCode,
-                               XMLGregorianCalendar docDate,
-                               @Optional String salespersonCode,
-                               String customerCode,
-                               @Optional String customerUsageType,
-                               String discount,
-                               @Optional String purchaseOrderNo,
-                               @Optional String exemptionNo,
-                               String originCode,
-                               String destinationCode,
-                               List<Map<String, Object>> baseAddresses,
-                               List<Map<String, Object>> lines,
-                               DetailLevelType detailLevel,
-                               @Optional String referenceCode,
-                               @Optional String locationCode,
-                               @Optional @Default("false") boolean commit,
-                               @Optional String batchCode,
-                               @Optional Map<String, Object> taxOverride,
-                               @Optional String currencyCode,
-                               @Optional @Default("AUTOMATIC") ServiceModeType serviceMode,
-                               XMLGregorianCalendar paymentDate,
-                               String exchangeRate,
-                               XMLGregorianCalendar exchangeRateEffDate) {
-        BigDecimal discountDecimal = discount == null ? null :  new BigDecimal(discount);
-        BigDecimal exchangeRateDecimal = exchangeRate == null ? null :  new BigDecimal(exchangeRate);
-
-        Map<String, Object> addresses = null;
-        if (baseAddresses != null && !baseAddresses.isEmpty()) {
-            addresses = new HashMap<String, Object>();
-            addresses.put("baseAddress", baseAddresses);
-        }
-
-        Map<String, Object> mapLines = null;
-        if (lines != null && !lines.isEmpty()) {
-            mapLines = new HashMap<String, Object>();
-            mapLines.put("line", lines);
-        }
-        GetTaxRequest getTaxRequest = (GetTaxRequest) mom.unmap(new MapBuilder().with("companyCode", companyCode)
-                .with("docType", docType.toDocumentType())
-                .with("docCode", docCode)
-                .with("docDate", docDate)
-                .with("salespersonCode", salespersonCode)
-                .with("customerCode", customerCode)
-                .with("customerUsageType", customerUsageType)
-                .with("discount", discountDecimal)
-                .with("purchaseOrderNo", purchaseOrderNo)
-                .with("exemptionNo", exemptionNo)
-                .with("originCode", originCode)
-                .with("destinationCode", destinationCode)
-                .with("addresses", addresses)
-                .with("lines", mapLines)
-                .with("detailLevel", detailLevel.toAvalaraDetailLevel())
-                .with("referenceCode", referenceCode)
-                .with("locationCode", locationCode)
-                .with("commit", commit)
-                .with("batchCode", batchCode)
-                .with("taxOverride", taxOverride)
-                .with("currencyCode", currencyCode)
-                .with("serviceMode", serviceMode.toAvalaraServiceMode())
-                .with("paymentDate", paymentDate)
-                .with("exchangeRate", exchangeRateDecimal)
-                .with("exchangeRateEffDate", exchangeRateEffDate).build(), GetTaxRequest.class);
-
+                                     @Optional @Default("#[payload]") GetTaxRequest getTaxRequest) {
         return apiClient.sendToAvalara(TaxRequestType.AdjustTax, mom.unmap(
                 new MapBuilder()
                         .with("adjustmentReason", adjustmentReason)
@@ -363,7 +301,6 @@ public class AvalaraModule
                 )
             );
     }
-
 
     /**
      * Post Tax processor
