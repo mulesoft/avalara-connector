@@ -20,7 +20,7 @@
         http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
         http://www.mulesoft.org/schema/mule/avalara http://www.mulesoft.org/schema/mule/avalara/2.0/mule-avalara.xsd">
 
-        <avalara:config avalaraAccount="${avalaraAccount}" avalaraLicense="${avalaraLicense}" client="${avalaraClient}" name="avalara-config"/>
+        <avalara:config account="${avalaraAccount}" license="${avalaraLicense}" client="${avalaraClient}" name="avalara-config"/>
 
     <flow name="testFlow">
         <avalara:get-tax 
