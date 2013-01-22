@@ -22,15 +22,14 @@
         http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/3.2/mule-scripting.xsd
         http://www.mulesoft.org/schema/mule/avalara http://www.mulesoft.org/schema/mule/avalara/2.0/mule-avalara.xsd">
 
-    <avalara:config avalaraAccount="${avalaraAccount}" avalaraLicense="${avalaraLicense}" client="${avalaraClient}" name="avalara-config"/>
+    <avalara:config avalaraAccount="${avalaraAccount}" avalaraLicense="${avalaraLicense}" client="${client}" name="avalara-config"/>
 
     <flow name="main">
-        <!-- <vm:inbound-endpoint path="in" exchange-pattern="request-response" /> -->
         <scripting:transformer name="createprops">
 			<scripting:script engine="groovy"><![CDATA[
-							import org.mule.modules.avalara.AvalaraDocumentType;
-							import org.mule.modules.avalara.DetailLevelType;
-							return ['docType': AvalaraDocumentType.SALES_INVOICE, 'detLevel':DetailLevelType.TAX]
+							import com.avalara.avatax.services.DocumentType;
+							import com.avalara.avatax.services.DetailLevel;
+							return ['docType': DocumentType.SALES_INVOICE, 'detLevel':DetailLevel.TAX]
 							        ]]>
 			</scripting:script>
 		</scripting:transformer>
@@ -39,7 +38,7 @@
 		  <avalara:get-tax-history-request
 				  companyCode="TC"
 		          docType="#[map-payload:docType]" docCode="abc123" detailLevel="#[map-payload:detLevel]" />
-		</avalra:get-tax-history>
+		</avalara:get-tax-history>
 		<logger message="Result from Avalara = #[payload]" level="INFO" />
 	</flow>
 </mule>
