@@ -469,17 +469,17 @@ public class AvalaraModule
      * 
      * @param cancelTaxRequest a {@link CancelTaxRequest} to post. Its fields represent:
      * <ul>
-     *  <li></li>
-     * </ul>
-     * @param docId The original document's type, such as Sales Invoice or Purchase Invoice.
-     * @param companyCode Client application company reference code. If docId is specified, 
-     *                    this is not needed.
-     * @param docType The document type specifies the category of the document and affects
+     *  <li>docId The original document's type, such as Sales Invoice or Purchase Invoice.</li>
+     *  <li>companyCode Client application company reference code. If docId is specified, 
+     *                    this is not needed.</li>
+     *  <li>docType The document type specifies the category of the document and affects
      *                how the document is treated after a tax calculation; see 
      *                {@link AvalaraDocumentType} for more information about the specific 
-     *                document types.
-     * @param docCode The internal reference code used by the client application.
-     * @param cancelCode A code indicating the reason the document is getting canceled.
+     *                document types.</li>
+     *  <li>docCode The internal reference code used by the client application.</li>
+     *  <li>cancelCode A code indicating the reason the document is getting canceled.</li>
+     * </ul>
+     *
      * @return The {@link CancelTaxResult}
      * 
      * @throws AvalaraRuntimeException
