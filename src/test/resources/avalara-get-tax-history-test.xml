@@ -22,7 +22,7 @@
         http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/3.2/mule-scripting.xsd
         http://www.mulesoft.org/schema/mule/avalara http://www.mulesoft.org/schema/mule/avalara/2.0/mule-avalara.xsd">
 
-    <avalara:config account="${avalaraAccount}" license="${avalaraLicense}" client="${avalaraClient}" name="avalara-config"/>
+    <avalara:config account="${avalaraAccount}" license="${avalaraLicense}" avalaraClient="${avalaraClient}" name="avalara-config"/>
 
     <flow name="main">
         <scripting:transformer name="createprops">
