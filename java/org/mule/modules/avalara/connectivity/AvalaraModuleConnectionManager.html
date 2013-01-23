@@ -624,7 +624,7 @@ org.mule.api.lifecycle.Initialisable
           
           
           String</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/connectivity/AvalaraModuleConnectionManager.html#batchServiceEndpoint">batchServiceEndpoint</a></td>
+          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/connectivity/AvalaraModuleConnectionManager.html#avalaraClient">avalaraClient</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
       
@@ -635,7 +635,7 @@ org.mule.api.lifecycle.Initialisable
           
           
           String</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/connectivity/AvalaraModuleConnectionManager.html#client">client</a></td>
+          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/connectivity/AvalaraModuleConnectionManager.html#batchServiceEndpoint">batchServiceEndpoint</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
       
@@ -849,9 +849,9 @@ org.mule.api.lifecycle.Initialisable
             String</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/connectivity/AvalaraModuleConnectionManager.html#getBatchServiceEndpoint()">getBatchServiceEndpoint</a></span>()</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/connectivity/AvalaraModuleConnectionManager.html#getAvalaraClient()">getAvalaraClient</a></span>()</nobr>
         
-        <div class="jd-descrdiv">Retrieves batchServiceEndpoint
+        <div class="jd-descrdiv">Retrieves avalaraClient
  
 </div>
   
@@ -869,9 +869,9 @@ org.mule.api.lifecycle.Initialisable
             String</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/connectivity/AvalaraModuleConnectionManager.html#getClient()">getClient</a></span>()</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/connectivity/AvalaraModuleConnectionManager.html#getBatchServiceEndpoint()">getBatchServiceEndpoint</a></span>()</nobr>
         
-        <div class="jd-descrdiv">Retrieves client
+        <div class="jd-descrdiv">Retrieves batchServiceEndpoint
  
 </div>
   
@@ -1193,9 +1193,9 @@ org.mule.api.lifecycle.Initialisable
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/connectivity/AvalaraModuleConnectionManager.html#setBatchServiceEndpoint(java.lang.String)">setBatchServiceEndpoint</a></span>(String value)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/connectivity/AvalaraModuleConnectionManager.html#setAvalaraClient(java.lang.String)">setAvalaraClient</a></span>(String value)</nobr>
         
-        <div class="jd-descrdiv">Sets batchServiceEndpoint</div>
+        <div class="jd-descrdiv">Sets avalaraClient</div>
   
   </td></tr>
 
@@ -1211,9 +1211,9 @@ org.mule.api.lifecycle.Initialisable
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/connectivity/AvalaraModuleConnectionManager.html#setClient(java.lang.String)">setClient</a></span>(String value)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/connectivity/AvalaraModuleConnectionManager.html#setBatchServiceEndpoint(java.lang.String)">setBatchServiceEndpoint</a></span>(String value)</nobr>
         
-        <div class="jd-descrdiv">Sets client</div>
+        <div class="jd-descrdiv">Sets batchServiceEndpoint</div>
   
   </td></tr>
 
@@ -2193,7 +2193,7 @@ From interface
 
 
 
-<A NAME="batchServiceEndpoint"></A>
+<A NAME="avalaraClient"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -2203,7 +2203,7 @@ From interface
          
         String
       </span>
-        batchServiceEndpoint
+        avalaraClient
     </h4>
       <div class="api-level">
         
@@ -2223,7 +2223,7 @@ From interface
 
 
 
-<A NAME="client"></A>
+<A NAME="batchServiceEndpoint"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -2233,7 +2233,7 @@ From interface
          
         String
       </span>
-        client
+        batchServiceEndpoint
     </h4>
       <div class="api-level">
         
@@ -2692,6 +2692,39 @@ From interface
 </div>
 
 
+<A NAME="getAvalaraClient()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        String
+      </span>
+      <span class="sympad">getAvalaraClient</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Retrieves avalaraClient
+ 
+</p></div>
+
+    </div>
+</div>
+
+
 <A NAME="getBatchServiceEndpoint()"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -2718,39 +2751,6 @@ From interface
     <div class="jd-details-descr">
       
   <div class="jd-tagdata jd-tagdescr"><p>Retrieves batchServiceEndpoint
- 
-</p></div>
-
-    </div>
-</div>
-
-
-<A NAME="getClient()"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        String
-      </span>
-      <span class="sympad">getClient</span>
-      <span class="normal">()</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Retrieves client
  
 </p></div>
 
@@ -3350,6 +3350,47 @@ From interface
 </div>
 
 
+<A NAME="setAvalaraClient(java.lang.String)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">setAvalaraClient</span>
+      <span class="normal">(String value)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Sets avalaraClient</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>value</td>
+          <td>Value to set
+</td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
 <A NAME="setBatchServiceEndpoint(java.lang.String)"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -3376,47 +3417,6 @@ From interface
     <div class="jd-details-descr">
       
   <div class="jd-tagdata jd-tagdescr"><p>Sets batchServiceEndpoint</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>value</td>
-          <td>Value to set
-</td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setClient(java.lang.String)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setClient</span>
-      <span class="normal">(String value)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Sets client</p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">
