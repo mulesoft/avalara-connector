@@ -529,9 +529,6 @@ public class AvalaraModule
      *
      * {@sample.xml ../../../doc/avalara-connector.xml.sample avalara:save-batch}
      *
-     * @param consoleUserName The username that is used to login to the Avalara console (UI).
-     * @param consolePassword The password that is used to login to the Avalara console (UI).
-     * @param avalaraClient Avalara's client
      * @param batchType The kind of records to be imported.
      * @param companyId The id of the company. (Need to be retrived from address bar in Avalara after hitting the Organization Tab)
      * @param content The content of this import, usually a csv file.
