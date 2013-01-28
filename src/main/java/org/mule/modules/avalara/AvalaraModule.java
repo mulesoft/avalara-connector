@@ -446,7 +446,7 @@ public class AvalaraModule
                                           @Optional @Default("DEFAULT") TextCaseType textCase,
                                           @Optional @Default("false") boolean coordinates,
                                           @Optional @Default("false") boolean taxability,
-                                          XMLGregorianCalendar date) {
+                                          @Optional XMLGregorianCalendar date) {
         return apiClient.validateAddress((ValidateRequest) mom.unmap( 
                 new MapBuilder()
                 .with("address", address)
