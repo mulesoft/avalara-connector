@@ -739,7 +739,7 @@ public class AvalaraModule
     /**
      * Batch Save processor.
      * <p>
-     * Saves a Batch
+     * Saves a Batch. Note that you should pass-in your console credentials for this method, instead of the API ones
      *
      * {@sample.xml ../../../doc/avalara-connector.xml.sample avalara:save-batch}
      *
@@ -751,7 +751,6 @@ public class AvalaraModule
      *
      * @throws AvalaraRuntimeException
      */
-
     @Processor
     public BatchSaveResult saveBatch(BatchType batchType,
                                        int companyId,
