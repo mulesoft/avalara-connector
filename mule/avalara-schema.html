@@ -1343,40 +1343,26 @@ Saves a Batch. Note that you should pass-in your console credentials for this me
       &lt;/xs:extension&gt;
     &lt;/xs:complexContent&gt;
   &lt;/xs:complexType&gt;
-  &lt;xs:simpleType name=&quot;DetailLevelTypeEnumType&quot;&gt;
+  &lt;xs:simpleType name=&quot;TextCaseTypeEnumType&quot;&gt;
     &lt;xs:annotation&gt;
-      &lt;xs:documentation&gt;In a GetTaxRequest (or GetTaxHistoryRequest) the DetailLevel specifies the level
-of tax detail to return to the client application following a tax calculation.&lt;/xs:documentation&gt;
+      &lt;xs:documentation&gt;The casing to apply to the valid address(es) returned in the validation result.&lt;/xs:documentation&gt;
     &lt;/xs:annotation&gt;
     &lt;xs:union&gt;
       &lt;xs:simpleType&gt;
         &lt;xs:restriction base=&quot;xs:string&quot;&gt;
-          &lt;xs:enumeration value=&quot;DOCUMENT&quot;&gt;
+          &lt;xs:enumeration value=&quot;DEFAULT&quot;&gt;
             &lt;xs:annotation&gt;
-              &lt;xs:documentation&gt;Document (GetTaxResult) level details; TaxLines will not be returned.&lt;/xs:documentation&gt;
+              &lt;xs:documentation&gt;Default casing for the account.&lt;/xs:documentation&gt;
             &lt;/xs:annotation&gt;
           &lt;/xs:enumeration&gt;
-          &lt;xs:enumeration value=&quot;SUMMARY&quot;&gt;
+          &lt;xs:enumeration value=&quot;UPPER&quot;&gt;
             &lt;xs:annotation&gt;
-              &lt;xs:documentation&gt;Reserved for future use.&lt;/xs:documentation&gt;
+              &lt;xs:documentation&gt;Upper case.&lt;/xs:documentation&gt;
             &lt;/xs:annotation&gt;
           &lt;/xs:enumeration&gt;
-          &lt;xs:enumeration value=&quot;LINE&quot;&gt;
+          &lt;xs:enumeration value=&quot;MIXED&quot;&gt;
             &lt;xs:annotation&gt;
-              &lt;xs:documentation&gt;Line level details (includes Document details). TaxLines will be returned
-but TaxDetails will not be returned.&lt;/xs:documentation&gt;
-            &lt;/xs:annotation&gt;
-          &lt;/xs:enumeration&gt;
-          &lt;xs:enumeration value=&quot;TAX&quot;&gt;
-            &lt;xs:annotation&gt;
-              &lt;xs:documentation&gt;Tax jurisdiction level details (includes Document, TaxLines, and TaxDetails)&lt;/xs:documentation&gt;
-            &lt;/xs:annotation&gt;
-          &lt;/xs:enumeration&gt;
-          &lt;xs:enumeration value=&quot;DIAGNOSTIC&quot;&gt;
-            &lt;xs:annotation&gt;
-              &lt;xs:documentation&gt;In addition to Tax level details, indicates that the server should return
-information about how the tax was calculated. Intended for use only while
-the SDK is in a development environment.&lt;/xs:documentation&gt;
+              &lt;xs:documentation&gt;Mixed case.&lt;/xs:documentation&gt;
             &lt;/xs:annotation&gt;
           &lt;/xs:enumeration&gt;
         &lt;/xs:restriction&gt;
@@ -1422,58 +1408,6 @@ is treated after a tax calculation. Specified when constructing a .&lt;/xs:docum
           &lt;xs:enumeration value=&quot;DOCUMENT_IMPORT&quot;&gt;
             &lt;xs:annotation&gt;
               &lt;xs:documentation&gt;Reserved for future use.&lt;/xs:documentation&gt;
-            &lt;/xs:annotation&gt;
-          &lt;/xs:enumeration&gt;
-        &lt;/xs:restriction&gt;
-      &lt;/xs:simpleType&gt;
-      &lt;xs:simpleType&gt;
-        &lt;xs:restriction xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; base=&quot;mule:propertyPlaceholderType&quot;&gt;&lt;/xs:restriction&gt;
-      &lt;/xs:simpleType&gt;
-    &lt;/xs:union&gt;
-  &lt;/xs:simpleType&gt;
-  &lt;xs:simpleType name=&quot;AvalaraDocumentTypeEnumType&quot;&gt;
-    &lt;xs:annotation&gt;
-      &lt;xs:documentation&gt;The document type specifies the category of the document and affects how the document
-is treated after a tax calculation. Specified when constructing a .&lt;/xs:documentation&gt;
-    &lt;/xs:annotation&gt;
-    &lt;xs:union&gt;
-      &lt;xs:simpleType&gt;
-        &lt;xs:restriction base=&quot;xs:string&quot;&gt;
-          &lt;xs:enumeration value=&quot;SALES_ORDER&quot;&gt;
-            &lt;xs:annotation&gt;
-              &lt;xs:documentation&gt;Sales Order, estimate or quote. This is a temporary document type and is not saved in tax history.
- will return with a  of &amp;lt;b&amp;gt;Temporary&amp;lt;/b&amp;gt;.&lt;/xs:documentation&gt;
-            &lt;/xs:annotation&gt;
-          &lt;/xs:enumeration&gt;
-          &lt;xs:enumeration value=&quot;SALES_INVOICE&quot;&gt;
-            &lt;xs:annotation&gt;
-              &lt;xs:documentation&gt;The document is a permanent invoice; document and tax calculation results are saved in the tax history.
- will return with a  of &amp;lt;b&amp;gt;Saved&amp;lt;/b&amp;gt;&lt;/xs:documentation&gt;
-            &lt;/xs:annotation&gt;
-          &lt;/xs:enumeration&gt;
-          &lt;xs:enumeration value=&quot;PURCHASE_ORDER&quot;&gt;
-            &lt;xs:annotation&gt;
-              &lt;xs:documentation&gt;Purchase order, estimate, or quote. This is a temporary document type and is not saved in tax history.
- will return with a  of &amp;lt;b&amp;gt;Temporary&amp;lt;/b&amp;gt;.&lt;/xs:documentation&gt;
-            &lt;/xs:annotation&gt;
-          &lt;/xs:enumeration&gt;
-          &lt;xs:enumeration value=&quot;PURCHASE_INVOICE&quot;&gt;
-            &lt;xs:annotation&gt;
-              &lt;xs:documentation&gt;The document is a permanent invoice; document and tax calculation results are saved in the tax history.
- will return with a  of &amp;lt;b&amp;gt;Saved&amp;lt;/b&amp;gt;.&lt;/xs:documentation&gt;
-            &lt;/xs:annotation&gt;
-          &lt;/xs:enumeration&gt;
-          &lt;xs:enumeration value=&quot;RETURN_ORDER&quot;&gt;
-            &lt;xs:annotation&gt;
-              &lt;xs:documentation&gt;Sales Return Order. This is a temporary document type and is not saved in tax history.
- will return with a  of &amp;lt;b&amp;gt;Temporary&amp;lt;/b&amp;gt;.&lt;/xs:documentation&gt;
-            &lt;/xs:annotation&gt;
-          &lt;/xs:enumeration&gt;
-          &lt;xs:enumeration value=&quot;RETURN_INVOICE&quot;&gt;
-            &lt;xs:annotation&gt;
-              &lt;xs:documentation&gt;The document is a permanent sales return invoice; document and tax calculation results are
-saved in the tax history  will return with a 
-of &amp;lt;b&amp;gt;Saved&amp;lt;/b&amp;gt;.&lt;/xs:documentation&gt;
             &lt;/xs:annotation&gt;
           &lt;/xs:enumeration&gt;
         &lt;/xs:restriction&gt;
@@ -1537,26 +1471,92 @@ and retained for historical records;  If the document was not committed,
       &lt;/xs:simpleType&gt;
     &lt;/xs:union&gt;
   &lt;/xs:simpleType&gt;
-  &lt;xs:simpleType name=&quot;TextCaseTypeEnumType&quot;&gt;
+  &lt;xs:simpleType name=&quot;DetailLevelTypeEnumType&quot;&gt;
     &lt;xs:annotation&gt;
-      &lt;xs:documentation&gt;The casing to apply to the valid address(es) returned in the validation result.&lt;/xs:documentation&gt;
+      &lt;xs:documentation&gt;In a GetTaxRequest (or GetTaxHistoryRequest) the DetailLevel specifies the level
+of tax detail to return to the client application following a tax calculation.&lt;/xs:documentation&gt;
     &lt;/xs:annotation&gt;
     &lt;xs:union&gt;
       &lt;xs:simpleType&gt;
         &lt;xs:restriction base=&quot;xs:string&quot;&gt;
-          &lt;xs:enumeration value=&quot;DEFAULT&quot;&gt;
+          &lt;xs:enumeration value=&quot;DOCUMENT&quot;&gt;
             &lt;xs:annotation&gt;
-              &lt;xs:documentation&gt;Default casing for the account.&lt;/xs:documentation&gt;
+              &lt;xs:documentation&gt;Document (GetTaxResult) level details; TaxLines will not be returned.&lt;/xs:documentation&gt;
             &lt;/xs:annotation&gt;
           &lt;/xs:enumeration&gt;
-          &lt;xs:enumeration value=&quot;UPPER&quot;&gt;
+          &lt;xs:enumeration value=&quot;SUMMARY&quot;&gt;
             &lt;xs:annotation&gt;
-              &lt;xs:documentation&gt;Upper case.&lt;/xs:documentation&gt;
+              &lt;xs:documentation&gt;Reserved for future use.&lt;/xs:documentation&gt;
             &lt;/xs:annotation&gt;
           &lt;/xs:enumeration&gt;
-          &lt;xs:enumeration value=&quot;MIXED&quot;&gt;
+          &lt;xs:enumeration value=&quot;LINE&quot;&gt;
             &lt;xs:annotation&gt;
-              &lt;xs:documentation&gt;Mixed case.&lt;/xs:documentation&gt;
+              &lt;xs:documentation&gt;Line level details (includes Document details). TaxLines will be returned
+but TaxDetails will not be returned.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+          &lt;xs:enumeration value=&quot;TAX&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Tax jurisdiction level details (includes Document, TaxLines, and TaxDetails)&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+          &lt;xs:enumeration value=&quot;DIAGNOSTIC&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;In addition to Tax level details, indicates that the server should return
+information about how the tax was calculated. Intended for use only while
+the SDK is in a development environment.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+        &lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; base=&quot;mule:propertyPlaceholderType&quot;&gt;&lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+    &lt;/xs:union&gt;
+  &lt;/xs:simpleType&gt;
+  &lt;xs:simpleType name=&quot;AvalaraDocumentTypeEnumType&quot;&gt;
+    &lt;xs:annotation&gt;
+      &lt;xs:documentation&gt;The document type specifies the category of the document and affects how the document
+is treated after a tax calculation. Specified when constructing a .&lt;/xs:documentation&gt;
+    &lt;/xs:annotation&gt;
+    &lt;xs:union&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction base=&quot;xs:string&quot;&gt;
+          &lt;xs:enumeration value=&quot;SALES_ORDER&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Sales Order, estimate or quote. This is a temporary document type and is not saved in tax history.
+ will return with a  of &amp;lt;b&amp;gt;Temporary&amp;lt;/b&amp;gt;.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+          &lt;xs:enumeration value=&quot;SALES_INVOICE&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;The document is a permanent invoice; document and tax calculation results are saved in the tax history.
+ will return with a  of &amp;lt;b&amp;gt;Saved&amp;lt;/b&amp;gt;&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+          &lt;xs:enumeration value=&quot;PURCHASE_ORDER&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Purchase order, estimate, or quote. This is a temporary document type and is not saved in tax history.
+ will return with a  of &amp;lt;b&amp;gt;Temporary&amp;lt;/b&amp;gt;.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+          &lt;xs:enumeration value=&quot;PURCHASE_INVOICE&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;The document is a permanent invoice; document and tax calculation results are saved in the tax history.
+ will return with a  of &amp;lt;b&amp;gt;Saved&amp;lt;/b&amp;gt;.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+          &lt;xs:enumeration value=&quot;RETURN_ORDER&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Sales Return Order. This is a temporary document type and is not saved in tax history.
+ will return with a  of &amp;lt;b&amp;gt;Temporary&amp;lt;/b&amp;gt;.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+          &lt;xs:enumeration value=&quot;RETURN_INVOICE&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;The document is a permanent sales return invoice; document and tax calculation results are
+saved in the tax history  will return with a 
+of &amp;lt;b&amp;gt;Saved&amp;lt;/b&amp;gt;.&lt;/xs:documentation&gt;
             &lt;/xs:annotation&gt;
           &lt;/xs:enumeration&gt;
         &lt;/xs:restriction&gt;
