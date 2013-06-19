@@ -388,6 +388,16 @@ Summary:
 	 
     <tr class="alt-color api apilevel-" >
         <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../mule/avalara-config.html#ping-with-credentials">&lt;avalara:ping-with-credentials&gt;</a></nobr>
+        
+        <div class="jd-descrdiv">Ping Avalara to test connectivity and version of the service for a specific user.</div>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/avalara-config.html#post-tax">&lt;avalara:post-tax&gt;</a></nobr>
         
         <div class="jd-descrdiv">Post Tax processor
@@ -398,7 +408,7 @@ Summary:
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/avalara-config.html#save-batch">&lt;avalara:save-batch&gt;</a></nobr>
         
@@ -408,7 +418,7 @@ Summary:
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../mule/avalara-config.html#validate-address">&lt;avalara:validate-address&gt;</a></nobr>
         
@@ -2627,6 +2637,158 @@ attempts to reconnect only during business hours. Such a setting can prove usefu
                     
                 
                     <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>license</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The matching license for the account
+</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                    
+                
+          
+          
+        </table>
+  </div>
+  
+  
+      <div class="jd-tagdata">
+         <h5 class="jd-tagtitle">Returns</h5>
+         <table id="lconfig" class="jd-sumtable">
+             <tr>
+                <th>Return Type</th>
+                <th>Description</th>
+             </tr>
+             <tr>
+                <td class="jd-descrcol"><a href="../java/com/avalara/avatax/services/PingResult.html">PingResult</a></td>
+                <td class="jd-descrcol">The <code><a href="../java/com/avalara/avatax/services/PingResult.html">PingResult</a></code></td>
+             </tr>
+         </table>
+  </div>
+    
+  
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Exception Payloads</h5>
+      <table class="jd-sumtable">
+        <tr><th>Payload Class</th><th>Description</th></tr>
+        
+        <tr>
+            <td><a href="../java/org/mule/modules/avalara/exception/AvalaraRuntimeException.html">AvalaraRuntimeException</a></td>
+            <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="ping-with-credentials"></A>
+
+<div class="jd-details api apilevel-">
+    <h4 class="jd-details-title">
+      <span class="sympad">&lt;avalara:ping-with-credentials&gt;</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Ping Avalara to test connectivity and version of the service for a specific user.
+ It is needed to specify the credentials for the user since this operation does not
+ use the global connector configuration.
+ 
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;avalara:ping-with-credentials pingAccount="Account" pingAvalaraClient="Client" pingLicense="License" message="a ping Message" /&gt;</pre></div></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Attributes</h5>
+
+        <table id="lconfig" class="jd-sumtable">
+        <tr><th>Name</th><th>Default Value</th><th>Description</th><th>Java Type</th><th>MIME Type</th><th>Encoding</th></tr>
+        <tr>
+          <td class="jd-linkcol"><nobr>config-ref</nobr></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Specify which configuration to use.</td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol"></td>
+          <td class="jd-descrcol"></td>
+        </tr>
+          
+          
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>pingAccount</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">Avalara Account Number</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>pingAvalaraClient</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">Avalara Client</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>pingLicense</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol">Avalara License</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>message</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol"><i>Optional.&nbsp;</i>Ping Message</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                
+                
+          
+          
+              <tr><th colspan="12">Connection Parameters<br/><span style="font-weight: 200;">This are only required if you didn't specified them at the configuration element. They are also useful for overriding the values of the configurations or even if you need to extract them from the Mule message since they support expression evaluation.</span></th></tr>
+                
+                    <tr class=" api apilevel-" >
+                        <td class="jd-linkcol"><nobr>account</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Registered Avalara account</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                    
+                
+                    <tr class="alt-color api apilevel-" >
+                        <td class="jd-linkcol"><nobr>avalaraClient</nobr></td>
+                        <td class="jd-descrcol"></td>
+                        <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Target client to which make the call</td>
+                        <td class="jd-descrcol">String</td>
+                        <td class="jd-descrcol">*/*</td>
+                        <td class="jd-descrcol">UTF-8</td>
+                    </tr>
+                    
+                
+                    <tr class=" api apilevel-" >
                         <td class="jd-linkcol"><nobr>license</nobr></td>
                         <td class="jd-descrcol"></td>
                         <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>The matching license for the account
