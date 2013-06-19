@@ -124,6 +124,26 @@ public class AvalaraModule
     public PingResult ping(@Optional String message) {
         return apiClient.ping(message);
     }
+    
+    /**
+     * Ping Avalara to test connectivity and version of the service for a specific user.
+     * It is needed to specify the credentials for the user since this operation does not
+     * use the global connector configuration.
+     * 
+     * {@sample.xml ../../../doc/avalara-connector.xml.sample avalara:ping-with-credentials}
+     * 
+     * @param pingAccount Avalara Account Number
+     * @param pingAvalaraClient Avalara Client
+     * @param pingLicense Avalara License
+     * @param message Ping Message
+     * @return The {@link PingResult}
+     *
+     * @throws AvalaraRuntimeException
+     */
+    @Processor
+    public PingResult pingWithCredentials(String pingAccount, String pingAvalaraClient, String pingLicense, @Optional String message) {
+    	return new DefaultAvalaraClient(pingAccount, pingAvalaraClient, pingLicense, getAddressServiceEndpoint(), getTaxServiceEndpoint()).ping(message);
+    }
 
     /**
      * Get Tax processor.

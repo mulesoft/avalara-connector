@@ -74,6 +74,17 @@ public class AvalaraTestDriver {
         assertNotNull(result);
         assertEquals(SeverityLevel.SUCCESS, result.getResultCode());
     }
+    
+    @Test
+    public void pingWithCredentials() {
+    	String pingAccount = ACCOUNT; // FILL WITH A SPECIFIC ACCOUNT (Module account is used here as default)
+    	String pingLicense = LICENSE; // FILL WITH A SPECIFIC LICENSE (Module license is used here as default)
+    	String pingAvalaraClient = CLIENT; // FILL WITH A SPECIFIC CLIENT FROM YOUR ACCOUNT (Module client is used here as default)
+    	
+        PingResult result = module.pingWithCredentials(pingAccount, pingAvalaraClient, pingLicense, "Hi");
+        assertNotNull(result);
+        assertEquals(SeverityLevel.SUCCESS, result.getResultCode());
+    }
 
     @Test
     public void getTaxWithoutKnowingUsernameOrPassword() throws Exception {

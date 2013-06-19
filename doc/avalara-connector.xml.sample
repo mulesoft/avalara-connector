@@ -1,3 +1,7 @@
+<!-- BEGIN_INCLUDE(avalara:ping-with-credentials) -->
+    <avalara:ping-with-credentials pingAccount="Account" pingAvalaraClient="Client" pingLicense="License" message="a ping Message" />
+<!-- END_INCLUDE(avalara:ping-with-credentials) -->
+
 <!-- BEGIN_INCLUDE(avalara:ping) -->
     <avalara:ping message="a ping Message" />
 <!-- END_INCLUDE(avalara:ping) -->
