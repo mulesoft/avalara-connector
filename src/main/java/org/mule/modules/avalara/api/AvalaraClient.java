@@ -9,6 +9,9 @@
 package org.mule.modules.avalara.api;
 
 import com.avalara.avatax.services.*;
+
+import org.mule.modules.avalara.AddressRequestType;
+import org.mule.modules.avalara.BatchRequestType;
 import org.mule.modules.avalara.TaxRequestType;
 
 /**
@@ -16,10 +19,12 @@ import org.mule.modules.avalara.TaxRequestType;
  * @since Oct 17, 2011
  */
 public interface AvalaraClient {
-    <T extends BaseResult> T sendToAvalara(TaxRequestType requestType, Object obj);
-
-    ValidateResult validateAddress(ValidateRequest validateRequest);
-
+    public <T extends BaseResult> T sendTaxRequestToAvalara(TaxRequestType entityType, Object obj);
+    
+    public <T extends BaseResult> T sendAddressRequestToAvalara(AddressRequestType entityType, Object obj);
+    
+    public <T extends BaseResult> T sendBatchRequestToAvalara(BatchRequestType entityType, Object obj);
+    
     BatchFetchResult fetchBatch(FetchRequest fetchRequest);
 
     BatchFileFetchResult fetchBatchFile(FetchRequest fetchRequest);

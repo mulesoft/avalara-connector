@@ -12,12 +12,15 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
@@ -34,6 +37,7 @@ import org.mule.modules.avalara.DetailLevelType;
 import org.mule.modules.avalara.ServiceModeType;
 import org.mule.modules.avalara.TextCaseType;
 import org.mule.modules.avalara.api.MapBuilder;
+import org.mule.modules.avalara.exception.AvalaraRuntimeException;
 
 import com.avalara.avatax.services.AdjustTaxResult;
 import com.avalara.avatax.services.BatchFileFetchResult;
@@ -52,11 +56,24 @@ import com.avalara.avatax.services.ValidateResult;
  * @since Oct 19, 2011
  */
 public class AvalaraTestDriver {
-    private AvalaraModule module;
+    private static Properties properties = loadTestProperties();
+	private AvalaraModule module;
     private XMLGregorianCalendar testDate;
-    private final String ACCOUNT = ""; // FILL WITH YOUR ACCOUNT
-    private final String LICENSE = ""; // FILL WITH YOUR LICENSE
-    private final String CLIENT = ""; // FILL WITH A CLIENT FROM YOUR ACCOUNT
+    private final String ACCOUNT = properties.getProperty("avalaraAccount"); // FILL YOUR ACCOUNT IN test.properties
+    private final String LICENSE = properties.getProperty("avalaraLicense"); // FILL YOUR LICENSE IN test.properties
+    private final String CLIENT = properties.getProperty("avalaraClient"); // FILL YOUR CLIENT IN test.properties
+
+    private static Properties loadTestProperties() {
+    	Properties prop = new Properties();
+    	InputStream in = AvalaraTestDriver.class.getClassLoader().getResourceAsStream("test.properties");
+    	try {
+			prop.load(in);
+			in.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	return prop;
+    }
 
     @Before
     public void setup() throws DatatypeConfigurationException, ConnectionException {
@@ -68,11 +85,15 @@ public class AvalaraTestDriver {
         module.connect(ACCOUNT, CLIENT, LICENSE);
     }
 
-    @Test
+	@Test
     public void ping() {
         PingResult result = module.ping("Hi");
         assertNotNull(result);
         assertEquals(SeverityLevel.SUCCESS, result.getResultCode());
+        
+        PingResult resultForNullMessage = module.ping(null);
+        assertNotNull(resultForNullMessage);
+        assertEquals(SeverityLevel.SUCCESS, resultForNullMessage.getResultCode());
     }
     
     @Test
@@ -84,6 +105,10 @@ public class AvalaraTestDriver {
         PingResult result = module.pingWithCredentials(pingAccount, pingAvalaraClient, pingLicense, "Hi");
         assertNotNull(result);
         assertEquals(SeverityLevel.SUCCESS, result.getResultCode());
+        
+        PingResult resultForNullMessage = module.pingWithCredentials(pingAccount, pingAvalaraClient, pingLicense, null);
+        assertNotNull(resultForNullMessage);
+        assertEquals(SeverityLevel.SUCCESS, resultForNullMessage.getResultCode());
     }
 
     @Test
@@ -257,10 +282,12 @@ public class AvalaraTestDriver {
 
     @Test
     public void validateAnInvalidAddress() throws Exception {
-        ValidateResult response = module.validateAddress("SARLAZA", null, null, null, null, null,
-                null, null, 0, null, null, TextCaseType.DEFAULT, false, false, testDate);
-
-        assertEquals(SeverityLevel.ERROR, response.getResultCode());
+    	try {
+        	module.validateAddress("SARLAZA", null, null, null, null, null,
+                    null, null, 0, null, null, TextCaseType.DEFAULT, false, false, testDate);
+        } catch(AvalaraRuntimeException e) {
+        	assertTrue(e.getMessage().contains("Insufficient address information"));
+        }
     }
 
     @Test

@@ -10,7 +10,11 @@ package org.mule.modules.avalara.api;
 
 import com.avalara.avatax.services.*;
 import org.apache.commons.lang.Validate;
+import org.mule.modules.avalara.AddressRequestType;
+import org.mule.modules.avalara.BatchRequestType;
+import org.mule.modules.avalara.RequestType;
 import org.mule.modules.avalara.TaxRequestType;
+import org.mule.modules.avalara.exception.AvalaraAuthenticationException;
 import org.mule.modules.avalara.exception.AvalaraRuntimeException;
 import org.mule.modules.avalara.util.AvalaraProfileHandler;
 
@@ -21,6 +25,7 @@ import java.lang.reflect.InvocationTargetException;
 
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
+import javax.xml.ws.soap.SOAPFaultException;
 
 /**
  * @author Gaston Ponti
@@ -64,19 +69,27 @@ public class DefaultAvalaraClient implements AvalaraClient
 
     @Override
     public PingResult ping(String message) {
-        return getTaxService().ping(message);
+    	String messageToSend = "";
+    	if(message != null) {
+    		messageToSend = message;
+    	}
+        return this.sendTaxRequestToAvalara(TaxRequestType.Ping, messageToSend);
     }
 
-    /** @see org.mule.modules.avalara.api.AvalaraClient#sendToAvalara(org.mule.modules.avalara.TaxRequestType, java.lang.Object) */
-    @Override
-    public <T extends BaseResult> T sendToAvalara(TaxRequestType entityType, Object obj) {
-        T response;
+    protected <T extends BaseResult> T sendRequestToAvalara(Object service, RequestType entityType, Object obj) {
+    	T response;
 
         try {
-            response = (T) getTaxService().getClass().getMethod(entityType.getResourceName(), obj.getClass()).invoke(getTaxService(), obj);
+            response = (T) service.getClass().getMethod(entityType.getResourceName(), obj.getClass()).invoke(service, obj);
         }
         catch (InvocationTargetException e) {
-            throw new AvalaraRuntimeException(e.getCause().getMessage());
+        	Throwable cause = e.getCause();
+        	
+        	if (this.isAvalaraAuthenticationException(cause)) {
+        		throw new AvalaraAuthenticationException(cause.getMessage());
+        	}
+        	
+            throw new AvalaraRuntimeException(cause.getMessage());
         }
         catch (Exception e) {
             throw new AssertionError(e);
@@ -86,25 +99,39 @@ public class DefaultAvalaraClient implements AvalaraClient
         }
         return response;
     }
-
-    @Override
-    public ValidateResult validateAddress(ValidateRequest validateRequest) {
-        return getAddressService().validate(validateRequest);
+    
+    protected Boolean isAvalaraAuthenticationException(Throwable e){
+    	return e instanceof SOAPFaultException && e.getMessage().contains("The user or account could not be authenticated");
     }
-
+    
+    @Override
+    public <T extends BaseResult> T sendTaxRequestToAvalara(TaxRequestType entityType, Object obj) {
+    	return this.sendRequestToAvalara(getTaxService(), entityType, obj);
+    }
+    
+    @Override
+    public <T extends BaseResult> T sendAddressRequestToAvalara(AddressRequestType entityType, Object obj) {
+    	return this.sendRequestToAvalara(getAddressService(), entityType, obj);
+    }
+    
+    @Override
+    public <T extends BaseResult> T sendBatchRequestToAvalara(BatchRequestType entityType, Object obj) {
+    	return this.sendRequestToAvalara(getBatchService(), entityType, obj);
+    }
+    
     @Override
     public BatchFetchResult fetchBatch(FetchRequest fetchRequest) {
-        return getBatchService().batchFetch(fetchRequest);
+        return this.sendBatchRequestToAvalara(BatchRequestType.BatchFetch, fetchRequest);
     }
 
     @Override
     public BatchFileFetchResult fetchBatchFile(FetchRequest fetchRequest) {
-        return getBatchService().batchFileFetch(fetchRequest);
+    	return this.sendBatchRequestToAvalara(BatchRequestType.BatchFileFetch, fetchRequest);
     }
 
     @Override
     public BatchSaveResult saveBatch(Batch batch) {
-        return getBatchService().batchSave(batch);
+    	return this.sendBatchRequestToAvalara(BatchRequestType.BatchSave, batch);
     }
     
     public String getAccount() {

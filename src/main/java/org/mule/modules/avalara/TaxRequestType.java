@@ -12,9 +12,11 @@ package org.mule.modules.avalara;
 import com.avalara.avatax.services.AdjustTax;
 import com.avalara.avatax.services.CancelTax;
 import com.avalara.avatax.services.GetTax;
+import com.avalara.avatax.services.IsAuthorized;
 import com.avalara.avatax.services.PostTax;
 import com.avalara.avatax.services.CommitTax;
 import com.avalara.avatax.services.GetTaxHistory;
+import com.avalara.avatax.services.Ping;
 import org.apache.commons.lang.StringUtils;
 
 
@@ -23,7 +25,7 @@ import org.apache.commons.lang.StringUtils;
  * @since Oct 18, 2011
  */
 
-public enum TaxRequestType
+public enum TaxRequestType implements RequestType
 {
     /**
      * GetTax is the core of the Avalara Service. It is capable of collecting a 
@@ -89,14 +91,27 @@ public enum TaxRequestType
      * be re-used).
      */
     CancelTax(CancelTax.class),
+    
     /**
      * AdjustTax provides a mechanism to adjust tax.
      */
-
-    AdjustTax(AdjustTax.class);
-
-
-
+    AdjustTax(AdjustTax.class),
+    
+    /**
+     * Ping Avalara Tax Service to test connectivity and version of the service.
+     */
+    Ping(Ping.class),
+    
+    /**
+     * IsAuthorized retrieves information about the operations that a user is
+     * allowed to perform.
+     * A Successful call with valid credentials and a list of valid operations
+     * returns a list of those operations the account is authorized to use, which
+     * may be a subset of the requested operations and account expiration date.
+     * For security, never returns any operations other than the ones specifically
+     * requested.
+     */
+    IsAuthorized(IsAuthorized.class);
 
     private final Class<?> type;
     
@@ -119,7 +134,7 @@ public enum TaxRequestType
     }
 
     /**
-     * @return
+     * @return the associated class for this entity type
      */
     @SuppressWarnings("unchecked")
     public <T> Class<T> getType()

@@ -24,6 +24,7 @@ import org.mule.api.annotations.Connect;
 import org.mule.api.annotations.ConnectionIdentifier;
 import org.mule.api.annotations.Connector;
 import org.mule.api.annotations.Disconnect;
+import org.mule.api.annotations.InvalidateConnectionOn;
 import org.mule.api.annotations.Processor;
 import org.mule.api.annotations.ValidateConnection;
 import org.mule.api.annotations.display.Password;
@@ -34,6 +35,7 @@ import org.mule.api.annotations.param.Optional;
 import org.mule.modules.avalara.api.AvalaraClient;
 import org.mule.modules.avalara.api.DefaultAvalaraClient;
 import org.mule.modules.avalara.api.MapBuilder;
+import org.mule.modules.avalara.exception.AvalaraAuthenticationException;
 import org.mule.modules.avalara.exception.AvalaraRuntimeException;
 import org.mule.modules.utils.mom.JaxbMapObjectMappers;
 
@@ -120,8 +122,9 @@ public class AvalaraModule
      *
      * @throws AvalaraRuntimeException
      */
+    @InvalidateConnectionOn(exception = AvalaraAuthenticationException.class)
     @Processor
-    public PingResult ping(@Optional String message) {
+    public PingResult ping(@Optional @Default("Ping") String message) {
         return apiClient.ping(message);
     }
     
@@ -141,7 +144,7 @@ public class AvalaraModule
      * @throws AvalaraRuntimeException
      */
     @Processor
-    public PingResult pingWithCredentials(String pingAccount, String pingAvalaraClient, String pingLicense, @Optional String message) {
+    public PingResult pingWithCredentials(String pingAccount, String pingAvalaraClient, String pingLicense, @Optional @Default("PingWithCredentials") String message) {
     	return new DefaultAvalaraClient(pingAccount, pingAvalaraClient, pingLicense, getAddressServiceEndpoint(), getTaxServiceEndpoint()).ping(message);
     }
 
@@ -221,6 +224,7 @@ public class AvalaraModule
      * 
      * @throws AvalaraRuntimeException
      */
+    @InvalidateConnectionOn(exception = AvalaraAuthenticationException.class)
     @Processor
     public GetTaxResult getTax(String companyCode,
                                AvalaraDocumentType docType,
@@ -262,7 +266,7 @@ public class AvalaraModule
             mapLines.put("line", lines);
         }
         
-        return apiClient.sendToAvalara(TaxRequestType.GetTax, mom.unmap(    
+        return apiClient.sendTaxRequestToAvalara(TaxRequestType.GetTax, mom.unmap(    
                 new MapBuilder()
                 .with("companyCode", companyCode)
                 .with("docType", docType.toDocumentType())
@@ -372,6 +376,7 @@ public class AvalaraModule
      *
      * @throws AvalaraRuntimeException
      */
+    @InvalidateConnectionOn(exception = AvalaraAuthenticationException.class)
     @Processor
     public AdjustTaxResult adjustTax(int adjustmentReason,
                                      String   adjustmentDescription,
@@ -440,7 +445,7 @@ public class AvalaraModule
                 .with("exchangeRate", exchangeRateDecimal)
                 .with("exchangeRateEffDate", exchangeRateEffDate).build(), GetTaxRequest.class);
 
-        return apiClient.sendToAvalara(TaxRequestType.AdjustTax, mom.unmap(
+        return apiClient.sendTaxRequestToAvalara(TaxRequestType.AdjustTax, mom.unmap(
                 new MapBuilder()
                         .with("adjustmentReason", adjustmentReason)
                         .with("adjustmentDescription", adjustmentDescription)
@@ -484,6 +489,7 @@ public class AvalaraModule
      * 
      * @throws AvalaraRuntimeException
      */
+    @InvalidateConnectionOn(exception = AvalaraAuthenticationException.class)
     @Processor
     public PostTaxResult postTax(@Optional String docId,
                                  String companyCode,
@@ -497,7 +503,7 @@ public class AvalaraModule
         BigDecimal totalAmountDecimal = totalAmount == null ? null :  new BigDecimal(totalAmount);
         BigDecimal totalTaxDecimal = totalTax == null ? null :  new BigDecimal(totalTax);
         
-        return (PostTaxResult) apiClient.sendToAvalara(
+        return (PostTaxResult) apiClient.sendTaxRequestToAvalara(
             TaxRequestType.PostTax,
             mom.unmap(
                 new MapBuilder()
@@ -533,13 +539,14 @@ public class AvalaraModule
      * 
      * @throws AvalaraRuntimeException
      */
+    @InvalidateConnectionOn(exception = AvalaraAuthenticationException.class)
     @Processor
     public CommitTaxResult commitTax(@Optional String docId,
                                      String companyCode,
                                      AvalaraDocumentType docType,
                                      @Optional String docCode,
                                      @Optional String newDocCode) {
-        return (CommitTaxResult) apiClient.sendToAvalara(
+        return (CommitTaxResult) apiClient.sendTaxRequestToAvalara(
             TaxRequestType.CommitTax,
             mom.unmap(
                 new MapBuilder()
@@ -571,13 +578,14 @@ public class AvalaraModule
      * 
      * @throws AvalaraRuntimeException
      */
+    @InvalidateConnectionOn(exception = AvalaraAuthenticationException.class)
     @Processor
     public GetTaxHistoryResult getTaxHistory(@Optional String docId,
                                              String companyCode,
                                              AvalaraDocumentType docType,
                                              @Optional String docCode,
                                              DetailLevelType detailLevel) {
-        return (GetTaxHistoryResult) apiClient.sendToAvalara(
+        return (GetTaxHistoryResult) apiClient.sendTaxRequestToAvalara(
             TaxRequestType.GetTaxHistory,
             mom.unmap(
                 new MapBuilder()
@@ -610,13 +618,14 @@ public class AvalaraModule
      * 
      * @throws AvalaraRuntimeException
      */
+    @InvalidateConnectionOn(exception = AvalaraAuthenticationException.class)
     @Processor
     public CancelTaxResult cancelTax(@Optional String docId,
                                      String companyCode,
                                      AvalaraDocumentType docType,
                                      @Optional String docCode,
                                      CancelCodeType cancelCode) {
-        return (CancelTaxResult) apiClient.sendToAvalara(
+        return (CancelTaxResult) apiClient.sendTaxRequestToAvalara(
             TaxRequestType.CancelTax,
             mom.unmap(
                 new MapBuilder()
@@ -658,6 +667,7 @@ public class AvalaraModule
      * 
      * @throws AvalaraRuntimeException
      */
+    @InvalidateConnectionOn(exception = AvalaraAuthenticationException.class)
     @Processor
     public ValidateResult validateAddress(String line1, @Optional String line2, @Optional String line3,
                                           @Optional String city, @Optional String region, @Optional String country,
@@ -681,7 +691,7 @@ public class AvalaraModule
         address.setRegion(region);
         address.setTaxRegionId(taxRegionId);
 
-        return apiClient.validateAddress((ValidateRequest) mom.unmap( 
+        return apiClient.sendAddressRequestToAvalara(AddressRequestType.Validate,(ValidateRequest) mom.unmap( 
                 new MapBuilder()
                 .with("address", address)
                 .with("textCase", textCase.toAvalaraTextCase())
@@ -705,6 +715,7 @@ public class AvalaraModule
      *
      * @throws AvalaraRuntimeException
      */
+    @InvalidateConnectionOn(exception = AvalaraAuthenticationException.class)
     @Processor
     public Map<String,BatchFileFetchResult> fetchBatchFile(String batchId) {
         // This Request is needed to retrieve the batch file ids. The actual content cannot be retrieved at once.
@@ -744,6 +755,7 @@ public class AvalaraModule
      *
      * @throws AvalaraRuntimeException
      */
+    @InvalidateConnectionOn(exception = AvalaraAuthenticationException.class)
     @Processor
     public boolean isBatchFinished(String batchId) {
         final FetchRequest batchFetchRequest = new FetchRequest();
@@ -771,6 +783,7 @@ public class AvalaraModule
      *
      * @throws AvalaraRuntimeException
      */
+    @InvalidateConnectionOn(exception = AvalaraAuthenticationException.class)
     @Processor
     public BatchSaveResult saveBatch(BatchType batchType,
                                        int companyId,

@@ -15,45 +15,26 @@ import com.avalara.avatax.services.Message;
  * @author Gaston Ponti
  * @since Oct 18, 2011
  */
-public class AvalaraRuntimeException extends RuntimeException
+public class AvalaraAuthenticationException extends AvalaraRuntimeException
 {
 
     /**
-     * Creates the AvalaraRuntimeException.
+     * Creates the AvalaraAuthenticationException.
      * 
      * @param messages
      */
-    public AvalaraRuntimeException(ArrayOfMessage messages)
+    public AvalaraAuthenticationException(ArrayOfMessage messages)
     {
         super(makeAvalaraMessage(messages));
     }
 
     /**
-     * Creates the AvalaraRuntimeException.
+     * Creates the AvalaraAuthenticationException.
      * 
      * @param message
      */
-    public AvalaraRuntimeException(String message)
+    public AvalaraAuthenticationException(String message)
     {
         super(message);
-    }
-    
-    /**
-     * @param messages
-     * @return
-     */
-    protected static String makeAvalaraMessage(ArrayOfMessage messages)
-    {
-        String message = "";
-        
-        if(messages != null){
-        	for (Message msj : messages.getMessage())
-        	{
-        		message += msj.getName() +
-        				": (" + msj.getRefersTo() + ") " +  msj.getSummary() + "\n";
-        	}
-        }
-        
-        return message;
     }
 }

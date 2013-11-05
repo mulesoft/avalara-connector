@@ -66,7 +66,7 @@ public class AvalaraModuleUnitTest
             docCode = "OldCode";
             newDocCode = "NewCode";
         } };
-        verify(clientMock).sendToAvalara(eq(TaxRequestType.CommitTax), refEq(commitTaxRequest));
+        verify(clientMock).sendTaxRequestToAvalara(eq(TaxRequestType.CommitTax), refEq(commitTaxRequest));
     }
 
     @Test
@@ -79,7 +79,7 @@ public class AvalaraModuleUnitTest
             detailLevel = DetailLevel.DIAGNOSTIC;
             docType = DocumentType.PURCHASE_ORDER;
         } };
-        verify(clientMock).sendToAvalara(eq(TaxRequestType.GetTaxHistory), refEq(getTaxRequest));
+        verify(clientMock).sendTaxRequestToAvalara(eq(TaxRequestType.GetTaxHistory), refEq(getTaxRequest));
     }
 
     @Test
@@ -92,7 +92,7 @@ public class AvalaraModuleUnitTest
             cancelCode = CancelCode.DOC_DELETED;
             docType = DocumentType.PURCHASE_ORDER;
         } };
-        verify(clientMock).sendToAvalara(eq(TaxRequestType.CancelTax), refEq(cancelTaxRequest));
+        verify(clientMock).sendTaxRequestToAvalara(eq(TaxRequestType.CancelTax), refEq(cancelTaxRequest));
     }
 
 }

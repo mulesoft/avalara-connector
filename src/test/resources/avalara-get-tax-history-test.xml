@@ -14,13 +14,17 @@
 <mule xmlns="http://www.mulesoft.org/schema/mule/core"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xmlns:spring="http://www.springframework.org/schema/beans"
+      xmlns:context="http://www.springframework.org/schema/context"
       xmlns:avalara="http://www.mulesoft.org/schema/mule/avalara"
       xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting"
       xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
         http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
         http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/3.2/mule-scripting.xsd
         http://www.mulesoft.org/schema/mule/avalara http://www.mulesoft.org/schema/mule/avalara/2.0/mule-avalara.xsd">
+        
+    <context:property-placeholder location="test.properties"/>
 
     <avalara:config account="${avalaraAccount}" license="${avalaraLicense}" avalaraClient="${avalaraClient}" name="avalara-config"/>
 
@@ -30,14 +34,18 @@
 			<scripting:script engine="groovy"><![CDATA[
 							import org.mule.modules.avalara.AvalaraDocumentType;
 							import org.mule.modules.avalara.DetailLevelType;
-							return ['docType': AvalaraDocumentType.SALES_INVOICE, 'detLevel':DetailLevelType.TAX]
-							        ]]>
+							
+							message.setInvocationProperty('docType', AvalaraDocumentType.SALES_INVOICE)
+							message.setInvocationProperty('detLevel', DetailLevelType.TAX)
+							
+							return payload
+							]]>
 			</scripting:script>
 		</scripting:transformer>
 
 		<avalara:get-tax-history config-ref="avalara-config"
 				  companyCode="TC"
-		          docType="#[map-payload:docType]" docCode="abc123" detailLevel="#[map-payload:detLevel]" />
+		          docType="#[docType]" docCode="abc123" detailLevel="#[detLevel]" />
 		
 		<logger message="Result from Avalara = #[payload]" level="INFO" />
 	</flow>
