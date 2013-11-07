@@ -126,7 +126,8 @@ public class AvalaraModule
     @InvalidateConnectionOn(exception = AvalaraAuthenticationException.class)
     @Processor
     public PingResult ping(@Optional @Default("Ping") String message) {
-        return apiClient.sendTaxRequestToAvalara(TaxRequestType.Ping, message);
+    	Validate.notNull(message);
+    	return apiClient.sendTaxRequestToAvalara(TaxRequestType.Ping, message);
     }
     
     /**
@@ -146,6 +147,7 @@ public class AvalaraModule
      */
     @Processor
     public PingResult pingWithCredentials(String pingAccount, String pingAvalaraClient, String pingLicense, @Optional @Default("PingWithCredentials") String message) {
+    	Validate.notNull(message);
     	return new DefaultAvalaraClient(pingAccount, pingAvalaraClient, pingLicense, getAddressServiceEndpoint(), getTaxServiceEndpoint()).sendTaxRequestToAvalara(TaxRequestType.Ping, message);
     }
 

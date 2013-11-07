@@ -67,7 +67,7 @@ public class DefaultAvalaraClient implements AvalaraClient
 
     protected <T extends BaseResult> T sendRequestToAvalara(Object service, RequestType entityType, Object obj) {
     	T response;
-
+    	
         try {
             response = (T) service.getClass().getMethod(entityType.getResourceName(), obj.getClass()).invoke(service, obj);
         }
