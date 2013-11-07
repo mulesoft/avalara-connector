@@ -21,8 +21,6 @@ import org.mule.modules.avalara.util.AvalaraProfileHandler;
 import com.zauberlabs.commons.ws.connection.ConnectionBuilder;
 import com.zauberlabs.commons.ws.security.BasicCredential;
 
-import java.lang.reflect.InvocationTargetException;
-
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 import javax.xml.ws.soap.SOAPFaultException;
@@ -67,32 +65,18 @@ public class DefaultAvalaraClient implements AvalaraClient
         this.license = license;
     }
 
-    @Override
-    public PingResult ping(String message) {
-    	String messageToSend = "";
-    	if(message != null) {
-    		messageToSend = message;
-    	}
-        return this.sendTaxRequestToAvalara(TaxRequestType.Ping, messageToSend);
-    }
-
     protected <T extends BaseResult> T sendRequestToAvalara(Object service, RequestType entityType, Object obj) {
     	T response;
 
         try {
             response = (T) service.getClass().getMethod(entityType.getResourceName(), obj.getClass()).invoke(service, obj);
         }
-        catch (InvocationTargetException e) {
-        	Throwable cause = e.getCause();
-        	
-        	if (this.isAvalaraAuthenticationException(cause)) {
-        		throw new AvalaraAuthenticationException(cause.getMessage());
+        catch (Exception e) {
+        	if (this.isAvalaraAuthenticationException(e.getCause())) {
+        		throw new AvalaraAuthenticationException(e.getCause().getMessage());
         	}
         	
-            throw new AvalaraRuntimeException(cause.getMessage());
-        }
-        catch (Exception e) {
-            throw new AssertionError(e);
+            throw new AvalaraRuntimeException(e.getCause().getMessage());
         }
         if (!response.getResultCode().equals(SeverityLevel.SUCCESS)) {
             throw new AvalaraRuntimeException(response.getMessages());
@@ -101,7 +85,8 @@ public class DefaultAvalaraClient implements AvalaraClient
     }
     
     protected Boolean isAvalaraAuthenticationException(Throwable e){
-    	return e instanceof SOAPFaultException && e.getMessage().contains("The user or account could not be authenticated");
+    	return e != null && e instanceof SOAPFaultException && 
+    			e.getMessage().contains("The user or account could not be authenticated");
     }
     
     @Override
@@ -117,21 +102,6 @@ public class DefaultAvalaraClient implements AvalaraClient
     @Override
     public <T extends BaseResult> T sendBatchRequestToAvalara(BatchRequestType entityType, Object obj) {
     	return this.sendRequestToAvalara(getBatchService(), entityType, obj);
-    }
-    
-    @Override
-    public BatchFetchResult fetchBatch(FetchRequest fetchRequest) {
-        return this.sendBatchRequestToAvalara(BatchRequestType.BatchFetch, fetchRequest);
-    }
-
-    @Override
-    public BatchFileFetchResult fetchBatchFile(FetchRequest fetchRequest) {
-    	return this.sendBatchRequestToAvalara(BatchRequestType.BatchFileFetch, fetchRequest);
-    }
-
-    @Override
-    public BatchSaveResult saveBatch(Batch batch) {
-    	return this.sendBatchRequestToAvalara(BatchRequestType.BatchSave, batch);
     }
     
     public String getAccount() {

@@ -90,10 +90,6 @@ public class AvalaraTestDriver {
         PingResult result = module.ping("Hi");
         assertNotNull(result);
         assertEquals(SeverityLevel.SUCCESS, result.getResultCode());
-        
-        PingResult resultForNullMessage = module.ping(null);
-        assertNotNull(resultForNullMessage);
-        assertEquals(SeverityLevel.SUCCESS, resultForNullMessage.getResultCode());
     }
     
     @Test
@@ -105,10 +101,6 @@ public class AvalaraTestDriver {
         PingResult result = module.pingWithCredentials(pingAccount, pingAvalaraClient, pingLicense, "Hi");
         assertNotNull(result);
         assertEquals(SeverityLevel.SUCCESS, result.getResultCode());
-        
-        PingResult resultForNullMessage = module.pingWithCredentials(pingAccount, pingAvalaraClient, pingLicense, null);
-        assertNotNull(resultForNullMessage);
-        assertEquals(SeverityLevel.SUCCESS, resultForNullMessage.getResultCode());
     }
 
     @Test

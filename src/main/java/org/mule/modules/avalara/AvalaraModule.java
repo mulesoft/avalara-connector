@@ -18,6 +18,7 @@ import java.util.Map;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import org.apache.commons.lang.Validate;
 import org.mule.api.ConnectionException;
 import org.mule.api.annotations.Configurable;
 import org.mule.api.annotations.Connect;
@@ -125,7 +126,7 @@ public class AvalaraModule
     @InvalidateConnectionOn(exception = AvalaraAuthenticationException.class)
     @Processor
     public PingResult ping(@Optional @Default("Ping") String message) {
-        return apiClient.ping(message);
+        return apiClient.sendTaxRequestToAvalara(TaxRequestType.Ping, message);
     }
     
     /**
@@ -145,7 +146,7 @@ public class AvalaraModule
      */
     @Processor
     public PingResult pingWithCredentials(String pingAccount, String pingAvalaraClient, String pingLicense, @Optional @Default("PingWithCredentials") String message) {
-    	return new DefaultAvalaraClient(pingAccount, pingAvalaraClient, pingLicense, getAddressServiceEndpoint(), getTaxServiceEndpoint()).ping(message);
+    	return new DefaultAvalaraClient(pingAccount, pingAvalaraClient, pingLicense, getAddressServiceEndpoint(), getTaxServiceEndpoint()).sendTaxRequestToAvalara(TaxRequestType.Ping, message);
     }
 
     /**
@@ -722,7 +723,7 @@ public class AvalaraModule
         FetchRequest batchFetchRequest = new FetchRequest();
         batchFetchRequest.setFields("Files");
         batchFetchRequest.setFilters("BatchId=" + batchId);
-        BatchFetchResult batchFetchResult = apiClient.fetchBatch(batchFetchRequest);
+        BatchFetchResult batchFetchResult = apiClient.sendBatchRequestToAvalara(BatchRequestType.BatchFetch, batchFetchRequest);
         Map<String,BatchFileFetchResult> resultHashMap = new HashMap<String, BatchFileFetchResult>();
         // This is in order to be able to return result and error file to the caller.
         for (BatchFile bf : batchFetchResult.getBatches().getBatch().get(0).getFiles().getBatchFile()) {
@@ -730,12 +731,12 @@ public class AvalaraModule
                 FetchRequest fetchRequest = new FetchRequest();
                 fetchRequest.setFields("*,Content");
                 fetchRequest.setFilters("BatchFileId=" + bf.getBatchFileId());
-                resultHashMap.put("result",apiClient.fetchBatchFile(fetchRequest));
+                resultHashMap.put("result",(BatchFileFetchResult) apiClient.sendBatchRequestToAvalara(BatchRequestType.BatchFileFetch, fetchRequest));
             } else if (bf.getName().equalsIgnoreCase("Error")) {
                 FetchRequest fetchRequest = new FetchRequest();
                 fetchRequest.setFields("*,Content");
                 fetchRequest.setFilters("BatchFileId=" + bf.getBatchFileId());
-                resultHashMap.put("error", apiClient.fetchBatchFile(fetchRequest));
+                resultHashMap.put("error", (BatchFileFetchResult) apiClient.sendBatchRequestToAvalara(BatchRequestType.BatchFileFetch, fetchRequest));
             }
         }
 
@@ -760,7 +761,7 @@ public class AvalaraModule
     public boolean isBatchFinished(String batchId) {
         final FetchRequest batchFetchRequest = new FetchRequest();
         batchFetchRequest.setFilters("BatchId="+batchId);
-        BatchFetchResult batchFetchResult = apiClient.fetchBatch(batchFetchRequest);
+        BatchFetchResult batchFetchResult = apiClient.sendBatchRequestToAvalara(BatchRequestType.BatchFetch, batchFetchRequest);
         if (batchFetchResult.getBatches().getBatch().size() == 0 || (batchFetchResult.getBatches().getBatch().get(0).getRecordCount() > batchFetchResult.getBatches().getBatch().get(0).getCurrentRecord())) {
             return false;
         } else {
@@ -804,7 +805,7 @@ public class AvalaraModule
         batch.setBatchTypeId(batchType.value());
         batch.setCompanyId(companyId);
         batch.setFiles(arrayOfBatchFile);
-        return apiClient.saveBatch(batch);
+        return apiClient.sendBatchRequestToAvalara(BatchRequestType.BatchSave, batch);
     }
 
     /**

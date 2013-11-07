@@ -25,13 +25,5 @@ public interface AvalaraClient {
     
     public <T extends BaseResult> T sendBatchRequestToAvalara(BatchRequestType entityType, Object obj);
     
-    BatchFetchResult fetchBatch(FetchRequest fetchRequest);
-
-    BatchFileFetchResult fetchBatchFile(FetchRequest fetchRequest);
-
-    BatchSaveResult saveBatch(Batch batch);
-
-    PingResult ping(String message);
-
     String getConnectionIdentifier();
 }

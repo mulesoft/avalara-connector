@@ -38,7 +38,7 @@ public class AvalaraModuleUnitTest
     @Test
     public void testPing() {
         module.ping("hello world");
-        verify(clientMock).ping(eq("hello world"));
+        verify(clientMock).sendTaxRequestToAvalara(eq(TaxRequestType.Ping), refEq("hello world"));
     }
 
 //    @Test
