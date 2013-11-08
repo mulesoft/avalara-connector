@@ -76,7 +76,7 @@ public class DefaultAvalaraClient implements AvalaraClient
         		throw new AvalaraAuthenticationException(e.getCause().getMessage());
         	}
         	
-            throw new AvalaraRuntimeException(e.getCause().getMessage());
+            throw new AvalaraRuntimeException(e.getCause() != null ? e.getCause().getMessage() : e.getMessage());
         }
         if (!response.getResultCode().equals(SeverityLevel.SUCCESS)) {
             throw new AvalaraRuntimeException(response.getMessages());
