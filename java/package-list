@@ -4,7 +4,6 @@ org.mule.modules.avalara.adapters
 org.mule.modules.avalara.agents
 org.mule.modules.avalara.api
 org.mule.modules.avalara.config
-org.mule.modules.avalara.config.spring
 org.mule.modules.avalara.connectivity
 org.mule.modules.avalara.exception
 org.mule.modules.avalara.process

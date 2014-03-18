@@ -74,7 +74,7 @@
 <link rel="shortcut icon" type="image/x-icon" href="../../../../../../favicon.ico" />
 <title>
 
-  ProcessCallbackProcessInterceptor
+  AvalaraAuthenticationException
 
 
 | Mule Avalara Connector
@@ -216,9 +216,9 @@
   <a href="../../../../../../java/org/mule/modules/avalara/config/package-summary.html">org.mule.modules.avalara.config</a></li>
     <li class="api apilevel-">
   <a href="../../../../../../java/org/mule/modules/avalara/connectivity/package-summary.html">org.mule.modules.avalara.connectivity</a></li>
-    <li class="api apilevel-">
-  <a href="../../../../../../java/org/mule/modules/avalara/exception/package-summary.html">org.mule.modules.avalara.exception</a></li>
     <li class="selected api apilevel-">
+  <a href="../../../../../../java/org/mule/modules/avalara/exception/package-summary.html">org.mule.modules.avalara.exception</a></li>
+    <li class="api apilevel-">
   <a href="../../../../../../java/org/mule/modules/avalara/process/package-summary.html">org.mule.modules.avalara.process</a></li>
     <li class="api apilevel-">
   <a href="../../../../../../java/org/mule/modules/avalara/processors/package-summary.html">org.mule.modules.avalara.processors</a></li>
@@ -233,17 +233,15 @@
             <ul>
               
               
-    <li><h2>Classes</h2>
+              
+              
+              
+    <li><h2>Exceptions</h2>
       <ul>
-          <li class="api apilevel-"><a href="../../../../../../java/org/mule/modules/avalara/process/ManagedConnectionProcessInterceptor.html">ManagedConnectionProcessInterceptor</a>&lt;T&gt;</li>
-          <li class="api apilevel-"><a href="../../../../../../java/org/mule/modules/avalara/process/NestedProcessorChain.html">NestedProcessorChain</a></li>
-          <li class="selected api apilevel-"><a href="../../../../../../java/org/mule/modules/avalara/process/ProcessCallbackProcessInterceptor.html">ProcessCallbackProcessInterceptor</a>&lt;T,&nbsp;O&gt;</li>
-          <li class="api apilevel-"><a href="../../../../../../java/org/mule/modules/avalara/process/RetryProcessInterceptor.html">RetryProcessInterceptor</a>&lt;T,&nbsp;O&gt;</li>
+          <li class="selected api apilevel-"><a href="../../../../../../java/org/mule/modules/avalara/exception/AvalaraAuthenticationException.html">AvalaraAuthenticationException</a></li>
+          <li class="api apilevel-"><a href="../../../../../../java/org/mule/modules/avalara/exception/AvalaraRuntimeException.html">AvalaraRuntimeException</a></li>
       </ul>
     </li>
-              
-              
-              
               
             </ul><br/>
           </div><!-- end classes -->
@@ -290,7 +288,37 @@
   
 
   
+  
    
+  
+  
+  
+
+  
+  
+   
+  
+  
+  
+
+  
+   
+  
+  
+   
+  
+  
+   
+  
+  
+
+  
+   
+  
+  
+  
+  
+
   
   
   
@@ -307,16 +335,19 @@ Summary:
 
 
 
-
-
-
-  <a href="#pubctors">Ctors</a>
+  <a href="#inhconstants">Inherited Constants</a>
   
 
 
 
-  &#124; <a href="#pubmethods">Methods</a>
+  &#124; <a href="#inhfields">Inherited Fields</a>
   
+
+
+  &#124; <a href="#pubctors">Ctors</a>
+  
+
+
 
 
 
@@ -344,22 +375,33 @@ Summary:
      
     
     class
-<h1>ProcessCallbackProcessInterceptor</h1>
+<h1>AvalaraAuthenticationException</h1>
 
 
 
-  
-    extends Object<br/>
   
   
   
 
   
   
-      implements 
-      
-        ProcessInterceptor&lt;T,&nbsp;O&gt; 
-      
+  
+
+  
+  
+  
+
+  
+  
+  
+
+  
+    extends <a href="../../../../../../java/org/mule/modules/avalara/exception/AvalaraRuntimeException.html">AvalaraRuntimeException</a><br/>
+  
+  
+  
+
+  
   
   
 
@@ -374,7 +416,7 @@ Summary:
 
     <tr>
         
-        <td colspan="2" class="jd-inheritance-class-cell">java.lang.Object</td>
+        <td colspan="6" class="jd-inheritance-class-cell">java.lang.Object</td>
     </tr>
     
 
@@ -382,7 +424,59 @@ Summary:
         
             <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;&#x21b3;</td>
         
-        <td colspan="1" class="jd-inheritance-class-cell">org.mule.modules.avalara.process.ProcessCallbackProcessInterceptor&lt;T,&nbsp;O&gt;</td>
+        <td colspan="5" class="jd-inheritance-class-cell">java.lang.Throwable</td>
+    </tr>
+    
+
+    <tr>
+        
+            <td class="jd-inheritance-space">&nbsp;</td>
+        
+            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;&#x21b3;</td>
+        
+        <td colspan="4" class="jd-inheritance-class-cell">java.lang.Exception</td>
+    </tr>
+    
+
+    <tr>
+        
+            <td class="jd-inheritance-space">&nbsp;</td>
+        
+            <td class="jd-inheritance-space">&nbsp;</td>
+        
+            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;&#x21b3;</td>
+        
+        <td colspan="3" class="jd-inheritance-class-cell">java.lang.RuntimeException</td>
+    </tr>
+    
+
+    <tr>
+        
+            <td class="jd-inheritance-space">&nbsp;</td>
+        
+            <td class="jd-inheritance-space">&nbsp;</td>
+        
+            <td class="jd-inheritance-space">&nbsp;</td>
+        
+            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;&#x21b3;</td>
+        
+        <td colspan="2" class="jd-inheritance-class-cell"><a href="../../../../../../java/org/mule/modules/avalara/exception/AvalaraRuntimeException.html">org.mule.modules.avalara.exception.AvalaraRuntimeException</a></td>
+    </tr>
+    
+
+    <tr>
+        
+            <td class="jd-inheritance-space">&nbsp;</td>
+        
+            <td class="jd-inheritance-space">&nbsp;</td>
+        
+            <td class="jd-inheritance-space">&nbsp;</td>
+        
+            <td class="jd-inheritance-space">&nbsp;</td>
+        
+            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;&#x21b3;</td>
+        
+        <td colspan="1" class="jd-inheritance-class-cell">org.mule.modules.avalara.exception.AvalaraAuthenticationException</td>
     </tr>
     
 
@@ -438,9 +532,202 @@ Summary:
 
 
 
+<!-- =========== ENUM CONSTANT SUMMARY =========== -->
+<table id="inhconstants" class="jd-sumtable"><tr><th>
+  <a href="#" class="toggle-all" onclick="return toggleAllInherited(this, null)">[Expand]</a>
+  <div style="clear:left;">Inherited Constants</div></th></tr>
 
 
 
+
+<tr class="api apilevel-" >
+<td colspan="12">
+
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-constants-java.lang.RuntimeException" class="jd-expando-trigger closed"
+          ><img id="inherited-constants-java.lang.RuntimeException-trigger"
+          src="../../../../../../assets/images/triangle-closed.png"
+          class="jd-expando-trigger-img" /></a>From class
+java.lang.RuntimeException
+<div id="inherited-constants-java.lang.RuntimeException">
+  <div id="inherited-constants-java.lang.RuntimeException-list"
+        class="jd-inheritedlinks">
+  </div>
+  <div id="inherited-constants-java.lang.RuntimeException-summary" style="display: none;">
+    <table class="jd-sumtable-expando">
+    
+
+    
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol">long</td>
+        <td class="jd-linkcol">serialVersionUID</td>
+        <td class="jd-descrcol" width="100%"></td>
+    </tr>
+    
+    
+</table>
+  </div>
+</div>
+</td></tr>
+
+
+
+<tr class="api apilevel-" >
+<td colspan="12">
+
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-constants-java.lang.Exception" class="jd-expando-trigger closed"
+          ><img id="inherited-constants-java.lang.Exception-trigger"
+          src="../../../../../../assets/images/triangle-closed.png"
+          class="jd-expando-trigger-img" /></a>From class
+java.lang.Exception
+<div id="inherited-constants-java.lang.Exception">
+  <div id="inherited-constants-java.lang.Exception-list"
+        class="jd-inheritedlinks">
+  </div>
+  <div id="inherited-constants-java.lang.Exception-summary" style="display: none;">
+    <table class="jd-sumtable-expando">
+    
+
+    
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol">long</td>
+        <td class="jd-linkcol">serialVersionUID</td>
+        <td class="jd-descrcol" width="100%"></td>
+    </tr>
+    
+    
+</table>
+  </div>
+</div>
+</td></tr>
+
+
+
+<tr class="api apilevel-" >
+<td colspan="12">
+
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-constants-java.lang.Throwable" class="jd-expando-trigger closed"
+          ><img id="inherited-constants-java.lang.Throwable-trigger"
+          src="../../../../../../assets/images/triangle-closed.png"
+          class="jd-expando-trigger-img" /></a>From class
+java.lang.Throwable
+<div id="inherited-constants-java.lang.Throwable">
+  <div id="inherited-constants-java.lang.Throwable-list"
+        class="jd-inheritedlinks">
+  </div>
+  <div id="inherited-constants-java.lang.Throwable-summary" style="display: none;">
+    <table class="jd-sumtable-expando">
+    
+
+    
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol">long</td>
+        <td class="jd-linkcol">serialVersionUID</td>
+        <td class="jd-descrcol" width="100%"></td>
+    </tr>
+    
+    
+</table>
+  </div>
+</div>
+</td></tr>
+
+
+
+
+
+
+</table>
+
+
+
+
+
+
+
+<!-- =========== FIELD SUMMARY =========== -->
+<table id="inhfields" class="jd-sumtable"><tr><th>
+  <a href="#" class="toggle-all" onclick="return toggleAllInherited(this, null)">[Expand]</a>
+  <div style="clear:left;">Inherited Fields</div></th></tr>
+
+
+
+
+
+
+
+
+<tr class="api apilevel-" >
+<td colspan="12">
+
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-fields-java.lang.Throwable" class="jd-expando-trigger closed"
+          ><img id="inherited-fields-java.lang.Throwable-trigger"
+          src="../../../../../../assets/images/triangle-closed.png"
+          class="jd-expando-trigger-img" /></a>From class
+java.lang.Throwable
+<div id="inherited-fields-java.lang.Throwable">
+  <div id="inherited-fields-java.lang.Throwable-list"
+        class="jd-inheritedlinks">
+  </div>
+  <div id="inherited-fields-java.lang.Throwable-summary" style="display: none;">
+    <table class="jd-sumtable-expando">
+    
+
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          Object</nobr></td>
+          <td class="jd-linkcol">backtrace</td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          Throwable</nobr></td>
+          <td class="jd-linkcol">cause</td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          String</nobr></td>
+          <td class="jd-linkcol">detailMessage</td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          StackTraceElement[]</nobr></td>
+          <td class="jd-linkcol">stackTrace</td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+</table>
+  </div>
+</div>
+</td></tr>
+
+
+
+
+
+
+</table>
 
 
 
@@ -461,8 +748,28 @@ Summary:
             </nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/process/ProcessCallbackProcessInterceptor.html#ProcessCallbackProcessInterceptor()">ProcessCallbackProcessInterceptor</a></span>()</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/exception/AvalaraAuthenticationException.html#AvalaraAuthenticationException(com.avalara.avatax.services.ArrayOfMessage)">AvalaraAuthenticationException</a></span>(<a href="../../../../../../java/com/avalara/avatax/services/ArrayOfMessage.html">ArrayOfMessage</a> messages)</nobr>
         
+        <div class="jd-descrdiv">Creates the AvalaraAuthenticationException.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            </nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/exception/AvalaraAuthenticationException.html#AvalaraAuthenticationException(java.lang.String)">AvalaraAuthenticationException</a></span>(String message)</nobr>
+        
+        <div class="jd-descrdiv">Creates the AvalaraAuthenticationException.</div>
+  
   </td></tr>
 
 
@@ -474,9 +781,34 @@ Summary:
 
 
 
-<!-- ========== METHOD SUMMARY =========== -->
-<table id="pubmethods" class="jd-sumtable"><tr><th colspan="12">Public Methods</th></tr>
 
+
+
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+<table id="inhmethods" class="jd-sumtable"><tr><th>
+  <a href="#" class="toggle-all" onclick="return toggleAllInherited(this, null)">[Expand]</a>
+  <div style="clear:left;">Inherited Methods</div></th></tr>
+
+
+<tr class="api apilevel-" >
+<td colspan="12">
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.modules.avalara.exception.AvalaraRuntimeException" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-org.mule.modules.avalara.exception.AvalaraRuntimeException-trigger"
+          src="../../../../../../assets/images/triangle-closed.png"
+          class="jd-expando-trigger-img" /></a>
+From class
+
+  <a href="../../../../../../org/mule/modules/avalara/exception/AvalaraRuntimeException.html">org.mule.modules.avalara.exception.AvalaraRuntimeException</a>
+
+<div id="inherited-methods-org.mule.modules.avalara.exception.AvalaraRuntimeException">
+  <div id="inherited-methods-org.mule.modules.avalara.exception.AvalaraRuntimeException-list"
+        class="jd-inheritedlinks">
+  </div>
+  <div id="inherited-methods-org.mule.modules.avalara.exception.AvalaraRuntimeException-summary" style="display: none;">
+    <table class="jd-sumtable-expando">
+    
 
 
 	 
@@ -485,12 +817,58 @@ Summary:
             
             
             
+            static
             
-            
-            T</nobr>
+            String</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/process/ProcessCallbackProcessInterceptor.html#execute(org.mule.api.process.ProcessCallback<T, O>, O, org.mule.api.processor.MessageProcessor, org.mule.api.MuleEvent)">execute</a></span>(ProcessCallback&lt;T,&nbsp;O&gt; processCallback, O object, MessageProcessor messageProcessor, MuleEvent event)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/exception/AvalaraRuntimeException.html#makeAvalaraMessage(com.avalara.avatax.services.ArrayOfMessage)">makeAvalaraMessage</a></span>(<a href="../../../../../../java/com/avalara/avatax/services/ArrayOfMessage.html">ArrayOfMessage</a> messages)</nobr>
+        
+  </td></tr>
+
+
+</table>
+  </div>
+</div>
+</td></tr>
+
+
+
+
+
+
+
+<tr class="api apilevel-" >
+<td colspan="12">
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-java.lang.Throwable" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-java.lang.Throwable-trigger"
+          src="../../../../../../assets/images/triangle-closed.png"
+          class="jd-expando-trigger-img" /></a>
+From class
+
+  java.lang.Throwable
+
+<div id="inherited-methods-java.lang.Throwable">
+  <div id="inherited-methods-java.lang.Throwable-list"
+        class="jd-inheritedlinks">
+  </div>
+  <div id="inherited-methods-java.lang.Throwable-summary" style="display: none;">
+    <table class="jd-sumtable-expando">
+    
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            synchronized
+            
+            
+            
+            Throwable</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">fillInStackTrace</span>()</nobr>
         
   </td></tr>
 
@@ -503,27 +881,163 @@ Summary:
             
             
             
-            T</nobr>
+            Throwable</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/process/ProcessCallbackProcessInterceptor.html#execute(org.mule.api.process.ProcessCallback<T, O>, O, org.mule.api.routing.filter.Filter, org.mule.api.MuleMessage)">execute</a></span>(ProcessCallback&lt;T,&nbsp;O&gt; processCallback, O object, Filter filter, MuleMessage message)</nobr>
+        <span class="sympad">getCause</span>()</nobr>
         
   </td></tr>
 
 
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getLocalizedMessage</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getMessage</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            StackTraceElement[]</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getStackTrace</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            synchronized
+            
+            
+            
+            Throwable</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">initCause</span>(Throwable arg0)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">printStackTrace</span>(PrintWriter arg0)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">printStackTrace</span>(PrintStream arg0)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">printStackTrace</span>()</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">setStackTrace</span>(StackTraceElement[] arg0)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">toString</span>()</nobr>
+        
+  </td></tr>
+
 
 </table>
+  </div>
+</div>
+</td></tr>
 
-
-
-
-
-
-
-<!-- ========== METHOD SUMMARY =========== -->
-<table id="inhmethods" class="jd-sumtable"><tr><th>
-  <a href="#" class="toggle-all" onclick="return toggleAllInherited(this, null)">[Expand]</a>
-  <div style="clear:left;">Inherited Methods</div></th></tr>
 
 
 <tr class="api apilevel-" >
@@ -728,62 +1242,6 @@ From class
 
 
 
-<tr class="api apilevel-" >
-<td colspan="12">
-  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-org.mule.api.process.ProcessInterceptor" class="jd-expando-trigger closed"
-          ><img id="inherited-methods-org.mule.api.process.ProcessInterceptor-trigger"
-          src="../../../../../../assets/images/triangle-closed.png"
-          class="jd-expando-trigger-img" /></a>
-From interface
-
-  org.mule.api.process.ProcessInterceptor
-
-<div id="inherited-methods-org.mule.api.process.ProcessInterceptor">
-  <div id="inherited-methods-org.mule.api.process.ProcessInterceptor-list"
-        class="jd-inheritedlinks">
-  </div>
-  <div id="inherited-methods-org.mule.api.process.ProcessInterceptor-summary" style="display: none;">
-    <table class="jd-sumtable-expando">
-    
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            abstract
-            
-            
-            
-            
-            T</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">execute</span>(ProcessCallback&lt;T,&nbsp;O&gt; arg0, O arg1, MessageProcessor arg2, MuleEvent arg3)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            abstract
-            
-            
-            
-            
-            T</nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad">execute</span>(ProcessCallback&lt;T,&nbsp;O&gt; arg0, O arg1, Filter arg2, MuleMessage arg3)</nobr>
-        
-  </td></tr>
-
-
-</table>
-  </div>
-</div>
-</td></tr>
-
 
 </table>
 
@@ -819,7 +1277,7 @@ From interface
 
 
 
-<A NAME="ProcessCallbackProcessInterceptor()"></A>
+<A NAME="AvalaraAuthenticationException(com.avalara.avatax.services.ArrayOfMessage)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -831,8 +1289,8 @@ From interface
          
         
       </span>
-      <span class="sympad">ProcessCallbackProcessInterceptor</span>
-      <span class="normal">()</span>
+      <span class="sympad">AvalaraAuthenticationException</span>
+      <span class="normal">(<a href="../../../../../../java/com/avalara/avatax/services/ArrayOfMessage.html">ArrayOfMessage</a> messages)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -844,7 +1302,56 @@ From interface
       </div>
     <div class="jd-details-descr">
       
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata jd-tagdescr"><p>Creates the AvalaraAuthenticationException.</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>messages</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="AvalaraAuthenticationException(java.lang.String)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        
+      </span>
+      <span class="sympad">AvalaraAuthenticationException</span>
+      <span class="normal">(String message)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Creates the AvalaraAuthenticationException.</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>message</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
 
     </div>
 </div>
@@ -860,133 +1367,6 @@ From interface
 
 <!-- ========= METHOD DETAIL ======== -->
 <!-- Public methdos -->
-
-<h2>Public Methods</h2>
-
-
-
-<A NAME="execute(org.mule.api.process.ProcessCallback<T, O>, O, org.mule.api.processor.MessageProcessor, org.mule.api.MuleEvent)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        T
-      </span>
-      <span class="sympad">execute</span>
-      <span class="normal">(ProcessCallback&lt;T,&nbsp;O&gt; processCallback, O object, MessageProcessor messageProcessor, MuleEvent event)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>processCallback</td>
-          <td></td>
-        </tr>
-        <tr>
-          <th>object</td>
-          <td></td>
-        </tr>
-        <tr>
-          <th>messageProcessor</td>
-          <td></td>
-        </tr>
-        <tr>
-          <th>event</td>
-          <td></td>
-        </tr>
-      </table>
-  </div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Throws</h5>
-      <table class="jd-tagtable">  
-        <tr>
-            <th>Exception</td>
-            <td></td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="execute(org.mule.api.process.ProcessCallback<T, O>, O, org.mule.api.routing.filter.Filter, org.mule.api.MuleMessage)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        T
-      </span>
-      <span class="sympad">execute</span>
-      <span class="normal">(ProcessCallback&lt;T,&nbsp;O&gt; processCallback, O object, Filter filter, MuleMessage message)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>processCallback</td>
-          <td></td>
-        </tr>
-        <tr>
-          <th>object</td>
-          <td></td>
-        </tr>
-        <tr>
-          <th>filter</td>
-          <td></td>
-        </tr>
-        <tr>
-          <th>message</td>
-          <td></td>
-        </tr>
-      </table>
-  </div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Throws</h5>
-      <table class="jd-tagtable">  
-        <tr>
-            <th>Exception</td>
-            <td></td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
 
 
 
