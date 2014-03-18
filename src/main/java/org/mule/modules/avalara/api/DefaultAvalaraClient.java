@@ -167,6 +167,10 @@ public class DefaultAvalaraClient implements AvalaraClient
     public String getBatchEndpoint() {
         return batchEndpoint;
     }
+    
+    public void setBatchEndpoint(String batchEndpoint) {
+    	this.batchEndpoint = batchEndpoint;
+    }
 
     public void setAddressEndpoint(String addressEndpoint) {
         this.addressEndpoint = addressEndpoint;
