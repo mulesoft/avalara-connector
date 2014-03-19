@@ -1,4 +1,6 @@
 com.avalara.avatax.services
+com.avalara.avatax.services.holders
+com.avalara.avatax.services.transformers
 org.mule.modules.avalara
 org.mule.modules.avalara.adapters
 org.mule.modules.avalara.agents
