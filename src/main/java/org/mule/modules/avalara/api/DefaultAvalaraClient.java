@@ -52,7 +52,7 @@ public class DefaultAvalaraClient implements AvalaraClient
         this.license = license;
     }
 
-    public DefaultAvalaraClient(String account, String client, String license, String addressEndpoint, String taxEndpoint) {
+    public DefaultAvalaraClient(String account, String client, String license, String addressEndpoint, String taxEndpoint, String batchEndpoint) {
         Validate.notNull(addressEndpoint);
         Validate.notNull(taxEndpoint);
         Validate.notNull(account);
@@ -60,6 +60,7 @@ public class DefaultAvalaraClient implements AvalaraClient
         Validate.notNull(license);
         this.setAddressEndpoint(addressEndpoint);
         this.setTaxEndpoint(taxEndpoint);
+        this.setBatchEndpoint(batchEndpoint);
         this.account = account;
         this.client = client;
         this.license = license;

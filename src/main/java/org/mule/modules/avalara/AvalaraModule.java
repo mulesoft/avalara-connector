@@ -148,7 +148,7 @@ public class AvalaraModule
     @Processor
     public PingResult pingWithCredentials(String pingAccount, String pingAvalaraClient, String pingLicense, @Optional @Default("PingWithCredentials") String message) {
     	Validate.notNull(message);
-    	return new DefaultAvalaraClient(pingAccount, pingAvalaraClient, pingLicense, getAddressServiceEndpoint(), getTaxServiceEndpoint()).sendTaxRequestToAvalara(TaxRequestType.Ping, message);
+    	return new DefaultAvalaraClient(pingAccount, pingAvalaraClient, pingLicense, getAddressServiceEndpoint(), getTaxServiceEndpoint(), getBatchServiceEndpoint()).sendTaxRequestToAvalara(TaxRequestType.Ping, message);
     }
 
     /**
@@ -821,7 +821,7 @@ public class AvalaraModule
     public synchronized void connect(@ConnectionKey String account, @ConnectionKey String avalaraClient, @Password String license)
             throws ConnectionException {
         if (apiClient == null ) {
-            apiClient = new DefaultAvalaraClient(account, avalaraClient, license, getAddressServiceEndpoint(), getTaxServiceEndpoint());
+            apiClient = new DefaultAvalaraClient(account, avalaraClient, license, getAddressServiceEndpoint(), getTaxServiceEndpoint(), getBatchServiceEndpoint());
         }
     }
 
