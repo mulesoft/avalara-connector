@@ -571,7 +571,7 @@ public class AvalaraModule
     public synchronized void connect(@ConnectionKey String account, @ConnectionKey String avalaraClient, @Password String license)
             throws ConnectionException {
         if (apiClient == null ) {
-            apiClient = new DefaultAvalaraClient(account, avalaraClient, license, getAddressServiceEndpoint(), getTaxServiceEndpoint());
+            apiClient = new DefaultAvalaraClient(account, avalaraClient, license, getAddressServiceEndpoint(), getTaxServiceEndpoint(), getBatchServiceEndpoint());
         }
     }
 
