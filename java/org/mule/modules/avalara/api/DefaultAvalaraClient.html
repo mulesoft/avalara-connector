@@ -205,10 +205,6 @@
     <li class="api apilevel-">
   <a href="../../../../../../java/com/avalara/avatax/services/package-summary.html">com.avalara.avatax.services</a></li>
     <li class="api apilevel-">
-  <a href="../../../../../../java/com/avalara/avatax/services/holders/package-summary.html">com.avalara.avatax.services.holders</a></li>
-    <li class="api apilevel-">
-  <a href="../../../../../../java/com/avalara/avatax/services/transformers/package-summary.html">com.avalara.avatax.services.transformers</a></li>
-    <li class="api apilevel-">
   <a href="../../../../../../java/org/mule/modules/avalara/package-summary.html">org.mule.modules.avalara</a></li>
     <li class="api apilevel-">
   <a href="../../../../../../java/org/mule/modules/avalara/adapters/package-summary.html">org.mule.modules.avalara.adapters</a></li>
@@ -624,38 +620,6 @@ Summary:
             
             
             
-            <a href="../../../../../../java/com/avalara/avatax/services/BatchFetchResult.html">BatchFetchResult</a></nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/api/DefaultAvalaraClient.html#fetchBatch(com.avalara.avatax.services.FetchRequest)">fetchBatch</a></span>(<a href="../../../../../../java/com/avalara/avatax/services/FetchRequest.html">FetchRequest</a> fetchRequest)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            <a href="../../../../../../java/com/avalara/avatax/services/BatchFileFetchResult.html">BatchFileFetchResult</a></nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/api/DefaultAvalaraClient.html#fetchBatchFile(com.avalara.avatax.services.FetchRequest)">fetchBatchFile</a></span>(<a href="../../../../../../java/com/avalara/avatax/services/FetchRequest.html">FetchRequest</a> fetchRequest)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
             String</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
@@ -767,11 +731,11 @@ Summary:
             
             
             
-            
-            <a href="../../../../../../java/com/avalara/avatax/services/PingResult.html">PingResult</a></nobr>
+            &lt;T&nbsp;extends&nbsp;<a href="../../../../../../java/com/avalara/avatax/services/BaseResult.html">BaseResult</a>&gt;
+            T</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/api/DefaultAvalaraClient.html#ping(java.lang.String)">ping</a></span>(String message)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/api/DefaultAvalaraClient.html#sendAddressRequestToAvalara(org.mule.modules.avalara.AddressRequestType, java.lang.Object)">sendAddressRequestToAvalara</a></span>(<a href="../../../../../../java/org/mule/modules/avalara/AddressRequestType.html">AddressRequestType</a> entityType, Object obj)</nobr>
         
   </td></tr>
 
@@ -783,11 +747,11 @@ Summary:
             
             
             
-            
-            <a href="../../../../../../java/com/avalara/avatax/services/BatchSaveResult.html">BatchSaveResult</a></nobr>
+            &lt;T&nbsp;extends&nbsp;<a href="../../../../../../java/com/avalara/avatax/services/BaseResult.html">BaseResult</a>&gt;
+            T</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/api/DefaultAvalaraClient.html#saveBatch(com.avalara.avatax.services.Batch)">saveBatch</a></span>(<a href="../../../../../../java/com/avalara/avatax/services/Batch.html">Batch</a> batch)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/api/DefaultAvalaraClient.html#sendBatchRequestToAvalara(org.mule.modules.avalara.BatchRequestType, java.lang.Object)">sendBatchRequestToAvalara</a></span>(<a href="../../../../../../java/org/mule/modules/avalara/BatchRequestType.html">BatchRequestType</a> entityType, Object obj)</nobr>
         
   </td></tr>
 
@@ -803,7 +767,7 @@ Summary:
             T</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/api/DefaultAvalaraClient.html#sendToAvalara(org.mule.modules.avalara.TaxRequestType, java.lang.Object)">sendToAvalara</a></span>(<a href="../../../../../../java/org/mule/modules/avalara/TaxRequestType.html">TaxRequestType</a> entityType, Object obj)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/api/DefaultAvalaraClient.html#sendTaxRequestToAvalara(org.mule.modules.avalara.TaxRequestType, java.lang.Object)">sendTaxRequestToAvalara</a></span>(<a href="../../../../../../java/org/mule/modules/avalara/TaxRequestType.html">TaxRequestType</a> entityType, Object obj)</nobr>
         
   </td></tr>
 
@@ -852,22 +816,6 @@ Summary:
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/api/DefaultAvalaraClient.html#setTaxEndpoint(java.lang.String)">setTaxEndpoint</a></span>(String taxEndpoint)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            
-            
-            
-            
-            
-            <a href="../../../../../../java/com/avalara/avatax/services/ValidateResult.html">ValidateResult</a></nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/api/DefaultAvalaraClient.html#validateAddress(com.avalara.avatax.services.ValidateRequest)">validateAddress</a></span>(<a href="../../../../../../java/com/avalara/avatax/services/ValidateRequest.html">ValidateRequest</a> validateRequest)</nobr>
         
   </td></tr>
 
@@ -955,10 +903,42 @@ Summary:
             
             
             
+            Boolean</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/api/DefaultAvalaraClient.html#isAvalaraAuthenticationException(java.lang.Throwable)">isAvalaraAuthenticationException</a></span>(Throwable e)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
             String</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/api/DefaultAvalaraClient.html#schemaLocation(java.lang.String)">schemaLocation</a></span>(String schemaName)</nobr>
+        
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            &lt;T&nbsp;extends&nbsp;<a href="../../../../../../java/com/avalara/avatax/services/BaseResult.html">BaseResult</a>&gt;
+            T</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/api/DefaultAvalaraClient.html#sendRequestToAvalara(java.lang.Object, org.mule.modules.avalara.RequestType, java.lang.Object)">sendRequestToAvalara</a></span>(Object service, <a href="../../../../../../java/org/mule/modules/avalara/RequestType.html">RequestType</a> entityType, Object obj)</nobr>
         
   </td></tr>
 
@@ -1205,38 +1185,6 @@ From interface
             
             
             
-            <a href="../../../../../../java/com/avalara/avatax/services/BatchFetchResult.html">BatchFetchResult</a></nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/api/AvalaraClient.html#fetchBatch(com.avalara.avatax.services.FetchRequest)">fetchBatch</a></span>(<a href="../../../../../../java/com/avalara/avatax/services/FetchRequest.html">FetchRequest</a> fetchRequest)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class=" api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            abstract
-            
-            
-            
-            
-            <a href="../../../../../../java/com/avalara/avatax/services/BatchFileFetchResult.html">BatchFileFetchResult</a></nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/api/AvalaraClient.html#fetchBatchFile(com.avalara.avatax.services.FetchRequest)">fetchBatchFile</a></span>(<a href="../../../../../../java/com/avalara/avatax/services/FetchRequest.html">FetchRequest</a> fetchRequest)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            abstract
-            
-            
-            
-            
             String</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
@@ -1252,11 +1200,11 @@ From interface
             
             
             
-            
-            <a href="../../../../../../java/com/avalara/avatax/services/PingResult.html">PingResult</a></nobr>
+            &lt;T&nbsp;extends&nbsp;<a href="../../../../../../java/com/avalara/avatax/services/BaseResult.html">BaseResult</a>&gt;
+            T</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/api/AvalaraClient.html#ping(java.lang.String)">ping</a></span>(String message)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/api/AvalaraClient.html#sendAddressRequestToAvalara(org.mule.modules.avalara.AddressRequestType, java.lang.Object)">sendAddressRequestToAvalara</a></span>(<a href="../../../../../../java/org/mule/modules/avalara/AddressRequestType.html">AddressRequestType</a> entityType, Object obj)</nobr>
         
   </td></tr>
 
@@ -1268,11 +1216,11 @@ From interface
             
             
             
-            
-            <a href="../../../../../../java/com/avalara/avatax/services/BatchSaveResult.html">BatchSaveResult</a></nobr>
+            &lt;T&nbsp;extends&nbsp;<a href="../../../../../../java/com/avalara/avatax/services/BaseResult.html">BaseResult</a>&gt;
+            T</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/api/AvalaraClient.html#saveBatch(com.avalara.avatax.services.Batch)">saveBatch</a></span>(<a href="../../../../../../java/com/avalara/avatax/services/Batch.html">Batch</a> batch)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/api/AvalaraClient.html#sendBatchRequestToAvalara(org.mule.modules.avalara.BatchRequestType, java.lang.Object)">sendBatchRequestToAvalara</a></span>(<a href="../../../../../../java/org/mule/modules/avalara/BatchRequestType.html">BatchRequestType</a> entityType, Object obj)</nobr>
         
   </td></tr>
 
@@ -1288,23 +1236,7 @@ From interface
             T</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/api/AvalaraClient.html#sendToAvalara(org.mule.modules.avalara.TaxRequestType, java.lang.Object)">sendToAvalara</a></span>(<a href="../../../../../../java/org/mule/modules/avalara/TaxRequestType.html">TaxRequestType</a> requestType, Object obj)</nobr>
-        
-  </td></tr>
-
-
-	 
-    <tr class="alt-color api apilevel-" >
-        <td class="jd-typecol"><nobr>
-            abstract
-            
-            
-            
-            
-            <a href="../../../../../../java/com/avalara/avatax/services/ValidateResult.html">ValidateResult</a></nobr>
-        </td>
-        <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/api/AvalaraClient.html#validateAddress(com.avalara.avatax.services.ValidateRequest)">validateAddress</a></span>(<a href="../../../../../../java/com/avalara/avatax/services/ValidateRequest.html">ValidateRequest</a> validateRequest)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/api/AvalaraClient.html#sendTaxRequestToAvalara(org.mule.modules.avalara.TaxRequestType, java.lang.Object)">sendTaxRequestToAvalara</a></span>(<a href="../../../../../../java/org/mule/modules/avalara/TaxRequestType.html">TaxRequestType</a> entityType, Object obj)</nobr>
         
   </td></tr>
 
@@ -1749,86 +1681,6 @@ From interface
 
 
 
-<A NAME="fetchBatch(com.avalara.avatax.services.FetchRequest)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        <a href="../../../../../../java/com/avalara/avatax/services/BatchFetchResult.html">BatchFetchResult</a>
-      </span>
-      <span class="sympad">fetchBatch</span>
-      <span class="normal">(<a href="../../../../../../java/com/avalara/avatax/services/FetchRequest.html">FetchRequest</a> fetchRequest)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>fetchRequest</td>
-          <td></td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="fetchBatchFile(com.avalara.avatax.services.FetchRequest)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        <a href="../../../../../../java/com/avalara/avatax/services/BatchFileFetchResult.html">BatchFileFetchResult</a>
-      </span>
-      <span class="sympad">fetchBatchFile</span>
-      <span class="normal">(<a href="../../../../../../java/com/avalara/avatax/services/FetchRequest.html">FetchRequest</a> fetchRequest)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>fetchRequest</td>
-          <td></td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
 <A NAME="getAccount()"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -2046,87 +1898,7 @@ From interface
 </div>
 
 
-<A NAME="ping(java.lang.String)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        <a href="../../../../../../java/com/avalara/avatax/services/PingResult.html">PingResult</a>
-      </span>
-      <span class="sympad">ping</span>
-      <span class="normal">(String message)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>message</td>
-          <td></td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="saveBatch(com.avalara.avatax.services.Batch)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        <a href="../../../../../../java/com/avalara/avatax/services/BatchSaveResult.html">BatchSaveResult</a>
-      </span>
-      <span class="sympad">saveBatch</span>
-      <span class="normal">(<a href="../../../../../../java/com/avalara/avatax/services/Batch.html">Batch</a> batch)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>batch</td>
-          <td></td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="sendToAvalara(org.mule.modules.avalara.TaxRequestType, java.lang.Object)"></A>
+<A NAME="sendAddressRequestToAvalara(org.mule.modules.avalara.AddressRequestType, java.lang.Object)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -2138,8 +1910,8 @@ From interface
          
         T
       </span>
-      <span class="sympad">sendToAvalara</span>
-      <span class="normal">(<a href="../../../../../../java/org/mule/modules/avalara/TaxRequestType.html">TaxRequestType</a> entityType, Object obj)</span>
+      <span class="sympad">sendAddressRequestToAvalara</span>
+      <span class="normal">(<a href="../../../../../../java/org/mule/modules/avalara/AddressRequestType.html">AddressRequestType</a> entityType, Object obj)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -2165,10 +1937,93 @@ From interface
         </tr>
       </table>
   </div>
+
+    </div>
+</div>
+
+
+<A NAME="sendBatchRequestToAvalara(org.mule.modules.avalara.BatchRequestType, java.lang.Object)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        T
+      </span>
+      <span class="sympad">sendBatchRequestToAvalara</span>
+      <span class="normal">(<a href="../../../../../../java/org/mule/modules/avalara/BatchRequestType.html">BatchRequestType</a> entityType, Object obj)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
   <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">See Also</h5>
-      <ul class="nolist"><li><code><a href="../../../../../../org/mule/modules/avalara/api/AvalaraClient.html#sendToAvalara(org.mule.modules.avalara.TaxRequestType, java.lang.Object)">sendToAvalara(org.mule.modules.avalara.TaxRequestType, java.lang.Object)</a></code></li>
-      </ul>
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>entityType</td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>obj</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="sendTaxRequestToAvalara(org.mule.modules.avalara.TaxRequestType, java.lang.Object)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        T
+      </span>
+      <span class="sympad">sendTaxRequestToAvalara</span>
+      <span class="normal">(<a href="../../../../../../java/org/mule/modules/avalara/TaxRequestType.html">TaxRequestType</a> entityType, Object obj)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>entityType</td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>obj</td>
+          <td></td>
+        </tr>
+      </table>
   </div>
 
     </div>
@@ -2286,46 +2141,6 @@ From interface
       <table class="jd-tagtable">
         <tr>
           <th>taxEndpoint</td>
-          <td></td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="validateAddress(com.avalara.avatax.services.ValidateRequest)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        <a href="../../../../../../java/com/avalara/avatax/services/ValidateResult.html">ValidateResult</a>
-      </span>
-      <span class="sympad">validateAddress</span>
-      <span class="normal">(<a href="../../../../../../java/com/avalara/avatax/services/ValidateRequest.html">ValidateRequest</a> validateRequest)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>validateRequest</td>
           <td></td>
         </tr>
       </table>
@@ -2493,6 +2308,46 @@ From interface
 </div>
 
 
+<A NAME="isAvalaraAuthenticationException(java.lang.Throwable)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        protected 
+         
+         
+         
+         
+        Boolean
+      </span>
+      <span class="sympad">isAvalaraAuthenticationException</span>
+      <span class="normal">(Throwable e)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>e</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
 <A NAME="schemaLocation(java.lang.String)"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -2524,6 +2379,54 @@ From interface
       <table class="jd-tagtable">
         <tr>
           <th>schemaName</td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="sendRequestToAvalara(java.lang.Object, org.mule.modules.avalara.RequestType, java.lang.Object)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        protected 
+         
+         
+         
+         
+        T
+      </span>
+      <span class="sympad">sendRequestToAvalara</span>
+      <span class="normal">(Object service, <a href="../../../../../../java/org/mule/modules/avalara/RequestType.html">RequestType</a> entityType, Object obj)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>service</td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>entityType</td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>obj</td>
           <td></td>
         </tr>
       </table>

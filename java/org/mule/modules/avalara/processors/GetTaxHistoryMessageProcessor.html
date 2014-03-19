@@ -205,10 +205,6 @@
     <li class="api apilevel-">
   <a href="../../../../../../java/com/avalara/avatax/services/package-summary.html">com.avalara.avatax.services</a></li>
     <li class="api apilevel-">
-  <a href="../../../../../../java/com/avalara/avatax/services/holders/package-summary.html">com.avalara.avatax.services.holders</a></li>
-    <li class="api apilevel-">
-  <a href="../../../../../../java/com/avalara/avatax/services/transformers/package-summary.html">com.avalara.avatax.services.transformers</a></li>
-    <li class="api apilevel-">
   <a href="../../../../../../java/org/mule/modules/avalara/package-summary.html">org.mule.modules.avalara</a></li>
     <li class="api apilevel-">
   <a href="../../../../../../java/org/mule/modules/avalara/adapters/package-summary.html">org.mule.modules.avalara.adapters</a></li>
@@ -251,6 +247,7 @@
           <li class="api apilevel-"><a href="../../../../../../java/org/mule/modules/avalara/processors/GetTaxMessageProcessor.html">GetTaxMessageProcessor</a></li>
           <li class="api apilevel-"><a href="../../../../../../java/org/mule/modules/avalara/processors/IsBatchFinishedMessageProcessor.html">IsBatchFinishedMessageProcessor</a></li>
           <li class="api apilevel-"><a href="../../../../../../java/org/mule/modules/avalara/processors/PingMessageProcessor.html">PingMessageProcessor</a></li>
+          <li class="api apilevel-"><a href="../../../../../../java/org/mule/modules/avalara/processors/PingWithCredentialsMessageProcessor.html">PingWithCredentialsMessageProcessor</a></li>
           <li class="api apilevel-"><a href="../../../../../../java/org/mule/modules/avalara/processors/PostTaxMessageProcessor.html">PostTaxMessageProcessor</a></li>
           <li class="api apilevel-"><a href="../../../../../../java/org/mule/modules/avalara/processors/SaveBatchMessageProcessor.html">SaveBatchMessageProcessor</a></li>
           <li class="api apilevel-"><a href="../../../../../../java/org/mule/modules/avalara/processors/ValidateAddressMessageProcessor.html">ValidateAddressMessageProcessor</a></li>
@@ -553,7 +550,7 @@ Summary:
 
 
 <h2>Class Overview</h2>
-<p>GetTaxHistoryMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/modules/avalara/AvalaraModule.html#getTaxHistory(com.avalara.avatax.services.GetTaxHistoryRequest)">getTaxHistory(com.avalara.avatax.services.GetTaxHistoryRequest)</a></code> method in <code><a href="../../../../../../java/org/mule/modules/avalara/AvalaraModule.html">AvalaraModule</a></code>. For each argument there is a field in this processor to match it.  Before invoking the actual method the processor will evaluate and transform where possible to the expected argument type.
+<p>GetTaxHistoryMessageProcessor invokes the <code><a href="../../../../../../java/org/mule/modules/avalara/AvalaraModule.html#getTaxHistory(java.lang.String, java.lang.String, org.mule.modules.avalara.AvalaraDocumentType, java.lang.String, org.mule.modules.avalara.DetailLevelType)">getTaxHistory(java.lang.String, java.lang.String, org.mule.modules.avalara.AvalaraDocumentType, java.lang.String, org.mule.modules.avalara.DetailLevelType)</a></code> method in <code><a href="../../../../../../java/org/mule/modules/avalara/AvalaraModule.html">AvalaraModule</a></code>. For each argument there is a field in this processor to match it.  Before invoking the actual method the processor will evaluate and transform where possible to the expected argument type.
  
 </p>
 
@@ -756,8 +753,52 @@ org.mule.api.lifecycle.Stoppable
           protected
           
           
-          <a href="../../../../../../java/com/avalara/avatax/services/GetTaxHistoryRequest.html">GetTaxHistoryRequest</a></nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/processors/GetTaxHistoryMessageProcessor.html#_getTaxHistoryRequestType">_getTaxHistoryRequestType</a></td>
+          String</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/processors/GetTaxHistoryMessageProcessor.html#_companyCodeType">_companyCodeType</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          protected
+          
+          
+          <a href="../../../../../../java/org/mule/modules/avalara/DetailLevelType.html">DetailLevelType</a></nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/processors/GetTaxHistoryMessageProcessor.html#_detailLevelType">_detailLevelType</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          protected
+          
+          
+          String</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/processors/GetTaxHistoryMessageProcessor.html#_docCodeType">_docCodeType</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          protected
+          
+          
+          String</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/processors/GetTaxHistoryMessageProcessor.html#_docIdType">_docIdType</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          protected
+          
+          
+          <a href="../../../../../../java/org/mule/modules/avalara/AvalaraDocumentType.html">AvalaraDocumentType</a></nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/processors/GetTaxHistoryMessageProcessor.html#_docTypeType">_docTypeType</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
       
@@ -768,7 +809,51 @@ org.mule.api.lifecycle.Stoppable
           
           
           Object</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/processors/GetTaxHistoryMessageProcessor.html#getTaxHistoryRequest">getTaxHistoryRequest</a></td>
+          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/processors/GetTaxHistoryMessageProcessor.html#companyCode">companyCode</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          protected
+          
+          
+          Object</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/processors/GetTaxHistoryMessageProcessor.html#detailLevel">detailLevel</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          protected
+          
+          
+          Object</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/processors/GetTaxHistoryMessageProcessor.html#docCode">docCode</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          protected
+          
+          
+          Object</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/processors/GetTaxHistoryMessageProcessor.html#docId">docId</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          protected
+          
+          
+          Object</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../org/mule/modules/avalara/processors/GetTaxHistoryMessageProcessor.html#docType">docType</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
       
@@ -1058,9 +1143,9 @@ org.mule.api.lifecycle.Stoppable
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/processors/GetTaxHistoryMessageProcessor.html#setFlowConstruct(org.mule.api.construct.FlowConstruct)">setFlowConstruct</a></span>(FlowConstruct flowConstruct)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/processors/GetTaxHistoryMessageProcessor.html#setCompanyCode(java.lang.Object)">setCompanyCode</a></span>(Object value)</nobr>
         
-        <div class="jd-descrdiv">Sets flow construct</div>
+        <div class="jd-descrdiv">Sets companyCode</div>
   
   </td></tr>
 
@@ -1076,9 +1161,81 @@ org.mule.api.lifecycle.Stoppable
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/processors/GetTaxHistoryMessageProcessor.html#setGetTaxHistoryRequest(java.lang.Object)">setGetTaxHistoryRequest</a></span>(Object value)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/processors/GetTaxHistoryMessageProcessor.html#setDetailLevel(java.lang.Object)">setDetailLevel</a></span>(Object value)</nobr>
         
-        <div class="jd-descrdiv">Sets getTaxHistoryRequest</div>
+        <div class="jd-descrdiv">Sets detailLevel</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/processors/GetTaxHistoryMessageProcessor.html#setDocCode(java.lang.Object)">setDocCode</a></span>(Object value)</nobr>
+        
+        <div class="jd-descrdiv">Sets docCode</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/processors/GetTaxHistoryMessageProcessor.html#setDocId(java.lang.Object)">setDocId</a></span>(Object value)</nobr>
+        
+        <div class="jd-descrdiv">Sets docId</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/processors/GetTaxHistoryMessageProcessor.html#setDocType(java.lang.Object)">setDocType</a></span>(Object value)</nobr>
+        
+        <div class="jd-descrdiv">Sets docType</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/processors/GetTaxHistoryMessageProcessor.html#setFlowConstruct(org.mule.api.construct.FlowConstruct)">setFlowConstruct</a></span>(FlowConstruct flowConstruct)</nobr>
+        
+        <div class="jd-descrdiv">Sets flow construct</div>
   
   </td></tr>
 
@@ -2197,7 +2354,7 @@ From interface
 
 
 
-<A NAME="_getTaxHistoryRequestType"></A>
+<A NAME="_companyCodeType"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -2205,9 +2362,9 @@ From interface
         protected 
          
          
-        <a href="../../../../../../java/com/avalara/avatax/services/GetTaxHistoryRequest.html">GetTaxHistoryRequest</a>
+        String
       </span>
-        _getTaxHistoryRequestType
+        _companyCodeType
     </h4>
       <div class="api-level">
         
@@ -2227,7 +2384,127 @@ From interface
 
 
 
-<A NAME="getTaxHistoryRequest"></A>
+<A NAME="_detailLevelType"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        protected 
+         
+         
+        <a href="../../../../../../java/org/mule/modules/avalara/DetailLevelType.html">DetailLevelType</a>
+      </span>
+        _detailLevelType
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="_docCodeType"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        protected 
+         
+         
+        String
+      </span>
+        _docCodeType
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="_docIdType"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        protected 
+         
+         
+        String
+      </span>
+        _docIdType
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="_docTypeType"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        protected 
+         
+         
+        <a href="../../../../../../java/org/mule/modules/avalara/AvalaraDocumentType.html">AvalaraDocumentType</a>
+      </span>
+        _docTypeType
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="companyCode"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -2237,7 +2514,127 @@ From interface
          
         Object
       </span>
-        getTaxHistoryRequest
+        companyCode
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="detailLevel"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        protected 
+         
+         
+        Object
+      </span>
+        detailLevel
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="docCode"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        protected 
+         
+         
+        Object
+      </span>
+        docCode
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="docId"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        protected 
+         
+         
+        Object
+      </span>
+        docId
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="docType"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        protected 
+         
+         
+        Object
+      </span>
+        docType
     </h4>
       <div class="api-level">
         
@@ -2432,6 +2829,211 @@ From interface
 </div>
 
 
+<A NAME="setCompanyCode(java.lang.Object)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">setCompanyCode</span>
+      <span class="normal">(Object value)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Sets companyCode</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>value</td>
+          <td>Value to set
+</td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="setDetailLevel(java.lang.Object)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">setDetailLevel</span>
+      <span class="normal">(Object value)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Sets detailLevel</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>value</td>
+          <td>Value to set
+</td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="setDocCode(java.lang.Object)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">setDocCode</span>
+      <span class="normal">(Object value)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Sets docCode</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>value</td>
+          <td>Value to set
+</td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="setDocId(java.lang.Object)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">setDocId</span>
+      <span class="normal">(Object value)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Sets docId</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>value</td>
+          <td>Value to set
+</td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="setDocType(java.lang.Object)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">setDocType</span>
+      <span class="normal">(Object value)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Sets docType</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>value</td>
+          <td>Value to set
+</td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
 <A NAME="setFlowConstruct(org.mule.api.construct.FlowConstruct)"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -2464,47 +3066,6 @@ From interface
         <tr>
           <th>flowConstruct</td>
           <td>Flow construct to set
-</td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
-<A NAME="setGetTaxHistoryRequest(java.lang.Object)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setGetTaxHistoryRequest</span>
-      <span class="normal">(Object value)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Sets getTaxHistoryRequest</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>value</td>
-          <td>Value to set
 </td>
         </tr>
       </table>

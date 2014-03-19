@@ -205,10 +205,6 @@
     <li class="api apilevel-">
   <a href="../../../../../../java/com/avalara/avatax/services/package-summary.html">com.avalara.avatax.services</a></li>
     <li class="api apilevel-">
-  <a href="../../../../../../java/com/avalara/avatax/services/holders/package-summary.html">com.avalara.avatax.services.holders</a></li>
-    <li class="api apilevel-">
-  <a href="../../../../../../java/com/avalara/avatax/services/transformers/package-summary.html">com.avalara.avatax.services.transformers</a></li>
-    <li class="api apilevel-">
   <a href="../../../../../../java/org/mule/modules/avalara/package-summary.html">org.mule.modules.avalara</a></li>
     <li class="selected api apilevel-">
   <a href="../../../../../../java/org/mule/modules/avalara/adapters/package-summary.html">org.mule.modules.avalara.adapters</a></li>
@@ -748,7 +744,7 @@ From class
             <a href="../../../../../../java/com/avalara/avatax/services/AdjustTaxResult.html">AdjustTaxResult</a></nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/AvalaraModule.html#adjustTax(int, java.lang.String, com.avalara.avatax.services.GetTaxRequest)">adjustTax</a></span>(int adjustmentReason, String adjustmentDescription, <a href="../../../../../../java/com/avalara/avatax/services/GetTaxRequest.html">GetTaxRequest</a> getTaxRequest)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/AvalaraModule.html#adjustTax(int, java.lang.String, java.lang.String, org.mule.modules.avalara.AvalaraDocumentType, java.lang.String, javax.xml.datatype.XMLGregorianCalendar, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>, org.mule.modules.avalara.DetailLevelType, java.lang.String, java.lang.String, boolean, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>, java.lang.String, org.mule.modules.avalara.ServiceModeType, javax.xml.datatype.XMLGregorianCalendar, java.lang.String, javax.xml.datatype.XMLGregorianCalendar)">adjustTax</a></span>(int adjustmentReason, String adjustmentDescription, String companyCode, <a href="../../../../../../java/org/mule/modules/avalara/AvalaraDocumentType.html">AvalaraDocumentType</a> docType, String docCode, XMLGregorianCalendar docDate, String salespersonCode, String customerCode, String customerUsageType, String discount, String purchaseOrderNo, String exemptionNo, String originCode, String destinationCode, List&lt;Map&lt;String,&nbsp;Object&gt;&gt; baseAddresses, List&lt;Map&lt;String,&nbsp;Object&gt;&gt; lines, <a href="../../../../../../java/org/mule/modules/avalara/DetailLevelType.html">DetailLevelType</a> detailLevel, String referenceCode, String locationCode, boolean commit, String batchCode, Map&lt;String,&nbsp;Object&gt; taxOverride, String currencyCode, <a href="../../../../../../java/org/mule/modules/avalara/ServiceModeType.html">ServiceModeType</a> serviceMode, XMLGregorianCalendar paymentDate, String exchangeRate, XMLGregorianCalendar exchangeRateEffDate)</nobr>
         
         <div class="jd-descrdiv">Adjust Tax processor.</div>
   
@@ -766,7 +762,7 @@ From class
             <a href="../../../../../../java/com/avalara/avatax/services/CancelTaxResult.html">CancelTaxResult</a></nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/AvalaraModule.html#cancelTax(com.avalara.avatax.services.CancelTaxRequest)">cancelTax</a></span>(<a href="../../../../../../java/com/avalara/avatax/services/CancelTaxRequest.html">CancelTaxRequest</a> cancelTaxRequest)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/AvalaraModule.html#cancelTax(java.lang.String, java.lang.String, org.mule.modules.avalara.AvalaraDocumentType, java.lang.String, org.mule.modules.avalara.CancelCodeType)">cancelTax</a></span>(String docId, String companyCode, <a href="../../../../../../java/org/mule/modules/avalara/AvalaraDocumentType.html">AvalaraDocumentType</a> docType, String docCode, <a href="../../../../../../java/org/mule/modules/avalara/CancelCodeType.html">CancelCodeType</a> cancelCode)</nobr>
         
         <div class="jd-descrdiv">Cancel tax, indicating the document that should be canceled and the reason
  for the operation.</div>
@@ -785,7 +781,7 @@ From class
             <a href="../../../../../../java/com/avalara/avatax/services/CommitTaxResult.html">CommitTaxResult</a></nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/AvalaraModule.html#commitTax(com.avalara.avatax.services.CommitTaxRequest)">commitTax</a></span>(<a href="../../../../../../java/com/avalara/avatax/services/CommitTaxRequest.html">CommitTaxRequest</a> commitTaxRequest)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/AvalaraModule.html#commitTax(java.lang.String, java.lang.String, org.mule.modules.avalara.AvalaraDocumentType, java.lang.String, java.lang.String)">commitTax</a></span>(String docId, String companyCode, <a href="../../../../../../java/org/mule/modules/avalara/AvalaraDocumentType.html">AvalaraDocumentType</a> docType, String docCode, String newDocCode)</nobr>
         
         <div class="jd-descrdiv">Commit Tax processor
 
@@ -908,7 +904,7 @@ From class
             <a href="../../../../../../java/com/avalara/avatax/services/GetTaxResult.html">GetTaxResult</a></nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/AvalaraModule.html#getTax(com.avalara.avatax.services.GetTaxRequest)">getTax</a></span>(<a href="../../../../../../java/com/avalara/avatax/services/GetTaxRequest.html">GetTaxRequest</a> getTaxRequest)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/AvalaraModule.html#getTax(java.lang.String, org.mule.modules.avalara.AvalaraDocumentType, java.lang.String, javax.xml.datatype.XMLGregorianCalendar, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>, java.util.List<java.util.Map<java.lang.String, java.lang.Object>>, org.mule.modules.avalara.DetailLevelType, java.lang.String, java.lang.String, boolean, java.lang.String, java.util.Map<java.lang.String, java.lang.Object>, java.lang.String, org.mule.modules.avalara.ServiceModeType, javax.xml.datatype.XMLGregorianCalendar, java.lang.String, javax.xml.datatype.XMLGregorianCalendar)">getTax</a></span>(String companyCode, <a href="../../../../../../java/org/mule/modules/avalara/AvalaraDocumentType.html">AvalaraDocumentType</a> docType, String docCode, XMLGregorianCalendar docDate, String salespersonCode, String customerCode, String customerUsageType, String discount, String purchaseOrderNo, String exemptionNo, String originCode, String destinationCode, List&lt;Map&lt;String,&nbsp;Object&gt;&gt; baseAddresses, List&lt;Map&lt;String,&nbsp;Object&gt;&gt; lines, <a href="../../../../../../java/org/mule/modules/avalara/DetailLevelType.html">DetailLevelType</a> detailLevel, String referenceCode, String locationCode, boolean commit, String batchCode, Map&lt;String,&nbsp;Object&gt; taxOverride, String currencyCode, <a href="../../../../../../java/org/mule/modules/avalara/ServiceModeType.html">ServiceModeType</a> serviceMode, XMLGregorianCalendar paymentDate, String exchangeRate, XMLGregorianCalendar exchangeRateEffDate)</nobr>
         
         <div class="jd-descrdiv">Get Tax processor.</div>
   
@@ -926,7 +922,7 @@ From class
             <a href="../../../../../../java/com/avalara/avatax/services/GetTaxHistoryResult.html">GetTaxHistoryResult</a></nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/AvalaraModule.html#getTaxHistory(com.avalara.avatax.services.GetTaxHistoryRequest)">getTaxHistory</a></span>(<a href="../../../../../../java/com/avalara/avatax/services/GetTaxHistoryRequest.html">GetTaxHistoryRequest</a> getTaxHistoryRequest)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/AvalaraModule.html#getTaxHistory(java.lang.String, java.lang.String, org.mule.modules.avalara.AvalaraDocumentType, java.lang.String, org.mule.modules.avalara.DetailLevelType)">getTaxHistory</a></span>(String docId, String companyCode, <a href="../../../../../../java/org/mule/modules/avalara/AvalaraDocumentType.html">AvalaraDocumentType</a> docType, String docCode, <a href="../../../../../../java/org/mule/modules/avalara/DetailLevelType.html">DetailLevelType</a> detailLevel)</nobr>
         
         <div class="jd-descrdiv">Get Tax History processor
 
@@ -1015,10 +1011,28 @@ From class
             
             
             
+            <a href="../../../../../../java/com/avalara/avatax/services/PingResult.html">PingResult</a></nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/AvalaraModule.html#pingWithCredentials(java.lang.String, java.lang.String, java.lang.String, java.lang.String)">pingWithCredentials</a></span>(String pingAccount, String pingAvalaraClient, String pingLicense, String message)</nobr>
+        
+        <div class="jd-descrdiv">Ping Avalara to test connectivity and version of the service for a specific user.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
             <a href="../../../../../../java/com/avalara/avatax/services/PostTaxResult.html">PostTaxResult</a></nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/AvalaraModule.html#postTax(com.avalara.avatax.services.PostTaxRequest)">postTax</a></span>(<a href="../../../../../../java/com/avalara/avatax/services/PostTaxRequest.html">PostTaxRequest</a> postTaxRequest)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/AvalaraModule.html#postTax(java.lang.String, java.lang.String, org.mule.modules.avalara.AvalaraDocumentType, java.lang.String, javax.xml.datatype.XMLGregorianCalendar, java.lang.String, java.lang.String, boolean, java.lang.String)">postTax</a></span>(String docId, String companyCode, <a href="../../../../../../java/org/mule/modules/avalara/AvalaraDocumentType.html">AvalaraDocumentType</a> docType, String docCode, XMLGregorianCalendar docDate, String totalAmount, String totalTax, boolean commit, String newDocCode)</nobr>
         
         <div class="jd-descrdiv">Post Tax processor
 
@@ -1028,7 +1042,7 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1046,7 +1060,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1062,7 +1076,7 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1078,7 +1092,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1096,7 +1110,7 @@ From class
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1112,7 +1126,7 @@ From class
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1122,7 +1136,7 @@ From class
             <a href="../../../../../../java/com/avalara/avatax/services/ValidateResult.html">ValidateResult</a></nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/AvalaraModule.html#validateAddress(com.avalara.avatax.services.BaseAddress, org.mule.modules.avalara.TextCaseType, boolean, boolean, javax.xml.datatype.XMLGregorianCalendar)">validateAddress</a></span>(<a href="../../../../../../java/com/avalara/avatax/services/BaseAddress.html">BaseAddress</a> address, <a href="../../../../../../java/org/mule/modules/avalara/TextCaseType.html">TextCaseType</a> textCase, boolean coordinates, boolean taxability, XMLGregorianCalendar date)</nobr>
+        <span class="sympad"><a href="../../../../../../org/mule/modules/avalara/AvalaraModule.html#validateAddress(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.Integer, java.lang.String, java.lang.String, org.mule.modules.avalara.TextCaseType, boolean, boolean, javax.xml.datatype.XMLGregorianCalendar)">validateAddress</a></span>(String line1, String line2, String line3, String city, String region, String country, String postalCode, String addressCode, Integer taxRegionId, String latitude, String longitude, <a href="../../../../../../java/org/mule/modules/avalara/TextCaseType.html">TextCaseType</a> textCase, boolean coordinates, boolean taxability, XMLGregorianCalendar date)</nobr>
         
         <div class="jd-descrdiv">Validate Address processor.</div>
   
