@@ -1,9 +1,9 @@
 /**
- * (c) 2003-2012 MuleSoft, Inc. This software is protected under international
- * copyright law. All use of this software is subject to MuleSoft's Master
- * Subscription Agreement (or other Terms of Service) separately entered
- * into between you and MuleSoft. If such an agreement is not in
- * place, you may not use the software.
+ * Copyright (c) MuleSoft, Inc.  All rights reserved.  http://www.mulesoft.com
+ *
+ * The software in this package is published under the terms of the CPAL v1.0
+ * license, a copy of which has been included with this distribution in the
+ * LICENSE.md file.
  */
 
 /**
@@ -11,23 +11,11 @@
  */
 package org.mule.modules.avalara;
 
-import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.xml.datatype.XMLGregorianCalendar;
-
+import com.avalara.avatax.services.*;
+import com.zauberlabs.commons.mom.MapObjectMapper;
 import org.apache.commons.lang.Validate;
 import org.mule.api.ConnectionException;
-import org.mule.api.annotations.Configurable;
-import org.mule.api.annotations.Connect;
-import org.mule.api.annotations.ConnectionIdentifier;
-import org.mule.api.annotations.Connector;
-import org.mule.api.annotations.Disconnect;
-import org.mule.api.annotations.InvalidateConnectionOn;
-import org.mule.api.annotations.Processor;
-import org.mule.api.annotations.ValidateConnection;
+import org.mule.api.annotations.*;
 import org.mule.api.annotations.display.Password;
 import org.mule.api.annotations.display.Placement;
 import org.mule.api.annotations.param.ConnectionKey;
@@ -40,30 +28,11 @@ import org.mule.modules.avalara.exception.AvalaraAuthenticationException;
 import org.mule.modules.avalara.exception.AvalaraRuntimeException;
 import org.mule.modules.utils.mom.JaxbMapObjectMappers;
 
-import com.avalara.avatax.services.AdjustTaxRequest;
-import com.avalara.avatax.services.AdjustTaxResult;
-import com.avalara.avatax.services.ArrayOfBatchFile;
-import com.avalara.avatax.services.BaseAddress;
-import com.avalara.avatax.services.Batch;
-import com.avalara.avatax.services.BatchFetchResult;
-import com.avalara.avatax.services.BatchFile;
-import com.avalara.avatax.services.BatchFileFetchResult;
-import com.avalara.avatax.services.BatchSaveResult;
-import com.avalara.avatax.services.CancelTaxRequest;
-import com.avalara.avatax.services.CancelTaxResult;
-import com.avalara.avatax.services.CommitTaxRequest;
-import com.avalara.avatax.services.CommitTaxResult;
-import com.avalara.avatax.services.FetchRequest;
-import com.avalara.avatax.services.GetTaxHistoryRequest;
-import com.avalara.avatax.services.GetTaxHistoryResult;
-import com.avalara.avatax.services.GetTaxRequest;
-import com.avalara.avatax.services.GetTaxResult;
-import com.avalara.avatax.services.PingResult;
-import com.avalara.avatax.services.PostTaxRequest;
-import com.avalara.avatax.services.PostTaxResult;
-import com.avalara.avatax.services.ValidateRequest;
-import com.avalara.avatax.services.ValidateResult;
-import com.zauberlabs.commons.mom.MapObjectMapper;
+import javax.xml.datatype.XMLGregorianCalendar;
+import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Avalara provides automated sales tax solutions to streamline cumbersome, 
@@ -75,6 +44,7 @@ import com.zauberlabs.commons.mom.MapObjectMapper;
  *
  * @author Gaston Ponti
  */
+@ReconnectOn(exceptions = AvalaraAuthenticationException.class)
 @Connector(name = "avalara", schemaVersion = "2.0", friendlyName = "Avalara")
 public class AvalaraModule
 {
@@ -82,7 +52,6 @@ public class AvalaraModule
      * Tax Webservice endpoint
      */
     @Configurable
-    @Optional
     @Default("https://development.avalara.net/Tax/TaxSvc.asmx")
     @Placement(group = "Connection")
     private String taxServiceEndpoint;
@@ -91,7 +60,6 @@ public class AvalaraModule
      * Address Webservice endpoint
      */
     @Configurable
-    @Optional
     @Default("https://development.avalara.net/Address/AddressSvc.asmx")
     @Placement(group = "Connection")
     private String addressServiceEndpoint;
@@ -101,7 +69,6 @@ public class AvalaraModule
      * Batch Webservice endpoint
      */
     @Configurable
-    @Optional
     @Default("https://development.avalara.net/Batch/BatchSvc.asmx")
     @Placement(group = "Connection")
     private String batchServiceEndpoint;
@@ -123,9 +90,8 @@ public class AvalaraModule
      *
      * @throws AvalaraRuntimeException
      */
-    @InvalidateConnectionOn(exception = AvalaraAuthenticationException.class)
     @Processor
-    public PingResult ping(@Optional @Default("Ping") String message) {
+    public PingResult ping(@Default("Ping") String message) {
     	Validate.notNull(message);
     	return apiClient.sendTaxRequestToAvalara(TaxRequestType.Ping, message);
     }
@@ -146,7 +112,7 @@ public class AvalaraModule
      * @throws AvalaraRuntimeException
      */
     @Processor
-    public PingResult pingWithCredentials(String pingAccount, String pingAvalaraClient, String pingLicense, @Optional @Default("PingWithCredentials") String message) {
+    public PingResult pingWithCredentials(String pingAccount, String pingAvalaraClient, String pingLicense, @Default("PingWithCredentials") String message) {
     	Validate.notNull(message);
     	return new DefaultAvalaraClient(pingAccount, pingAvalaraClient, pingLicense, getAddressServiceEndpoint(), getTaxServiceEndpoint(), getBatchServiceEndpoint()).sendTaxRequestToAvalara(TaxRequestType.Ping, message);
     }
@@ -227,7 +193,6 @@ public class AvalaraModule
      * 
      * @throws AvalaraRuntimeException
      */
-    @InvalidateConnectionOn(exception = AvalaraAuthenticationException.class)
     @Processor
     public GetTaxResult getTax(String companyCode,
                                AvalaraDocumentType docType,
@@ -246,11 +211,11 @@ public class AvalaraModule
                                DetailLevelType detailLevel,
                                @Optional String referenceCode,
                                @Optional String locationCode,
-                               @Optional @Default("false") boolean commit,
+                               @Default("false") boolean commit,
                                @Optional String batchCode,
                                @Optional Map<String, Object> taxOverride,
                                @Optional String currencyCode,
-                               @Optional @Default("AUTOMATIC") ServiceModeType serviceMode,
+                               @Default("AUTOMATIC") ServiceModeType serviceMode,
                                XMLGregorianCalendar paymentDate,
                                String exchangeRate,
                                XMLGregorianCalendar exchangeRateEffDate) {
@@ -379,7 +344,6 @@ public class AvalaraModule
      *
      * @throws AvalaraRuntimeException
      */
-    @InvalidateConnectionOn(exception = AvalaraAuthenticationException.class)
     @Processor
     public AdjustTaxResult adjustTax(int adjustmentReason,
                                      String   adjustmentDescription,
@@ -400,11 +364,11 @@ public class AvalaraModule
                                DetailLevelType detailLevel,
                                @Optional String referenceCode,
                                @Optional String locationCode,
-                               @Optional @Default("false") boolean commit,
+                               @Default("false") boolean commit,
                                @Optional String batchCode,
                                @Optional Map<String, Object> taxOverride,
                                @Optional String currencyCode,
-                               @Optional @Default("AUTOMATIC") ServiceModeType serviceMode,
+                               @Default("AUTOMATIC") ServiceModeType serviceMode,
                                XMLGregorianCalendar paymentDate,
                                String exchangeRate,
                                XMLGregorianCalendar exchangeRateEffDate) {
@@ -492,7 +456,6 @@ public class AvalaraModule
      * 
      * @throws AvalaraRuntimeException
      */
-    @InvalidateConnectionOn(exception = AvalaraAuthenticationException.class)
     @Processor
     public PostTaxResult postTax(@Optional String docId,
                                  String companyCode,
@@ -501,7 +464,7 @@ public class AvalaraModule
                                  XMLGregorianCalendar docDate,
                                  String totalAmount,
                                  String totalTax,
-                                 @Optional @Default("false") boolean commit,
+                                 @Default("false") boolean commit,
                                  @Optional String newDocCode) {
         BigDecimal totalAmountDecimal = totalAmount == null ? null :  new BigDecimal(totalAmount);
         BigDecimal totalTaxDecimal = totalTax == null ? null :  new BigDecimal(totalTax);
@@ -542,7 +505,6 @@ public class AvalaraModule
      * 
      * @throws AvalaraRuntimeException
      */
-    @InvalidateConnectionOn(exception = AvalaraAuthenticationException.class)
     @Processor
     public CommitTaxResult commitTax(@Optional String docId,
                                      String companyCode,
@@ -581,7 +543,6 @@ public class AvalaraModule
      * 
      * @throws AvalaraRuntimeException
      */
-    @InvalidateConnectionOn(exception = AvalaraAuthenticationException.class)
     @Processor
     public GetTaxHistoryResult getTaxHistory(@Optional String docId,
                                              String companyCode,
@@ -621,7 +582,6 @@ public class AvalaraModule
      * 
      * @throws AvalaraRuntimeException
      */
-    @InvalidateConnectionOn(exception = AvalaraAuthenticationException.class)
     @Processor
     public CancelTaxResult cancelTax(@Optional String docId,
                                      String companyCode,
@@ -670,16 +630,15 @@ public class AvalaraModule
      * 
      * @throws AvalaraRuntimeException
      */
-    @InvalidateConnectionOn(exception = AvalaraAuthenticationException.class)
     @Processor
     public ValidateResult validateAddress(String line1, @Optional String line2, @Optional String line3,
                                           @Optional String city, @Optional String region, @Optional String country,
                                           @Optional String postalCode, @Optional String addressCode,
                                           Integer taxRegionId,
                                           @Optional String latitude, @Optional String longitude,
-                                          @Optional @Default("DEFAULT") TextCaseType textCase,
-                                          @Optional @Default("false") boolean coordinates,
-                                          @Optional @Default("false") boolean taxability,
+                                          @Default("DEFAULT") TextCaseType textCase,
+                                          @Default("false") boolean coordinates,
+                                          @Default("false") boolean taxability,
                                           XMLGregorianCalendar date) {
         BaseAddress address = new BaseAddress();
         address.setAddressCode(addressCode);
@@ -718,7 +677,6 @@ public class AvalaraModule
      *
      * @throws AvalaraRuntimeException
      */
-    @InvalidateConnectionOn(exception = AvalaraAuthenticationException.class)
     @Processor
     public Map<String,BatchFileFetchResult> fetchBatchFile(String batchId) {
         // This Request is needed to retrieve the batch file ids. The actual content cannot be retrieved at once.
@@ -758,7 +716,6 @@ public class AvalaraModule
      *
      * @throws AvalaraRuntimeException
      */
-    @InvalidateConnectionOn(exception = AvalaraAuthenticationException.class)
     @Processor
     public boolean isBatchFinished(String batchId) {
         final FetchRequest batchFetchRequest = new FetchRequest();
@@ -786,7 +743,6 @@ public class AvalaraModule
      *
      * @throws AvalaraRuntimeException
      */
-    @InvalidateConnectionOn(exception = AvalaraAuthenticationException.class)
     @Processor
     public BatchSaveResult saveBatch(BatchType batchType,
                                        int companyId,
@@ -849,9 +805,9 @@ public class AvalaraModule
      * @param apiClient  with the apiClient.
      */
     
-    public void setClient(AvalaraClient client)
+    public void setClient(AvalaraClient apiClient)
     {
-        this.apiClient = client;
+        this.apiClient = apiClient;
     }
 
     public String getTaxServiceEndpoint() {
