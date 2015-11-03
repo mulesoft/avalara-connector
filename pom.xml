@@ -3,7 +3,7 @@
     <parent>
         <groupId>org.mule.tools.devkit</groupId>
         <artifactId>mule-devkit-parent</artifactId>
-        <version>3.3.2</version>
+        <version>3.5.3</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -20,7 +20,7 @@
         <ws.version>1.1</ws.version>
         <cfx.version>2.5.2</cfx.version>
         <spring.version>3.1.1.RELEASE</spring.version>
-        <category>Standard</category>
+        <category>Community</category>
         <licensePath>LICENSE.md</licensePath>
         <devkit.studio.package.skip>false</devkit.studio.package.skip>
     </properties>
@@ -34,7 +34,7 @@
                 <executions>
                     <execution>
                         <id>generate-sources</id>
-                        <phase>generate-sources</phase>
+                        <phase>initialize</phase>
                         <goals>
                             <goal>wsdl2java</goal>
                         </goals>
@@ -63,12 +63,6 @@
 
       <dependencies>
         <dependency>
-          <groupId>org.mule.modules</groupId>
-          <artifactId>mule-module-scripting</artifactId>
-          <version>3.2.0</version>
-          <scope>test</scope>
-        </dependency>
-        <dependency>
           <groupId>com.mulesoft.modules</groupId>
           <artifactId>mule-modules-utils</artifactId>
           <version>${mule.module.utils.version}</version>
@@ -92,11 +86,6 @@
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-frontend-jaxws</artifactId>
             <version>${cfx.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${spring.version}</version>
         </dependency>
       </dependencies>
 

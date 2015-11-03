@@ -15,11 +15,13 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xmlns:spring="http://www.springframework.org/schema/beans"
       xmlns:avalara="http://www.mulesoft.org/schema/mule/avalara"
-      xsi:schemaLocation="
+      xmlns:context="http://www.springframework.org/schema/context"
+      xsi:schemaLocation="http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
         http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
         http://www.mulesoft.org/schema/mule/avalara http://www.mulesoft.org/schema/mule/avalara/2.0/mule-avalara.xsd">
 
+        <context:property-placeholder location="test.properties"/>
         <avalara:config account="${avalaraAccount}" license="${avalaraLicense}" avalaraClient="${avalaraClient}" name="avalara-config"/>
 
     <flow name="testFlow">
