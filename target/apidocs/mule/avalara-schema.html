@@ -1,0 +1,1830 @@
+
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+  <meta name="description" content="Documentation for Mule Avalara Connector." />
+
+<link rel="shortcut icon" type="image/x-icon" href="../favicon.ico" />
+<title>
+
+  AvalaraModule
+
+
+| Mule Avalara Connector
+
+</title>
+<link href="../assets/mule-developer-docs.css" rel="stylesheet" type="text/css" />
+<link href="../assets/mule-developer-prettify.css" rel="stylesheet" type="text/css" />
+<link href="../assets/customizations.css" rel="stylesheet" type="text/css" />
+<link href='http://fonts.googleapis.com/css?family=Ubuntu:300' rel='stylesheet' type='text/css'>
+<script src="../assets/search_autocomplete.js" type="text/javascript"></script>
+<script src="../assets/jquery-resizable.min.js" type="text/javascript"></script>
+<script src="../assets/jquery-toc.js" type="text/javascript"></script>
+<script src="../assets/mule-developer-docs.js" type="text/javascript"></script>
+<script src="../assets/prettify.js" type="text/javascript"></script>
+<script type="text/javascript">
+  setToRoot("../", "../assets/");
+</script>
+<script src="../assets/customizations.js" type="text/javascript"></script>
+<noscript>
+  <style type="text/css">
+    html,body{overflow:auto;}
+    #body-content{position:relative; top:0;}
+    #doc-content{overflow:visible;border-left:3px solid #666;}
+    #side-nav{padding:0;}
+    #side-nav .toggle-list ul {display:block;}
+    #resize-packages-nav{border-bottom:3px solid #666;}
+  </style>
+</noscript>
+<script type="text/javascript" charset="utf-8">
+  var is_ssl = ("https:" == document.location.protocol);
+  var asset_host = is_ssl ? "https://s3.amazonaws.com/getsatisfaction.com/" : "http://s3.amazonaws.com/getsatisfaction.com/";
+  document.write(unescape("%3Cscript src='" + asset_host + "javascripts/feedback-v2.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+<script type="text/javascript" charset="utf-8">
+  var feedback_widget_options = {};
+
+  feedback_widget_options.display = "overlay";
+  feedback_widget_options.company = "mulesoft";
+  feedback_widget_options.placement = "right";
+  feedback_widget_options.color = "#2F74AE";
+  feedback_widget_options.style = "question";
+
+  feedback_widget_options.tag = "Mule Avalara Connector";
+
+  feedback_widget_options.limit = "3";
+
+  var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
+</script>
+</head>
+
+<body class="">
+
+<div id="header">
+    <div id="headerLeft">
+    
+      <span id="masthead-title">Mule Avalara Connector</span>
+    
+    <ul id="header-tabs" class="mule">
+    
+    	<li id="guide"><a href="../guide/install.html">
+	    	<span class="en">Install Guide</span>
+    	</a></li>
+    
+    	<li id="java"><a href="../java/packages.html">
+	    	<span class="en">Java API Reference</span>
+    	</a></li>
+    
+    	<li id="mule"><a href="../mule/modules.html">
+	    	<span class="en">Mule API Reference</span>
+    	</a></li>
+    
+    </ul>
+    </div>
+    <div id="headerRight">
+      <a href="http://www.mulesoft.com" tabindex="-1">
+      <img src="../assets//images/mulesoft-logo-final.gif" alt="MuleSoft" border="0" id="mulesoftlogo"></a><br/>
+      
+  <div id="searchContainer" >
+      <div id="searchForm">
+          <form accept-charset="utf-8" class="gsc-search-box" 
+                onsubmit="return submit_search()">
+            <table class="gsc-search-box" cellpadding="0" cellspacing="0"><tbody>
+                <tr>
+                  <td class="gsc-input">
+                    <input id="search_autocomplete" class="gsc-input" type="text" size="33" autocomplete="off"
+                      title="search developer docs" name="q"
+                      value="search developer docs"
+                      onFocus="search_focus_changed(this, true)"
+                      onBlur="search_focus_changed(this, false)"
+                      onkeydown="return search_changed(event, true, '../')"
+                      onkeyup="return search_changed(event, false, '../')" />
+                  <div id="search_filtered_div" class="no-display">
+                      <table id="search_filtered" cellspacing=0>
+                      </table>
+                  </div>
+                  </td>
+                  <td class="gsc-search-button">
+                    <input type="submit" value="Search" title="search" id="search-button" class="gsc-search-button" />
+                  </td>
+                  <td class="gsc-clear-button">
+                    <div title="clear results" class="gsc-clear-button">&nbsp;</div>
+                  </td>
+                </tr></tbody>
+              </table>
+          </form>
+      </div><!-- searchForm -->
+  </div><!-- search -->
+      
+    </div>
+</div><!-- header -->
+
+
+<div class="g-unit" id="all-content">
+
+<div id="api-info-block">
+
+<div class="api-level">
+  
+
+
+  
+  
+
+</div>
+</div><!-- end api-info-block -->
+
+
+<!-- ======== START OF MODULE DATA ======== -->
+
+<div id="jd-header">
+    org.mule.modules
+<h1>mule-module-avalara</h1>
+
+</div><!-- end header -->
+
+<div id="naMessage"></div>
+
+<div id="jd-content" class="api apilevel-">
+
+
+<div class="jd-tagdata">
+      <table class="jd-tagtable">
+        <tbody><tr>
+          <th>Namespace</th><td>http://www.mulesoft.org/schema/mule/avalara</td>
+        </tr><tr>
+          <th>Schema Location</th><td>http://www.mulesoft.org/schema/mule/avalara/current/mule-avalara.xsd&nbsp;&nbsp;(<a href="avalara-schema.html">View Schema</a>)</td>
+        </tr>
+<tr>
+          <th>Schema Version</th><td>2.0</td>
+        </tr>
+<tr>
+          <th>Minimum Mule Version</th><td>3.2</td>
+        </tr>
+    </tbody></table>
+  </div>
+
+<div class="jd-descr">
+<h2>Schema</h2>
+<pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+
+&lt;xs:schema xmlns:ns2=&quot;http://www.mulesoft.org/schema/mule/devkit&quot; xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; targetNamespace=&quot;http://www.mulesoft.org/schema/mule/avalara&quot; attributeFormDefault=&quot;unqualified&quot; elementFormDefault=&quot;qualified&quot;&gt;
+  &lt;xs:import namespace=&quot;http://www.w3.org/XML/1998/namespace&quot;&gt;&lt;/xs:import&gt;
+  &lt;xs:import namespace=&quot;http://www.springframework.org/schema/beans&quot; schemaLocation=&quot;http://www.springframework.org/schema/beans/spring-beans-3.0.xsd&quot;&gt;&lt;/xs:import&gt;
+  &lt;xs:import namespace=&quot;http://www.mulesoft.org/schema/mule/core&quot; schemaLocation=&quot;http://www.mulesoft.org/schema/mule/core/current/mule.xsd&quot;&gt;&lt;/xs:import&gt;
+  &lt;xs:element xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; substitutionGroup=&quot;mule:abstract-extension&quot; name=&quot;config&quot; ns2:javaClass=&quot;org.mule.modules.avalara.connectivity.AvalaraModuleConnectionManager&quot;&gt;
+    &lt;xs:complexType&gt;
+      &lt;xs:complexContent&gt;
+        &lt;xs:extension base=&quot;mule:abstractExtensionType&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Avalara provides automated sales tax solutions to streamline cumbersome,
+error-prone tax compliance processes and reduce the risk of loss or penalty
+in case of an audit. Their automated solutions automatically perform address
+validation, jurisdiction research and rate calculation and allow you to
+manage even the most complicated tax issues, such as situs, nexus, tax tiers,
+tax holidays, exemptions, certificate management and product taxability rules.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+          &lt;xs:sequence&gt;
+            &lt;xs:element type=&quot;mule:poolingProfileType&quot; minOccurs=&quot;0&quot; name=&quot;connection-pooling-profile&quot;&gt;
+              &lt;xs:annotation&gt;
+                &lt;xs:documentation&gt;Characteristics of the connection pool.&lt;/xs:documentation&gt;
+              &lt;/xs:annotation&gt;
+            &lt;/xs:element&gt;
+            &lt;xs:element minOccurs=&quot;0&quot; ref=&quot;mule:abstract-reconnection-strategy&quot;&gt;
+              &lt;xs:annotation&gt;
+                &lt;xs:documentation&gt;Reconnection strategy that defines how Mule should handle a connection failure.&lt;/xs:documentation&gt;
+              &lt;/xs:annotation&gt;
+            &lt;/xs:element&gt;
+          &lt;/xs:sequence&gt;
+          &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;name&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Give a name to this configuration so it can be later referenced by config-ref.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:attribute&gt;
+          &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; default=&quot;https://development.avalara.net/Tax/TaxSvc.asmx&quot; name=&quot;taxServiceEndpoint&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Tax Webservice endpoint&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:attribute&gt;
+          &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; default=&quot;https://development.avalara.net/Address/AddressSvc.asmx&quot; name=&quot;addressServiceEndpoint&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Address Webservice endpoint&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:attribute&gt;
+          &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; default=&quot;https://development.avalara.net/Batch/BatchSvc.asmx&quot; name=&quot;batchServiceEndpoint&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Batch Webservice endpoint&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:attribute&gt;
+          &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;account&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Registered Avalara account&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:attribute&gt;
+          &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;avalaraClient&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Target client to which make the call&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:attribute&gt;
+          &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;license&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;The matching license for the account&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:attribute&gt;
+        &lt;/xs:extension&gt;
+      &lt;/xs:complexContent&gt;
+    &lt;/xs:complexType&gt;
+  &lt;/xs:element&gt;
+  &lt;xs:element xmlns=&quot;http://www.mulesoft.org/schema/mule/avalara&quot; xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; type=&quot;PingType&quot; substitutionGroup=&quot;mule:abstract-message-processor&quot; name=&quot;ping&quot;&gt;
+    &lt;xs:annotation&gt;
+      &lt;xs:documentation&gt;Ping Avalara to test connectivity and version of the service.&lt;/xs:documentation&gt;
+    &lt;/xs:annotation&gt;
+  &lt;/xs:element&gt;
+  &lt;xs:complexType name=&quot;PingType&quot;&gt;
+    &lt;xs:complexContent&gt;
+      &lt;xs:extension xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; base=&quot;mule:abstractMessageProcessorType&quot;&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;config-ref&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Specify which configuration to use for this invocation.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; default=&quot;Ping&quot; name=&quot;message&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Ping Message&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;account&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Registered Avalara account&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;avalaraClient&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Target client to which make the call&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;license&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The matching license for the account&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+      &lt;/xs:extension&gt;
+    &lt;/xs:complexContent&gt;
+  &lt;/xs:complexType&gt;
+  &lt;xs:element xmlns=&quot;http://www.mulesoft.org/schema/mule/avalara&quot; xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; type=&quot;PingWithCredentialsType&quot; substitutionGroup=&quot;mule:abstract-message-processor&quot; name=&quot;ping-with-credentials&quot;&gt;
+    &lt;xs:annotation&gt;
+      &lt;xs:documentation&gt;Ping Avalara to test connectivity and version of the service for a specific user.
+It is needed to specify the credentials for the user since this operation does not
+use the global connector configuration.&lt;/xs:documentation&gt;
+    &lt;/xs:annotation&gt;
+  &lt;/xs:element&gt;
+  &lt;xs:complexType name=&quot;PingWithCredentialsType&quot;&gt;
+    &lt;xs:complexContent&gt;
+      &lt;xs:extension xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; base=&quot;mule:abstractMessageProcessorType&quot;&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;config-ref&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Specify which configuration to use for this invocation.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;required&quot; name=&quot;pingAccount&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Avalara Account Number&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;required&quot; name=&quot;pingAvalaraClient&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Avalara Client&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;required&quot; name=&quot;pingLicense&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Avalara License&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; default=&quot;PingWithCredentials&quot; name=&quot;message&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Ping Message&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;account&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Registered Avalara account&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;avalaraClient&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Target client to which make the call&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;license&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The matching license for the account&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+      &lt;/xs:extension&gt;
+    &lt;/xs:complexContent&gt;
+  &lt;/xs:complexType&gt;
+  &lt;xs:element xmlns=&quot;http://www.mulesoft.org/schema/mule/avalara&quot; xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; type=&quot;GetTaxType&quot; substitutionGroup=&quot;mule:abstract-message-processor&quot; name=&quot;get-tax&quot;&gt;
+    &lt;xs:annotation&gt;
+      &lt;xs:documentation&gt;Get Tax processor.
+&amp;lt;p&amp;gt;
+The Get Tax operation calculates tax for one or more invoiced items and
+displays details describing the calculation of tax for each line item.&lt;/xs:documentation&gt;
+    &lt;/xs:annotation&gt;
+  &lt;/xs:element&gt;
+  &lt;xs:complexType name=&quot;GetTaxType&quot;&gt;
+    &lt;xs:complexContent&gt;
+      &lt;xs:extension xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; base=&quot;mule:abstractMessageProcessorType&quot;&gt;
+        &lt;xs:sequence&gt;
+          &lt;xs:element minOccurs=&quot;1&quot; maxOccurs=&quot;1&quot; name=&quot;base-addresses&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Collection of physical addresses that will be referred to as the destination or origination of 1 or more invoice line entries&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+            &lt;xs:complexType&gt;
+              &lt;xs:sequence&gt;
+                &lt;xs:element minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot; name=&quot;base-address&quot;&gt;
+                  &lt;xs:complexType&gt;
+                    &lt;xs:choice&gt;
+                      &lt;xs:sequence&gt;
+                        &lt;xs:element minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot; name=&quot;inner-base-address&quot;&gt;
+                          &lt;xs:complexType&gt;
+                            &lt;xs:simpleContent&gt;
+                              &lt;xs:extension base=&quot;xs:string&quot;&gt;
+                                &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;value-ref&quot;&gt;&lt;/xs:attribute&gt;
+                                &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;required&quot; name=&quot;key-ref&quot;&gt;&lt;/xs:attribute&gt;
+                              &lt;/xs:extension&gt;
+                            &lt;/xs:simpleContent&gt;
+                          &lt;/xs:complexType&gt;
+                        &lt;/xs:element&gt;
+                      &lt;/xs:sequence&gt;
+                      &lt;xs:sequence&gt;
+                        &lt;xs:any minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot; processContents=&quot;lax&quot;&gt;&lt;/xs:any&gt;
+                      &lt;/xs:sequence&gt;
+                    &lt;/xs:choice&gt;
+                    &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;ref&quot;&gt;
+                      &lt;xs:annotation&gt;
+                        &lt;xs:documentation&gt;The reference object for this parameter&lt;/xs:documentation&gt;
+                      &lt;/xs:annotation&gt;
+                    &lt;/xs:attribute&gt;
+                  &lt;/xs:complexType&gt;
+                &lt;/xs:element&gt;
+              &lt;/xs:sequence&gt;
+              &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;ref&quot;&gt;
+                &lt;xs:annotation&gt;
+                  &lt;xs:documentation&gt;The reference object for this parameter&lt;/xs:documentation&gt;
+                &lt;/xs:annotation&gt;
+              &lt;/xs:attribute&gt;
+            &lt;/xs:complexType&gt;
+          &lt;/xs:element&gt;
+          &lt;xs:element minOccurs=&quot;1&quot; maxOccurs=&quot;1&quot; name=&quot;lines&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Collection of invoice lines requiring tax calculation&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+            &lt;xs:complexType&gt;
+              &lt;xs:sequence&gt;
+                &lt;xs:element minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot; name=&quot;line&quot;&gt;
+                  &lt;xs:complexType&gt;
+                    &lt;xs:choice&gt;
+                      &lt;xs:sequence&gt;
+                        &lt;xs:element minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot; name=&quot;inner-line&quot;&gt;
+                          &lt;xs:complexType&gt;
+                            &lt;xs:simpleContent&gt;
+                              &lt;xs:extension base=&quot;xs:string&quot;&gt;
+                                &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;value-ref&quot;&gt;&lt;/xs:attribute&gt;
+                                &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;required&quot; name=&quot;key-ref&quot;&gt;&lt;/xs:attribute&gt;
+                              &lt;/xs:extension&gt;
+                            &lt;/xs:simpleContent&gt;
+                          &lt;/xs:complexType&gt;
+                        &lt;/xs:element&gt;
+                      &lt;/xs:sequence&gt;
+                      &lt;xs:sequence&gt;
+                        &lt;xs:any minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot; processContents=&quot;lax&quot;&gt;&lt;/xs:any&gt;
+                      &lt;/xs:sequence&gt;
+                    &lt;/xs:choice&gt;
+                    &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;ref&quot;&gt;
+                      &lt;xs:annotation&gt;
+                        &lt;xs:documentation&gt;The reference object for this parameter&lt;/xs:documentation&gt;
+                      &lt;/xs:annotation&gt;
+                    &lt;/xs:attribute&gt;
+                  &lt;/xs:complexType&gt;
+                &lt;/xs:element&gt;
+              &lt;/xs:sequence&gt;
+              &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;ref&quot;&gt;
+                &lt;xs:annotation&gt;
+                  &lt;xs:documentation&gt;The reference object for this parameter&lt;/xs:documentation&gt;
+                &lt;/xs:annotation&gt;
+              &lt;/xs:attribute&gt;
+            &lt;/xs:complexType&gt;
+          &lt;/xs:element&gt;
+          &lt;xs:element minOccurs=&quot;0&quot; maxOccurs=&quot;1&quot; name=&quot;tax-override&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Indicates to apply tax override to the document.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+            &lt;xs:complexType&gt;
+              &lt;xs:choice&gt;
+                &lt;xs:sequence&gt;
+                  &lt;xs:element minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot; name=&quot;tax-override&quot;&gt;
+                    &lt;xs:complexType&gt;
+                      &lt;xs:simpleContent&gt;
+                        &lt;xs:extension base=&quot;xs:string&quot;&gt;
+                          &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;value-ref&quot;&gt;&lt;/xs:attribute&gt;
+                          &lt;xs:attribute type=&quot;xs:string&quot; name=&quot;key&quot;&gt;&lt;/xs:attribute&gt;
+                        &lt;/xs:extension&gt;
+                      &lt;/xs:simpleContent&gt;
+                    &lt;/xs:complexType&gt;
+                  &lt;/xs:element&gt;
+                &lt;/xs:sequence&gt;
+                &lt;xs:sequence&gt;
+                  &lt;xs:any minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot; processContents=&quot;lax&quot;&gt;&lt;/xs:any&gt;
+                &lt;/xs:sequence&gt;
+              &lt;/xs:choice&gt;
+              &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;ref&quot;&gt;
+                &lt;xs:annotation&gt;
+                  &lt;xs:documentation&gt;The reference object for this parameter&lt;/xs:documentation&gt;
+                &lt;/xs:annotation&gt;
+              &lt;/xs:attribute&gt;
+            &lt;/xs:complexType&gt;
+          &lt;/xs:element&gt;
+        &lt;/xs:sequence&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;config-ref&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Specify which configuration to use for this invocation.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;required&quot; name=&quot;companyCode&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Client application company reference code&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute xmlns=&quot;http://www.mulesoft.org/schema/mule/avalara&quot; type=&quot;AvalaraDocumentTypeEnumType&quot; use=&quot;required&quot; name=&quot;docType&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The document type specifies the category of the document and affects how the document is treated after a tax calculation; see  for more information about the specific document types.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;docCode&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The internal reference code used by the client application.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;required&quot; name=&quot;docDate-ref&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Date of invoice, purchase order, etc.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;salespersonCode&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The client application salesperson reference code.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;required&quot; name=&quot;customerCode&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Client application customer reference code&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;customerUsageType&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Client application customer or usage type. CustomerUsageType determines the exempt status of the transaction based on the exemption tax rules for the jurisdictions involved. CustomerUsageType may also be set at the line item level. &amp;lt;p&amp;gt; The standard values for the CustomerUsageType (A-L).&amp;lt;br/&amp;gt; A Federal Government&amp;lt;br/&amp;gt; B State/Local Govt.&amp;lt;br/&amp;gt; C Tribal Government&amp;lt;br/&amp;gt; D Foreign Diplomat&amp;lt;br/&amp;gt; E Charitable Organization&amp;lt;br/&amp;gt; F Religious/Education&amp;lt;br/&amp;gt; G Resale&amp;lt;br/&amp;gt; H Agricultural Production&amp;lt;br/&amp;gt; I Industrial Prod/Mfg.&amp;lt;br/&amp;gt; J Direct Pay Permit&amp;lt;br/&amp;gt; K Direct Mail&amp;lt;br/&amp;gt; L - Other&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;required&quot; name=&quot;discount&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The discount amount to apply to the document. The string represents a .&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;purchaseOrderNo&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Purchase order identifier. PurchaseOrderNo is required for single use exemption certificates to match the order and invoice with the certificate.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;exemptionNo&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Exemption number used for this transaction&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;required&quot; name=&quot;originCode&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Code that refers one of the address of the baseAddress collection. It has to be the same code of one of the address's addressCode. It represents the origin address.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;required&quot; name=&quot;destinationCode&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Code that refers one of the address of the baseAddress collection. It has to be the same code of one of the address's addressCode. It represents the destination address.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute xmlns=&quot;http://www.mulesoft.org/schema/mule/avalara&quot; type=&quot;DetailLevelTypeEnumType&quot; use=&quot;required&quot; name=&quot;detailLevel&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Specifies the level of tax detail to return&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;referenceCode&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;For returns (see ), refers to the  of the original invoice.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;locationCode&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Location Code value. It is Also referred to as a Store Location, Outlet Id, or Outlet code is a number assigned by the State which identifies a Store location. Some state returns require taxes are broken out separately for Store Locations.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute xmlns=&quot;http://www.mulesoft.org/schema/mule/avalara&quot; type=&quot;booleanType&quot; use=&quot;optional&quot; default=&quot;false&quot; name=&quot;commit&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Commit flag. If Commit is set to true, tax for the transaction is saved, posted and committed as tax document.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;batchCode&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The batchCode value.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;currencyCode&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;It is 3 character ISO 4217 currency code.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute xmlns=&quot;http://www.mulesoft.org/schema/mule/avalara&quot; type=&quot;ServiceModeTypeEnumType&quot; use=&quot;optional&quot; default=&quot;AUTOMATIC&quot; name=&quot;serviceMode&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;This is only supported by AvaLocal servers. It provides the ability to controls whether tax is calculated locally or remotely when using an AvaLocal server. The default is Automatic which calculates locally unless remote is necessary for non-local addresses.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;required&quot; name=&quot;paymentDate-ref&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The date on which payment was made.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;required&quot; name=&quot;exchangeRate&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The exchange rate value. The string represents a&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;required&quot; name=&quot;exchangeRateEffDate-ref&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The exchange rate effective date value.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;account&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Registered Avalara account&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;avalaraClient&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Target client to which make the call&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;license&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The matching license for the account&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+      &lt;/xs:extension&gt;
+    &lt;/xs:complexContent&gt;
+  &lt;/xs:complexType&gt;
+  &lt;xs:element xmlns=&quot;http://www.mulesoft.org/schema/mule/avalara&quot; xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; type=&quot;AdjustTaxType&quot; substitutionGroup=&quot;mule:abstract-message-processor&quot; name=&quot;adjust-tax&quot;&gt;
+    &lt;xs:annotation&gt;
+      &lt;xs:documentation&gt;Adjust Tax processor.
+&amp;lt;p&amp;gt;
+The Get Tax operation calculates tax for one or more invoiced items and
+displays details describing the calculation of tax for each line item.&lt;/xs:documentation&gt;
+    &lt;/xs:annotation&gt;
+  &lt;/xs:element&gt;
+  &lt;xs:complexType name=&quot;AdjustTaxType&quot;&gt;
+    &lt;xs:complexContent&gt;
+      &lt;xs:extension xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; base=&quot;mule:abstractMessageProcessorType&quot;&gt;
+        &lt;xs:sequence&gt;
+          &lt;xs:element minOccurs=&quot;1&quot; maxOccurs=&quot;1&quot; name=&quot;base-addresses&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Collection of physical addresses that will be referred to as the destination or origination of 1 or more invoice line entries&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+            &lt;xs:complexType&gt;
+              &lt;xs:sequence&gt;
+                &lt;xs:element minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot; name=&quot;base-address&quot;&gt;
+                  &lt;xs:complexType&gt;
+                    &lt;xs:choice&gt;
+                      &lt;xs:sequence&gt;
+                        &lt;xs:element minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot; name=&quot;inner-base-address&quot;&gt;
+                          &lt;xs:complexType&gt;
+                            &lt;xs:simpleContent&gt;
+                              &lt;xs:extension base=&quot;xs:string&quot;&gt;
+                                &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;value-ref&quot;&gt;&lt;/xs:attribute&gt;
+                                &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;required&quot; name=&quot;key-ref&quot;&gt;&lt;/xs:attribute&gt;
+                              &lt;/xs:extension&gt;
+                            &lt;/xs:simpleContent&gt;
+                          &lt;/xs:complexType&gt;
+                        &lt;/xs:element&gt;
+                      &lt;/xs:sequence&gt;
+                      &lt;xs:sequence&gt;
+                        &lt;xs:any minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot; processContents=&quot;lax&quot;&gt;&lt;/xs:any&gt;
+                      &lt;/xs:sequence&gt;
+                    &lt;/xs:choice&gt;
+                    &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;ref&quot;&gt;
+                      &lt;xs:annotation&gt;
+                        &lt;xs:documentation&gt;The reference object for this parameter&lt;/xs:documentation&gt;
+                      &lt;/xs:annotation&gt;
+                    &lt;/xs:attribute&gt;
+                  &lt;/xs:complexType&gt;
+                &lt;/xs:element&gt;
+              &lt;/xs:sequence&gt;
+              &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;ref&quot;&gt;
+                &lt;xs:annotation&gt;
+                  &lt;xs:documentation&gt;The reference object for this parameter&lt;/xs:documentation&gt;
+                &lt;/xs:annotation&gt;
+              &lt;/xs:attribute&gt;
+            &lt;/xs:complexType&gt;
+          &lt;/xs:element&gt;
+          &lt;xs:element minOccurs=&quot;1&quot; maxOccurs=&quot;1&quot; name=&quot;lines&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Collection of invoice lines requiring tax calculation&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+            &lt;xs:complexType&gt;
+              &lt;xs:sequence&gt;
+                &lt;xs:element minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot; name=&quot;line&quot;&gt;
+                  &lt;xs:complexType&gt;
+                    &lt;xs:choice&gt;
+                      &lt;xs:sequence&gt;
+                        &lt;xs:element minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot; name=&quot;inner-line&quot;&gt;
+                          &lt;xs:complexType&gt;
+                            &lt;xs:simpleContent&gt;
+                              &lt;xs:extension base=&quot;xs:string&quot;&gt;
+                                &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;value-ref&quot;&gt;&lt;/xs:attribute&gt;
+                                &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;required&quot; name=&quot;key-ref&quot;&gt;&lt;/xs:attribute&gt;
+                              &lt;/xs:extension&gt;
+                            &lt;/xs:simpleContent&gt;
+                          &lt;/xs:complexType&gt;
+                        &lt;/xs:element&gt;
+                      &lt;/xs:sequence&gt;
+                      &lt;xs:sequence&gt;
+                        &lt;xs:any minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot; processContents=&quot;lax&quot;&gt;&lt;/xs:any&gt;
+                      &lt;/xs:sequence&gt;
+                    &lt;/xs:choice&gt;
+                    &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;ref&quot;&gt;
+                      &lt;xs:annotation&gt;
+                        &lt;xs:documentation&gt;The reference object for this parameter&lt;/xs:documentation&gt;
+                      &lt;/xs:annotation&gt;
+                    &lt;/xs:attribute&gt;
+                  &lt;/xs:complexType&gt;
+                &lt;/xs:element&gt;
+              &lt;/xs:sequence&gt;
+              &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;ref&quot;&gt;
+                &lt;xs:annotation&gt;
+                  &lt;xs:documentation&gt;The reference object for this parameter&lt;/xs:documentation&gt;
+                &lt;/xs:annotation&gt;
+              &lt;/xs:attribute&gt;
+            &lt;/xs:complexType&gt;
+          &lt;/xs:element&gt;
+          &lt;xs:element minOccurs=&quot;0&quot; maxOccurs=&quot;1&quot; name=&quot;tax-override&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Indicates to apply tax override to the document.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+            &lt;xs:complexType&gt;
+              &lt;xs:choice&gt;
+                &lt;xs:sequence&gt;
+                  &lt;xs:element minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot; name=&quot;tax-override&quot;&gt;
+                    &lt;xs:complexType&gt;
+                      &lt;xs:simpleContent&gt;
+                        &lt;xs:extension base=&quot;xs:string&quot;&gt;
+                          &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;value-ref&quot;&gt;&lt;/xs:attribute&gt;
+                          &lt;xs:attribute type=&quot;xs:string&quot; name=&quot;key&quot;&gt;&lt;/xs:attribute&gt;
+                        &lt;/xs:extension&gt;
+                      &lt;/xs:simpleContent&gt;
+                    &lt;/xs:complexType&gt;
+                  &lt;/xs:element&gt;
+                &lt;/xs:sequence&gt;
+                &lt;xs:sequence&gt;
+                  &lt;xs:any minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot; processContents=&quot;lax&quot;&gt;&lt;/xs:any&gt;
+                &lt;/xs:sequence&gt;
+              &lt;/xs:choice&gt;
+              &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;ref&quot;&gt;
+                &lt;xs:annotation&gt;
+                  &lt;xs:documentation&gt;The reference object for this parameter&lt;/xs:documentation&gt;
+                &lt;/xs:annotation&gt;
+              &lt;/xs:attribute&gt;
+            &lt;/xs:complexType&gt;
+          &lt;/xs:element&gt;
+        &lt;/xs:sequence&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;config-ref&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Specify which configuration to use for this invocation.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute xmlns=&quot;http://www.mulesoft.org/schema/mule/avalara&quot; type=&quot;integerType&quot; use=&quot;required&quot; name=&quot;adjustmentReason&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The reason for this tax adjustment.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;required&quot; name=&quot;adjustmentDescription&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;A description of a tax adjustment.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;required&quot; name=&quot;companyCode&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Client application company reference code&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute xmlns=&quot;http://www.mulesoft.org/schema/mule/avalara&quot; type=&quot;AvalaraDocumentTypeEnumType&quot; use=&quot;required&quot; name=&quot;docType&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The document type specifies the category of the document and affects how the document is treated after a tax calculation; see  for more information about the specific document types.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;docCode&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The internal reference code used by the client application.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;required&quot; name=&quot;docDate-ref&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Date of invoice, purchase order, etc.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;salespersonCode&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The client application salesperson reference code.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;required&quot; name=&quot;customerCode&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Client application customer reference code&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;customerUsageType&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Client application customer or usage type. CustomerUsageType determines the exempt status of the transaction based on the exemption tax rules for the jurisdictions involved. CustomerUsageType may also be set at the line item level. &amp;lt;p&amp;gt; The standard values for the CustomerUsageType (A-L).&amp;lt;br/&amp;gt; A Federal Government&amp;lt;br/&amp;gt; B State/Local Govt.&amp;lt;br/&amp;gt; C Tribal Government&amp;lt;br/&amp;gt; D Foreign Diplomat&amp;lt;br/&amp;gt; E Charitable Organization&amp;lt;br/&amp;gt; F Religious/Education&amp;lt;br/&amp;gt; G Resale&amp;lt;br/&amp;gt; H Agricultural Production&amp;lt;br/&amp;gt; I Industrial Prod/Mfg.&amp;lt;br/&amp;gt; J Direct Pay Permit&amp;lt;br/&amp;gt; K Direct Mail&amp;lt;br/&amp;gt; L - Other&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;required&quot; name=&quot;discount&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The discount amount to apply to the document. The string represents a .&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;purchaseOrderNo&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Purchase order identifier. PurchaseOrderNo is required for single use exemption certificates to match the order and invoice with the certificate.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;exemptionNo&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Exemption number used for this transaction&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;required&quot; name=&quot;originCode&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Code that refers one of the address of the baseAddress collection. It has to be the same code of one of the address's addressCode. It represents the origin address.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;required&quot; name=&quot;destinationCode&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Code that refers one of the address of the baseAddress collection. It has to be the same code of one of the address's addressCode. It represents the destination address.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute xmlns=&quot;http://www.mulesoft.org/schema/mule/avalara&quot; type=&quot;DetailLevelTypeEnumType&quot; use=&quot;required&quot; name=&quot;detailLevel&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Specifies the level of tax detail to return&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;referenceCode&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;For returns (see ), refers to the  of the original invoice.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;locationCode&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Location Code value. It is Also referred to as a Store Location, Outlet Id, or Outlet code is a number assigned by the State which identifies a Store location. Some state returns require taxes are broken out separately for Store Locations.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute xmlns=&quot;http://www.mulesoft.org/schema/mule/avalara&quot; type=&quot;booleanType&quot; use=&quot;optional&quot; default=&quot;false&quot; name=&quot;commit&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Commit flag. If Commit is set to true, tax for the transaction is saved, posted and committed as tax document.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;batchCode&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The batchCode value.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;currencyCode&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;It is 3 character ISO 4217 currency code.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute xmlns=&quot;http://www.mulesoft.org/schema/mule/avalara&quot; type=&quot;ServiceModeTypeEnumType&quot; use=&quot;optional&quot; default=&quot;AUTOMATIC&quot; name=&quot;serviceMode&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;This is only supported by AvaLocal servers. It provides the ability to controls whether tax is calculated locally or remotely when using an AvaLocal server. The default is Automatic which calculates locally unless remote is necessary for non-local addresses.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;required&quot; name=&quot;paymentDate-ref&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The date on which payment was made.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;required&quot; name=&quot;exchangeRate&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The exchange rate value. The string represents a&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;required&quot; name=&quot;exchangeRateEffDate-ref&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The exchange rate effective date value.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;account&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Registered Avalara account&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;avalaraClient&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Target client to which make the call&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;license&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The matching license for the account&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+      &lt;/xs:extension&gt;
+    &lt;/xs:complexContent&gt;
+  &lt;/xs:complexType&gt;
+  &lt;xs:element xmlns=&quot;http://www.mulesoft.org/schema/mule/avalara&quot; xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; type=&quot;PostTaxType&quot; substitutionGroup=&quot;mule:abstract-message-processor&quot; name=&quot;post-tax&quot;&gt;
+    &lt;xs:annotation&gt;
+      &lt;xs:documentation&gt;Post Tax processor&lt;/xs:documentation&gt;
+    &lt;/xs:annotation&gt;
+  &lt;/xs:element&gt;
+  &lt;xs:complexType name=&quot;PostTaxType&quot;&gt;
+    &lt;xs:complexContent&gt;
+      &lt;xs:extension xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; base=&quot;mule:abstractMessageProcessorType&quot;&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;config-ref&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Specify which configuration to use for this invocation.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;docId&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The original document's type, such as Sales Invoice or Purchase Invoice.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;required&quot; name=&quot;companyCode&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Client application company reference code. If docId is specified, this is not needed.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute xmlns=&quot;http://www.mulesoft.org/schema/mule/avalara&quot; type=&quot;AvalaraDocumentTypeEnumType&quot; use=&quot;required&quot; name=&quot;docType&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The document type specifies the category of the document and affects how the document is treated after a tax calculation; see  for more information about the specific document types.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;docCode&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The internal reference code used by the client application.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;required&quot; name=&quot;docDate-ref&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The date on the invoice, purchase order, etc&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;required&quot; name=&quot;totalAmount&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The total amount (not including tax) for the document. This is used for verification and reconciliation. This should be the &amp;lt;b&amp;gt;TotalAmount&amp;lt;/b&amp;gt; returned by  when tax was calculated for this document; otherwise the web service will return an error. The string represents a&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;required&quot; name=&quot;totalTax&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The total tax for the document. This is used for verification and reconciliation. This should be the &amp;lt;b&amp;gt;TotalTax&amp;lt;/b&amp;gt; returned by  when tax was calculated for this document; otherwise the web service will return an error. The string represents a&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute xmlns=&quot;http://www.mulesoft.org/schema/mule/avalara&quot; type=&quot;booleanType&quot; use=&quot;optional&quot; default=&quot;false&quot; name=&quot;commit&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The commit value. This has been defaulted to false. If this has been set to true AvaTax will commit the document on this call. Seller's system who wants to Post and Commit the document on one call should use this flag.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;newDocCode&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The new document code value.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;account&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Registered Avalara account&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;avalaraClient&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Target client to which make the call&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;license&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The matching license for the account&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+      &lt;/xs:extension&gt;
+    &lt;/xs:complexContent&gt;
+  &lt;/xs:complexType&gt;
+  &lt;xs:element xmlns=&quot;http://www.mulesoft.org/schema/mule/avalara&quot; xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; type=&quot;CommitTaxType&quot; substitutionGroup=&quot;mule:abstract-message-processor&quot; name=&quot;commit-tax&quot;&gt;
+    &lt;xs:annotation&gt;
+      &lt;xs:documentation&gt;Commit Tax processor&lt;/xs:documentation&gt;
+    &lt;/xs:annotation&gt;
+  &lt;/xs:element&gt;
+  &lt;xs:complexType name=&quot;CommitTaxType&quot;&gt;
+    &lt;xs:complexContent&gt;
+      &lt;xs:extension xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; base=&quot;mule:abstractMessageProcessorType&quot;&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;config-ref&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Specify which configuration to use for this invocation.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;docId&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The original document's type, such as Sales Invoice or Purchase Invoice.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;required&quot; name=&quot;companyCode&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Client application company reference code. If docId is specified, this is not needed.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute xmlns=&quot;http://www.mulesoft.org/schema/mule/avalara&quot; type=&quot;AvalaraDocumentTypeEnumType&quot; use=&quot;required&quot; name=&quot;docType&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The document type specifies the category of the document and affects how the document is treated after a tax calculation; see  for more information about the specific document types.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;docCode&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The internal reference code used by the client application.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;newDocCode&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The new document code value.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;account&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Registered Avalara account&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;avalaraClient&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Target client to which make the call&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;license&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The matching license for the account&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+      &lt;/xs:extension&gt;
+    &lt;/xs:complexContent&gt;
+  &lt;/xs:complexType&gt;
+  &lt;xs:element xmlns=&quot;http://www.mulesoft.org/schema/mule/avalara&quot; xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; type=&quot;GetTaxHistoryType&quot; substitutionGroup=&quot;mule:abstract-message-processor&quot; name=&quot;get-tax-history&quot;&gt;
+    &lt;xs:annotation&gt;
+      &lt;xs:documentation&gt;Get Tax History processor&lt;/xs:documentation&gt;
+    &lt;/xs:annotation&gt;
+  &lt;/xs:element&gt;
+  &lt;xs:complexType name=&quot;GetTaxHistoryType&quot;&gt;
+    &lt;xs:complexContent&gt;
+      &lt;xs:extension xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; base=&quot;mule:abstractMessageProcessorType&quot;&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;config-ref&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Specify which configuration to use for this invocation.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;docId&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The original document's type, such as Sales Invoice or Purchase Invoice.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;required&quot; name=&quot;companyCode&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Client application company reference code. If docId is specified, this is not needed.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute xmlns=&quot;http://www.mulesoft.org/schema/mule/avalara&quot; type=&quot;AvalaraDocumentTypeEnumType&quot; use=&quot;required&quot; name=&quot;docType&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The document type specifies the category of the document and affects how the document is treated after a tax calculation; see  for more information about the specific document types.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;docCode&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The internal reference code used by the client application.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute xmlns=&quot;http://www.mulesoft.org/schema/mule/avalara&quot; type=&quot;DetailLevelTypeEnumType&quot; use=&quot;required&quot; name=&quot;detailLevel&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Specifies the level of detail to return. See .&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;account&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Registered Avalara account&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;avalaraClient&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Target client to which make the call&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;license&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The matching license for the account&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+      &lt;/xs:extension&gt;
+    &lt;/xs:complexContent&gt;
+  &lt;/xs:complexType&gt;
+  &lt;xs:element xmlns=&quot;http://www.mulesoft.org/schema/mule/avalara&quot; xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; type=&quot;CancelTaxType&quot; substitutionGroup=&quot;mule:abstract-message-processor&quot; name=&quot;cancel-tax&quot;&gt;
+    &lt;xs:annotation&gt;
+      &lt;xs:documentation&gt;Cancel tax, indicating the document that should be canceled and the reason
+for the operation.&lt;/xs:documentation&gt;
+    &lt;/xs:annotation&gt;
+  &lt;/xs:element&gt;
+  &lt;xs:complexType name=&quot;CancelTaxType&quot;&gt;
+    &lt;xs:complexContent&gt;
+      &lt;xs:extension xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; base=&quot;mule:abstractMessageProcessorType&quot;&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;config-ref&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Specify which configuration to use for this invocation.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;docId&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The original document's type, such as Sales Invoice or Purchase Invoice.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;required&quot; name=&quot;companyCode&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Client application company reference code. If docId is specified, this is not needed.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute xmlns=&quot;http://www.mulesoft.org/schema/mule/avalara&quot; type=&quot;AvalaraDocumentTypeEnumType&quot; use=&quot;required&quot; name=&quot;docType&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The document type specifies the category of the document and affects how the document is treated after a tax calculation; see  for more information about the specific document types.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;docCode&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The internal reference code used by the client application.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute xmlns=&quot;http://www.mulesoft.org/schema/mule/avalara&quot; type=&quot;CancelCodeTypeEnumType&quot; use=&quot;required&quot; name=&quot;cancelCode&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;A code indicating the reason the document is getting canceled.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;account&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Registered Avalara account&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;avalaraClient&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Target client to which make the call&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;license&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The matching license for the account&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+      &lt;/xs:extension&gt;
+    &lt;/xs:complexContent&gt;
+  &lt;/xs:complexType&gt;
+  &lt;xs:element xmlns=&quot;http://www.mulesoft.org/schema/mule/avalara&quot; xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; type=&quot;ValidateAddressType&quot; substitutionGroup=&quot;mule:abstract-message-processor&quot; name=&quot;validate-address&quot;&gt;
+    &lt;xs:annotation&gt;
+      &lt;xs:documentation&gt;Validate Address processor.
+&amp;lt;p&amp;gt;
+This operation validates the supplied address, returning canonical form and
+additional delivery details if successfully validated.&lt;/xs:documentation&gt;
+    &lt;/xs:annotation&gt;
+  &lt;/xs:element&gt;
+  &lt;xs:complexType name=&quot;ValidateAddressType&quot;&gt;
+    &lt;xs:complexContent&gt;
+      &lt;xs:extension xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; base=&quot;mule:abstractMessageProcessorType&quot;&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;config-ref&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Specify which configuration to use for this invocation.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;required&quot; name=&quot;line1&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Address line 1&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;line2&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Address line 2&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;line3&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Address line 3&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;city&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;City name. Required, when PostalCode is not specified.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;region&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;State or region name. Requirad, when PostalCode is not specified.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;country&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Country code&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;postalCode&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Postal or ZIP code. Required, when City and Region are not specified&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;addressCode&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;the address code.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute xmlns=&quot;http://www.mulesoft.org/schema/mule/avalara&quot; type=&quot;integerType&quot; use=&quot;required&quot; name=&quot;taxRegionId&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The tax region id.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;latitude&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Latitude.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;longitude&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Longitude.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute xmlns=&quot;http://www.mulesoft.org/schema/mule/avalara&quot; type=&quot;TextCaseTypeEnumType&quot; use=&quot;optional&quot; default=&quot;DEFAULT&quot; name=&quot;textCase&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The casing to apply to the validated address(es).&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute xmlns=&quot;http://www.mulesoft.org/schema/mule/avalara&quot; type=&quot;booleanType&quot; use=&quot;optional&quot; default=&quot;false&quot; name=&quot;coordinates&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;True, if you want in the result a not empty latitud and longitude.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute xmlns=&quot;http://www.mulesoft.org/schema/mule/avalara&quot; type=&quot;booleanType&quot; use=&quot;optional&quot; default=&quot;false&quot; name=&quot;taxability&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;True, if you want the valid taxRegionId in the result.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;required&quot; name=&quot;date-ref&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Date.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;account&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Registered Avalara account&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;avalaraClient&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Target client to which make the call&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;license&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The matching license for the account&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+      &lt;/xs:extension&gt;
+    &lt;/xs:complexContent&gt;
+  &lt;/xs:complexType&gt;
+  &lt;xs:element xmlns=&quot;http://www.mulesoft.org/schema/mule/avalara&quot; xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; type=&quot;FetchBatchFileType&quot; substitutionGroup=&quot;mule:abstract-message-processor&quot; name=&quot;fetch-batch-file&quot;&gt;
+    &lt;xs:annotation&gt;
+      &lt;xs:documentation&gt;Batch Fetch processor.
+&amp;lt;p&amp;gt;
+Fetches a Batch result&lt;/xs:documentation&gt;
+    &lt;/xs:annotation&gt;
+  &lt;/xs:element&gt;
+  &lt;xs:complexType name=&quot;FetchBatchFileType&quot;&gt;
+    &lt;xs:complexContent&gt;
+      &lt;xs:extension xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; base=&quot;mule:abstractMessageProcessorType&quot;&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;config-ref&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Specify which configuration to use for this invocation.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;required&quot; name=&quot;batchId&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The numerical identifier of the BatchFile.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;account&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Registered Avalara account&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;avalaraClient&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Target client to which make the call&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;license&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The matching license for the account&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+      &lt;/xs:extension&gt;
+    &lt;/xs:complexContent&gt;
+  &lt;/xs:complexType&gt;
+  &lt;xs:element xmlns=&quot;http://www.mulesoft.org/schema/mule/avalara&quot; xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; type=&quot;IsBatchFinishedType&quot; substitutionGroup=&quot;mule:abstract-message-processor&quot; name=&quot;is-batch-finished&quot;&gt;
+    &lt;xs:annotation&gt;
+      &lt;xs:documentation&gt;Has the Batch Processing finished
+&amp;lt;p&amp;gt;
+Fetches a Batch result&lt;/xs:documentation&gt;
+    &lt;/xs:annotation&gt;
+  &lt;/xs:element&gt;
+  &lt;xs:complexType name=&quot;IsBatchFinishedType&quot;&gt;
+    &lt;xs:complexContent&gt;
+      &lt;xs:extension xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; base=&quot;mule:abstractMessageProcessorType&quot;&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;config-ref&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Specify which configuration to use for this invocation.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;required&quot; name=&quot;batchId&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The numerical identifier of the BatchFile.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;account&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Registered Avalara account&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;avalaraClient&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Target client to which make the call&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;license&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The matching license for the account&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+      &lt;/xs:extension&gt;
+    &lt;/xs:complexContent&gt;
+  &lt;/xs:complexType&gt;
+  &lt;xs:element xmlns=&quot;http://www.mulesoft.org/schema/mule/avalara&quot; xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; type=&quot;SaveBatchType&quot; substitutionGroup=&quot;mule:abstract-message-processor&quot; name=&quot;save-batch&quot;&gt;
+    &lt;xs:annotation&gt;
+      &lt;xs:documentation&gt;Batch Save processor.
+&amp;lt;p&amp;gt;
+Saves a Batch. Note that you should pass-in your console credentials for this method, instead of the API ones&lt;/xs:documentation&gt;
+    &lt;/xs:annotation&gt;
+  &lt;/xs:element&gt;
+  &lt;xs:complexType name=&quot;SaveBatchType&quot;&gt;
+    &lt;xs:complexContent&gt;
+      &lt;xs:extension xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; base=&quot;mule:abstractMessageProcessorType&quot;&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;config-ref&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Specify which configuration to use for this invocation.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute xmlns=&quot;http://www.mulesoft.org/schema/mule/avalara&quot; type=&quot;BatchTypeEnumType&quot; use=&quot;required&quot; name=&quot;batchType&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The kind of records to be imported.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute xmlns=&quot;http://www.mulesoft.org/schema/mule/avalara&quot; type=&quot;integerType&quot; use=&quot;required&quot; name=&quot;companyId&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The id of the company. (Need to be retrived from address bar in Avalara after hitting the Organization Tab)&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;required&quot; name=&quot;content&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The content of this import, usually a csv file.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;batchName&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The name of the batch.&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;account&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Registered Avalara account&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;avalaraClient&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;Target client to which make the call&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute type=&quot;xs:string&quot; use=&quot;optional&quot; name=&quot;license&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;The matching license for the account&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+      &lt;/xs:extension&gt;
+    &lt;/xs:complexContent&gt;
+  &lt;/xs:complexType&gt;
+  &lt;xs:simpleType name=&quot;BatchTypeEnumType&quot;&gt;
+    &lt;xs:annotation&gt;
+      &lt;xs:documentation&gt;The document type specifies the category of the document and affects how the document
+is treated after a tax calculation. Specified when constructing a .&lt;/xs:documentation&gt;
+    &lt;/xs:annotation&gt;
+    &lt;xs:union&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction base=&quot;xs:string&quot;&gt;
+          &lt;xs:enumeration value=&quot;TRANSACTION_IMPORT&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Invoices, returns and credit memos.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+          &lt;xs:enumeration value=&quot;ITEM_IMPORT&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;The products and services (SKUs) you sell, and the charges (freight, handling, and other miscellaneous charges) used by your business.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+          &lt;xs:enumeration value=&quot;EXEMPTION_CERTIFICATE_IMPORT&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;ECMS Exemption Certificate entries that hold important data accurately representing an Exemption Certificate.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+          &lt;xs:enumeration value=&quot;COMPANY_LOCACTION_IMPORT&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Descriptive and address information for physical locations of Company buildings and sales people.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+          &lt;xs:enumeration value=&quot;TAX_RULE_IMPORT&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Rules used to override the default taxing behavior of AvaTax Calc when tax laws for a particular jurisdiction require special handling.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+          &lt;xs:enumeration value=&quot;DOCUMENT_IMPORT&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Reserved for future use.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+        &lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; base=&quot;mule:propertyPlaceholderType&quot;&gt;&lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+    &lt;/xs:union&gt;
+  &lt;/xs:simpleType&gt;
+  &lt;xs:simpleType name=&quot;DetailLevelTypeEnumType&quot;&gt;
+    &lt;xs:annotation&gt;
+      &lt;xs:documentation&gt;In a GetTaxRequest (or GetTaxHistoryRequest) the DetailLevel specifies the level
+of tax detail to return to the client application following a tax calculation.&lt;/xs:documentation&gt;
+    &lt;/xs:annotation&gt;
+    &lt;xs:union&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction base=&quot;xs:string&quot;&gt;
+          &lt;xs:enumeration value=&quot;DOCUMENT&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Document (GetTaxResult) level details; TaxLines will not be returned.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+          &lt;xs:enumeration value=&quot;SUMMARY&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Reserved for future use.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+          &lt;xs:enumeration value=&quot;LINE&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Line level details (includes Document details). TaxLines will be returned
+but TaxDetails will not be returned.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+          &lt;xs:enumeration value=&quot;TAX&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Tax jurisdiction level details (includes Document, TaxLines, and TaxDetails)&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+          &lt;xs:enumeration value=&quot;DIAGNOSTIC&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;In addition to Tax level details, indicates that the server should return
+information about how the tax was calculated. Intended for use only while
+the SDK is in a development environment.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+        &lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; base=&quot;mule:propertyPlaceholderType&quot;&gt;&lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+    &lt;/xs:union&gt;
+  &lt;/xs:simpleType&gt;
+  &lt;xs:simpleType name=&quot;TextCaseTypeEnumType&quot;&gt;
+    &lt;xs:annotation&gt;
+      &lt;xs:documentation&gt;The casing to apply to the valid address(es) returned in the validation result.&lt;/xs:documentation&gt;
+    &lt;/xs:annotation&gt;
+    &lt;xs:union&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction base=&quot;xs:string&quot;&gt;
+          &lt;xs:enumeration value=&quot;DEFAULT&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Default casing for the account.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+          &lt;xs:enumeration value=&quot;UPPER&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Upper case.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+          &lt;xs:enumeration value=&quot;MIXED&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Mixed case.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+        &lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; base=&quot;mule:propertyPlaceholderType&quot;&gt;&lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+    &lt;/xs:union&gt;
+  &lt;/xs:simpleType&gt;
+  &lt;xs:simpleType name=&quot;ServiceModeTypeEnumType&quot;&gt;
+    &lt;xs:annotation&gt;
+      &lt;xs:documentation&gt;Specifies the type of tax override.
+This is only supported by AvaLocal servers. It provides the ability to controls whether tax is calculated locally or remotely when using an AvaLocal server.
+The default is Automatic which calculates locally unless remote is necessary for non-local addresses&lt;/xs:documentation&gt;
+    &lt;/xs:annotation&gt;
+    &lt;xs:union&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction base=&quot;xs:string&quot;&gt;
+          &lt;xs:enumeration value=&quot;AUTOMATIC&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Automated handling by local and/or remote server.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+          &lt;xs:enumeration value=&quot;LOCAL&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;AvaLocal server only. Lines requiring remote will not be calculated.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+          &lt;xs:enumeration value=&quot;REMOTE&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;All lines are calculated by AvaTax remote server.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+        &lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; base=&quot;mule:propertyPlaceholderType&quot;&gt;&lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+    &lt;/xs:union&gt;
+  &lt;/xs:simpleType&gt;
+  &lt;xs:simpleType name=&quot;AvalaraDocumentTypeEnumType&quot;&gt;
+    &lt;xs:annotation&gt;
+      &lt;xs:documentation&gt;The document type specifies the category of the document and affects how the document
+is treated after a tax calculation. Specified when constructing a .&lt;/xs:documentation&gt;
+    &lt;/xs:annotation&gt;
+    &lt;xs:union&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction base=&quot;xs:string&quot;&gt;
+          &lt;xs:enumeration value=&quot;SALES_ORDER&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Sales Order, estimate or quote. This is a temporary document type and is not saved in tax history.
+ will return with a  of &amp;lt;b&amp;gt;Temporary&amp;lt;/b&amp;gt;.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+          &lt;xs:enumeration value=&quot;SALES_INVOICE&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;The document is a permanent invoice; document and tax calculation results are saved in the tax history.
+ will return with a  of &amp;lt;b&amp;gt;Saved&amp;lt;/b&amp;gt;&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+          &lt;xs:enumeration value=&quot;PURCHASE_ORDER&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Purchase order, estimate, or quote. This is a temporary document type and is not saved in tax history.
+ will return with a  of &amp;lt;b&amp;gt;Temporary&amp;lt;/b&amp;gt;.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+          &lt;xs:enumeration value=&quot;PURCHASE_INVOICE&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;The document is a permanent invoice; document and tax calculation results are saved in the tax history.
+ will return with a  of &amp;lt;b&amp;gt;Saved&amp;lt;/b&amp;gt;.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+          &lt;xs:enumeration value=&quot;RETURN_ORDER&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Sales Return Order. This is a temporary document type and is not saved in tax history.
+ will return with a  of &amp;lt;b&amp;gt;Temporary&amp;lt;/b&amp;gt;.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+          &lt;xs:enumeration value=&quot;RETURN_INVOICE&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;The document is a permanent sales return invoice; document and tax calculation results are
+saved in the tax history  will return with a 
+of &amp;lt;b&amp;gt;Saved&amp;lt;/b&amp;gt;.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+        &lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; base=&quot;mule:propertyPlaceholderType&quot;&gt;&lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+    &lt;/xs:union&gt;
+  &lt;/xs:simpleType&gt;
+  &lt;xs:simpleType name=&quot;CancelCodeTypeEnumType&quot;&gt;
+    &lt;xs:annotation&gt;
+      &lt;xs:documentation&gt;Specifies the reason the tax calculation is being canceled (or in the case of
+posting, returned to its prior state).&lt;/xs:documentation&gt;
+    &lt;/xs:annotation&gt;
+    &lt;xs:union&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction base=&quot;xs:string&quot;&gt;
+          &lt;xs:enumeration value=&quot;UNSPECIFIED&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Unspecified reason&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+          &lt;xs:enumeration value=&quot;POST_FAILED&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Specifies the post operation failed when attempting to post an invoice within
+a client's application, for example, to the client's General Ledger; The
+document's status will be changed to &amp;lt;b&amp;gt;Saved&amp;lt;/b&amp;gt;.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+          &lt;xs:enumeration value=&quot;DOC_DELETED&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Specifies the document was deleted within the client's application and
+should be removed from the AvaTax records; If the document within AvaTax
+is already committed, the document status will be changed to &amp;lt;b&amp;gt;Cancelled&amp;lt;/b&amp;gt;
+and retained for historical records;  If the document was not committed,
+(was &amp;lt;b&amp;gt;Saved&amp;lt;/b&amp;gt; or &amp;lt;b&amp;gt;Posted&amp;lt;/b&amp;gt;) the document will be deleted within AvaTax.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+          &lt;xs:enumeration value=&quot;DOC_VOIDED&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Specifies the document was voided within the client's application and
+should be removed from the AvaTax records; If the document within AvaTax
+is already committed, the document status will be changed to &amp;lt;b&amp;gt;Cancelled&amp;lt;/b&amp;gt;
+and retained for historical records;  If the document was not committed,
+(was &amp;lt;b&amp;gt;Saved&amp;lt;/b&amp;gt; or &amp;lt;b&amp;gt;Posted&amp;lt;/b&amp;gt;) the document will be deleted within AvaTax.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+          &lt;xs:enumeration value=&quot;ADJUSTMENT_CANCELLED&quot;&gt;
+            &lt;xs:annotation&gt;
+              &lt;xs:documentation&gt;Specifies the document was adjusted within the client's application and
+should be removed from the AvaTax records; If the document within AvaTax
+is already committed, the document status will be changed to &amp;lt;b&amp;gt;Cancelled&amp;lt;/b&amp;gt;
+and retained for historical records;  If the document was not committed,
+(was &amp;lt;b&amp;gt;Saved&amp;lt;/b&amp;gt; or &amp;lt;b&amp;gt;Posted&amp;lt;/b&amp;gt;) the document will be deleted within AvaTax.&lt;/xs:documentation&gt;
+            &lt;/xs:annotation&gt;
+          &lt;/xs:enumeration&gt;
+        &lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; base=&quot;mule:propertyPlaceholderType&quot;&gt;&lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+    &lt;/xs:union&gt;
+  &lt;/xs:simpleType&gt;
+  &lt;xs:simpleType name=&quot;OnNoTokenPolicyEnumType&quot;&gt;
+    &lt;xs:union&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction base=&quot;xs:string&quot;&gt;
+          &lt;xs:enumeration value=&quot;EXCEPTION&quot;&gt;&lt;/xs:enumeration&gt;
+          &lt;xs:enumeration value=&quot;STOP_FLOW&quot;&gt;&lt;/xs:enumeration&gt;
+        &lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; base=&quot;mule:propertyPlaceholderType&quot;&gt;&lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+    &lt;/xs:union&gt;
+  &lt;/xs:simpleType&gt;
+  &lt;xs:simpleType name=&quot;integerType&quot;&gt;
+    &lt;xs:union&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction base=&quot;xs:integer&quot;&gt;&lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; base=&quot;mule:propertyPlaceholderType&quot;&gt;&lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+    &lt;/xs:union&gt;
+  &lt;/xs:simpleType&gt;
+  &lt;xs:simpleType name=&quot;decimalType&quot;&gt;
+    &lt;xs:union&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction base=&quot;xs:decimal&quot;&gt;&lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; base=&quot;mule:propertyPlaceholderType&quot;&gt;&lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+    &lt;/xs:union&gt;
+  &lt;/xs:simpleType&gt;
+  &lt;xs:simpleType name=&quot;floatType&quot;&gt;
+    &lt;xs:union&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction base=&quot;xs:float&quot;&gt;&lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; base=&quot;mule:propertyPlaceholderType&quot;&gt;&lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+    &lt;/xs:union&gt;
+  &lt;/xs:simpleType&gt;
+  &lt;xs:simpleType name=&quot;doubleType&quot;&gt;
+    &lt;xs:union&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction base=&quot;xs:double&quot;&gt;&lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; base=&quot;mule:propertyPlaceholderType&quot;&gt;&lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+    &lt;/xs:union&gt;
+  &lt;/xs:simpleType&gt;
+  &lt;xs:simpleType name=&quot;dateTimeType&quot;&gt;
+    &lt;xs:union&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction base=&quot;xs:dateTime&quot;&gt;&lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; base=&quot;mule:propertyPlaceholderType&quot;&gt;&lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+    &lt;/xs:union&gt;
+  &lt;/xs:simpleType&gt;
+  &lt;xs:simpleType name=&quot;longType&quot;&gt;
+    &lt;xs:union&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction base=&quot;xs:long&quot;&gt;&lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; base=&quot;mule:propertyPlaceholderType&quot;&gt;&lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+    &lt;/xs:union&gt;
+  &lt;/xs:simpleType&gt;
+  &lt;xs:simpleType name=&quot;byteType&quot;&gt;
+    &lt;xs:union&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction base=&quot;xs:byte&quot;&gt;&lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; base=&quot;mule:propertyPlaceholderType&quot;&gt;&lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+    &lt;/xs:union&gt;
+  &lt;/xs:simpleType&gt;
+  &lt;xs:simpleType name=&quot;booleanType&quot;&gt;
+    &lt;xs:union&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction base=&quot;xs:boolean&quot;&gt;&lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; base=&quot;mule:propertyPlaceholderType&quot;&gt;&lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+    &lt;/xs:union&gt;
+  &lt;/xs:simpleType&gt;
+  &lt;xs:simpleType name=&quot;anyUriType&quot;&gt;
+    &lt;xs:union&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction base=&quot;xs:anyURI&quot;&gt;&lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; base=&quot;mule:propertyPlaceholderType&quot;&gt;&lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+    &lt;/xs:union&gt;
+  &lt;/xs:simpleType&gt;
+  &lt;xs:simpleType name=&quot;charType&quot;&gt;
+    &lt;xs:union&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction base=&quot;xs:string&quot;&gt;
+          &lt;xs:minLength value=&quot;1&quot;&gt;&lt;/xs:minLength&gt;
+          &lt;xs:maxLength value=&quot;1&quot;&gt;&lt;/xs:maxLength&gt;
+        &lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+      &lt;xs:simpleType&gt;
+        &lt;xs:restriction xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; base=&quot;mule:propertyPlaceholderType&quot;&gt;&lt;/xs:restriction&gt;
+      &lt;/xs:simpleType&gt;
+    &lt;/xs:union&gt;
+  &lt;/xs:simpleType&gt;
+&lt;/xs:schema&gt;</pre>
+</div><!-- jd-descr -->
+
+<div id="footer">
+Generated by <a href="http://www.mulesoft.com/devkit">Mule DevKit</a>. Document generation technology based on <a href="http://code.google.com/p/doclava/">Google's Doclava</a>.
+</div> <!-- end footer -->
+
+</div> <!-- jd-content -->
+
+</div><!-- end doc-content -->
+
+</div> <!-- end body-content --> 
+
+<script type="text/javascript">
+init(); /* initialize mule-developer-docs.js */
+</script>
+
+</body>
+</html>

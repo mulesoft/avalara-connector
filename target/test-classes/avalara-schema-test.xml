@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Mule Avalara Cloud Connector
+
+    Copyright (c) MuleSoft, Inc.  All rights reserved.  http://www.mulesoft.com
+
+    The software in this package is published under the terms of the CPAL v1.0
+    license, a copy of which has been included with this distribution in the
+    LICENSE.txt file.
+
+-->
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:spring="http://www.springframework.org/schema/beans"
+      xmlns:avalara="http://www.mulesoft.org/schema/mule/avalara"
+      xmlns:context="http://www.springframework.org/schema/context"
+      xsi:schemaLocation="http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+        http://www.mulesoft.org/schema/mule/avalara http://www.mulesoft.org/schema/mule/avalara/2.0/mule-avalara.xsd">
+
+        <context:property-placeholder location="test.properties"/>
+        <avalara:config account="${avalaraAccount}" license="${avalaraLicense}" avalaraClient="${avalaraClient}" name="avalara-config"/>
+
+    <flow name="testFlow">
+        <avalara:get-tax 
+        				 companyCode ="#[variable:companyCode]"
+                         docType="SALES_ORDER"
+                         docDate-ref="#[variable:docDate]"
+                         customerCode="#[variable:customerCode]"
+                         discount="0.2"
+                         originCode="Origin"
+                         destinationCode="Dest"
+                         detailLevel="TAX"
+                         serviceMode="LOCAL"
+                         paymentDate-ref="#[variable:paymentDate]"
+                         exchangeRate="#[variable:exchangeRate]"
+                         exchangeRateEffDate-ref="#[variable:exchangeRateEffDate]" >
+            <avalara:base-addresses ref="#[variable:addresses]" />
+            <avalara:lines ref="#[variable:lines]" /> 
+        </avalara:get-tax>
+        <avalara:commit-tax 
+        				 	docId="#[variable:docId]"
+                            companyCode="#[variable:companyCode]"
+                            docType="SALES_ORDER"
+                            docCode="#[variable:docCode]"
+                            newDocCode="#[variable:newDocCode]"/>
+        <avalara:get-tax-history 
+        						 docId="#[variable:docId]"
+                                 companyCode="#[variable:companyCode]"
+                                 docType="SALES_ORDER"
+                                 docCode="#[variable:docCode]"
+                                 detailLevel="TAX"/>
+        <avalara:cancel-tax 
+        					docId="#[variable:docId]"
+                            companyCode="#[variable:companyCode]"
+                            docType="SALES_ORDER"
+                            docCode="#[variable:docCode]"
+                            cancelCode="UNSPECIFIED"/>
+        <avalara:validate-address
+        						  line1="#[variable:line1]"
+                                  line2="#[variable:line2]"
+                                  line3="#[variable:line3]"
+                                  city="#[variable:city]"
+                                  region="#[variable:region]"
+                                  country="#[variable:country]"
+                                  postalCode="#[variable:postalCode]"
+                                  addressCode="#[variable:addressCode]"
+                                  taxRegionId="#[variable:taxRegionId]"
+                                  latitude="#[variable:latitude]"
+                                  longitude="#[variable:longitude]"
+                                  date-ref="#[variable:date]" />
+        <avalara:post-tax 
+        				  docId="#[variable:docId]"
+		                  companyCode="#[variable:companyCode]"
+		                  docType="SALES_ORDER"
+		                  docCode="#[variable:docCode]"
+		                  docDate-ref="2010-09-13T01:18:14-07:00"
+		                  totalAmount="1200"
+		                  totalTax="100"
+		                  commit="false"
+		                  newDocCode="#[variable:newDocCode]"/>
+		
+    </flow>
+
+</mule>

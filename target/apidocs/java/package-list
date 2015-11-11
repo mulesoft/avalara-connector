@@ -1,0 +1,17 @@
+com.avalara.avatax.services
+org.mule.modules.avalara
+org.mule.modules.avalara.adapter
+org.mule.modules.avalara.adapters
+org.mule.modules.avalara.agents
+org.mule.modules.avalara.api
+org.mule.modules.avalara.config
+org.mule.modules.avalara.connection
+org.mule.modules.avalara.connectivity
+org.mule.modules.avalara.devkit
+org.mule.modules.avalara.exception
+org.mule.modules.avalara.pooling
+org.mule.modules.avalara.process
+org.mule.modules.avalara.processors
+org.mule.modules.avalara.transformers
+org.mule.modules.avalara.util
+

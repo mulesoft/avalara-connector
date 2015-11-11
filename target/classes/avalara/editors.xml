@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<namespace xmlns="http://www.mulesoft.org/schema/mule/tooling.attributes" xmlns:mule="http://www.mulesoft.org/schema/mule/core" url="http://www.mulesoft.org/schema/mule/avalara" prefix="avalara">
+  <global-cloud-connector versions="[3.5.0,8.0.0]" caption="Avalara" description="" icon="" localId="parentConfig" image="" abstract="true" extends="http://www.mulesoft.org/schema/mule/avalara/abstractAvalaraConnectorGeneric"></global-cloud-connector>
+  <nested caption="" description="" localId="connection-pooling-profile" abstract="true">
+    <radioBoolean name="defaultPoolingProfile" caption="Use default connection pool configuration" description="Use default connection pool configuration." fillLine="true"></radioBoolean>
+    <radioBoolean name="customPoolingProfile" caption="Define connection pool configuration" description="Define connection pool configuration." fillLine="true"></radioBoolean>
+    <integer defaultValue="5" min="-1" step="0" name="maxActive" caption="Max active" description="Controls the maximum number of connections that can be borrowed from the pool at one time. When set to a negative value, there is no limit to the number of connections that may be active at one time. When maxActive is exceeded, the pool is said to be exhausted." controlled="customPoolingProfile" indented="true" fillLine="true"></integer>
+    <integer defaultValue="5" min="-1" step="0" name="maxIdle" caption="Max idle" description="Controls the maximum number of connections that can sit idle in the pool at any time. When set to a negative value, there is no limit to the number of connections that may be idle at one time." controlled="customPoolingProfile" indented="true" fillLine="true"></integer>
+    <enum defaultValue="INITIALISE_ONE" name="initialisationPolicy" caption="Initialisation policy" description="Determines how connections in a pool should be initialized. The possible values are: INITIALISE_NONE (will not load any connection into the pool on startup), INITIALISE_ONE (will load one initial connection into the pool on startup), or INITIALISE_ALL (will load all connections in the pool on startup)" alwaysFill="true" controlled="customPoolingProfile" indented="true">
+      <option value="INITIALISE_NONE"></option>
+      <option value="INITIALISE_ONE"></option>
+      <option value="INITIALISE_ALL"></option>
+    </enum>
+    <enum defaultValue="WHEN_EXHAUSTED_GROW" name="exhaustedAction" caption="Exhausted action" description="Specifies the behavior of the connection pool when the pool is exhausted. Possible values are: &quot;WHEN_EXHAUSTED_FAIL&quot;, which will throw a NoSuchElementException, &quot;WHEN_EXHAUSTED_WAIT&quot;, which will block by invoking Object.wait(long) until a new or idle object is available, or WHEN_EXHAUSTED_GROW, which will create a new connection and return it, essentially making maxActive meaningless. If a positive maxWait value is supplied, it will block for at most that many milliseconds, after which a NoSuchElementException will be thrown. If maxThreadWait is a negative value, it will block indefinitely." alwaysFill="true" controlled="customPoolingProfile" indented="true">
+      <option value="WHEN_EXHAUSTED_WAIT"></option>
+      <option value="WHEN_EXHAUSTED_FAIL"></option>
+      <option value="WHEN_EXHAUSTED_GROW"></option>
+    </enum>
+    <integer defaultValue="5" min="-1" step="0" name="maxWait" caption="Max wait" description="When exhausted action is Wait (or block) this is the amount of time in milliseconds that the pool will wait before failing. Setting a negative value will block indefinitely until an idle instance becomes available." controlled="customPoolingProfile" indented="true" fillLine="true"></integer>
+    <integer defaultValue="1800000" min="-1" step="0" name="minEvictionMillis" caption="Min eviction (ms)" description="Determines the minimum amount of time a connection may sit idle in the pool before it is eligible for eviction. When non-positive, no connections will be evicted from the pool due to idle time alone." controlled="customPoolingProfile" indented="true" fillLine="true"></integer>
+    <integer defaultValue="-1" min="-1" step="0" name="evictionCheckIntervalMillis" caption="Eviction check interval (ms)" description="Specifies the number of milliseconds between runs of the connection evictor. When non-positive, no connection evictor is executed." controlled="customPoolingProfile" indented="true" fillLine="true"></integer>
+  </nested>
+  <nested caption="" description="" localId="reconnectionStrategyElement" abstract="true">
+    <label name="connectionLabel" caption="Define how mule should attempt to handle a connection failure" description=""></label>
+    <radioBoolean name="noReconnection" caption="Do not use a Reconnection strategy" description="Disable reconection strategy" fillLine="true"></radioBoolean>
+    <radioBoolean name="standardReconnection" caption="Standard Reconnection" description="A reconnection strategy that allows the user to configure how many times a reconnection should be attempted and how long to wait between attempts." fillLine="true"></radioBoolean>
+    <integer defaultValue="2000" min="1" max="2147483647" step="1" name="reconnectionFrequency" caption="Frequency (ms)" description="How often (in ms) to reconnect" controlled="standardReconnection" indented="true"></integer>
+    <integer defaultValue="2" min="1" max="2147483647" step="1" name="reconnectionAttemps" caption="Reconnection Attempts" description="How many reconnection attempts to make" controlled="standardReconnection,!reconnectForever" indented="true"></integer>
+    <boolean name="reconnectForever" caption="Reconnect Forever" description="A reconnection strategy that retries an infinite number of times at the specified frequency." controlled="standardReconnection" indented="true"></boolean>
+    <radioBoolean name="customReconnection" caption="Custom Reconnection" description="A user-defined reconnection strategy." fillLine="true"></radioBoolean>
+    <classname name="class" caption="Class" description="A class that implements the RetryPolicyTemplate interface." controlled="customReconnection" indented="true"></classname>
+    <childElement allowMultiple="true" name="http://www.springframework.org/schema/beans/property" caption="Properties" description="Property elements." controlled="customReconnection"></childElement>
+  </nested>
+  <global-cloud-connector versions="[3.5.0,8.0.0]" caption="Avalara" description="Global Avalara configuration information." icon="icons/small/avalara-connector-24x16.png" localId="config" image="icons/large/avalara-connector-48x32.png" abstract="false" extends="http://www.mulesoft.org/schema/mule/avalara/parentConfig" connectivityTesting="on" metaData="static">
+    <attribute-category caption="General" description="Avalara configuration properties.">
+      <group id="avalaraGenericProperties" caption="Basic Settings">
+        <name name="name" caption="Name" description="Give a name to this configuration so it can be later referenced by config-ref." required="true"></name>
+      </group>
+      <group id="connection" caption="Connection">
+        <string name="account" caption="Account" description="Registered Avalara account." required="false" javaType="java.lang.String"></string>
+        <string name="avalaraClient" caption="Avalara Client" description="Target client to which make the call." required="false" javaType="java.lang.String"></string>
+        <password name="license" caption="License" description="The matching license for the account." required="false" javaType="java.lang.String"></password>
+        <string defaultValue="https://development.avalara.net/Tax/TaxSvc.asmx" name="taxServiceEndpoint" caption="Tax Service Endpoint" description="Tax Webservice endpoint." required="false" javaType="java.lang.String"></string>
+        <string defaultValue="https://development.avalara.net/Address/AddressSvc.asmx" name="addressServiceEndpoint" caption="Address Service Endpoint" description="Address Webservice endpoint." required="false" javaType="java.lang.String"></string>
+        <string defaultValue="https://development.avalara.net/Batch/BatchSvc.asmx" name="batchServiceEndpoint" caption="Batch Service Endpoint" description="Batch Webservice endpoint." required="false" javaType="java.lang.String"></string>
+      </group>
+    </attribute-category>
+    <attribute-category caption="Pooling Profile" description="Pooling profile options.">
+      <group id="poolingProfile" caption="Pooling Profile">
+        <childElement inplace="true" name="http://www.mulesoft.org/schema/mule/avalara/connection-pooling-profile" caption="" description="" valuePersistence="org.mule.tooling.ui.modules.core.widgets.meta.PoolingProfileValuePersistence"></childElement>
+      </group>
+    </attribute-category>
+    <attribute-category caption="Reconnection" description="Reconnection options.">
+      <group id="reconnectionStrategies" caption="Strategies">
+        <childElement inplace="true" name="http://www.mulesoft.org/schema/mule/core/reconnectionStrategyElement" caption="" description="" valuePersistence="org.mule.tooling.ui.modules.core.widgets.meta.HTTPTransactionValuePersistence"></childElement>
+        <childElement allowSubTypes="true" allowedSubTypes="http://www.mulesoft.org/schema/mule/core/reconnect,http://www.mulesoft.org/schema/mule/core/reconnect-custom-strategy,http://www.mulesoft.org/schema/mule/core/reconnect-forever" name="http://www.mulesoft.org/schema/mule/core/abstractReconnectionStrategy" caption="" description="" visibleInDialog="false"></childElement>
+      </group>
+    </attribute-category>
+  </global-cloud-connector>
+  <cloud-connector caption="Abstractavalaraconnectorgeneric" description="Interact with Avalara." icon="icons/small/avalara-connector-24x16.png" localId="abstractAvalaraConnectorGeneric" image="icons/large/avalara-connector-48x32.png" abstract="true">
+    <attribute-category caption="General" description="General.">
+      <group id="abstractAvalaraConnectorGeneric" caption="Basic Settings">
+        <globalRef requiredType="http://www.mulesoft.org/schema/mule/avalara/config" name="config-ref" caption="Connector Configuration" description="Specify which configuration to use for this invocation." required="true"></globalRef>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector versions="[3.5.0,8.0.0]" aliasId="org.mule.tooling.ui.modules.core.pattern.avalara" caption="Avalara" description="Avalara provides automated sales tax solutions to streamline cumbersome,
+error-prone tax compliance processes and reduce the risk of loss or penalty
+in case of an audit. Their automated solutions automatically perform address
+validation, jurisdiction research and rate calculation and allow you to
+manage even the most complicated tax issues, such as situs, nexus, tax tiers,
+tax holidays, exemptions, certificate management and product taxability rules." icon="icons/small/avalara-connector-24x16.png" localId="avalara-connector" image="icons/large/avalara-connector-48x32.png" extends="http://www.mulesoft.org/schema/mule/avalara/abstractAvalaraConnectorGeneric">
+    <attribute-category caption="General" description="General.">
+      <group id="avalaraConnectorGeneric" caption="Basic Settings">
+        <modeSwitch alwaysCombo="true" name="Avalara operations to execute" caption="Operation" description="Operation.">
+          <no-operation abstractElement="http://www.mulesoft.org/schema/mule/avalara/abstractAvalaraConnectorGeneric" versions="[3.5.0,8.0.0]" connector-name="processor"></no-operation>
+          <mode modeId="http://www.mulesoft.org/schema/mule/avalara/adjust-tax" modeLabel="Adjust tax"></mode>
+          <mode modeId="http://www.mulesoft.org/schema/mule/avalara/cancel-tax" modeLabel="Cancel tax"></mode>
+          <mode modeId="http://www.mulesoft.org/schema/mule/avalara/commit-tax" modeLabel="Commit tax"></mode>
+          <mode modeId="http://www.mulesoft.org/schema/mule/avalara/fetch-batch-file" modeLabel="Fetch batch file"></mode>
+          <mode modeId="http://www.mulesoft.org/schema/mule/avalara/get-tax" modeLabel="Get tax"></mode>
+          <mode modeId="http://www.mulesoft.org/schema/mule/avalara/get-tax-history" modeLabel="Get tax history"></mode>
+          <mode modeId="http://www.mulesoft.org/schema/mule/avalara/is-batch-finished" modeLabel="Is batch finished"></mode>
+          <mode modeId="http://www.mulesoft.org/schema/mule/avalara/ping" modeLabel="Ping"></mode>
+          <mode modeId="http://www.mulesoft.org/schema/mule/avalara/ping-with-credentials" modeLabel="Ping with credentials"></mode>
+          <mode modeId="http://www.mulesoft.org/schema/mule/avalara/post-tax" modeLabel="Post tax"></mode>
+          <mode modeId="http://www.mulesoft.org/schema/mule/avalara/save-batch" modeLabel="Save batch"></mode>
+          <mode modeId="http://www.mulesoft.org/schema/mule/avalara/validate-address" modeLabel="Validate address"></mode>
+        </modeSwitch>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="com.avalara.avatax.services.AdjustTaxResult" caption="Adjust Tax" icon="icons/small/avalara-connector-24x16.png" localId="adjust-tax" image="icons/large/avalara-connector-48x32.png" abstract="true" extends="http://www.mulesoft.org/schema/mule/avalara/abstractAvalaraConnectorGeneric" metaData="static">
+    <attribute-category caption="General" description="General.">
+      <group id="general" caption="General">
+        <integer min="0" step="1" name="adjustmentReason" caption="Adjustment Reason" description="The reason for this tax adjustment." required="true" javaType="int"></integer>
+        <string name="adjustmentDescription" caption="Adjustment Description" description="A description of a tax adjustment." required="true" javaType="java.lang.String"></string>
+        <string name="batchCode" caption="Batch Code" description="The batchCode value." required="false" javaType="java.lang.String"></string>
+        <string name="companyCode" caption="Company Code" description="Client application company reference code." required="true" javaType="java.lang.String"></string>
+        <string name="currencyCode" caption="Currency Code" description="It is 3 character ISO 4217 currency code." required="false" javaType="java.lang.String"></string>
+        <string name="customerCode" caption="Customer Code" description="Client application customer reference code." required="true" javaType="java.lang.String"></string>
+        <string name="customerUsageType" caption="Customer Usage Type" description="Client application customer or usage type. CustomerUsageType determines the exempt status of the transaction based on the exemption tax rules for the jurisdictions involved. CustomerUsageType may also be set at the line item level.  The standard values for the CustomerUsageType (A-L). A Federal Government B State/Local Govt. C Tribal Government D Foreign Diplomat E Charitable Organization F Religious/Education G Resale H Agricultural Production I Industrial Prod/Mfg. J Direct Pay Permit K Direct Mail L - Other." required="false" javaType="java.lang.String"></string>
+        <string name="docCode" caption="Doc Code" description="The internal reference code used by the client application." required="false" javaType="java.lang.String"></string>
+        <string name="docDate-ref" caption="Doc Date Reference" description="Date of invoice, purchase order, etc." required="true" javaType="javax.xml.datatype.XMLGregorianCalendar"></string>
+        <string name="destinationCode" caption="Destination Code" description="Code that refers one of the address of the baseAddress collection. It has to be the same code of one of the address's addressCode. It represents the destination address." required="true" javaType="java.lang.String"></string>
+        <string name="discount" caption="Discount" description="The discount amount to apply to the document. The string represents a ." required="true" javaType="java.lang.String"></string>
+        <string name="exchangeRate" caption="Exchange Rate" description="The exchange rate value. The string represents a." required="true" javaType="java.lang.String"></string>
+        <string name="exemptionNo" caption="Exemption No" description="Exemption number used for this transaction." required="false" javaType="java.lang.String"></string>
+        <string name="locationCode" caption="Location Code" description="Location Code value. It is Also referred to as a Store Location, Outlet Id, or Outlet code is a number assigned by the State which identifies a Store location. Some state returns require taxes are broken out separately for Store Locations." required="false" javaType="java.lang.String"></string>
+        <string name="originCode" caption="Origin Code" description="Code that refers one of the address of the baseAddress collection. It has to be the same code of one of the address's addressCode. It represents the origin address." required="true" javaType="java.lang.String"></string>
+        <string name="purchaseOrderNo" caption="Purchase Order No" description="Purchase order identifier. PurchaseOrderNo is required for single use exemption certificates to match the order and invoice with the certificate." required="false" javaType="java.lang.String"></string>
+        <string name="referenceCode" caption="Reference Code" description="For returns (see ), refers to the  of the original invoice." required="false" javaType="java.lang.String"></string>
+        <string name="salespersonCode" caption="Salesperson Code" description="The client application salesperson reference code." required="false" javaType="java.lang.String"></string>
+        <string name="paymentDate-ref" caption="Payment Date Reference" description="The date on which payment was made." required="true" javaType="javax.xml.datatype.XMLGregorianCalendar"></string>
+        <string name="exchangeRateEffDate-ref" caption="Exchange Rate Eff Date Reference" description="The exchange rate effective date value." required="true" javaType="javax.xml.datatype.XMLGregorianCalendar"></string>
+        <enum allowsCustom="true" name="detailLevel" caption="Detail Level" description="Specifies the level of tax detail to return." supportsExpressions="true" required="true" javaType="org.mule.modules.avalara.DetailLevelType">
+          <option value="DIAGNOSTIC"></option>
+          <option value="DOCUMENT"></option>
+          <option value="LINE"></option>
+          <option value="SUMMARY"></option>
+          <option value="TAX"></option>
+        </enum>
+        <enum allowsCustom="true" name="docType" caption="Doc Type" description="The document type specifies the category of the document and affects how the document is treated after a tax calculation; see  for more information about the specific document types." supportsExpressions="true" required="true" javaType="org.mule.modules.avalara.AvalaraDocumentType">
+          <option value="PURCHASE_INVOICE"></option>
+          <option value="PURCHASE_ORDER"></option>
+          <option value="RETURN_INVOICE"></option>
+          <option value="RETURN_ORDER"></option>
+          <option value="SALES_INVOICE"></option>
+          <option value="SALES_ORDER"></option>
+        </enum>
+        <enum defaultValue="AUTOMATIC" allowsCustom="true" name="serviceMode" caption="Service Mode" description="This is only supported by AvaLocal servers. It provides the ability to controls whether tax is calculated locally or remotely when using an AvaLocal server. The default is Automatic which calculates locally unless remote is necessary for non-local addresses." supportsExpressions="true" required="false" javaType="org.mule.modules.avalara.ServiceModeType">
+          <option value="AUTOMATIC"></option>
+          <option value="LOCAL"></option>
+          <option value="REMOTE"></option>
+        </enum>
+        <boolean defaultValue="false" name="commit" caption="Commit" description="Commit flag. If Commit is set to true, tax for the transaction is saved, posted and committed as tax document." supportsExpressions="true" required="false" javaType="boolean"></boolean>
+        <element-controller-listOfMap listName="base-addresses" innerName="inner-base-address" localName="adjust-tax-base-addresses" itemName="base-address" caption="Base Addresses" description="Collection of physical addresses that will be referred to as the destination or origination of 1 or more invoice line entries." required="true" javaType="java.util.List&lt;java.util.Map&lt;java.lang.String,java.lang.Object&gt;&gt;"></element-controller-listOfMap>
+        <element-controller-listOfMap listName="lines" innerName="inner-line" localName="adjust-tax-lines" itemName="line" caption="Lines" description="Collection of invoice lines requiring tax calculation." required="true" javaType="java.util.List&lt;java.util.Map&lt;java.lang.String,java.lang.Object&gt;&gt;"></element-controller-listOfMap>
+        <element-controller-map mapName="tax-override" localName="adjust-tax-tax-override" itemName="tax-override" caption="Tax Override" description="Indicates to apply tax override to the document." required="false" javaType="java.util.Map&lt;java.lang.String,java.lang.Object&gt;"></element-controller-map>
+      </group>
+    </attribute-category>
+    <attribute-category caption="Advanced" description="Advanced.">
+      <group id="connector Configuration Overrides" caption="Connector Configuration Overrides">
+        <string name="account" caption="Account" description="Registered Avalara account." required="false" javaType="java.lang.String"></string>
+        <string name="avalaraClient" caption="Avalara Client" description="Target client to which make the call." required="false" javaType="java.lang.String"></string>
+        <password name="license" caption="License" description="The matching license for the account." required="false" javaType="java.lang.String"></password>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="com.avalara.avatax.services.CancelTaxResult" caption="Cancel Tax" icon="icons/small/avalara-connector-24x16.png" localId="cancel-tax" image="icons/large/avalara-connector-48x32.png" abstract="true" extends="http://www.mulesoft.org/schema/mule/avalara/abstractAvalaraConnectorGeneric" metaData="static">
+    <attribute-category caption="General" description="General.">
+      <group id="general" caption="General">
+        <string name="companyCode" caption="Company Code" description="Client application company reference code. If docId is specified, this is not needed." required="true" javaType="java.lang.String"></string>
+        <string name="docCode" caption="Doc Code" description="The internal reference code used by the client application." required="false" javaType="java.lang.String"></string>
+        <string name="docId" caption="Doc Id" description="The original document's type, such as Sales Invoice or Purchase Invoice." required="false" javaType="java.lang.String"></string>
+        <enum allowsCustom="true" name="cancelCode" caption="Cancel Code" description="A code indicating the reason the document is getting canceled." supportsExpressions="true" required="true" javaType="org.mule.modules.avalara.CancelCodeType">
+          <option value="ADJUSTMENT_CANCELLED"></option>
+          <option value="DOC_DELETED"></option>
+          <option value="DOC_VOIDED"></option>
+          <option value="POST_FAILED"></option>
+          <option value="UNSPECIFIED"></option>
+        </enum>
+        <enum allowsCustom="true" name="docType" caption="Doc Type" description="The document type specifies the category of the document and affects how the document is treated after a tax calculation; see  for more information about the specific document types." supportsExpressions="true" required="true" javaType="org.mule.modules.avalara.AvalaraDocumentType">
+          <option value="PURCHASE_INVOICE"></option>
+          <option value="PURCHASE_ORDER"></option>
+          <option value="RETURN_INVOICE"></option>
+          <option value="RETURN_ORDER"></option>
+          <option value="SALES_INVOICE"></option>
+          <option value="SALES_ORDER"></option>
+        </enum>
+      </group>
+    </attribute-category>
+    <attribute-category caption="Advanced" description="Advanced.">
+      <group id="connector Configuration Overrides" caption="Connector Configuration Overrides">
+        <string name="account" caption="Account" description="Registered Avalara account." required="false" javaType="java.lang.String"></string>
+        <string name="avalaraClient" caption="Avalara Client" description="Target client to which make the call." required="false" javaType="java.lang.String"></string>
+        <password name="license" caption="License" description="The matching license for the account." required="false" javaType="java.lang.String"></password>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="com.avalara.avatax.services.CommitTaxResult" caption="Commit Tax" icon="icons/small/avalara-connector-24x16.png" localId="commit-tax" image="icons/large/avalara-connector-48x32.png" abstract="true" extends="http://www.mulesoft.org/schema/mule/avalara/abstractAvalaraConnectorGeneric" metaData="static">
+    <attribute-category caption="General" description="General.">
+      <group id="general" caption="General">
+        <string name="companyCode" caption="Company Code" description="Client application company reference code. If docId is specified, this is not needed." required="true" javaType="java.lang.String"></string>
+        <string name="docCode" caption="Doc Code" description="The internal reference code used by the client application." required="false" javaType="java.lang.String"></string>
+        <string name="docId" caption="Doc Id" description="The original document's type, such as Sales Invoice or Purchase Invoice." required="false" javaType="java.lang.String"></string>
+        <string name="newDocCode" caption="New Doc Code" description="The new document code value." required="false" javaType="java.lang.String"></string>
+        <enum allowsCustom="true" name="docType" caption="Doc Type" description="The document type specifies the category of the document and affects how the document is treated after a tax calculation; see  for more information about the specific document types." supportsExpressions="true" required="true" javaType="org.mule.modules.avalara.AvalaraDocumentType">
+          <option value="PURCHASE_INVOICE"></option>
+          <option value="PURCHASE_ORDER"></option>
+          <option value="RETURN_INVOICE"></option>
+          <option value="RETURN_ORDER"></option>
+          <option value="SALES_INVOICE"></option>
+          <option value="SALES_ORDER"></option>
+        </enum>
+      </group>
+    </attribute-category>
+    <attribute-category caption="Advanced" description="Advanced.">
+      <group id="connector Configuration Overrides" caption="Connector Configuration Overrides">
+        <string name="account" caption="Account" description="Registered Avalara account." required="false" javaType="java.lang.String"></string>
+        <string name="avalaraClient" caption="Avalara Client" description="Target client to which make the call." required="false" javaType="java.lang.String"></string>
+        <password name="license" caption="License" description="The matching license for the account." required="false" javaType="java.lang.String"></password>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="java.util.Map&lt;java.lang.String,com.avalara.avatax.services.BatchFileFetchResult&gt;" caption="Fetch Batch File" icon="icons/small/avalara-connector-24x16.png" localId="fetch-batch-file" image="icons/large/avalara-connector-48x32.png" abstract="true" extends="http://www.mulesoft.org/schema/mule/avalara/abstractAvalaraConnectorGeneric" metaData="static">
+    <attribute-category caption="General" description="General.">
+      <group id="general" caption="General">
+        <string name="batchId" caption="Batch Id" description="The numerical identifier of the BatchFile." required="true" javaType="java.lang.String"></string>
+      </group>
+    </attribute-category>
+    <attribute-category caption="Advanced" description="Advanced.">
+      <group id="connector Configuration Overrides" caption="Connector Configuration Overrides">
+        <string name="account" caption="Account" description="Registered Avalara account." required="false" javaType="java.lang.String"></string>
+        <string name="avalaraClient" caption="Avalara Client" description="Target client to which make the call." required="false" javaType="java.lang.String"></string>
+        <password name="license" caption="License" description="The matching license for the account." required="false" javaType="java.lang.String"></password>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="com.avalara.avatax.services.GetTaxResult" caption="Get Tax" icon="icons/small/avalara-connector-24x16.png" localId="get-tax" image="icons/large/avalara-connector-48x32.png" abstract="true" extends="http://www.mulesoft.org/schema/mule/avalara/abstractAvalaraConnectorGeneric" metaData="static">
+    <attribute-category caption="General" description="General.">
+      <group id="general" caption="General">
+        <string name="companyCode" caption="Company Code" description="Client application company reference code." required="true" javaType="java.lang.String"></string>
+        <string name="docCode" caption="Doc Code" description="The internal reference code used by the client application." required="false" javaType="java.lang.String"></string>
+        <string name="docDate-ref" caption="Doc Date Reference" description="Date of invoice, purchase order, etc." required="true" javaType="javax.xml.datatype.XMLGregorianCalendar"></string>
+        <string name="batchCode" caption="Batch Code" description="The batchCode value." required="false" javaType="java.lang.String"></string>
+        <string name="currencyCode" caption="Currency Code" description="It is 3 character ISO 4217 currency code." required="false" javaType="java.lang.String"></string>
+        <string name="customerCode" caption="Customer Code" description="Client application customer reference code." required="true" javaType="java.lang.String"></string>
+        <string name="customerUsageType" caption="Customer Usage Type" description="Client application customer or usage type. CustomerUsageType determines the exempt status of the transaction based on the exemption tax rules for the jurisdictions involved. CustomerUsageType may also be set at the line item level.  The standard values for the CustomerUsageType (A-L). A Federal Government B State/Local Govt. C Tribal Government D Foreign Diplomat E Charitable Organization F Religious/Education G Resale H Agricultural Production I Industrial Prod/Mfg. J Direct Pay Permit K Direct Mail L - Other." required="false" javaType="java.lang.String"></string>
+        <string name="destinationCode" caption="Destination Code" description="Code that refers one of the address of the baseAddress collection. It has to be the same code of one of the address's addressCode. It represents the destination address." required="true" javaType="java.lang.String"></string>
+        <string name="discount" caption="Discount" description="The discount amount to apply to the document. The string represents a ." required="true" javaType="java.lang.String"></string>
+        <string name="exchangeRate" caption="Exchange Rate" description="The exchange rate value. The string represents a." required="true" javaType="java.lang.String"></string>
+        <string name="exemptionNo" caption="Exemption No" description="Exemption number used for this transaction." required="false" javaType="java.lang.String"></string>
+        <string name="locationCode" caption="Location Code" description="Location Code value. It is Also referred to as a Store Location, Outlet Id, or Outlet code is a number assigned by the State which identifies a Store location. Some state returns require taxes are broken out separately for Store Locations." required="false" javaType="java.lang.String"></string>
+        <string name="originCode" caption="Origin Code" description="Code that refers one of the address of the baseAddress collection. It has to be the same code of one of the address's addressCode. It represents the origin address." required="true" javaType="java.lang.String"></string>
+        <string name="purchaseOrderNo" caption="Purchase Order No" description="Purchase order identifier. PurchaseOrderNo is required for single use exemption certificates to match the order and invoice with the certificate." required="false" javaType="java.lang.String"></string>
+        <string name="referenceCode" caption="Reference Code" description="For returns (see ), refers to the  of the original invoice." required="false" javaType="java.lang.String"></string>
+        <string name="salespersonCode" caption="Salesperson Code" description="The client application salesperson reference code." required="false" javaType="java.lang.String"></string>
+        <string name="paymentDate-ref" caption="Payment Date Reference" description="The date on which payment was made." required="true" javaType="javax.xml.datatype.XMLGregorianCalendar"></string>
+        <string name="exchangeRateEffDate-ref" caption="Exchange Rate Eff Date Reference" description="The exchange rate effective date value." required="true" javaType="javax.xml.datatype.XMLGregorianCalendar"></string>
+        <enum allowsCustom="true" name="detailLevel" caption="Detail Level" description="Specifies the level of tax detail to return." supportsExpressions="true" required="true" javaType="org.mule.modules.avalara.DetailLevelType">
+          <option value="DIAGNOSTIC"></option>
+          <option value="DOCUMENT"></option>
+          <option value="LINE"></option>
+          <option value="SUMMARY"></option>
+          <option value="TAX"></option>
+        </enum>
+        <enum allowsCustom="true" name="docType" caption="Doc Type" description="The document type specifies the category of the document and affects how the document is treated after a tax calculation; see  for more information about the specific document types." supportsExpressions="true" required="true" javaType="org.mule.modules.avalara.AvalaraDocumentType">
+          <option value="PURCHASE_INVOICE"></option>
+          <option value="PURCHASE_ORDER"></option>
+          <option value="RETURN_INVOICE"></option>
+          <option value="RETURN_ORDER"></option>
+          <option value="SALES_INVOICE"></option>
+          <option value="SALES_ORDER"></option>
+        </enum>
+        <enum defaultValue="AUTOMATIC" allowsCustom="true" name="serviceMode" caption="Service Mode" description="This is only supported by AvaLocal servers. It provides the ability to controls whether tax is calculated locally or remotely when using an AvaLocal server. The default is Automatic which calculates locally unless remote is necessary for non-local addresses." supportsExpressions="true" required="false" javaType="org.mule.modules.avalara.ServiceModeType">
+          <option value="AUTOMATIC"></option>
+          <option value="LOCAL"></option>
+          <option value="REMOTE"></option>
+        </enum>
+        <boolean defaultValue="false" name="commit" caption="Commit" description="Commit flag. If Commit is set to true, tax for the transaction is saved, posted and committed as tax document." supportsExpressions="true" required="false" javaType="boolean"></boolean>
+        <element-controller-listOfMap listName="base-addresses" innerName="inner-base-address" localName="get-tax-base-addresses" itemName="base-address" caption="Base Addresses" description="Collection of physical addresses that will be referred to as the destination or origination of 1 or more invoice line entries." required="true" javaType="java.util.List&lt;java.util.Map&lt;java.lang.String,java.lang.Object&gt;&gt;"></element-controller-listOfMap>
+        <element-controller-listOfMap listName="lines" innerName="inner-line" localName="get-tax-lines" itemName="line" caption="Lines" description="Collection of invoice lines requiring tax calculation." required="true" javaType="java.util.List&lt;java.util.Map&lt;java.lang.String,java.lang.Object&gt;&gt;"></element-controller-listOfMap>
+        <element-controller-map mapName="tax-override" localName="get-tax-tax-override" itemName="tax-override" caption="Tax Override" description="Indicates to apply tax override to the document." required="false" javaType="java.util.Map&lt;java.lang.String,java.lang.Object&gt;"></element-controller-map>
+      </group>
+    </attribute-category>
+    <attribute-category caption="Advanced" description="Advanced.">
+      <group id="connector Configuration Overrides" caption="Connector Configuration Overrides">
+        <string name="account" caption="Account" description="Registered Avalara account." required="false" javaType="java.lang.String"></string>
+        <string name="avalaraClient" caption="Avalara Client" description="Target client to which make the call." required="false" javaType="java.lang.String"></string>
+        <password name="license" caption="License" description="The matching license for the account." required="false" javaType="java.lang.String"></password>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="com.avalara.avatax.services.GetTaxHistoryResult" caption="Get Tax History" icon="icons/small/avalara-connector-24x16.png" localId="get-tax-history" image="icons/large/avalara-connector-48x32.png" abstract="true" extends="http://www.mulesoft.org/schema/mule/avalara/abstractAvalaraConnectorGeneric" metaData="static">
+    <attribute-category caption="General" description="General.">
+      <group id="general" caption="General">
+        <string name="companyCode" caption="Company Code" description="Client application company reference code. If docId is specified, this is not needed." required="true" javaType="java.lang.String"></string>
+        <string name="docCode" caption="Doc Code" description="The internal reference code used by the client application." required="false" javaType="java.lang.String"></string>
+        <string name="docId" caption="Doc Id" description="The original document's type, such as Sales Invoice or Purchase Invoice." required="false" javaType="java.lang.String"></string>
+        <enum allowsCustom="true" name="detailLevel" caption="Detail Level" description="Specifies the level of detail to return. See ." supportsExpressions="true" required="true" javaType="org.mule.modules.avalara.DetailLevelType">
+          <option value="DIAGNOSTIC"></option>
+          <option value="DOCUMENT"></option>
+          <option value="LINE"></option>
+          <option value="SUMMARY"></option>
+          <option value="TAX"></option>
+        </enum>
+        <enum allowsCustom="true" name="docType" caption="Doc Type" description="The document type specifies the category of the document and affects how the document is treated after a tax calculation; see  for more information about the specific document types." supportsExpressions="true" required="true" javaType="org.mule.modules.avalara.AvalaraDocumentType">
+          <option value="PURCHASE_INVOICE"></option>
+          <option value="PURCHASE_ORDER"></option>
+          <option value="RETURN_INVOICE"></option>
+          <option value="RETURN_ORDER"></option>
+          <option value="SALES_INVOICE"></option>
+          <option value="SALES_ORDER"></option>
+        </enum>
+      </group>
+    </attribute-category>
+    <attribute-category caption="Advanced" description="Advanced.">
+      <group id="connector Configuration Overrides" caption="Connector Configuration Overrides">
+        <string name="account" caption="Account" description="Registered Avalara account." required="false" javaType="java.lang.String"></string>
+        <string name="avalaraClient" caption="Avalara Client" description="Target client to which make the call." required="false" javaType="java.lang.String"></string>
+        <password name="license" caption="License" description="The matching license for the account." required="false" javaType="java.lang.String"></password>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="boolean" caption="Is Batch Finished" icon="icons/small/avalara-connector-24x16.png" localId="is-batch-finished" image="icons/large/avalara-connector-48x32.png" abstract="true" extends="http://www.mulesoft.org/schema/mule/avalara/abstractAvalaraConnectorGeneric" metaData="static">
+    <attribute-category caption="General" description="General.">
+      <group id="general" caption="General">
+        <string name="batchId" caption="Batch Id" description="The numerical identifier of the BatchFile." required="true" javaType="java.lang.String"></string>
+      </group>
+    </attribute-category>
+    <attribute-category caption="Advanced" description="Advanced.">
+      <group id="connector Configuration Overrides" caption="Connector Configuration Overrides">
+        <string name="account" caption="Account" description="Registered Avalara account." required="false" javaType="java.lang.String"></string>
+        <string name="avalaraClient" caption="Avalara Client" description="Target client to which make the call." required="false" javaType="java.lang.String"></string>
+        <password name="license" caption="License" description="The matching license for the account." required="false" javaType="java.lang.String"></password>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="com.avalara.avatax.services.PingResult" caption="Ping" icon="icons/small/avalara-connector-24x16.png" localId="ping" image="icons/large/avalara-connector-48x32.png" abstract="true" extends="http://www.mulesoft.org/schema/mule/avalara/abstractAvalaraConnectorGeneric" metaData="static">
+    <attribute-category caption="General" description="General.">
+      <group id="general" caption="General">
+        <string defaultValue="Ping" name="message" caption="Message" description="Ping Message." required="false" javaType="java.lang.String"></string>
+      </group>
+    </attribute-category>
+    <attribute-category caption="Advanced" description="Advanced.">
+      <group id="connector Configuration Overrides" caption="Connector Configuration Overrides">
+        <string name="account" caption="Account" description="Registered Avalara account." required="false" javaType="java.lang.String"></string>
+        <string name="avalaraClient" caption="Avalara Client" description="Target client to which make the call." required="false" javaType="java.lang.String"></string>
+        <password name="license" caption="License" description="The matching license for the account." required="false" javaType="java.lang.String"></password>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="com.avalara.avatax.services.PingResult" caption="Ping With Credentials" icon="icons/small/avalara-connector-24x16.png" localId="ping-with-credentials" image="icons/large/avalara-connector-48x32.png" abstract="true" extends="http://www.mulesoft.org/schema/mule/avalara/abstractAvalaraConnectorGeneric" metaData="static">
+    <attribute-category caption="General" description="General.">
+      <group id="general" caption="General">
+        <string defaultValue="PingWithCredentials" name="message" caption="Message" description="Ping Message." required="false" javaType="java.lang.String"></string>
+        <string name="pingAccount" caption="Ping Account" description="Avalara Account Number." required="true" javaType="java.lang.String"></string>
+        <string name="pingAvalaraClient" caption="Ping Avalara Client" description="Avalara Client." required="true" javaType="java.lang.String"></string>
+        <string name="pingLicense" caption="Ping License" description="Avalara License." required="true" javaType="java.lang.String"></string>
+      </group>
+    </attribute-category>
+    <attribute-category caption="Advanced" description="Advanced.">
+      <group id="connector Configuration Overrides" caption="Connector Configuration Overrides">
+        <string name="account" caption="Account" description="Registered Avalara account." required="false" javaType="java.lang.String"></string>
+        <string name="avalaraClient" caption="Avalara Client" description="Target client to which make the call." required="false" javaType="java.lang.String"></string>
+        <password name="license" caption="License" description="The matching license for the account." required="false" javaType="java.lang.String"></password>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="com.avalara.avatax.services.PostTaxResult" caption="Post Tax" icon="icons/small/avalara-connector-24x16.png" localId="post-tax" image="icons/large/avalara-connector-48x32.png" abstract="true" extends="http://www.mulesoft.org/schema/mule/avalara/abstractAvalaraConnectorGeneric" metaData="static">
+    <attribute-category caption="General" description="General.">
+      <group id="general" caption="General">
+        <string name="companyCode" caption="Company Code" description="Client application company reference code. If docId is specified, this is not needed." required="true" javaType="java.lang.String"></string>
+        <string name="docCode" caption="Doc Code" description="The internal reference code used by the client application." required="false" javaType="java.lang.String"></string>
+        <string name="docId" caption="Doc Id" description="The original document's type, such as Sales Invoice or Purchase Invoice." required="false" javaType="java.lang.String"></string>
+        <string name="docDate-ref" caption="Doc Date Reference" description="The date on the invoice, purchase order, etc." required="true" javaType="javax.xml.datatype.XMLGregorianCalendar"></string>
+        <string name="newDocCode" caption="New Doc Code" description="The new document code value." required="false" javaType="java.lang.String"></string>
+        <string name="totalAmount" caption="Total Amount" description="The total amount (not including tax) for the document. This is used for verification and reconciliation. This should be the TotalAmount returned by  when tax was calculated for this document; otherwise the web service will return an error. The string represents a." required="true" javaType="java.lang.String"></string>
+        <string name="totalTax" caption="Total Tax" description="The total tax for the document. This is used for verification and reconciliation. This should be the TotalTax returned by  when tax was calculated for this document; otherwise the web service will return an error. The string represents a." required="true" javaType="java.lang.String"></string>
+        <enum allowsCustom="true" name="docType" caption="Doc Type" description="The document type specifies the category of the document and affects how the document is treated after a tax calculation; see  for more information about the specific document types." supportsExpressions="true" required="true" javaType="org.mule.modules.avalara.AvalaraDocumentType">
+          <option value="PURCHASE_INVOICE"></option>
+          <option value="PURCHASE_ORDER"></option>
+          <option value="RETURN_INVOICE"></option>
+          <option value="RETURN_ORDER"></option>
+          <option value="SALES_INVOICE"></option>
+          <option value="SALES_ORDER"></option>
+        </enum>
+        <boolean defaultValue="false" name="commit" caption="Commit" description="The commit value. This has been defaulted to false. If this has been set to true AvaTax will commit the document on this call. Seller's system who wants to Post and Commit the document on one call should use this flag." supportsExpressions="true" required="false" javaType="boolean"></boolean>
+      </group>
+    </attribute-category>
+    <attribute-category caption="Advanced" description="Advanced.">
+      <group id="connector Configuration Overrides" caption="Connector Configuration Overrides">
+        <string name="account" caption="Account" description="Registered Avalara account." required="false" javaType="java.lang.String"></string>
+        <string name="avalaraClient" caption="Avalara Client" description="Target client to which make the call." required="false" javaType="java.lang.String"></string>
+        <password name="license" caption="License" description="The matching license for the account." required="false" javaType="java.lang.String"></password>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="com.avalara.avatax.services.BatchSaveResult" caption="Save Batch" icon="icons/small/avalara-connector-24x16.png" localId="save-batch" image="icons/large/avalara-connector-48x32.png" abstract="true" extends="http://www.mulesoft.org/schema/mule/avalara/abstractAvalaraConnectorGeneric" metaData="static">
+    <attribute-category caption="General" description="General.">
+      <group id="general" caption="General">
+        <integer min="0" step="1" name="companyId" caption="Company Id" description="The id of the company. (Need to be retrived from address bar in Avalara after hitting the Organization Tab)." required="true" javaType="int"></integer>
+        <string name="batchName" caption="Batch Name" description="The name of the batch." required="false" javaType="java.lang.String"></string>
+        <string name="content" caption="Content" description="The content of this import, usually a csv file." required="true" javaType="java.lang.String"></string>
+        <enum allowsCustom="true" name="batchType" caption="Batch Type" description="The kind of records to be imported." supportsExpressions="true" required="true" javaType="org.mule.modules.avalara.BatchType">
+          <option value="COMPANY_LOCACTION_IMPORT"></option>
+          <option value="DOCUMENT_IMPORT"></option>
+          <option value="EXEMPTION_CERTIFICATE_IMPORT"></option>
+          <option value="ITEM_IMPORT"></option>
+          <option value="TAX_RULE_IMPORT"></option>
+          <option value="TRANSACTION_IMPORT"></option>
+        </enum>
+      </group>
+    </attribute-category>
+    <attribute-category caption="Advanced" description="Advanced.">
+      <group id="connector Configuration Overrides" caption="Connector Configuration Overrides">
+        <string name="account" caption="Account" description="Registered Avalara account." required="false" javaType="java.lang.String"></string>
+        <string name="avalaraClient" caption="Avalara Client" description="Target client to which make the call." required="false" javaType="java.lang.String"></string>
+        <password name="license" caption="License" description="The matching license for the account." required="false" javaType="java.lang.String"></password>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="com.avalara.avatax.services.ValidateResult" caption="Validate Address" icon="icons/small/avalara-connector-24x16.png" localId="validate-address" image="icons/large/avalara-connector-48x32.png" abstract="true" extends="http://www.mulesoft.org/schema/mule/avalara/abstractAvalaraConnectorGeneric" metaData="static">
+    <attribute-category caption="General" description="General.">
+      <group id="general" caption="General">
+        <string name="addressCode" caption="Address Code" description="The address code." required="false" javaType="java.lang.String"></string>
+        <string name="city" caption="City" description="City name. Required, when PostalCode is not specified." required="false" javaType="java.lang.String"></string>
+        <string name="country" caption="Country" description="Country code." required="false" javaType="java.lang.String"></string>
+        <string name="latitude" caption="Latitude" description="Latitude." required="false" javaType="java.lang.String"></string>
+        <string name="line1" caption="Line1" description="Address line 1." required="true" javaType="java.lang.String"></string>
+        <string name="line2" caption="Line2" description="Address line 2." required="false" javaType="java.lang.String"></string>
+        <string name="line3" caption="Line3" description="Address line 3." required="false" javaType="java.lang.String"></string>
+        <string name="longitude" caption="Longitude" description="Longitude." required="false" javaType="java.lang.String"></string>
+        <string name="postalCode" caption="Postal Code" description="Postal or ZIP code. Required, when City and Region are not specified." required="false" javaType="java.lang.String"></string>
+        <string name="region" caption="Region" description="State or region name. Requirad, when PostalCode is not specified." required="false" javaType="java.lang.String"></string>
+        <integer min="0" step="1" name="taxRegionId" caption="Tax Region Id" description="The tax region id." required="true" javaType="java.lang.Integer"></integer>
+        <string name="date-ref" caption="Date Reference" description="Date." required="true" javaType="javax.xml.datatype.XMLGregorianCalendar"></string>
+        <enum defaultValue="DEFAULT" allowsCustom="true" name="textCase" caption="Text Case" description="The casing to apply to the validated address(es)." supportsExpressions="true" required="false" javaType="org.mule.modules.avalara.TextCaseType">
+          <option value="DEFAULT"></option>
+          <option value="MIXED"></option>
+          <option value="UPPER"></option>
+        </enum>
+        <boolean defaultValue="false" name="coordinates" caption="Coordinates" description="True, if you want in the result a not empty latitud and longitude." supportsExpressions="true" required="false" javaType="boolean"></boolean>
+        <boolean defaultValue="false" name="taxability" caption="Taxability" description="True, if you want the valid taxRegionId in the result." supportsExpressions="true" required="false" javaType="boolean"></boolean>
+      </group>
+    </attribute-category>
+    <attribute-category caption="Advanced" description="Advanced.">
+      <group id="connector Configuration Overrides" caption="Connector Configuration Overrides">
+        <string name="account" caption="Account" description="Registered Avalara account." required="false" javaType="java.lang.String"></string>
+        <string name="avalaraClient" caption="Avalara Client" description="Target client to which make the call." required="false" javaType="java.lang.String"></string>
+        <password name="license" caption="License" description="The matching license for the account." required="false" javaType="java.lang.String"></password>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+</namespace>
