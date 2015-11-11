@@ -9,7 +9,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.mule.modules</groupId>
     <artifactId>mule-module-avalara</artifactId>
-    <version>3.0.3-SNAPSHOT</version>
+    <version>3.0.3</version>
     <packaging>mule-module</packaging>
     <name>Mule Avalara Connector</name>
 
@@ -103,7 +103,7 @@
             <layout>default</layout>
         </repository>
     </repositories>
-    
+
     <distributionManagement>
         <repository>
             <id>mulesoft-releases</id>
